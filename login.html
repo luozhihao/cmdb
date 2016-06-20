@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>login</title>
+    </head>
+    <body>
+        <form action='/login/' method='post' accept-charset="utf-8" name="loginForm">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <td colspan="2">
+                        <div class="inputBg">
+                            <span>用户名：</span>
+                            <input id="username" name="username" value="{{username}}" />
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="inputBg mTop10">
+                            <span>密码：</span>
+                            <input name="password" type="password" value="{{password}}" />
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" class="loginBt mTop10" value="登录" id="myform">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <label id="error_msg" class="mTop15{% if not error_msg %} dis_none{% endif %}">{{error_msg}}</label>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>
