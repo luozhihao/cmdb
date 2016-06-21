@@ -7,17 +7,30 @@
         <div slot="modal-body" class="modal-body">
             <form class="form-horizontal clearfix">
                 <div class="col-sm-6">
-                    <div class="form-group">
-                        <label class="control-label col-sm-4">产品名称：</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" value="">
-                        </div>
-                    </div>
                     <div class="form-group input-box">
                         <label class="control-label col-sm-4">业务类型：</label>
                         <div class="col-sm-8">
                             <v-select :value.sync="businessType" :options="businessTypes" placeholder="请选择">
                             </v-select>
+                        </div>
+                    </div>
+                    <div class="form-group" v-show="isShow === 2">
+                        <label class="control-label col-sm-4">产品名称：</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" value="">
+                        </div>
+                    </div>
+                    <div class="form-group input-box" v-show="isShow === 1">
+                        <label class="control-label col-sm-4">游戏列表：</label>
+                        <div class="col-sm-8">
+                            <v-select :value.sync="gameList" :options="gameLists" placeholder="请选择">
+                            </v-select>
+                        </div>
+                    </div>
+                    <div class="form-group" v-show="isShow === 1">
+                        <label class="control-label col-sm-4">子类别：</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" v-model="childType">
                         </div>
                     </div>
                     <div class="form-group input-box">
@@ -44,7 +57,7 @@
                     <div class="form-group input-box">
                         <label class="control-label col-sm-4">运营阶段：</label>
                         <div class="col-sm-8">
-                            <v-select :value.sync="param.phase" :options="phases" placeholder="请选择">
+                            <v-select :value.sync="phase" :options="phases" placeholder="请选择">
                             </v-select>
                         </div>
                     </div>
@@ -81,10 +94,11 @@
                             <input type="text" class="form-control" value="">
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group input-box">
                         <label class="control-label col-sm-4">产品级别：</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" value="下拉框">
+                            <v-select :value.sync="productLevel" :options="productLevels" placeholder="请选择">
+                            </v-select>
                         </div>
                     </div>
                 </div>
@@ -104,17 +118,23 @@ import vSelect from '../../global/Select.vue'
 let origin = {
         creatProductModal: false,
         departments: [],
-        businessTypes: [],
+        businessTypes: [{value: '游戏', label: '游戏'}, {value: '应用', label: '应用'}],
         gameTypes: [],
         platformTypes: [],
         developModels: [],
         phases: [],
+        productLevels: [],
+        gameLists: [],
+        gameList: '',
         department: '',
-        businessType: '',
+        businessType: '游戏',
         gameType: '',
         platformType: '',
         developModel: '',
-        phase: ''
+        phase: '',
+        productLevel: '',
+        childType: '',
+        isShow: 1
     },
     init = Object.assign({}, origin);
 
@@ -132,6 +152,17 @@ export default {
     events: {
         'showCreateProduct' () {
             this.creatProductModal = true
+        }
+    },
+    watch: {
+        'businessType' (newVal) {
+            if (newVal === '游戏') {
+                this.isShow = 1
+            } else if (newVal === '应用') {
+                this.isShow = 2
+            } else {
+                this.isShow = 0
+            }
         }
     }
 }

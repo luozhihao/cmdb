@@ -5,7 +5,7 @@
             <h4 class="modal-title">编辑服务器</h4>
         </div>
         <div slot="modal-body" class="modal-body">
-            <form class="form-horizontal clearfix form-input form-min">
+            <form class="form-horizontal clearfix form-input">
                 <div class="col-sm-3">
                     <div class="form-group">
                         <label class="control-label col-sm-4">SN：</label>
@@ -122,11 +122,11 @@
                     <div class="form-group">
                         <label class="control-label col-sm-4">来源：</label>
                         <div class="col-sm-4 input-box pr0">
-                            <v-select :value.sync="origin1" :options="origins1" placeholder="请选择">
+                            <v-select :value.sync="origin1" :options="origins1" placeholder="请选择" class="fs12">
                             </v-select>
                         </div>
                         <div class="col-sm-4 input-box pl0">
-                            <v-select :value.sync="origin2" :options="origins2" placeholder="请选择">
+                            <v-select :value.sync="origin2" :options="origins2" placeholder="请选择" class="fs12">
                             </v-select>
                         </div>
                     </div>
@@ -189,19 +189,19 @@
                     <div class="form-group">
                         <label class="control-label col-sm-4">所属Set：</label>
                         <div class="col-sm-8">
-                            <textarea rows="3" class="form-control" :readonly="true"></textarea> 
+                            <textarea rows="4" class="form-control" :readonly="true"></textarea> 
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-4">所属Module：</label>
                         <div class="col-sm-8">
-                            <textarea rows="3" class="form-control" :readonly="true"></textarea> 
+                            <textarea rows="4" class="form-control" :readonly="true"></textarea> 
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-4">IP：</label>
                         <div class="col-sm-8">
-                            <textarea rows="3" class="form-control" :readonly="true"></textarea> 
+                            <textarea rows="4" class="form-control" :readonly="true"></textarea> 
                         </div>
                     </div>
                 </div>

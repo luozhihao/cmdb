@@ -17,7 +17,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-3 input-box">
                 <div class="form-group input-box">
                     <label class="control-label col-sm-4">机房：</label>
                     <div class="col-sm-8">
@@ -25,10 +25,11 @@
                         </v-select>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group input-box">
                     <label class="control-label col-sm-4">类型：</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" value="下拉框">
+                        <v-select :value.sync="param.type" :options="types" placeholder="请选择">
+                        </v-select>
                     </div>
                 </div>
             </div>
@@ -40,11 +41,12 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-3 input-box">
                 <div class="form-group">
                     <label class="control-label col-sm-4">状态：</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" value="下拉框">
+                        <v-select :value.sync="param.stauts" :options="stautsArr" placeholder="请选择">
+                        </v-select>
                     </div>
                 </div>
             </div>
@@ -103,10 +105,14 @@ let origin = {
         url: '',
         operators: [],
         rooms: [],
+        types: [],
+        stautsArr: [],
         param: {
             ip: '',
             operator: '',
-            room: ''
+            room: '',
+            type: '',
+            status: ''
         }
     },
     init = Object.assign({}, origin);

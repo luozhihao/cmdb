@@ -10,7 +10,7 @@
                 <div class="form-group input-box">
                     <label class="col-sm-4 control-label">机房：</label>
                     <div class="col-sm-8">
-                        <v-select :value.sync="param.room" :options="rooms" placeholder="请选择">
+                        <v-select :value.sync="param.idc" :options="idcs" placeholder="请选择">
                         </v-select>
                     </div>
                 </div>
@@ -49,10 +49,20 @@
         </div>
         <div class="text-center table-title">
             查询结果
-            <div class="pull-right">
-                <button type="button" class="btn btn-default set-btn">
-                    <span class="glyphicon glyphicon-cog"></span>
-                </button>
+            <div class="pull-left">
+                <dropdown>
+                    <button type="button" class="btn btn-default set-btn" data-toggle="dropdown">
+                        <span class="glyphicon glyphicon-cog"></span>
+                    </button>
+                    <div slot="dropdown-menu" class="dropdown-menu dropdown-width">
+                        <ul class="pull-left dropdown-width">
+                            <li v-for="check in checkArr" class="pull-left dropdown-li" track-by="$index">
+                                <input :id="'fliter' + $index" type="checkbox" :checked="check.checked" @click="fliter($index)"> 
+                                <label :for="'fliter' + $index" v-text="check.label"></label>
+                            </li>
+                        </ul>
+                    </div>
+                </dropdown>
             </div>
         </div>
         <div class="table-box">
@@ -66,11 +76,15 @@
                 <tbody>
                     <tr v-for="list in tableList" v-if="tableList.length !== 0" v-show="tableList.length !== 0">
                         <td><input type="checkbox" :id="list.id" :value="list.id" v-model="checkedIds"></td>
-                        <td v-if="list.idcName"><a class="pointer" v-text="list.idcName" @click="$broadcast('showEditRoom', list.id)"></a></td>
-                        <td v-if="list.frameName"><a class="pointer" v-text="list.frameName" @click="$broadcast('showEditFrame', list.id)"></a></td>
-                        <td v-if="list.seatsName"><a class="pointer" v-text="list.seatsName" @click="$broadcast('showEditSeats', list.id)"></a></td>
 
-                        <td v-for="value in list" :title="value" v-text="value" v-if="$key !== 'idcName' && $key !== 'frameName' && $key !== 'seatsName' &&  $key !== 'id'"></td>
+                        <td v-for="value in valueArr" v-if="value === 'idcName' || value === 'frameName' || value === 'seatsName'">
+                            <a class="pointer" v-if="value === 'idcName'" v-text="list[value]" @click="$broadcast('showEditRoom', list.id)"></a>
+                            <a class="pointer" v-if="value === 'frameName'" v-text="list[value]" @click="$broadcast('showEditRoom', list.id)"></a>
+                            <a class="pointer" v-if="value === 'seatsName'" v-text="list[value]" @click="$broadcast('showEditRoom', list.id)"></a>
+                        </td>
+
+                        <td v-for="value in valueArr" :title="list[value]" v-text="list[value]" v-if="value !== 'idcName' && value !== 'frameName' && value !== 'seatsName'">
+                        </td>
                     </tr>
                     <tr class="text-center" v-show="tableList.length === 0">
                         <td :colspan="titles.length + 1">暂无数据</td>
@@ -90,12 +104,15 @@
 </template>
 
 <script>
+import { dropdown } from 'vue-strap'
 import bootPage from '../../global/BootPage.vue'
 import createModal from './CreateRoom.vue'
 import editRoomModal from './EditRoom.vue'
 import editFrameModal from './EditFrame.vue'
 import editSeatsModal from './EditSeats.vue'
 import vSelect from '../../global/Select.vue'
+import { getRoomSearch } from '../../../vuex/action.js'
+import { idcs, statusArr } from '../../../vuex/getters.js'
 
 let origin = {
         dimensions: [
@@ -104,8 +121,6 @@ let origin = {
             {value: '机位', label: '机位视角'}
         ],
         dimension: '',
-        rooms: [],
-        statusArr: [],
         checkedAll: false,
         checkedIds: [],
         titles: ['机房名称', '机架编号', '机位编号', '机房地址', '网络类型', '业务类型', '所在城市', '机房状态', '客服电话', '业务经理名称'],
@@ -116,9 +131,22 @@ let origin = {
         pageLen: 5,
         url: '',
         param: {
-            room: '',
+            idc: '',
             status: ''
-        }
+        },
+        checkArr: [
+            {label: '机房名称', value: 'idcName', checked: true},
+            {label: '机架编号', value: 'frameName', checked: true},
+            {label: '机位编号', value: 'seatsName', checked: true},
+            {label: '机房地址', value: 'idcAddress', checked: true},
+            {label: '网络类型', value: 'network', checked: true},
+            {label: '业务类型', value: 'productType', checked: true},
+            {label: '所在城市', value: 'city', checked: true},
+            {label: '机房状态', value: 'status', checked: true},
+            {label: '客服电话', value: 'phone', checked: true},
+            {label: '业务经理名称', value: 'bossName', checked: true}
+        ],
+        valueArr: ['idcName', 'frameName', 'seatsName', 'idcAddress', 'network', 'productType', 'city', 'status', 'phone', 'bossName']
     },
     init = Object.assign({}, origin);
 
@@ -131,6 +159,21 @@ export default {
         // 刷新数据
         refresh () {
             this.$broadcast('refresh')
+        },
+
+        // 筛选
+        fliter (index) {
+            this.checkArr[index].checked ? this.checkArr[index].checked = false : this.checkArr[index].checked = true
+
+            this.titles = []
+            this.valueArr = []
+
+            this.checkArr.forEach((e) => {
+                if (e.checked) {
+                    this.titles.push(e.label)
+                    this.valueArr.push(e.value)
+                }
+            })
         }
     },
     components: {
@@ -139,7 +182,20 @@ export default {
         createModal,
         editRoomModal,
         editFrameModal,
-        editSeatsModal
+        editSeatsModal,
+        dropdown
+    },
+    vuex: {
+        actions: {
+            getRoomSearch
+        },
+        getters: {
+            idcs,   // 获取机房位置
+            statusArr  // 获取机房状态
+        }
+    },
+    ready () {
+        this.getRoomSearch()
     },
     watch: {
         'checkedAll' (newVal) {
@@ -182,5 +238,11 @@ export default {
 </script>
 
 <style scoped>
+.dropdown-width {
+    width: 500px;
+}
 
+.dropdown-li {
+    width: 50%;
+}
 </style>

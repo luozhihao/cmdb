@@ -1,12 +1,12 @@
 webpackJsonp([5],{
 
-/***/ 68:
+/***/ 70:
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(69)
-	__vue_script__ = __webpack_require__(71)
-	__vue_template__ = __webpack_require__(72)
+	__webpack_require__(71)
+	__vue_script__ = __webpack_require__(73)
+	__vue_template__ = __webpack_require__(74)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -24,16 +24,16 @@ webpackJsonp([5],{
 
 /***/ },
 
-/***/ 69:
+/***/ 71:
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(70);
+	var content = __webpack_require__(72);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(29)(content, {});
+	var update = __webpack_require__(30)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -51,10 +51,10 @@ webpackJsonp([5],{
 
 /***/ },
 
-/***/ 70:
+/***/ 72:
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(28)();
+	exports = module.exports = __webpack_require__(29)();
 	// imports
 	
 	
@@ -66,7 +66,7 @@ webpackJsonp([5],{
 
 /***/ },
 
-/***/ 71:
+/***/ 73:
 /***/ function(module, exports) {
 
 	'use strict';
@@ -368,20 +368,20 @@ webpackJsonp([5],{
 
 /***/ },
 
-/***/ 72:
+/***/ 74:
 /***/ function(module, exports) {
 
 	module.exports = "\n    <nav class=\"boot-nav\" _v-457beca8=\"\">\n        <ul class=\"pagination boot-page\" _v-457beca8=\"\">\n            <li _v-457beca8=\"\">\n                <a href=\"javascript:void(0)\" aria-label=\"Previous\" @click=\"onPrevClick()\" _v-457beca8=\"\">\n                    <span aria-hidden=\"true\" _v-457beca8=\"\">«</span>\n                </a>\n            </li>\n            <li v-for=\"page in pages\" :class=\"activeNum === $index ? 'active' : ''\" _v-457beca8=\"\">\n                <a href=\"javascript:void(0)\" v-text=\"page\" @click=\"onPageClick($index)\" _v-457beca8=\"\"></a>\n            </li>\n            <li _v-457beca8=\"\">\n                <a href=\"javascript:void(0)\" aria-label=\"Next\" @click=\"onNextClick()\" _v-457beca8=\"\">\n                    <span aria-hidden=\"true\" _v-457beca8=\"\">»</span>\n                </a>\n            </li>\n        </ul>\n        <div class=\"page-total\" _v-457beca8=\"\">\n            共 <span v-text=\"pageTotal\" _v-457beca8=\"\"></span> 页\n        </div>\n    </nav>\n    <select class=\"form-control boot-select\" v-model=\"len\" _v-457beca8=\"\">\n        <option v-for=\"arr in lens\" :value=\"arr\" v-text=\"arr\" :selected=\"$index === 0 ? true : false\" _v-457beca8=\"\"></option>\n    </select>\n";
 
 /***/ },
 
-/***/ 171:
+/***/ 172:
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(172)
-	__vue_script__ = __webpack_require__(174)
-	__vue_template__ = __webpack_require__(175)
+	__webpack_require__(173)
+	__vue_script__ = __webpack_require__(175)
+	__vue_template__ = __webpack_require__(176)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -399,16 +399,16 @@ webpackJsonp([5],{
 
 /***/ },
 
-/***/ 172:
+/***/ 173:
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(173);
+	var content = __webpack_require__(174);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(29)(content, {});
+	var update = __webpack_require__(30)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -426,10 +426,10 @@ webpackJsonp([5],{
 
 /***/ },
 
-/***/ 173:
+/***/ 174:
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(28)();
+	exports = module.exports = __webpack_require__(29)();
 	// imports
 	
 	
@@ -441,7 +441,7 @@ webpackJsonp([5],{
 
 /***/ },
 
-/***/ 174:
+/***/ 175:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -450,7 +450,7 @@ webpackJsonp([5],{
 	    value: true
 	});
 	
-	var _BootPage = __webpack_require__(68);
+	var _BootPage = __webpack_require__(70);
 	
 	var _BootPage2 = _interopRequireDefault(_BootPage);
 	
@@ -466,7 +466,11 @@ webpackJsonp([5],{
 	            lenArr: [10, 50, 100],
 	            pageLen: 5,
 	            url: '',
-	            param: {}
+	            param: {
+	                sn: '',
+	                deviceNum: '',
+	                ip: ''
+	            }
 	        };
 	    },
 	
@@ -476,6 +480,19 @@ webpackJsonp([5],{
 	
 	        refresh: function refresh() {
 	            this.$broadcast('refresh');
+	        },
+	
+	
+	        // 输入面板
+	        showBroad: function showBroad(target) {
+	            var obj = target.split('.');
+	
+	            var param = {
+	                value: this[obj[0]][obj[1]],
+	                name: target
+	            };
+	
+	            this.$dispatch('showBroad', param);
 	        }
 	    },
 	    components: {
@@ -509,6 +526,13 @@ webpackJsonp([5],{
 	                this.checkedAll = false;
 	            }
 	        }
+	    },
+	    events: {
+	        'getTxt': function getTxt(param) {
+	            var obj = param.name.split('.');
+	
+	            this[obj[0]][obj[1]] = param.val;
+	        }
 	    }
 	};
 	// </script>
@@ -526,7 +550,7 @@ webpackJsonp([5],{
 	//             <div class="form-group">
 	//                 <label class="col-sm-4 control-label">SN：</label>
 	//                 <div class="col-sm-8">
-	//                     <input type="text" class="form-control" value="多个">
+	//                     <input type="text" class="form-control" placeholder="多个，精确" onfocus="this.blur()" v-model="param.sn" @click="showBroad('param.sn')">
 	//                 </div>
 	//             </div>
 	//             </div>
@@ -534,7 +558,7 @@ webpackJsonp([5],{
 	//                 <div class="form-group">
 	//                     <label class="col-sm-4 control-label">设备编号：</label>
 	//                     <div class="col-sm-8">
-	//                         <input type="text" class="form-control" value="多个">
+	//                         <input type="text" class="form-control" placeholder="多个，精确" onfocus="this.blur()" v-model="param.deviceNum" @click="showBroad('param.deviceNum')">
 	//                     </div>
 	//                 </div>
 	//             </div>
@@ -542,7 +566,7 @@ webpackJsonp([5],{
 	//                 <div class="form-group">
 	//                     <label class="col-sm-4 control-label">IP地址：</label>
 	//                     <div class="col-sm-8">
-	//                         <input type="text" class="form-control" value="多个">
+	//                         <input type="text" class="form-control" placeholder="多个，精确" onfocus="this.blur()" v-model="param.ip" @click="showBroad('param.ip')">
 	//                     </div>
 	//                 </div>
 	//             </div>
@@ -595,10 +619,10 @@ webpackJsonp([5],{
 
 /***/ },
 
-/***/ 175:
+/***/ 176:
 /***/ function(module, exports) {
 
-	module.exports = "\n    <div _v-3af0dace=\"\">\n        <form class=\"form-horizontal clearfix form-search\" _v-3af0dace=\"\">\n        <div class=\"col-sm-3\" _v-3af0dace=\"\">\n            <div class=\"form-group\" _v-3af0dace=\"\">\n                <label class=\"col-sm-4 control-label\" _v-3af0dace=\"\">SN：</label>\n                <div class=\"col-sm-8\" _v-3af0dace=\"\">\n                    <input type=\"text\" class=\"form-control\" value=\"多个\" _v-3af0dace=\"\">\n                </div>\n            </div>\n            </div>\n            <div class=\"col-sm-3\" _v-3af0dace=\"\">\n                <div class=\"form-group\" _v-3af0dace=\"\">\n                    <label class=\"col-sm-4 control-label\" _v-3af0dace=\"\">设备编号：</label>\n                    <div class=\"col-sm-8\" _v-3af0dace=\"\">\n                        <input type=\"text\" class=\"form-control\" value=\"多个\" _v-3af0dace=\"\">\n                    </div>\n                </div>\n            </div>\n            <div class=\"col-sm-3\" _v-3af0dace=\"\">\n                <div class=\"form-group\" _v-3af0dace=\"\">\n                    <label class=\"col-sm-4 control-label\" _v-3af0dace=\"\">IP地址：</label>\n                    <div class=\"col-sm-8\" _v-3af0dace=\"\">\n                        <input type=\"text\" class=\"form-control\" value=\"多个\" _v-3af0dace=\"\">\n                    </div>\n                </div>\n            </div>\n        </form>\n        <div class=\"text-center btn-operate\" _v-3af0dace=\"\">\n            <button type=\"button\" class=\"btn btn-default\" _v-3af0dace=\"\">\n                查询\n            </button>\n            <button type=\"button\" class=\"btn btn-default\" _v-3af0dace=\"\">\n                批量回收\n            </button>\n        </div>\n        <div class=\"text-center table-title\" _v-3af0dace=\"\">\n            查询结果\n        </div>\n        <table class=\"table table-hover table-bordered\" _v-3af0dace=\"\">\n            <thead _v-3af0dace=\"\">\n                <tr _v-3af0dace=\"\">\n                    <th width=\"3%\" _v-3af0dace=\"\"><input type=\"checkbox\" v-model=\"checkedAll\" _v-3af0dace=\"\"></th>\n                    <th v-for=\"title in titles\" v-text=\"title\" _v-3af0dace=\"\"></th>\n                </tr>\n            </thead>\n            <tbody _v-3af0dace=\"\">\n                <tr v-for=\"list in tableList\" v-if=\"tableList.length !== 0\" v-show=\"tableList.length !== 0\" _v-3af0dace=\"\">\n                    <td _v-3af0dace=\"\"><input type=\"checkbox\" :id=\"list.id\" :value=\"list.id\" v-model=\"checkedIds\" _v-3af0dace=\"\"></td>\n                    <td :title=\"list.device\" v-text=\"list.device\" v-show=\"list.device\" _v-3af0dace=\"\"></td>\n                    <td :title=\"list.ipAddress\" v-text=\"list.ipAddress\" v-show=\"list.ipAddress\" _v-3af0dace=\"\"></td>\n                    <td :title=\"list.netType\" v-text=\"list.netType\" v-show=\"list.netType\" _v-3af0dace=\"\"></td>\n                    <td :title=\"list.network\" v-text=\"list.network\" v-show=\"list.network\" _v-3af0dace=\"\"></td>\n                    <td :title=\"list.mask\" v-text=\"list.mask\" v-show=\"list.mask\" _v-3af0dace=\"\"></td>\n                    <td :title=\"list.gateway\" v-text=\"list.gateway\" v-show=\"list.gateway\" _v-3af0dace=\"\"></td>\n                    <td _v-3af0dace=\"\">\n                        <button class=\"btn btn-default btn-small\" _v-3af0dace=\"\">\n                            <span class=\"table-icon glyphicon glyphicon-trash\" _v-3af0dace=\"\"></span>\n                        </button>\n                    </td>\n                </tr>\n                <tr class=\"text-center\" v-show=\"tableList.length === 0\" _v-3af0dace=\"\">\n                    <td :colspan=\"titles.length\" _v-3af0dace=\"\">暂无数据</td>\n                </tr>\n            </tbody>\n        </table>\n        <div class=\"clearfix mt30\" _v-3af0dace=\"\">\n            <boot-page :async=\"false\" :lens=\"lenArr\" :page-len=\"pageLen\" :url=\"url\" :param=\"param\" _v-3af0dace=\"\"></boot-page>\n        </div>\n    </div>\n";
+	module.exports = "\n    <div _v-3af0dace=\"\">\n        <form class=\"form-horizontal clearfix form-search\" _v-3af0dace=\"\">\n        <div class=\"col-sm-3\" _v-3af0dace=\"\">\n            <div class=\"form-group\" _v-3af0dace=\"\">\n                <label class=\"col-sm-4 control-label\" _v-3af0dace=\"\">SN：</label>\n                <div class=\"col-sm-8\" _v-3af0dace=\"\">\n                    <input type=\"text\" class=\"form-control\" placeholder=\"多个，精确\" onfocus=\"this.blur()\" v-model=\"param.sn\" @click=\"showBroad('param.sn')\" _v-3af0dace=\"\">\n                </div>\n            </div>\n            </div>\n            <div class=\"col-sm-3\" _v-3af0dace=\"\">\n                <div class=\"form-group\" _v-3af0dace=\"\">\n                    <label class=\"col-sm-4 control-label\" _v-3af0dace=\"\">设备编号：</label>\n                    <div class=\"col-sm-8\" _v-3af0dace=\"\">\n                        <input type=\"text\" class=\"form-control\" placeholder=\"多个，精确\" onfocus=\"this.blur()\" v-model=\"param.deviceNum\" @click=\"showBroad('param.deviceNum')\" _v-3af0dace=\"\">\n                    </div>\n                </div>\n            </div>\n            <div class=\"col-sm-3\" _v-3af0dace=\"\">\n                <div class=\"form-group\" _v-3af0dace=\"\">\n                    <label class=\"col-sm-4 control-label\" _v-3af0dace=\"\">IP地址：</label>\n                    <div class=\"col-sm-8\" _v-3af0dace=\"\">\n                        <input type=\"text\" class=\"form-control\" placeholder=\"多个，精确\" onfocus=\"this.blur()\" v-model=\"param.ip\" @click=\"showBroad('param.ip')\" _v-3af0dace=\"\">\n                    </div>\n                </div>\n            </div>\n        </form>\n        <div class=\"text-center btn-operate\" _v-3af0dace=\"\">\n            <button type=\"button\" class=\"btn btn-default\" _v-3af0dace=\"\">\n                查询\n            </button>\n            <button type=\"button\" class=\"btn btn-default\" _v-3af0dace=\"\">\n                批量回收\n            </button>\n        </div>\n        <div class=\"text-center table-title\" _v-3af0dace=\"\">\n            查询结果\n        </div>\n        <table class=\"table table-hover table-bordered\" _v-3af0dace=\"\">\n            <thead _v-3af0dace=\"\">\n                <tr _v-3af0dace=\"\">\n                    <th width=\"3%\" _v-3af0dace=\"\"><input type=\"checkbox\" v-model=\"checkedAll\" _v-3af0dace=\"\"></th>\n                    <th v-for=\"title in titles\" v-text=\"title\" _v-3af0dace=\"\"></th>\n                </tr>\n            </thead>\n            <tbody _v-3af0dace=\"\">\n                <tr v-for=\"list in tableList\" v-if=\"tableList.length !== 0\" v-show=\"tableList.length !== 0\" _v-3af0dace=\"\">\n                    <td _v-3af0dace=\"\"><input type=\"checkbox\" :id=\"list.id\" :value=\"list.id\" v-model=\"checkedIds\" _v-3af0dace=\"\"></td>\n                    <td :title=\"list.device\" v-text=\"list.device\" v-show=\"list.device\" _v-3af0dace=\"\"></td>\n                    <td :title=\"list.ipAddress\" v-text=\"list.ipAddress\" v-show=\"list.ipAddress\" _v-3af0dace=\"\"></td>\n                    <td :title=\"list.netType\" v-text=\"list.netType\" v-show=\"list.netType\" _v-3af0dace=\"\"></td>\n                    <td :title=\"list.network\" v-text=\"list.network\" v-show=\"list.network\" _v-3af0dace=\"\"></td>\n                    <td :title=\"list.mask\" v-text=\"list.mask\" v-show=\"list.mask\" _v-3af0dace=\"\"></td>\n                    <td :title=\"list.gateway\" v-text=\"list.gateway\" v-show=\"list.gateway\" _v-3af0dace=\"\"></td>\n                    <td _v-3af0dace=\"\">\n                        <button class=\"btn btn-default btn-small\" _v-3af0dace=\"\">\n                            <span class=\"table-icon glyphicon glyphicon-trash\" _v-3af0dace=\"\"></span>\n                        </button>\n                    </td>\n                </tr>\n                <tr class=\"text-center\" v-show=\"tableList.length === 0\" _v-3af0dace=\"\">\n                    <td :colspan=\"titles.length\" _v-3af0dace=\"\">暂无数据</td>\n                </tr>\n            </tbody>\n        </table>\n        <div class=\"clearfix mt30\" _v-3af0dace=\"\">\n            <boot-page :async=\"false\" :lens=\"lenArr\" :page-len=\"pageLen\" :url=\"url\" :param=\"param\" _v-3af0dace=\"\"></boot-page>\n        </div>\n    </div>\n";
 
 /***/ }
 

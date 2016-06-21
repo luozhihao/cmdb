@@ -27,10 +27,19 @@ export default {
         }
     },
     methods: {
+
+        // 多行内容转换
         transformFn () {
             if (this.txt.trim()) {
+                let arr = this.txt.split('\n'),
+                    newArr = []
+
+                arr.forEach((e) => {
+                    e.trim() ? newArr.push(e.trim()) : ''
+                })
+
                 let param = {
-                    val: this.txt.replace(/\n/g, ','),
+                    val: newArr.join(','),
                     name: this.name
                 }
 

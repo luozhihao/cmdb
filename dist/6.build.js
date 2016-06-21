@@ -1,33 +1,33 @@
-webpackJsonp([6],Array(31).concat([
-/* 31 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(32), __esModule: true };
-
-/***/ },
+webpackJsonp([6],Array(32).concat([
 /* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(33);
-	module.exports = __webpack_require__(36).Object.assign;
+	module.exports = { "default": __webpack_require__(33), __esModule: true };
 
 /***/ },
 /* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
-	// 19.1.3.1 Object.assign(target, source)
-	var $export = __webpack_require__(34);
-	
-	$export($export.S + $export.F, 'Object', {assign: __webpack_require__(49)});
+	__webpack_require__(34);
+	module.exports = __webpack_require__(37).Object.assign;
 
 /***/ },
 /* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var global    = __webpack_require__(35)
-	  , core      = __webpack_require__(36)
-	  , ctx       = __webpack_require__(37)
-	  , hide      = __webpack_require__(39)
+	// 19.1.3.1 Object.assign(target, source)
+	var $export = __webpack_require__(35);
+	
+	$export($export.S + $export.F, 'Object', {assign: __webpack_require__(50)});
+
+/***/ },
+/* 35 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var global    = __webpack_require__(36)
+	  , core      = __webpack_require__(37)
+	  , ctx       = __webpack_require__(38)
+	  , hide      = __webpack_require__(40)
 	  , PROTOTYPE = 'prototype';
 	
 	var $export = function(type, name, source){
@@ -87,7 +87,7 @@ webpackJsonp([6],Array(31).concat([
 	module.exports = $export;
 
 /***/ },
-/* 35 */
+/* 36 */
 /***/ function(module, exports) {
 
 	// https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
@@ -96,18 +96,18 @@ webpackJsonp([6],Array(31).concat([
 	if(typeof __g == 'number')__g = global; // eslint-disable-line no-undef
 
 /***/ },
-/* 36 */
+/* 37 */
 /***/ function(module, exports) {
 
 	var core = module.exports = {version: '2.4.0'};
 	if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
 
 /***/ },
-/* 37 */
+/* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// optional / simple context binding
-	var aFunction = __webpack_require__(38);
+	var aFunction = __webpack_require__(39);
 	module.exports = function(fn, that, length){
 	  aFunction(fn);
 	  if(that === undefined)return fn;
@@ -128,7 +128,7 @@ webpackJsonp([6],Array(31).concat([
 	};
 
 /***/ },
-/* 38 */
+/* 39 */
 /***/ function(module, exports) {
 
 	module.exports = function(it){
@@ -137,12 +137,12 @@ webpackJsonp([6],Array(31).concat([
 	};
 
 /***/ },
-/* 39 */
+/* 40 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var dP         = __webpack_require__(40)
-	  , createDesc = __webpack_require__(48);
-	module.exports = __webpack_require__(44) ? function(object, key, value){
+	var dP         = __webpack_require__(41)
+	  , createDesc = __webpack_require__(49);
+	module.exports = __webpack_require__(45) ? function(object, key, value){
 	  return dP.f(object, key, createDesc(1, value));
 	} : function(object, key, value){
 	  object[key] = value;
@@ -150,15 +150,15 @@ webpackJsonp([6],Array(31).concat([
 	};
 
 /***/ },
-/* 40 */
+/* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var anObject       = __webpack_require__(41)
-	  , IE8_DOM_DEFINE = __webpack_require__(43)
-	  , toPrimitive    = __webpack_require__(47)
+	var anObject       = __webpack_require__(42)
+	  , IE8_DOM_DEFINE = __webpack_require__(44)
+	  , toPrimitive    = __webpack_require__(48)
 	  , dP             = Object.defineProperty;
 	
-	exports.f = __webpack_require__(44) ? Object.defineProperty : function defineProperty(O, P, Attributes){
+	exports.f = __webpack_require__(45) ? Object.defineProperty : function defineProperty(O, P, Attributes){
 	  anObject(O);
 	  P = toPrimitive(P, true);
 	  anObject(Attributes);
@@ -171,17 +171,17 @@ webpackJsonp([6],Array(31).concat([
 	};
 
 /***/ },
-/* 41 */
+/* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(42);
+	var isObject = __webpack_require__(43);
 	module.exports = function(it){
 	  if(!isObject(it))throw TypeError(it + ' is not an object!');
 	  return it;
 	};
 
 /***/ },
-/* 42 */
+/* 43 */
 /***/ function(module, exports) {
 
 	module.exports = function(it){
@@ -189,24 +189,24 @@ webpackJsonp([6],Array(31).concat([
 	};
 
 /***/ },
-/* 43 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = !__webpack_require__(44) && !__webpack_require__(45)(function(){
-	  return Object.defineProperty(__webpack_require__(46)('div'), 'a', {get: function(){ return 7; }}).a != 7;
-	});
-
-/***/ },
 /* 44 */
 /***/ function(module, exports, __webpack_require__) {
 
-	// Thank's IE8 for his funny defineProperty
-	module.exports = !__webpack_require__(45)(function(){
-	  return Object.defineProperty({}, 'a', {get: function(){ return 7; }}).a != 7;
+	module.exports = !__webpack_require__(45) && !__webpack_require__(46)(function(){
+	  return Object.defineProperty(__webpack_require__(47)('div'), 'a', {get: function(){ return 7; }}).a != 7;
 	});
 
 /***/ },
 /* 45 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// Thank's IE8 for his funny defineProperty
+	module.exports = !__webpack_require__(46)(function(){
+	  return Object.defineProperty({}, 'a', {get: function(){ return 7; }}).a != 7;
+	});
+
+/***/ },
+/* 46 */
 /***/ function(module, exports) {
 
 	module.exports = function(exec){
@@ -218,11 +218,11 @@ webpackJsonp([6],Array(31).concat([
 	};
 
 /***/ },
-/* 46 */
+/* 47 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(42)
-	  , document = __webpack_require__(35).document
+	var isObject = __webpack_require__(43)
+	  , document = __webpack_require__(36).document
 	  // in old IE typeof document.createElement is 'object'
 	  , is = isObject(document) && isObject(document.createElement);
 	module.exports = function(it){
@@ -230,11 +230,11 @@ webpackJsonp([6],Array(31).concat([
 	};
 
 /***/ },
-/* 47 */
+/* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 7.1.1 ToPrimitive(input [, PreferredType])
-	var isObject = __webpack_require__(42);
+	var isObject = __webpack_require__(43);
 	// instead of the ES6 spec version, we didn't implement @@toPrimitive case
 	// and the second argument - flag - preferred type is a string
 	module.exports = function(it, S){
@@ -247,7 +247,7 @@ webpackJsonp([6],Array(31).concat([
 	};
 
 /***/ },
-/* 48 */
+/* 49 */
 /***/ function(module, exports) {
 
 	module.exports = function(bitmap, value){
@@ -260,20 +260,20 @@ webpackJsonp([6],Array(31).concat([
 	};
 
 /***/ },
-/* 49 */
+/* 50 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	// 19.1.2.1 Object.assign(target, source, ...)
-	var getKeys  = __webpack_require__(50)
-	  , gOPS     = __webpack_require__(65)
-	  , pIE      = __webpack_require__(66)
-	  , toObject = __webpack_require__(67)
-	  , IObject  = __webpack_require__(54)
+	var getKeys  = __webpack_require__(51)
+	  , gOPS     = __webpack_require__(66)
+	  , pIE      = __webpack_require__(67)
+	  , toObject = __webpack_require__(68)
+	  , IObject  = __webpack_require__(55)
 	  , $assign  = Object.assign;
 	
 	// should work with symbols and should have deterministic property order (V8 bug)
-	module.exports = !$assign || __webpack_require__(45)(function(){
+	module.exports = !$assign || __webpack_require__(46)(function(){
 	  var A = {}
 	    , B = {}
 	    , S = Symbol()
@@ -298,25 +298,25 @@ webpackJsonp([6],Array(31).concat([
 	} : $assign;
 
 /***/ },
-/* 50 */
+/* 51 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 19.1.2.14 / 15.2.3.14 Object.keys(O)
-	var $keys       = __webpack_require__(51)
-	  , enumBugKeys = __webpack_require__(64);
+	var $keys       = __webpack_require__(52)
+	  , enumBugKeys = __webpack_require__(65);
 	
 	module.exports = Object.keys || function keys(O){
 	  return $keys(O, enumBugKeys);
 	};
 
 /***/ },
-/* 51 */
+/* 52 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var has          = __webpack_require__(52)
-	  , toIObject    = __webpack_require__(53)
-	  , arrayIndexOf = __webpack_require__(57)(false)
-	  , IE_PROTO     = __webpack_require__(61)('IE_PROTO');
+	var has          = __webpack_require__(53)
+	  , toIObject    = __webpack_require__(54)
+	  , arrayIndexOf = __webpack_require__(58)(false)
+	  , IE_PROTO     = __webpack_require__(62)('IE_PROTO');
 	
 	module.exports = function(object, names){
 	  var O      = toIObject(object)
@@ -332,7 +332,7 @@ webpackJsonp([6],Array(31).concat([
 	};
 
 /***/ },
-/* 52 */
+/* 53 */
 /***/ function(module, exports) {
 
 	var hasOwnProperty = {}.hasOwnProperty;
@@ -341,28 +341,28 @@ webpackJsonp([6],Array(31).concat([
 	};
 
 /***/ },
-/* 53 */
+/* 54 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// to indexed object, toObject with fallback for non-array-like ES3 strings
-	var IObject = __webpack_require__(54)
-	  , defined = __webpack_require__(56);
+	var IObject = __webpack_require__(55)
+	  , defined = __webpack_require__(57);
 	module.exports = function(it){
 	  return IObject(defined(it));
 	};
 
 /***/ },
-/* 54 */
+/* 55 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// fallback for non-array-like ES3 and non-enumerable old V8 strings
-	var cof = __webpack_require__(55);
+	var cof = __webpack_require__(56);
 	module.exports = Object('z').propertyIsEnumerable(0) ? Object : function(it){
 	  return cof(it) == 'String' ? it.split('') : Object(it);
 	};
 
 /***/ },
-/* 55 */
+/* 56 */
 /***/ function(module, exports) {
 
 	var toString = {}.toString;
@@ -372,7 +372,7 @@ webpackJsonp([6],Array(31).concat([
 	};
 
 /***/ },
-/* 56 */
+/* 57 */
 /***/ function(module, exports) {
 
 	// 7.2.1 RequireObjectCoercible(argument)
@@ -382,14 +382,14 @@ webpackJsonp([6],Array(31).concat([
 	};
 
 /***/ },
-/* 57 */
+/* 58 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// false -> Array#indexOf
 	// true  -> Array#includes
-	var toIObject = __webpack_require__(53)
-	  , toLength  = __webpack_require__(58)
-	  , toIndex   = __webpack_require__(60);
+	var toIObject = __webpack_require__(54)
+	  , toLength  = __webpack_require__(59)
+	  , toIndex   = __webpack_require__(61);
 	module.exports = function(IS_INCLUDES){
 	  return function($this, el, fromIndex){
 	    var O      = toIObject($this)
@@ -408,18 +408,18 @@ webpackJsonp([6],Array(31).concat([
 	};
 
 /***/ },
-/* 58 */
+/* 59 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 7.1.15 ToLength
-	var toInteger = __webpack_require__(59)
+	var toInteger = __webpack_require__(60)
 	  , min       = Math.min;
 	module.exports = function(it){
 	  return it > 0 ? min(toInteger(it), 0x1fffffffffffff) : 0; // pow(2, 53) - 1 == 9007199254740991
 	};
 
 /***/ },
-/* 59 */
+/* 60 */
 /***/ function(module, exports) {
 
 	// 7.1.4 ToInteger
@@ -430,10 +430,10 @@ webpackJsonp([6],Array(31).concat([
 	};
 
 /***/ },
-/* 60 */
+/* 61 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var toInteger = __webpack_require__(59)
+	var toInteger = __webpack_require__(60)
 	  , max       = Math.max
 	  , min       = Math.min;
 	module.exports = function(index, length){
@@ -442,20 +442,20 @@ webpackJsonp([6],Array(31).concat([
 	};
 
 /***/ },
-/* 61 */
+/* 62 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var shared = __webpack_require__(62)('keys')
-	  , uid    = __webpack_require__(63);
+	var shared = __webpack_require__(63)('keys')
+	  , uid    = __webpack_require__(64);
 	module.exports = function(key){
 	  return shared[key] || (shared[key] = uid(key));
 	};
 
 /***/ },
-/* 62 */
+/* 63 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var global = __webpack_require__(35)
+	var global = __webpack_require__(36)
 	  , SHARED = '__core-js_shared__'
 	  , store  = global[SHARED] || (global[SHARED] = {});
 	module.exports = function(key){
@@ -463,7 +463,7 @@ webpackJsonp([6],Array(31).concat([
 	};
 
 /***/ },
-/* 63 */
+/* 64 */
 /***/ function(module, exports) {
 
 	var id = 0
@@ -473,7 +473,7 @@ webpackJsonp([6],Array(31).concat([
 	};
 
 /***/ },
-/* 64 */
+/* 65 */
 /***/ function(module, exports) {
 
 	// IE 8- don't enum bug keys
@@ -482,35 +482,36 @@ webpackJsonp([6],Array(31).concat([
 	).split(',');
 
 /***/ },
-/* 65 */
+/* 66 */
 /***/ function(module, exports) {
 
 	exports.f = Object.getOwnPropertySymbols;
 
 /***/ },
-/* 66 */
+/* 67 */
 /***/ function(module, exports) {
 
 	exports.f = {}.propertyIsEnumerable;
 
 /***/ },
-/* 67 */
+/* 68 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 7.1.13 ToObject(argument)
-	var defined = __webpack_require__(56);
+	var defined = __webpack_require__(57);
 	module.exports = function(it){
 	  return Object(defined(it));
 	};
 
 /***/ },
-/* 68 */
+/* 69 */,
+/* 70 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(69)
-	__vue_script__ = __webpack_require__(71)
-	__vue_template__ = __webpack_require__(72)
+	__webpack_require__(71)
+	__vue_script__ = __webpack_require__(73)
+	__vue_template__ = __webpack_require__(74)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -527,16 +528,16 @@ webpackJsonp([6],Array(31).concat([
 	})()}
 
 /***/ },
-/* 69 */
+/* 71 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(70);
+	var content = __webpack_require__(72);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(29)(content, {});
+	var update = __webpack_require__(30)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -553,10 +554,10 @@ webpackJsonp([6],Array(31).concat([
 	}
 
 /***/ },
-/* 70 */
+/* 72 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(28)();
+	exports = module.exports = __webpack_require__(29)();
 	// imports
 	
 	
@@ -567,7 +568,7 @@ webpackJsonp([6],Array(31).concat([
 
 
 /***/ },
-/* 71 */
+/* 73 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -868,24 +869,23 @@ webpackJsonp([6],Array(31).concat([
 	/* generated by vue-loader */
 
 /***/ },
-/* 72 */
+/* 74 */
 /***/ function(module, exports) {
 
 	module.exports = "\n    <nav class=\"boot-nav\" _v-457beca8=\"\">\n        <ul class=\"pagination boot-page\" _v-457beca8=\"\">\n            <li _v-457beca8=\"\">\n                <a href=\"javascript:void(0)\" aria-label=\"Previous\" @click=\"onPrevClick()\" _v-457beca8=\"\">\n                    <span aria-hidden=\"true\" _v-457beca8=\"\">«</span>\n                </a>\n            </li>\n            <li v-for=\"page in pages\" :class=\"activeNum === $index ? 'active' : ''\" _v-457beca8=\"\">\n                <a href=\"javascript:void(0)\" v-text=\"page\" @click=\"onPageClick($index)\" _v-457beca8=\"\"></a>\n            </li>\n            <li _v-457beca8=\"\">\n                <a href=\"javascript:void(0)\" aria-label=\"Next\" @click=\"onNextClick()\" _v-457beca8=\"\">\n                    <span aria-hidden=\"true\" _v-457beca8=\"\">»</span>\n                </a>\n            </li>\n        </ul>\n        <div class=\"page-total\" _v-457beca8=\"\">\n            共 <span v-text=\"pageTotal\" _v-457beca8=\"\"></span> 页\n        </div>\n    </nav>\n    <select class=\"form-control boot-select\" v-model=\"len\" _v-457beca8=\"\">\n        <option v-for=\"arr in lens\" :value=\"arr\" v-text=\"arr\" :selected=\"$index === 0 ? true : false\" _v-457beca8=\"\"></option>\n    </select>\n";
 
 /***/ },
-/* 73 */,
-/* 74 */,
 /* 75 */,
 /* 76 */,
 /* 77 */,
-/* 78 */
+/* 78 */,
+/* 79 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(79)
-	__vue_script__ = __webpack_require__(81)
-	__vue_template__ = __webpack_require__(108)
+	__webpack_require__(80)
+	__vue_script__ = __webpack_require__(82)
+	__vue_template__ = __webpack_require__(109)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -902,16 +902,16 @@ webpackJsonp([6],Array(31).concat([
 	})()}
 
 /***/ },
-/* 79 */
+/* 80 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(80);
+	var content = __webpack_require__(81);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(29)(content, {});
+	var update = __webpack_require__(30)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -928,10 +928,10 @@ webpackJsonp([6],Array(31).concat([
 	}
 
 /***/ },
-/* 80 */
+/* 81 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(28)();
+	exports = module.exports = __webpack_require__(29)();
 	// imports
 	
 	
@@ -942,7 +942,7 @@ webpackJsonp([6],Array(31).concat([
 
 
 /***/ },
-/* 81 */
+/* 82 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
@@ -951,11 +951,11 @@ webpackJsonp([6],Array(31).concat([
 	    value: true
 	});
 	
-	var _defineProperty2 = __webpack_require__(82);
+	var _defineProperty2 = __webpack_require__(83);
 	
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 	
-	var _getIterator2 = __webpack_require__(86);
+	var _getIterator2 = __webpack_require__(87);
 	
 	var _getIterator3 = _interopRequireDefault(_getIterator2);
 	
@@ -1221,14 +1221,14 @@ webpackJsonp([6],Array(31).concat([
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 82 */
+/* 83 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
 	exports.__esModule = true;
 	
-	var _defineProperty = __webpack_require__(83);
+	var _defineProperty = __webpack_require__(84);
 	
 	var _defineProperty2 = _interopRequireDefault(_defineProperty);
 	
@@ -1250,52 +1250,52 @@ webpackJsonp([6],Array(31).concat([
 	};
 
 /***/ },
-/* 83 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(84), __esModule: true };
-
-/***/ },
 /* 84 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(85);
-	var $Object = __webpack_require__(36).Object;
-	module.exports = function defineProperty(it, key, desc){
-	  return $Object.defineProperty(it, key, desc);
-	};
+	module.exports = { "default": __webpack_require__(85), __esModule: true };
 
 /***/ },
 /* 85 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var $export = __webpack_require__(34);
-	// 19.1.2.4 / 15.2.3.6 Object.defineProperty(O, P, Attributes)
-	$export($export.S + $export.F * !__webpack_require__(44), 'Object', {defineProperty: __webpack_require__(40).f});
+	__webpack_require__(86);
+	var $Object = __webpack_require__(37).Object;
+	module.exports = function defineProperty(it, key, desc){
+	  return $Object.defineProperty(it, key, desc);
+	};
 
 /***/ },
 /* 86 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(87), __esModule: true };
+	var $export = __webpack_require__(35);
+	// 19.1.2.4 / 15.2.3.6 Object.defineProperty(O, P, Attributes)
+	$export($export.S + $export.F * !__webpack_require__(45), 'Object', {defineProperty: __webpack_require__(41).f});
 
 /***/ },
 /* 87 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(88);
-	__webpack_require__(103);
-	module.exports = __webpack_require__(105);
+	module.exports = { "default": __webpack_require__(88), __esModule: true };
 
 /***/ },
 /* 88 */
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(89);
-	var global        = __webpack_require__(35)
-	  , hide          = __webpack_require__(39)
-	  , Iterators     = __webpack_require__(92)
-	  , TO_STRING_TAG = __webpack_require__(101)('toStringTag');
+	__webpack_require__(104);
+	module.exports = __webpack_require__(106);
+
+/***/ },
+/* 89 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(90);
+	var global        = __webpack_require__(36)
+	  , hide          = __webpack_require__(40)
+	  , Iterators     = __webpack_require__(93)
+	  , TO_STRING_TAG = __webpack_require__(102)('toStringTag');
 	
 	for(var collections = ['NodeList', 'DOMTokenList', 'MediaList', 'StyleSheetList', 'CSSRuleList'], i = 0; i < 5; i++){
 	  var NAME       = collections[i]
@@ -1306,20 +1306,20 @@ webpackJsonp([6],Array(31).concat([
 	}
 
 /***/ },
-/* 89 */
+/* 90 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	var addToUnscopables = __webpack_require__(90)
-	  , step             = __webpack_require__(91)
-	  , Iterators        = __webpack_require__(92)
-	  , toIObject        = __webpack_require__(53);
+	var addToUnscopables = __webpack_require__(91)
+	  , step             = __webpack_require__(92)
+	  , Iterators        = __webpack_require__(93)
+	  , toIObject        = __webpack_require__(54);
 	
 	// 22.1.3.4 Array.prototype.entries()
 	// 22.1.3.13 Array.prototype.keys()
 	// 22.1.3.29 Array.prototype.values()
 	// 22.1.3.30 Array.prototype[@@iterator]()
-	module.exports = __webpack_require__(93)(Array, 'Array', function(iterated, kind){
+	module.exports = __webpack_require__(94)(Array, 'Array', function(iterated, kind){
 	  this._t = toIObject(iterated); // target
 	  this._i = 0;                   // next index
 	  this._k = kind;                // kind
@@ -1345,13 +1345,13 @@ webpackJsonp([6],Array(31).concat([
 	addToUnscopables('entries');
 
 /***/ },
-/* 90 */
+/* 91 */
 /***/ function(module, exports) {
 
 	module.exports = function(){ /* empty */ };
 
 /***/ },
-/* 91 */
+/* 92 */
 /***/ function(module, exports) {
 
 	module.exports = function(done, value){
@@ -1359,26 +1359,26 @@ webpackJsonp([6],Array(31).concat([
 	};
 
 /***/ },
-/* 92 */
+/* 93 */
 /***/ function(module, exports) {
 
 	module.exports = {};
 
 /***/ },
-/* 93 */
+/* 94 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	var LIBRARY        = __webpack_require__(94)
-	  , $export        = __webpack_require__(34)
-	  , redefine       = __webpack_require__(95)
-	  , hide           = __webpack_require__(39)
-	  , has            = __webpack_require__(52)
-	  , Iterators      = __webpack_require__(92)
-	  , $iterCreate    = __webpack_require__(96)
-	  , setToStringTag = __webpack_require__(100)
-	  , getPrototypeOf = __webpack_require__(102)
-	  , ITERATOR       = __webpack_require__(101)('iterator')
+	var LIBRARY        = __webpack_require__(95)
+	  , $export        = __webpack_require__(35)
+	  , redefine       = __webpack_require__(96)
+	  , hide           = __webpack_require__(40)
+	  , has            = __webpack_require__(53)
+	  , Iterators      = __webpack_require__(93)
+	  , $iterCreate    = __webpack_require__(97)
+	  , setToStringTag = __webpack_require__(101)
+	  , getPrototypeOf = __webpack_require__(103)
+	  , ITERATOR       = __webpack_require__(102)('iterator')
 	  , BUGGY          = !([].keys && 'next' in [].keys()) // Safari has buggy iterators w/o `next`
 	  , FF_ITERATOR    = '@@iterator'
 	  , KEYS           = 'keys'
@@ -1440,29 +1440,29 @@ webpackJsonp([6],Array(31).concat([
 	};
 
 /***/ },
-/* 94 */
+/* 95 */
 /***/ function(module, exports) {
 
 	module.exports = true;
 
 /***/ },
-/* 95 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__(39);
-
-/***/ },
 /* 96 */
 /***/ function(module, exports, __webpack_require__) {
 
+	module.exports = __webpack_require__(40);
+
+/***/ },
+/* 97 */
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';
-	var create         = __webpack_require__(97)
-	  , descriptor     = __webpack_require__(48)
-	  , setToStringTag = __webpack_require__(100)
+	var create         = __webpack_require__(98)
+	  , descriptor     = __webpack_require__(49)
+	  , setToStringTag = __webpack_require__(101)
 	  , IteratorPrototype = {};
 	
 	// 25.1.2.1.1 %IteratorPrototype%[@@iterator]()
-	__webpack_require__(39)(IteratorPrototype, __webpack_require__(101)('iterator'), function(){ return this; });
+	__webpack_require__(40)(IteratorPrototype, __webpack_require__(102)('iterator'), function(){ return this; });
 	
 	module.exports = function(Constructor, NAME, next){
 	  Constructor.prototype = create(IteratorPrototype, {next: descriptor(1, next)});
@@ -1470,26 +1470,26 @@ webpackJsonp([6],Array(31).concat([
 	};
 
 /***/ },
-/* 97 */
+/* 98 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
-	var anObject    = __webpack_require__(41)
-	  , dPs         = __webpack_require__(98)
-	  , enumBugKeys = __webpack_require__(64)
-	  , IE_PROTO    = __webpack_require__(61)('IE_PROTO')
+	var anObject    = __webpack_require__(42)
+	  , dPs         = __webpack_require__(99)
+	  , enumBugKeys = __webpack_require__(65)
+	  , IE_PROTO    = __webpack_require__(62)('IE_PROTO')
 	  , Empty       = function(){ /* empty */ }
 	  , PROTOTYPE   = 'prototype';
 	
 	// Create object with fake `null` prototype: use iframe Object with cleared prototype
 	var createDict = function(){
 	  // Thrash, waste and sodomy: IE GC bug
-	  var iframe = __webpack_require__(46)('iframe')
+	  var iframe = __webpack_require__(47)('iframe')
 	    , i      = enumBugKeys.length
 	    , gt     = '>'
 	    , iframeDocument;
 	  iframe.style.display = 'none';
-	  __webpack_require__(99).appendChild(iframe);
+	  __webpack_require__(100).appendChild(iframe);
 	  iframe.src = 'javascript:'; // eslint-disable-line no-script-url
 	  // createDict = iframe.contentWindow.Object;
 	  // html.removeChild(iframe);
@@ -1515,14 +1515,14 @@ webpackJsonp([6],Array(31).concat([
 	};
 
 /***/ },
-/* 98 */
+/* 99 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var dP       = __webpack_require__(40)
-	  , anObject = __webpack_require__(41)
-	  , getKeys  = __webpack_require__(50);
+	var dP       = __webpack_require__(41)
+	  , anObject = __webpack_require__(42)
+	  , getKeys  = __webpack_require__(51);
 	
-	module.exports = __webpack_require__(44) ? Object.defineProperties : function defineProperties(O, Properties){
+	module.exports = __webpack_require__(45) ? Object.defineProperties : function defineProperties(O, Properties){
 	  anObject(O);
 	  var keys   = getKeys(Properties)
 	    , length = keys.length
@@ -1533,30 +1533,30 @@ webpackJsonp([6],Array(31).concat([
 	};
 
 /***/ },
-/* 99 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__(35).document && document.documentElement;
-
-/***/ },
 /* 100 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var def = __webpack_require__(40).f
-	  , has = __webpack_require__(52)
-	  , TAG = __webpack_require__(101)('toStringTag');
+	module.exports = __webpack_require__(36).document && document.documentElement;
+
+/***/ },
+/* 101 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var def = __webpack_require__(41).f
+	  , has = __webpack_require__(53)
+	  , TAG = __webpack_require__(102)('toStringTag');
 	
 	module.exports = function(it, tag, stat){
 	  if(it && !has(it = stat ? it : it.prototype, TAG))def(it, TAG, {configurable: true, value: tag});
 	};
 
 /***/ },
-/* 101 */
+/* 102 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var store      = __webpack_require__(62)('wks')
-	  , uid        = __webpack_require__(63)
-	  , Symbol     = __webpack_require__(35).Symbol
+	var store      = __webpack_require__(63)('wks')
+	  , uid        = __webpack_require__(64)
+	  , Symbol     = __webpack_require__(36).Symbol
 	  , USE_SYMBOL = typeof Symbol == 'function';
 	
 	var $exports = module.exports = function(name){
@@ -1567,13 +1567,13 @@ webpackJsonp([6],Array(31).concat([
 	$exports.store = store;
 
 /***/ },
-/* 102 */
+/* 103 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 19.1.2.9 / 15.2.3.2 Object.getPrototypeOf(O)
-	var has         = __webpack_require__(52)
-	  , toObject    = __webpack_require__(67)
-	  , IE_PROTO    = __webpack_require__(61)('IE_PROTO')
+	var has         = __webpack_require__(53)
+	  , toObject    = __webpack_require__(68)
+	  , IE_PROTO    = __webpack_require__(62)('IE_PROTO')
 	  , ObjectProto = Object.prototype;
 	
 	module.exports = Object.getPrototypeOf || function(O){
@@ -1585,14 +1585,14 @@ webpackJsonp([6],Array(31).concat([
 	};
 
 /***/ },
-/* 103 */
+/* 104 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	var $at  = __webpack_require__(104)(true);
+	var $at  = __webpack_require__(105)(true);
 	
 	// 21.1.3.27 String.prototype[@@iterator]()
-	__webpack_require__(93)(String, 'String', function(iterated){
+	__webpack_require__(94)(String, 'String', function(iterated){
 	  this._t = String(iterated); // target
 	  this._i = 0;                // next index
 	// 21.1.5.2.1 %StringIteratorPrototype%.next()
@@ -1607,11 +1607,11 @@ webpackJsonp([6],Array(31).concat([
 	});
 
 /***/ },
-/* 104 */
+/* 105 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var toInteger = __webpack_require__(59)
-	  , defined   = __webpack_require__(56);
+	var toInteger = __webpack_require__(60)
+	  , defined   = __webpack_require__(57);
 	// true  -> String#at
 	// false -> String#codePointAt
 	module.exports = function(TO_STRING){
@@ -1629,37 +1629,37 @@ webpackJsonp([6],Array(31).concat([
 	};
 
 /***/ },
-/* 105 */
+/* 106 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var anObject = __webpack_require__(41)
-	  , get      = __webpack_require__(106);
-	module.exports = __webpack_require__(36).getIterator = function(it){
+	var anObject = __webpack_require__(42)
+	  , get      = __webpack_require__(107);
+	module.exports = __webpack_require__(37).getIterator = function(it){
 	  var iterFn = get(it);
 	  if(typeof iterFn != 'function')throw TypeError(it + ' is not iterable!');
 	  return anObject(iterFn.call(it));
 	};
 
 /***/ },
-/* 106 */
+/* 107 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var classof   = __webpack_require__(107)
-	  , ITERATOR  = __webpack_require__(101)('iterator')
-	  , Iterators = __webpack_require__(92);
-	module.exports = __webpack_require__(36).getIteratorMethod = function(it){
+	var classof   = __webpack_require__(108)
+	  , ITERATOR  = __webpack_require__(102)('iterator')
+	  , Iterators = __webpack_require__(93);
+	module.exports = __webpack_require__(37).getIteratorMethod = function(it){
 	  if(it != undefined)return it[ITERATOR]
 	    || it['@@iterator']
 	    || Iterators[classof(it)];
 	};
 
 /***/ },
-/* 107 */
+/* 108 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// getting tag from 19.1.3.6 Object.prototype.toString()
-	var cof = __webpack_require__(55)
-	  , TAG = __webpack_require__(101)('toStringTag')
+	var cof = __webpack_require__(56)
+	  , TAG = __webpack_require__(102)('toStringTag')
 	  // ES3 wrong here
 	  , ARG = cof(function(){ return arguments; }()) == 'Arguments';
 	
@@ -1682,13 +1682,12 @@ webpackJsonp([6],Array(31).concat([
 	};
 
 /***/ },
-/* 108 */
+/* 109 */
 /***/ function(module, exports) {
 
 	module.exports = "\n  <div class=\"btn-group\" v-bind:class=\"{open:show}\">\n    <button v-el:btn type=\"button\" class=\"btn btn-default dropdown-toggle\" \n      @click=\"toggleDropdown\"\n      @blur=\"show = (search ? show:false)\"\n    >\n      <span class=\"placeholder\" v-show=\"showPlaceholder\">{{placeholder}}</span>\n      <span class=\"content\">{{ selectedItems }}</span>\n      <span class=\"caret\"></span>\n    </button>\n    <ul class=\"dropdown-menu\">\n      <template v-if=\"options.length\">\n        <li v-if=\"search\" class=\"bs-searchbox\">\n          <input type=\"text\" placeholder=\"Search\" v-model=\"searchText\" class=\"form-control\" autocomplete=\"off\">\n        </li>\n        <li v-for=\"option in options | filterBy searchText \" v-bind:id=\"option.value\" style=\"position:relative\">\n          <a @mousedown.prevent=\"select(option.value)\" style=\"cursor:pointer\">\n            {{ option.label }}\n            <span class=\"glyphicon glyphicon-ok check-mark\" v-show=\"multiple ? value.indexOf(option.value) !== -1 : value === option.value\"></span>\n          </a>\n        </li>\n      </template>\n      <slot v-else></slot>\n      <div class=\"notify\" v-show=\"showNotify\" transition=\"fadein\">最多选择 ({{limit}} 个)</div>\n    </ul>\n  </div>\n";
 
 /***/ },
-/* 109 */,
 /* 110 */,
 /* 111 */,
 /* 112 */,
@@ -1734,13 +1733,14 @@ webpackJsonp([6],Array(31).concat([
 /* 152 */,
 /* 153 */,
 /* 154 */,
-/* 155 */
+/* 155 */,
+/* 156 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(156)
-	__vue_script__ = __webpack_require__(158)
-	__vue_template__ = __webpack_require__(159)
+	__webpack_require__(157)
+	__vue_script__ = __webpack_require__(159)
+	__vue_template__ = __webpack_require__(160)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -1757,16 +1757,16 @@ webpackJsonp([6],Array(31).concat([
 	})()}
 
 /***/ },
-/* 156 */
+/* 157 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(157);
+	var content = __webpack_require__(158);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(29)(content, {});
+	var update = __webpack_require__(30)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -1783,10 +1783,10 @@ webpackJsonp([6],Array(31).concat([
 	}
 
 /***/ },
-/* 157 */
+/* 158 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(28)();
+	exports = module.exports = __webpack_require__(29)();
 	// imports
 	
 	
@@ -1797,7 +1797,7 @@ webpackJsonp([6],Array(31).concat([
 
 
 /***/ },
-/* 158 */
+/* 159 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -2289,13 +2289,12 @@ webpackJsonp([6],Array(31).concat([
 	/* generated by vue-loader */
 
 /***/ },
-/* 159 */
+/* 160 */
 /***/ function(module, exports) {
 
 	module.exports = "\r\n    <div @click.stop=\"\"  @touchstart.stop=\"\" class=\"calendar\" v-show=\"show\" :style=\"{'left':x+'px','top':y+'px'}\" transition=\"calendar\" transition-mode=\"out-in\">\r\n        <div class=\"calendar-tools\">\r\n            <i class=\"fa fa-angle-left float left\" @click=\"prev\"  @touchstart=\"prev\"></i>\r\n            <i class=\"fa fa-angle-right float right\" @click=\"next\"  @touchstart=\"next\"></i>\r\n            <div class=\"text center\">\r\n                <input type=\"number\" v-model=\"year\" value=\"{{year}}\" @change=\"render(year,month - 1)\" min=\"1970\" max=\"2100\" maxlength=\"4\" number>\r\n                 / \r\n                <input type=\"number\" v-model=\"month\" value=\"{{month}}\" @change=\"render(year,month - 1)\" min=\"01\" max=\"12\" maxlength=\"2\" number>\r\n            </div>\r\n        </div>\r\n        <table cellpadding=\"5\">\r\n        <thead>\r\n            <tr>\r\n                <td v-for=\"week in weeks\" class=\"week\">{{week}}</td>\r\n            </tr>\r\n         </thead>\r\n        <tr v-for=\"(k1,day) in days\">\r\n            <td \r\n            v-for=\"(k2,child) in day\" \r\n            :class=\"{'today':child.today,'disabled':child.disabled}\"\r\n            @click=\"select(k1,k2,$event)\" @touchstart=\"select(k1,k2,$event)\">\r\n            {{child.day}}\r\n            <div class=\"lunar\" v-if=\"showLunar\">{{child.lunar}}</div>\r\n            </td>\r\n        </tr>\r\n        </table>\r\n        <div class=\"calendar-time\" v-show=\"type=='datetime'||type=='time'\">\r\n            <div class=\"timer\">\r\n                <input type=\"number\" v-model=\"hour\" value=\"{{hour}}\" min=\"0\" max=\"23\" maxlength=\"2\" number>\r\n                时\r\n                <input type=\"number\" v-model=\"minute\" value=\"{{minute}}\" min=\"0\" max=\"59\" maxlength=\"2\" number>\r\n                分\r\n                <input type=\"number\" v-model=\"second\" value=\"{{second}}\" min=\"0\" max=\"59\" maxlength=\"2\" number>\r\n                秒\r\n            </div>\r\n        </div>\r\n        <div class=\"calendar-button\" v-show=\"type=='datetime'||type=='time'||range\">\r\n            <button type=\"button\" @click=\"ok\">确定</button>\r\n            <button type=\"button\" @click=\"cancel\" class=\"cancel\">取消</button>\r\n        </div>\r\n    </div>\r\n";
 
 /***/ },
-/* 160 */,
 /* 161 */,
 /* 162 */,
 /* 163 */,
@@ -2311,13 +2310,14 @@ webpackJsonp([6],Array(31).concat([
 /* 173 */,
 /* 174 */,
 /* 175 */,
-/* 176 */
+/* 176 */,
+/* 177 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(177)
-	__vue_script__ = __webpack_require__(179)
-	__vue_template__ = __webpack_require__(195)
+	__webpack_require__(178)
+	__vue_script__ = __webpack_require__(180)
+	__vue_template__ = __webpack_require__(196)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -2334,16 +2334,16 @@ webpackJsonp([6],Array(31).concat([
 	})()}
 
 /***/ },
-/* 177 */
+/* 178 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(178);
+	var content = __webpack_require__(179);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(29)(content, {});
+	var update = __webpack_require__(30)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -2360,21 +2360,21 @@ webpackJsonp([6],Array(31).concat([
 	}
 
 /***/ },
-/* 178 */
+/* 179 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(28)();
+	exports = module.exports = __webpack_require__(29)();
 	// imports
 	
 	
 	// module
-	exports.push([module.id, "\r\n\r\n", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"ServerSearch.vue","sourceRoot":"webpack://"}]);
+	exports.push([module.id, "\r\n.dropdown-width[_v-1eb1c1ac] {\r\n    width: 500px;\r\n}\r\n\r\n.dropdown-li[_v-1eb1c1ac] {\r\n    width: 50%;\r\n}\r\n", "", {"version":3,"sources":["/./src/components/server/server_search/ServerSearch.vue.style"],"names":[],"mappings":";AA2aA;IACA,aAAA;CACA;;AAEA;IACA,WAAA;CACA","file":"ServerSearch.vue","sourcesContent":["<!-- 服务器查询 -->\r\n<template>\r\n    <div>\r\n        <form class=\"form-horizontal clearfix form-search\">\r\n            <div class=\"col-sm-3\">\r\n                <div class=\"form-group\">\r\n                    <label class=\"control-label col-sm-4\">SN：</label>\r\n                    <div class=\"col-sm-8\">\r\n                        <input type=\"text\" class=\"form-control\" placeholder=\"多个，精确\" onfocus=\"this.blur()\" v-model=\"param.sn\" @click=\"showBroad('param.sn')\">\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <label class=\"control-label col-sm-4\">设备编号：</label>\r\n                    <div class=\"col-sm-8\">\r\n                        <input type=\"text\" class=\"form-control\" placeholder=\"多个，精确\" onfocus=\"this.blur()\" v-model=\"param.serverNum\" @click=\"showBroad('param.serverNum')\">\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group input-box\">\r\n                    <label class=\"control-label col-sm-4\">所在机房：</label>\r\n                    <div class=\"col-sm-8\">\r\n                        <v-select :value.sync=\"param.room\" :options=\"rooms\" placeholder=\"请选择\">\r\n                        </v-select>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <label class=\"control-label col-sm-4\">入库时间：</label>\r\n                    <div class=\"col-sm-8\">\r\n                        <input type=\"text\" class=\"form-control time-input fs12\" onfocus=\"this.blur()\" @click=\"showCalendar('show1', $event)\" v-model=\"param.addTime\" placeholder=\"选择范围\">\r\n                        <calendar :show.sync=\"show1\" :value.sync=\"param.addTime\" :x=\"x\" :y=\"y\" :range=\"range\" :type=\"type\"></calendar>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group input-box\">\r\n                    <label class=\"control-label col-sm-4\">所属产品：</label>\r\n                    <div class=\"col-sm-8\">\r\n                        <v-select :value.sync=\"param.product\" :options=\"products\" placeholder=\"请选择\">\r\n                        </v-select>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <label class=\"control-label col-sm-4\">运维负责人：</label>\r\n                    <div class=\"col-sm-8\">\r\n                        <input type=\"text\" class=\"form-control\" value=\"\">\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"col-sm-3\">\r\n                <div class=\"form-group\">\r\n                    <label class=\"control-label col-sm-4\">资产编号：</label>\r\n                    <div class=\"col-sm-8\">\r\n                        <input type=\"text\" class=\"form-control\" placeholder=\"多个，精确\" onfocus=\"this.blur()\" v-model=\"param.assetNum\" @click=\"showBroad('param.assetNum')\">\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group input-box\">\r\n                    <label class=\"control-label col-sm-4\">类型：</label>\r\n                    <div class=\"col-sm-8\">\r\n                        <v-select :value.sync=\"param.serverType\" :options=\"serverTypes\" placeholder=\"请选择\">\r\n                        </v-select>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group input-box\">\r\n                    <label class=\"control-label col-sm-4\">所在机架：</label>\r\n                    <div class=\"col-sm-8\">\r\n                        <v-select :value.sync=\"param.frame\" :options=\"frames\" placeholder=\"请选择\">\r\n                        </v-select>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <label class=\"control-label col-sm-4\">出厂时间：</label>\r\n                    <div class=\"col-sm-8\">\r\n                        <input type=\"text\" class=\"form-control time-input fs12\" onfocus=\"this.blur()\" @click=\"showCalendar('show3', $event)\" v-model=\"param.factoryTime\" placeholder=\"选择范围\">\r\n                        <calendar :show.sync=\"show3\" :value.sync=\"param.factoryTime\" :x=\"x\" :y=\"y\" :range=\"range\" :type=\"type\"></calendar>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group input-box\">\r\n                    <label class=\"control-label col-sm-4\">所属部门：</label>\r\n                    <div class=\"col-sm-8\">\r\n                        <v-select :value.sync=\"param.department\" :options=\"departments\" placeholder=\"请选择\">\r\n                        </v-select>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <label class=\"control-label col-sm-4\">IP：</label>\r\n                    <div class=\"col-sm-8\">\r\n                        <input type=\"text\" class=\"form-control\" placeholder=\"多个，精确\" onfocus=\"this.blur()\" v-model=\"param.ip\" @click=\"showBroad('param.ip')\">\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"col-sm-3 input-box\">\r\n                <div class=\"form-group\">\r\n                    <label class=\"control-label col-sm-4\">财务编号：</label>\r\n                    <div class=\"col-sm-8\">\r\n                        <input type=\"text\" class=\"form-control\" placeholder=\"多个，精确\" onfocus=\"this.blur()\" v-model=\"param.financeNum\" @click=\"showBroad('param.financeNum')\">\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group input-box\">\r\n                    <label class=\"control-label col-sm-4\">操作系统：</label>\r\n                    <div class=\"col-sm-8\">\r\n                        <v-select :value.sync=\"param.system\" :options=\"systems\" placeholder=\"请选择\">\r\n                        </v-select>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <label class=\"control-label col-sm-4\">来源：</label>\r\n                    <div class=\"col-sm-4 input-box pr0\">\r\n                        <v-select :value.sync=\"param.origin1\" :options=\"origins1\" placeholder=\"请选择\">\r\n                        </v-select>\r\n                    </div>\r\n                    <div class=\"col-sm-4 input-box pl0\">\r\n                        <v-select :value.sync=\"param.origin2\" :options=\"origins2\" placeholder=\"请选择\">\r\n                        </v-select>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <label class=\"control-label col-sm-4\">采购时间：</label>\r\n                    <div class=\"col-sm-8\">\r\n                        <input type=\"text\" class=\"form-control time-input fs12\" onfocus=\"this.blur()\" @click=\"showCalendar('show2', $event)\" v-model=\"param.procureTime\" placeholder=\"选择范围\">\r\n                        <calendar :show.sync=\"show2\" :value.sync=\"param.procureTime\" :x=\"x\" :y=\"y\" :range=\"range\" :type=\"type\"></calendar>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <label class=\"control-label col-sm-4\">Set：</label>\r\n                    <div class=\"col-sm-8\">\r\n                        <input type=\"text\" class=\"form-control\" value=\"\">\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"col-sm-3\">\r\n                <div class=\"form-group\">\r\n                    <label class=\"control-label col-sm-4\">发票编号：</label>\r\n                    <div class=\"col-sm-8\">\r\n                        <input type=\"text\" class=\"form-control\" placeholder=\"多个，精确\" onfocus=\"this.blur()\" v-model=\"param.invoiceNum\" @click=\"showBroad('param.invoiceNum')\">\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group input-box\">\r\n                    <label class=\"control-label col-sm-4\">状态：</label>\r\n                    <div class=\"col-sm-8\">\r\n                        <v-select :value.sync=\"param.status\" :options=\"statusArr\" placeholder=\"请选择\">\r\n                        </v-select>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <label class=\"control-label col-sm-4\">型号：</label>\r\n                    <div class=\"col-sm-8\">\r\n                        <input type=\"text\" class=\"form-control\" value=\"模糊\">\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group input-box\">\r\n                    <label class=\"control-label col-sm-4\">厂商：</label>\r\n                    <div class=\"col-sm-8\">\r\n                        <v-select :value.sync=\"param.firm\" :options=\"firms\" placeholder=\"请选择\">\r\n                        </v-select>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <label class=\"control-label col-sm-4\">Module：</label>\r\n                    <div class=\"col-sm-8\">\r\n                        <input type=\"text\" class=\"form-control\" value=\"\">\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </form>\r\n        <div class=\"text-center btn-operate\">\r\n            <button type=\"button\" class=\"btn btn-default\">\r\n                查询\r\n            </button>\r\n            <button type=\"button\" class=\"btn btn-default\" @click=\"$broadcast('showCreateServer')\">\r\n                新增服务器\r\n            </button>\r\n            <button type=\"button\" class=\"btn btn-default\">\r\n                分配到产品\r\n            </button>\r\n            <button type=\"button\" class=\"btn btn-default\"  @click=\"batchEdit\">\r\n                批量修改\r\n            </button>\r\n            <button type=\"button\" class=\"btn btn-default\">\r\n                批量退库\r\n            </button>\r\n            <button type=\"button\" class=\"btn btn-default\">\r\n                导出\r\n            </button>\r\n            <button type=\"button\" class=\"btn btn-default\">\r\n                应用回收\r\n            </button>\r\n            <button type=\"button\" class=\"btn btn-default\">\r\n                退换IDC\r\n            </button>\r\n        </div>\r\n        <div class=\"text-center table-title\">\r\n            查询结果\r\n            <div class=\"pull-left\">\r\n                <dropdown>\r\n                    <button type=\"button\" class=\"btn btn-default set-btn\" data-toggle=\"dropdown\">\r\n                        <span class=\"glyphicon glyphicon-cog\"></span>\r\n                    </button>\r\n                    <div slot=\"dropdown-menu\" class=\"dropdown-menu dropdown-width\">\r\n                        <ul class=\"pull-left dropdown-width\">\r\n                            <li v-for=\"check in checkArr\" class=\"pull-left dropdown-li\" track-by=\"$index\">\r\n                                <input :id=\"'fliter' + $index\" type=\"checkbox\" :checked=\"check.checked\" @click=\"fliter($index)\"> \r\n                                <label :for=\"'fliter' + $index\" v-text=\"check.label\"></label>\r\n                            </li>\r\n                        </ul>\r\n                    </div>\r\n                </dropdown>\r\n            </div>\r\n        </div>\r\n        <div class=\"table-box\">\r\n            <table class=\"table table-hover table-bordered\">\r\n                <thead>\r\n                    <tr>\r\n                        <th width=\"3%\"><input type=\"checkbox\" v-model=\"checkedAll\"></th>\r\n                        <th v-for=\"title in titles\" v-text=\"title\"></th>\r\n                    </tr>\r\n                </thead>\r\n                <tbody>\r\n                    <tr v-for=\"list in tableList\" v-if=\"tableList.length !== 0\" v-show=\"tableList.length !== 0\">\r\n                        <td><input type=\"checkbox\" :id=\"list.id\" :value=\"list.id\" v-model=\"checkedIds\"></td>\r\n                        <td v-show=\"list.serverNum !== 'undefined'\"><a class=\"pointer\" v-text=\"list.serverNum\" @click=\"$broadcast('showEditServer', list.id)\"></a></td>\r\n                        <td :title=\"list.ip\" v-text=\"list.ip\" v-show=\"list.ip !== 'undefined'\"></td>\r\n                        <td :title=\"list.SN\" v-text=\"list.SN\" v-show=\"list.SN !== 'undefined'\"></td>\r\n                        <td :title=\"list.type\" v-text=\"list.type\" v-show=\"list.type !== 'undefined'\"></td>\r\n                        <td :title=\"list.system\" v-text=\"list.system\" v-show=\"list.system !== 'undefined'\"></td>\r\n                        <td :title=\"list.status\" v-text=\"list.status\" v-show=\"list.status !== 'undefined'\"></td>\r\n                        <td :title=\"list.room\" v-text=\"list.room\" v-show=\"list.room !== 'undefined'\"></td>\r\n                        <td :title=\"list.frame\" v-text=\"list.frame\" v-show=\"list.frame !== 'undefined'\"></td>\r\n                        <td :title=\"list.seats\" v-text=\"list.seats\" v-show=\"list.seats !== 'undefined'\"></td>\r\n                    </tr>\r\n                    <tr class=\"text-center\" v-show=\"tableList.length === 0\">\r\n                        <td :colspan=\"titles.length\">暂无数据</td>\r\n                    </tr>\r\n                </tbody>\r\n            </table>\r\n        </div>\r\n        <div class=\"clearfix mt30\">\r\n            <boot-page :async=\"false\" :lens=\"lenArr\" :page-len=\"pageLen\" :url=\"url\" :param=\"param\"></boot-page>\r\n        </div>\r\n\r\n        <create-server-modal></create-server-modal>\r\n        <batch-edit-modal></batch-edit-modal>\r\n        <edit-server-modal></edit-server-modal>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\nimport { dropdown } from 'vue-strap'\r\nimport bootPage from '../../global/BootPage.vue'\r\nimport createServerModal from './createServer.vue'\r\nimport batchEditModal from './BatchEdit.vue'\r\nimport editServerModal from './EditServer.vue'\r\nimport vSelect from '../../global/Select.vue'\r\nimport calendar from '../../global/Calendar.vue'\r\n\r\nexport default {\r\n    data () {\r\n        return {\r\n            checkedAll: false,\r\n            checkedIds: [],\r\n            titles: ['服务器编号', 'IP', 'SN', '类型', '操作系统', '状态', '所在机房', '所在机架', '所在机位'],\r\n            tableList: [\r\n                {id: 1, serverNum: 'SGSW00001', ip: '117.121.13.56', SN: 'BRCBRW1906K01R', type: '物理机', system: 'windows 2003x64', status: '待运营', room: '北京亦庄联通机房', frame: 'L4M1-IDC-C003', seats: '46U'}\r\n            ],\r\n            lenArr: [10, 50, 100],\r\n            pageLen: 5,\r\n            url: '',\r\n            firms: [],\r\n            rooms: [],\r\n            frames: [],\r\n            serverTypes: [],\r\n            statusArr: [],\r\n            systems: [],\r\n            origins1: [],\r\n            origins2: [],\r\n            departments: [],\r\n            products: [],\r\n            param: {\r\n                serverNum: '',\r\n                sn: '',\r\n                assetNum: '',\r\n                financeNum: '',\r\n                invoiceNum: '',\r\n                room: '',\r\n                frame: '',\r\n                ip: '',\r\n                firm: '',\r\n                serverType: '',\r\n                status: '',\r\n                system: '',\r\n                origin1: '',\r\n                origin2: '',\r\n                addTime: '',\r\n                factoryTime: '',\r\n                procureTime: '',\r\n                department: '',\r\n                product: '',\r\n                titles: []\r\n            },\r\n            checkArr: [\r\n                {label: '服务器编号', checked: true},\r\n                {label: 'IP', checked: true},\r\n                {label: 'SN', checked: true},\r\n                {label: '类型', checked: true},\r\n                {label: '型号', checked: true},\r\n                {label: '操作系统', checked: true},\r\n                {label: '状态', checked: true},\r\n                {label: '设备状态', checked: true},\r\n                {label: '所在机房', checked: true},\r\n                {label: '所在机架', checked: true},\r\n                {label: '所在机位', checked: true}\r\n            ],\r\n            show1: false,\r\n            show2: false,\r\n            show3: false,\r\n            type: 'date', \r\n            x: 0,\r\n            y: 0,\r\n            range: true\r\n        }\r\n    },\r\n    methods: {\r\n\r\n        // 刷新数据\r\n        refresh () {\r\n            this.$broadcast('refresh')\r\n        },\r\n\r\n        // 筛选\r\n        fliter (index) {\r\n            console.log(index)\r\n\r\n            this.checkArr[index].checked ? this.checkArr[index].checked = false : this.checkArr[index].checked = true\r\n\r\n            console.log(this.checkArr[index].checked)\r\n\r\n            this.param.titles = []\r\n\r\n            this.checkArr.forEach((e) => {\r\n                e.checked ? this.param.titles.push(e.label) : ''\r\n            })\r\n\r\n            console.log(this.param.titles)\r\n        },\r\n\r\n        // 批量修改\r\n        batchEdit () {\r\n            let _this = this\r\n\r\n            if (this.checkedIds.length) {\r\n                this.$broadcast('batchEdit', _this.checkedIds)\r\n            }\r\n        },\r\n\r\n        // 输入面板\r\n        showBroad (target) {\r\n            let obj = target.split('.')\r\n\r\n            let param = {\r\n                value: this[obj[0]][obj[1]],\r\n                name: target\r\n            }\r\n\r\n            this.$dispatch('showBroad', param)\r\n        },\r\n\r\n        // 显示日期控件\r\n        showCalendar (name, e) {\r\n            e.stopPropagation();\r\n\r\n            var that = this;\r\n            that[name] = true;\r\n            that.x = e.target.offsetLeft;\r\n            that.y = e.target.offsetTop + e.target.offsetHeight + 8;\r\n\r\n            var bindHide = function(e) {\r\n                e.stopPropagation();\r\n                that[name] = false;\r\n                document.removeEventListener('click', bindHide, false);\r\n            };\r\n\r\n            setTimeout(function() {\r\n                document.addEventListener('click', bindHide, false);\r\n            }, 500);\r\n        },\r\n    },\r\n    components: {\r\n        bootPage,\r\n        createServerModal,\r\n        batchEditModal,\r\n        editServerModal,\r\n        vSelect,\r\n        calendar,\r\n        dropdown\r\n    },\r\n    watch: {\r\n        'checkedAll' (newVal) {\r\n            if (newVal) {\r\n                if (this.checkedIds.length !== this.tableList.length) {\r\n                    let _this = this\r\n\r\n                    _this.checkedIds = []\r\n                    _this.tableList.forEach(function(e) {\r\n                        _this.checkedIds.push(e.id)\r\n                    })\r\n                }\r\n            } else {\r\n                if (this.checkedIds.length === this.tableList.length) {\r\n                    this.checkedIds = []\r\n                }\r\n            }\r\n        },\r\n        'checkedIds' (newVal) {\r\n            if (newVal.length === this.tableList.length && this.tableList.length !== 0) {\r\n                this.checkedAll = true\r\n            } else {\r\n                this.checkedAll = false\r\n            }\r\n        }\r\n    },\r\n    events: {\r\n        'getTxt' (param) {\r\n            let obj = param.name.split('.')\r\n\r\n            this[obj[0]][obj[1]] = param.val\r\n        }\r\n    }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.dropdown-width {\r\n    width: 500px;\r\n}\r\n\r\n.dropdown-li {\r\n    width: 50%;\r\n}\r\n</style>\r\n"],"sourceRoot":"webpack://"}]);
 	
 	// exports
 
 
 /***/ },
-/* 179 */
+/* 180 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2383,32 +2383,218 @@ webpackJsonp([6],Array(31).concat([
 	    value: true
 	});
 	
-	var _BootPage = __webpack_require__(68);
+	var _vueStrap = __webpack_require__(69);
+	
+	var _BootPage = __webpack_require__(70);
 	
 	var _BootPage2 = _interopRequireDefault(_BootPage);
 	
-	var _createServer = __webpack_require__(180);
+	var _createServer = __webpack_require__(181);
 	
 	var _createServer2 = _interopRequireDefault(_createServer);
 	
-	var _BatchEdit = __webpack_require__(185);
+	var _BatchEdit = __webpack_require__(186);
 	
 	var _BatchEdit2 = _interopRequireDefault(_BatchEdit);
 	
-	var _EditServer = __webpack_require__(190);
+	var _EditServer = __webpack_require__(191);
 	
 	var _EditServer2 = _interopRequireDefault(_EditServer);
 	
-	var _Select = __webpack_require__(78);
+	var _Select = __webpack_require__(79);
 	
 	var _Select2 = _interopRequireDefault(_Select);
 	
-	var _Calendar = __webpack_require__(155);
+	var _Calendar = __webpack_require__(156);
 	
 	var _Calendar2 = _interopRequireDefault(_Calendar);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	exports.default = {
+	    data: function data() {
+	        return {
+	            checkedAll: false,
+	            checkedIds: [],
+	            titles: ['服务器编号', 'IP', 'SN', '类型', '操作系统', '状态', '所在机房', '所在机架', '所在机位'],
+	            tableList: [{ id: 1, serverNum: 'SGSW00001', ip: '117.121.13.56', SN: 'BRCBRW1906K01R', type: '物理机', system: 'windows 2003x64', status: '待运营', room: '北京亦庄联通机房', frame: 'L4M1-IDC-C003', seats: '46U' }],
+	            lenArr: [10, 50, 100],
+	            pageLen: 5,
+	            url: '',
+	            firms: [],
+	            rooms: [],
+	            frames: [],
+	            serverTypes: [],
+	            statusArr: [],
+	            systems: [],
+	            origins1: [],
+	            origins2: [],
+	            departments: [],
+	            products: [],
+	            param: {
+	                serverNum: '',
+	                sn: '',
+	                assetNum: '',
+	                financeNum: '',
+	                invoiceNum: '',
+	                room: '',
+	                frame: '',
+	                ip: '',
+	                firm: '',
+	                serverType: '',
+	                status: '',
+	                system: '',
+	                origin1: '',
+	                origin2: '',
+	                addTime: '',
+	                factoryTime: '',
+	                procureTime: '',
+	                department: '',
+	                product: '',
+	                titles: []
+	            },
+	            checkArr: [{ label: '服务器编号', checked: true }, { label: 'IP', checked: true }, { label: 'SN', checked: true }, { label: '类型', checked: true }, { label: '型号', checked: true }, { label: '操作系统', checked: true }, { label: '状态', checked: true }, { label: '设备状态', checked: true }, { label: '所在机房', checked: true }, { label: '所在机架', checked: true }, { label: '所在机位', checked: true }],
+	            show1: false,
+	            show2: false,
+	            show3: false,
+	            type: 'date',
+	            x: 0,
+	            y: 0,
+	            range: true
+	        };
+	    },
+	
+	    methods: {
+	
+	        // 刷新数据
+	
+	        refresh: function refresh() {
+	            this.$broadcast('refresh');
+	        },
+	
+	
+	        // 筛选
+	        fliter: function fliter(index) {
+	            var _this2 = this;
+	
+	            console.log(index);
+	
+	            this.checkArr[index].checked ? this.checkArr[index].checked = false : this.checkArr[index].checked = true;
+	
+	            console.log(this.checkArr[index].checked);
+	
+	            this.param.titles = [];
+	
+	            this.checkArr.forEach(function (e) {
+	                e.checked ? _this2.param.titles.push(e.label) : '';
+	            });
+	
+	            console.log(this.param.titles);
+	        },
+	
+	
+	        // 批量修改
+	        batchEdit: function batchEdit() {
+	            var _this = this;
+	
+	            if (this.checkedIds.length) {
+	                this.$broadcast('batchEdit', _this.checkedIds);
+	            }
+	        },
+	
+	
+	        // 输入面板
+	        showBroad: function showBroad(target) {
+	            var obj = target.split('.');
+	
+	            var param = {
+	                value: this[obj[0]][obj[1]],
+	                name: target
+	            };
+	
+	            this.$dispatch('showBroad', param);
+	        },
+	
+	
+	        // 显示日期控件
+	        showCalendar: function showCalendar(name, e) {
+	            e.stopPropagation();
+	
+	            var that = this;
+	            that[name] = true;
+	            that.x = e.target.offsetLeft;
+	            that.y = e.target.offsetTop + e.target.offsetHeight + 8;
+	
+	            var bindHide = function bindHide(e) {
+	                e.stopPropagation();
+	                that[name] = false;
+	                document.removeEventListener('click', bindHide, false);
+	            };
+	
+	            setTimeout(function () {
+	                document.addEventListener('click', bindHide, false);
+	            }, 500);
+	        }
+	    },
+	    components: {
+	        bootPage: _BootPage2.default,
+	        createServerModal: _createServer2.default,
+	        batchEditModal: _BatchEdit2.default,
+	        editServerModal: _EditServer2.default,
+	        vSelect: _Select2.default,
+	        calendar: _Calendar2.default,
+	        dropdown: _vueStrap.dropdown
+	    },
+	    watch: {
+	        'checkedAll': function checkedAll(newVal) {
+	            var _this3 = this;
+	
+	            if (newVal) {
+	                if (this.checkedIds.length !== this.tableList.length) {
+	                    (function () {
+	                        var _this = _this3;
+	
+	                        _this.checkedIds = [];
+	                        _this.tableList.forEach(function (e) {
+	                            _this.checkedIds.push(e.id);
+	                        });
+	                    })();
+	                }
+	            } else {
+	                if (this.checkedIds.length === this.tableList.length) {
+	                    this.checkedIds = [];
+	                }
+	            }
+	        },
+	        'checkedIds': function checkedIds(newVal) {
+	            if (newVal.length === this.tableList.length && this.tableList.length !== 0) {
+	                this.checkedAll = true;
+	            } else {
+	                this.checkedAll = false;
+	            }
+	        }
+	    },
+	    events: {
+	        'getTxt': function getTxt(param) {
+	            var obj = param.name.split('.');
+	
+	            this[obj[0]][obj[1]] = param.val;
+	        }
+	    }
+	};
+	// </script>
+	//
+	// <style scoped>
+	// .dropdown-width {
+	//     width: 500px;
+	// }
+	//
+	// .dropdown-li {
+	//     width: 50%;
+	// }
+	// </style>
+	//
+	/* generated by vue-loader */
 	// <!-- 服务器查询 -->
 	// <template>
 	//     <div>
@@ -2598,10 +2784,20 @@ webpackJsonp([6],Array(31).concat([
 	//         </div>
 	//         <div class="text-center table-title">
 	//             查询结果
-	//             <div class="pull-right">
-	//                 <button type="button" class="btn btn-default set-btn">
-	//                     <span class="glyphicon glyphicon-cog"></span>
-	//                 </button>
+	//             <div class="pull-left">
+	//                 <dropdown>
+	//                     <button type="button" class="btn btn-default set-btn" data-toggle="dropdown">
+	//                         <span class="glyphicon glyphicon-cog"></span>
+	//                     </button>
+	//                     <div slot="dropdown-menu" class="dropdown-menu dropdown-width">
+	//                         <ul class="pull-left dropdown-width">
+	//                             <li v-for="check in checkArr" class="pull-left dropdown-li" track-by="$index">
+	//                                 <input :id="'fliter' + $index" type="checkbox" :checked="check.checked" @click="fliter($index)">
+	//                                 <label :for="'fliter' + $index" v-text="check.label"></label>
+	//                             </li>
+	//                         </ul>
+	//                     </div>
+	//                 </dropdown>
 	//             </div>
 	//         </div>
 	//         <div class="table-box">
@@ -2642,170 +2838,15 @@ webpackJsonp([6],Array(31).concat([
 	// </template>
 	//
 	// <script>
-	exports.default = {
-	    data: function data() {
-	        return {
-	            checkedAll: false,
-	            checkedIds: [],
-	            titles: ['服务器编号', 'IP', 'SN', '类型', '操作系统', '状态', '所在机房', '所在机架', '所在机位'],
-	            tableList: [{ id: 1, serverNum: 'SGSW00001', ip: '117.121.13.56', SN: 'BRCBRW1906K01R', type: '物理机', system: 'windows 2003x64', status: '待运营', room: '北京亦庄联通机房', frame: 'L4M1-IDC-C003', seats: '46U' }],
-	            lenArr: [10, 50, 100],
-	            pageLen: 5,
-	            url: '',
-	            firms: [],
-	            rooms: [],
-	            frames: [],
-	            serverTypes: [],
-	            statusArr: [],
-	            systems: [],
-	            origins1: [],
-	            origins2: [],
-	            departments: [],
-	            products: [],
-	            param: {
-	                serverNum: '',
-	                sn: '',
-	                assetNum: '',
-	                financeNum: '',
-	                invoiceNum: '',
-	                room: '',
-	                frame: '',
-	                ip: '',
-	                firm: '',
-	                serverType: '',
-	                status: '',
-	                system: '',
-	                origin1: '',
-	                origin2: '',
-	                addTime: '',
-	                factoryTime: '',
-	                procureTime: '',
-	                department: '',
-	                product: ''
-	            },
-	            show1: false,
-	            show2: false,
-	            show3: false,
-	            type: 'date',
-	            x: 0,
-	            y: 0,
-	            range: true
-	        };
-	    },
-	
-	    methods: {
-	
-	        // 刷新数据
-	
-	        refresh: function refresh() {
-	            this.$broadcast('refresh');
-	        },
-	
-	
-	        // 批量修改
-	        batchEdit: function batchEdit() {
-	            var _this = this;
-	
-	            if (this.checkedIds.length) {
-	                this.$broadcast('batchEdit', _this.checkedIds);
-	            }
-	        },
-	
-	
-	        // 输入面板
-	        showBroad: function showBroad(target) {
-	            var obj = target.split('.');
-	
-	            var param = {
-	                value: this[obj[0]][obj[1]],
-	                name: target
-	            };
-	
-	            this.$dispatch('showBroad', param);
-	        },
-	
-	
-	        // 显示日期控件
-	        showCalendar: function showCalendar(name, e) {
-	            e.stopPropagation();
-	
-	            var that = this;
-	            that[name] = true;
-	            that.x = e.target.offsetLeft;
-	            that.y = e.target.offsetTop + e.target.offsetHeight + 8;
-	
-	            var bindHide = function bindHide(e) {
-	                e.stopPropagation();
-	                that[name] = false;
-	                document.removeEventListener('click', bindHide, false);
-	            };
-	
-	            setTimeout(function () {
-	                document.addEventListener('click', bindHide, false);
-	            }, 500);
-	        }
-	    },
-	    components: {
-	        bootPage: _BootPage2.default,
-	        createServerModal: _createServer2.default,
-	        batchEditModal: _BatchEdit2.default,
-	        editServerModal: _EditServer2.default,
-	        vSelect: _Select2.default,
-	        calendar: _Calendar2.default
-	    },
-	    watch: {
-	        'checkedAll': function checkedAll(newVal) {
-	            var _this2 = this;
-	
-	            if (newVal) {
-	                if (this.checkedIds.length !== this.tableList.length) {
-	                    (function () {
-	                        var _this = _this2;
-	
-	                        _this.checkedIds = [];
-	                        _this.tableList.forEach(function (e) {
-	                            _this.checkedIds.push(e.id);
-	                        });
-	                    })();
-	                }
-	            } else {
-	                if (this.checkedIds.length === this.tableList.length) {
-	                    this.checkedIds = [];
-	                }
-	            }
-	        },
-	        'checkedIds': function checkedIds(newVal) {
-	            if (newVal.length === this.tableList.length && this.tableList.length !== 0) {
-	                this.checkedAll = true;
-	            } else {
-	                this.checkedAll = false;
-	            }
-	        }
-	    },
-	    events: {
-	        'getTxt': function getTxt(param) {
-	            var obj = param.name.split('.');
-	
-	            this[obj[0]][obj[1]] = param.val;
-	        }
-	    }
-	};
-	// </script>
-	//
-	// <style scoped>
-	//
-	// </style>
-	//
-	/* generated by vue-loader */
 
 /***/ },
-/* 180 */
+/* 181 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(181)
-	__vue_script__ = __webpack_require__(183)
-	__vue_template__ = __webpack_require__(184)
+	__webpack_require__(182)
+	__vue_script__ = __webpack_require__(184)
+	__vue_template__ = __webpack_require__(185)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -2822,16 +2863,16 @@ webpackJsonp([6],Array(31).concat([
 	})()}
 
 /***/ },
-/* 181 */
+/* 182 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(182);
+	var content = __webpack_require__(183);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(29)(content, {});
+	var update = __webpack_require__(30)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -2848,10 +2889,10 @@ webpackJsonp([6],Array(31).concat([
 	}
 
 /***/ },
-/* 182 */
+/* 183 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(28)();
+	exports = module.exports = __webpack_require__(29)();
 	// imports
 	
 	
@@ -2862,7 +2903,7 @@ webpackJsonp([6],Array(31).concat([
 
 
 /***/ },
-/* 183 */
+/* 184 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2871,13 +2912,13 @@ webpackJsonp([6],Array(31).concat([
 	    value: true
 	});
 	
-	var _assign = __webpack_require__(31);
+	var _assign = __webpack_require__(32);
 	
 	var _assign2 = _interopRequireDefault(_assign);
 	
-	var _vueStrap = __webpack_require__(77);
+	var _vueStrap = __webpack_require__(69);
 	
-	var _Select = __webpack_require__(78);
+	var _Select = __webpack_require__(79);
 	
 	var _Select2 = _interopRequireDefault(_Select);
 	
@@ -3105,19 +3146,19 @@ webpackJsonp([6],Array(31).concat([
 	/* generated by vue-loader */
 
 /***/ },
-/* 184 */
+/* 185 */
 /***/ function(module, exports) {
 
 	module.exports = "\n    <modal :show.sync=\"creatServerModal\" effect=\"fade\" width=\"850px\" _v-3235bd9e=\"\">\n        <div slot=\"modal-header\" class=\"modal-header\" _v-3235bd9e=\"\">\n            <h4 class=\"modal-title\" _v-3235bd9e=\"\">新增服务器</h4>\n        </div>\n        <div slot=\"modal-body\" class=\"modal-body\" _v-3235bd9e=\"\">\n            <form class=\"form-horizontal clearfix form-input\" _v-3235bd9e=\"\">\n                <div class=\"col-sm-6\" _v-3235bd9e=\"\">\n                    <div class=\"form-group\" _v-3235bd9e=\"\">\n                        <label class=\"control-label col-sm-4\" _v-3235bd9e=\"\">SN：</label>\n                        <div class=\"col-sm-8\" _v-3235bd9e=\"\">\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\" _v-3235bd9e=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-3235bd9e=\"\">\n                        <label class=\"control-label col-sm-4\" _v-3235bd9e=\"\">来源：</label>\n                        <div class=\"col-sm-4 input-box pr0\" _v-3235bd9e=\"\">\n                            <v-select :value.sync=\"origin1\" :options=\"origins1\" placeholder=\"请选择\" _v-3235bd9e=\"\">\n                            </v-select>\n                        </div>\n                        <div class=\"col-sm-4 input-box pl0\" _v-3235bd9e=\"\">\n                            <v-select :value.sync=\"origin2\" :options=\"origins2\" placeholder=\"请选择\" _v-3235bd9e=\"\">\n                            </v-select>\n                        </div>\n                    </div>\n                    <div class=\"form-group input-box\" _v-3235bd9e=\"\">\n                        <label class=\"control-label col-sm-4\" _v-3235bd9e=\"\">机房：</label>\n                        <div class=\"col-sm-8\" _v-3235bd9e=\"\">\n                            <v-select :value.sync=\"room\" :options=\"rooms\" placeholder=\"请选择\" _v-3235bd9e=\"\">\n                            </v-select>\n                        </div>\n                    </div>\n                    <div class=\"form-group input-box\" _v-3235bd9e=\"\">\n                        <label class=\"control-label col-sm-4\" _v-3235bd9e=\"\">机架：</label>\n                        <div class=\"col-sm-8\" _v-3235bd9e=\"\">\n                            <v-select :value.sync=\"frame\" :options=\"frames\" placeholder=\"请选择\" _v-3235bd9e=\"\">\n                            </v-select>\n                        </div>\n                    </div>\n                    <div class=\"form-group input-box\" _v-3235bd9e=\"\">\n                        <label class=\"control-label col-sm-4\" _v-3235bd9e=\"\">机位：</label>\n                        <div class=\"col-sm-8\" _v-3235bd9e=\"\">\n                            <v-select :value.sync=\"seat\" :options=\"seats\" placeholder=\"请选择\" _v-3235bd9e=\"\">\n                            </v-select>\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-3235bd9e=\"\">\n                        <label class=\"control-label col-sm-4\" _v-3235bd9e=\"\">入库时间：</label>\n                        <div class=\"col-sm-8\" _v-3235bd9e=\"\">\n                            <datepicker :value.sync=\"addTime\" :format=\"'yyyy-MM-dd'\" :show-reset-button=\"true\" _v-3235bd9e=\"\">\n                            </datepicker>\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-3235bd9e=\"\">\n                        <label class=\"control-label col-sm-4\" _v-3235bd9e=\"\">出厂时间：</label>\n                        <div class=\"col-sm-8\" _v-3235bd9e=\"\">\n                            <datepicker :value.sync=\"factoryTime\" :format=\"'yyyy-MM-dd'\" :show-reset-button=\"true\" _v-3235bd9e=\"\">\n                            </datepicker>\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-3235bd9e=\"\">\n                        <label class=\"control-label col-sm-4\" _v-3235bd9e=\"\">采购时间：</label>\n                        <div class=\"col-sm-8\" _v-3235bd9e=\"\">\n                            <datepicker :value.sync=\"procureTime\" :format=\"'yyyy-MM-dd'\" :show-reset-button=\"true\" _v-3235bd9e=\"\">\n                            </datepicker>\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-3235bd9e=\"\">\n                        <label class=\"control-label col-sm-4\" _v-3235bd9e=\"\">型号：</label>\n                        <div class=\"col-sm-8\" _v-3235bd9e=\"\">\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\" _v-3235bd9e=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group input-box\" _v-3235bd9e=\"\">\n                        <label class=\"control-label col-sm-4\" _v-3235bd9e=\"\">状态：</label>\n                        <div class=\"col-sm-8\" _v-3235bd9e=\"\">\n                            <v-select :value.sync=\"status\" :options=\"statusArr\" placeholder=\"请选择\" _v-3235bd9e=\"\">\n                            </v-select>\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-3235bd9e=\"\">\n                        <label class=\"control-label col-sm-4\" _v-3235bd9e=\"\">备注：</label>\n                        <div class=\"col-sm-8\" _v-3235bd9e=\"\">\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\" _v-3235bd9e=\"\">\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-sm-6\" _v-3235bd9e=\"\">\n                    <div class=\"form-group input-box\" _v-3235bd9e=\"\">\n                        <label class=\"control-label col-sm-4\" _v-3235bd9e=\"\">类型：</label>\n                        <div class=\"col-sm-8\" _v-3235bd9e=\"\">\n                            <v-select :value.sync=\"system\" :options=\"systems\" placeholder=\"请选择\" _v-3235bd9e=\"\">\n                            </v-select>\n                        </div>\n                    </div>\n                     <div class=\"form-group\" _v-3235bd9e=\"\">\n                        <label class=\"control-label col-sm-4\" _v-3235bd9e=\"\">物理主机编号：</label>\n                        <div class=\"col-sm-8\" _v-3235bd9e=\"\">\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\" _v-3235bd9e=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-3235bd9e=\"\">\n                        <label class=\"control-label col-sm-4\" _v-3235bd9e=\"\">资产编号：</label>\n                        <div class=\"col-sm-8\" _v-3235bd9e=\"\">\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\" _v-3235bd9e=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-3235bd9e=\"\">\n                        <label class=\"control-label col-sm-4\" _v-3235bd9e=\"\">财务编号：</label>\n                        <div class=\"col-sm-8\" _v-3235bd9e=\"\">\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\" _v-3235bd9e=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-3235bd9e=\"\">\n                        <label class=\"control-label col-sm-4\" _v-3235bd9e=\"\">发票编号：</label>\n                        <div class=\"col-sm-8\" _v-3235bd9e=\"\">\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\" _v-3235bd9e=\"\">\n                        </div>\n                    </div>\n                    \n                    <div class=\"form-group\" _v-3235bd9e=\"\">\n                        <label class=\"control-label col-sm-4\" _v-3235bd9e=\"\">电压：</label>\n                        <div class=\"col-sm-8\" _v-3235bd9e=\"\">\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\" _v-3235bd9e=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-3235bd9e=\"\">\n                        <label class=\"control-label col-sm-4\" _v-3235bd9e=\"\">电流：</label>\n                        <div class=\"col-sm-8\" _v-3235bd9e=\"\">\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\" _v-3235bd9e=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-3235bd9e=\"\">\n                        <label class=\"control-label col-sm-4\" _v-3235bd9e=\"\">功率：</label>\n                        <div class=\"col-sm-8\" _v-3235bd9e=\"\">\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\" _v-3235bd9e=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group input-box\" _v-3235bd9e=\"\">\n                        <label class=\"control-label col-sm-4\" _v-3235bd9e=\"\">厂商：</label>\n                        <div class=\"col-sm-8\" _v-3235bd9e=\"\">\n                            <v-select :value.sync=\"firm\" :options=\"firms\" placeholder=\"请选择\" _v-3235bd9e=\"\">\n                            </v-select>\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-3235bd9e=\"\">\n                        <label class=\"control-label col-sm-4\" _v-3235bd9e=\"\">质保期限：</label>\n                        <div class=\"col-sm-8\" _v-3235bd9e=\"\">\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\" _v-3235bd9e=\"\">\n                        </div>\n                    </div>\n                </div>\n            </form>\n        </div>\n        <div slot=\"modal-footer\" class=\"modal-footer\" _v-3235bd9e=\"\">\n            <button type=\"button\" class=\"btn btn-default\" _v-3235bd9e=\"\">保存</button>\n            <button type=\"button\" class=\"btn btn-default\" @click=\"creatServerModal = false\" _v-3235bd9e=\"\">取消</button>\n        </div>\n    </modal>\n";
 
 /***/ },
-/* 185 */
+/* 186 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(186)
-	__vue_script__ = __webpack_require__(188)
-	__vue_template__ = __webpack_require__(189)
+	__webpack_require__(187)
+	__vue_script__ = __webpack_require__(189)
+	__vue_template__ = __webpack_require__(190)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -3134,16 +3175,16 @@ webpackJsonp([6],Array(31).concat([
 	})()}
 
 /***/ },
-/* 186 */
+/* 187 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(187);
+	var content = __webpack_require__(188);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(29)(content, {});
+	var update = __webpack_require__(30)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -3160,10 +3201,10 @@ webpackJsonp([6],Array(31).concat([
 	}
 
 /***/ },
-/* 187 */
+/* 188 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(28)();
+	exports = module.exports = __webpack_require__(29)();
 	// imports
 	
 	
@@ -3174,7 +3215,7 @@ webpackJsonp([6],Array(31).concat([
 
 
 /***/ },
-/* 188 */
+/* 189 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3183,13 +3224,13 @@ webpackJsonp([6],Array(31).concat([
 	    value: true
 	});
 	
-	var _assign = __webpack_require__(31);
+	var _assign = __webpack_require__(32);
 	
 	var _assign2 = _interopRequireDefault(_assign);
 	
-	var _vueStrap = __webpack_require__(77);
+	var _vueStrap = __webpack_require__(69);
 	
-	var _Select = __webpack_require__(78);
+	var _Select = __webpack_require__(79);
 	
 	var _Select2 = _interopRequireDefault(_Select);
 	
@@ -3421,19 +3462,19 @@ webpackJsonp([6],Array(31).concat([
 	/* generated by vue-loader */
 
 /***/ },
-/* 189 */
+/* 190 */
 /***/ function(module, exports) {
 
 	module.exports = "\n    <modal :show.sync=\"batchEditModal\" effect=\"fade\" width=\"850px\" _v-e903f9d6=\"\">\n        <div slot=\"modal-header\" class=\"modal-header\" _v-e903f9d6=\"\">\n            <h4 class=\"modal-title\" _v-e903f9d6=\"\">批量修改服务器</h4>\n        </div>\n        <div slot=\"modal-body\" class=\"modal-body\" _v-e903f9d6=\"\">\n            <form class=\"form-horizontal clearfix form-input\" _v-e903f9d6=\"\">\n                <div class=\"col-sm-6\" _v-e903f9d6=\"\">\n                    <div class=\"form-group\" _v-e903f9d6=\"\">\n                        <label class=\"control-label col-sm-4\" _v-e903f9d6=\"\">状态：</label>\n                        <div class=\"col-sm-8\" _v-e903f9d6=\"\">\n                            <input type=\"text\" class=\"form-control\" _v-e903f9d6=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-e903f9d6=\"\">\n                        <label class=\"control-label col-sm-4\" _v-e903f9d6=\"\">操作系统：</label>\n                        <div class=\"col-sm-8\" _v-e903f9d6=\"\">\n                            <input type=\"text\" class=\"form-control\" _v-e903f9d6=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-e903f9d6=\"\">\n                        <label class=\"control-label col-sm-4\" _v-e903f9d6=\"\">厂商：</label>\n                        <div class=\"col-sm-8\" _v-e903f9d6=\"\">\n                            <input type=\"text\" class=\"form-control\" _v-e903f9d6=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-e903f9d6=\"\">\n                        <label class=\"control-label col-sm-4\" _v-e903f9d6=\"\">所在机房：</label>\n                        <div class=\"col-sm-8\" _v-e903f9d6=\"\">\n                            <input type=\"text\" class=\"form-control\" _v-e903f9d6=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-e903f9d6=\"\">\n                        <label class=\"control-label col-sm-4\" _v-e903f9d6=\"\">所在机架：</label>\n                        <div class=\"col-sm-8\" _v-e903f9d6=\"\">\n                            <input type=\"text\" class=\"form-control\" _v-e903f9d6=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-e903f9d6=\"\">\n                        <label class=\"control-label col-sm-4\" _v-e903f9d6=\"\">所在机位：</label>\n                        <div class=\"col-sm-8\" _v-e903f9d6=\"\">\n                            <input type=\"text\" class=\"form-control\" _v-e903f9d6=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-e903f9d6=\"\">\n                        <label class=\"control-label col-sm-4\" _v-e903f9d6=\"\">入库时间：</label>\n                        <div class=\"col-sm-8\" _v-e903f9d6=\"\">\n                            <input type=\"text\" class=\"form-control\" _v-e903f9d6=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-e903f9d6=\"\">\n                        <label class=\"control-label col-sm-4\" _v-e903f9d6=\"\">出厂时间：</label>\n                        <div class=\"col-sm-8\" _v-e903f9d6=\"\">\n                            <input type=\"text\" class=\"form-control\" _v-e903f9d6=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-e903f9d6=\"\">\n                        <label class=\"control-label col-sm-4\" _v-e903f9d6=\"\">购买时间：</label>\n                        <div class=\"col-sm-8\" _v-e903f9d6=\"\">\n                            <input type=\"text\" class=\"form-control\" _v-e903f9d6=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-e903f9d6=\"\">\n                        <label class=\"control-label col-sm-4\" _v-e903f9d6=\"\">上架时间：</label>\n                        <div class=\"col-sm-8\" _v-e903f9d6=\"\">\n                            <input type=\"text\" class=\"form-control\" _v-e903f9d6=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-e903f9d6=\"\">\n                        <label class=\"control-label col-sm-4\" _v-e903f9d6=\"\">型号：</label>\n                        <div class=\"col-sm-8\" _v-e903f9d6=\"\">\n                            <input type=\"text\" class=\"form-control\" _v-e903f9d6=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-e903f9d6=\"\">\n                        <label class=\"control-label col-sm-4\" _v-e903f9d6=\"\">质保期限：</label>\n                        <div class=\"col-sm-8\" _v-e903f9d6=\"\">\n                            <input type=\"text\" class=\"form-control\" _v-e903f9d6=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-e903f9d6=\"\">\n                        <label class=\"control-label col-sm-4\" _v-e903f9d6=\"\">备注：</label>\n                        <div class=\"col-sm-8\" _v-e903f9d6=\"\">\n                            <input type=\"text\" class=\"form-control\" _v-e903f9d6=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-e903f9d6=\"\">\n                        <label class=\"control-label col-sm-4\" _v-e903f9d6=\"\">内核版本：</label>\n                        <div class=\"col-sm-8\" _v-e903f9d6=\"\">\n                            <input type=\"text\" class=\"form-control\" _v-e903f9d6=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-e903f9d6=\"\">\n                        <label class=\"control-label col-sm-4\" _v-e903f9d6=\"\">发行版本：</label>\n                        <div class=\"col-sm-8\" _v-e903f9d6=\"\">\n                            <input type=\"text\" class=\"form-control\" _v-e903f9d6=\"\">\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-sm-6\" _v-e903f9d6=\"\">\n                    <div class=\"form-group\" _v-e903f9d6=\"\">\n                        <label class=\"control-label col-sm-4\" _v-e903f9d6=\"\">CPU信息：</label>\n                        <div class=\"col-sm-8\" _v-e903f9d6=\"\">\n                            <input type=\"text\" class=\"form-control\" _v-e903f9d6=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-e903f9d6=\"\">\n                        <label class=\"control-label col-sm-4\" _v-e903f9d6=\"\">内存信息：</label>\n                        <div class=\"col-sm-8\" _v-e903f9d6=\"\">\n                            <input type=\"text\" class=\"form-control\" _v-e903f9d6=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-e903f9d6=\"\">\n                        <label class=\"control-label col-sm-4\" _v-e903f9d6=\"\">磁盘信息:</label>\n                        <div class=\"col-sm-8\" _v-e903f9d6=\"\">\n                            <input type=\"text\" class=\"form-control\" _v-e903f9d6=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-e903f9d6=\"\">\n                        <label class=\"control-label col-sm-4\" _v-e903f9d6=\"\">网卡信息:</label>\n                        <div class=\"col-sm-8\" _v-e903f9d6=\"\">\n                            <input type=\"text\" class=\"form-control\" _v-e903f9d6=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-e903f9d6=\"\">\n                        <label class=\"control-label col-sm-4\" _v-e903f9d6=\"\">主板：</label>\n                        <div class=\"col-sm-8\" _v-e903f9d6=\"\">\n                            <input type=\"text\" class=\"form-control\" _v-e903f9d6=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-e903f9d6=\"\">\n                        <label class=\"control-label col-sm-4\" _v-e903f9d6=\"\">阵列卡：</label>\n                        <div class=\"col-sm-8\" _v-e903f9d6=\"\">\n                            <input type=\"text\" class=\"form-control\" _v-e903f9d6=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-e903f9d6=\"\">\n                        <label class=\"control-label col-sm-4\" _v-e903f9d6=\"\">电源：</label>\n                        <div class=\"col-sm-8\" _v-e903f9d6=\"\">\n                            <input type=\"text\" class=\"form-control\" _v-e903f9d6=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-e903f9d6=\"\">\n                        <label class=\"control-label col-sm-4\" _v-e903f9d6=\"\">电源背板：</label>\n                        <div class=\"col-sm-8\" _v-e903f9d6=\"\">\n                            <input type=\"text\" class=\"form-control\" _v-e903f9d6=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-e903f9d6=\"\">\n                        <label class=\"control-label col-sm-4\" _v-e903f9d6=\"\">硬盘背板：</label>\n                        <div class=\"col-sm-8\" _v-e903f9d6=\"\">\n                            <input type=\"text\" class=\"form-control\" _v-e903f9d6=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-e903f9d6=\"\">\n                        <label class=\"control-label col-sm-4\" _v-e903f9d6=\"\">PCI板：</label>\n                        <div class=\"col-sm-8\" _v-e903f9d6=\"\">\n                            <input type=\"text\" class=\"form-control\" _v-e903f9d6=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-e903f9d6=\"\">\n                        <label class=\"control-label col-sm-4\" _v-e903f9d6=\"\">远程控制卡：</label>\n                        <div class=\"col-sm-8\" _v-e903f9d6=\"\">\n                            <input type=\"text\" class=\"form-control\" _v-e903f9d6=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-e903f9d6=\"\">\n                        <label class=\"control-label col-sm-4\" _v-e903f9d6=\"\">功率（W）：</label>\n                        <div class=\"col-sm-8\" _v-e903f9d6=\"\">\n                            <input type=\"text\" class=\"form-control\" _v-e903f9d6=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-e903f9d6=\"\">\n                        <label class=\"control-label col-sm-4\" _v-e903f9d6=\"\">电流（A）：</label>\n                        <div class=\"col-sm-8\" _v-e903f9d6=\"\">\n                            <input type=\"text\" class=\"form-control\" _v-e903f9d6=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-e903f9d6=\"\">\n                        <label class=\"control-label col-sm-4\" _v-e903f9d6=\"\">电压（V）：</label>\n                        <div class=\"col-sm-8\" _v-e903f9d6=\"\">\n                            <input type=\"text\" class=\"form-control\" _v-e903f9d6=\"\">\n                        </div>\n                    </div>\n                </div>\n            </form>\n        </div>\n        <div slot=\"modal-footer\" class=\"modal-footer\" _v-e903f9d6=\"\">\n            <button type=\"button\" class=\"btn btn-default\" _v-e903f9d6=\"\">保存</button>\n            <button type=\"button\" class=\"btn btn-default\" @click=\"batchEditModal = false\" _v-e903f9d6=\"\">取消</button>\n        </div>\n    </modal>\n";
 
 /***/ },
-/* 190 */
+/* 191 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(191)
-	__vue_script__ = __webpack_require__(193)
-	__vue_template__ = __webpack_require__(194)
+	__webpack_require__(192)
+	__vue_script__ = __webpack_require__(194)
+	__vue_template__ = __webpack_require__(195)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -3450,16 +3491,16 @@ webpackJsonp([6],Array(31).concat([
 	})()}
 
 /***/ },
-/* 191 */
+/* 192 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(192);
+	var content = __webpack_require__(193);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(29)(content, {});
+	var update = __webpack_require__(30)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -3476,21 +3517,21 @@ webpackJsonp([6],Array(31).concat([
 	}
 
 /***/ },
-/* 192 */
+/* 193 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(28)();
+	exports = module.exports = __webpack_require__(29)();
 	// imports
 	
 	
 	// module
-	exports.push([module.id, "\r\nlabel.col-sm-4[_v-aaff09e8] {\r\n    padding-right: 5px;\r\n    padding-left: 5px;\r\n}\r\n", "", {"version":3,"sources":["/./src/components/server/server_search/EditServer.vue.style"],"names":[],"mappings":";AA8SA;IACA,mBAAA;IACA,kBAAA;CACA","file":"EditServer.vue","sourcesContent":["<!-- 编辑服务器 -->\r\n<template>\r\n    <modal :show.sync=\"editServerModal\" effect=\"fade\" width=\"1200px\">\r\n        <div slot=\"modal-header\" class=\"modal-header\">\r\n            <h4 class=\"modal-title\">编辑服务器</h4>\r\n        </div>\r\n        <div slot=\"modal-body\" class=\"modal-body\">\r\n            <form class=\"form-horizontal clearfix form-input form-min\">\r\n                <div class=\"col-sm-3\">\r\n                    <div class=\"form-group\">\r\n                        <label class=\"control-label col-sm-4\">SN：</label>\r\n                        <div class=\"col-sm-8\">\r\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\">\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"form-group input-box\">\r\n                        <label class=\"control-label col-sm-4\">类型：</label>\r\n                        <div class=\"col-sm-8\">\r\n                            <v-select :value.sync=\"system\" :options=\"systems\" placeholder=\"请选择\">\r\n                            </v-select>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"form-group input-box\">\r\n                        <label class=\"control-label col-sm-4\">机房：</label>\r\n                        <div class=\"col-sm-8\">\r\n                            <v-select :value.sync=\"room\" :options=\"rooms\" placeholder=\"请选择\">\r\n                            </v-select>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"form-group input-box\">\r\n                        <label class=\"control-label col-sm-4\">机架：</label>\r\n                        <div class=\"col-sm-8\">\r\n                            <v-select :value.sync=\"frame\" :options=\"frames\" placeholder=\"请选择\">\r\n                            </v-select>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"form-group input-box\">\r\n                        <label class=\"control-label col-sm-4\">机位：</label>\r\n                        <div class=\"col-sm-8\">\r\n                            <v-select :value.sync=\"seat\" :options=\"seats\" placeholder=\"请选择\">\r\n                            </v-select>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"form-group input-box\">\r\n                        <label class=\"control-label col-sm-4\">状态：</label>\r\n                        <div class=\"col-sm-8\">\r\n                            <v-select :value.sync=\"status\" :options=\"statusArr\" placeholder=\"请选择\">\r\n                            </v-select>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"form-group input-box\">\r\n                        <label class=\"control-label col-sm-4\">厂商：</label>\r\n                        <div class=\"col-sm-8\">\r\n                            <v-select :value.sync=\"firm\" :options=\"firms\" placeholder=\"请选择\">\r\n                            </v-select>\r\n                        </div>\r\n                    </div>   \r\n                     <div class=\"form-group\">\r\n                        <label class=\"control-label col-sm-4\">质保期限：</label>\r\n                        <div class=\"col-sm-8\">\r\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\">\r\n                        </div>\r\n                    </div>     \r\n                    <div class=\"form-group\">\r\n                        <label class=\"control-label col-sm-4\">备注：</label>\r\n                        <div class=\"col-sm-8\">\r\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\">\r\n                        </div>\r\n                    </div>            \r\n                </div>\r\n                <div class=\"col-sm-3\">\r\n                   <div class=\"form-group\">\r\n                        <label class=\"control-label col-sm-4\">设备编号：</label>\r\n                        <div class=\"col-sm-8\">\r\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\">\r\n                        </div>\r\n                    </div>\r\n                     <div class=\"form-group\">\r\n                        <label class=\"control-label col-sm-4\">物理主机编号：</label>\r\n                        <div class=\"col-sm-8\">\r\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\">\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"form-group\">\r\n                        <label class=\"control-label col-sm-4\">资产编号：</label>\r\n                        <div class=\"col-sm-8\">\r\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\">\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"form-group\">\r\n                        <label class=\"control-label col-sm-4\">财务编号：</label>\r\n                        <div class=\"col-sm-8\">\r\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\">\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"form-group\">\r\n                        <label class=\"control-label col-sm-4\">发票编号：</label>\r\n                        <div class=\"col-sm-8\">\r\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\">\r\n                        </div>\r\n                    </div>\r\n                     <div class=\"form-group\">\r\n                        <label class=\"control-label col-sm-4\">电压：</label>\r\n                        <div class=\"col-sm-8\">\r\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\">\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"form-group\">\r\n                        <label class=\"control-label col-sm-4\">电流：</label>\r\n                        <div class=\"col-sm-8\">\r\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\">\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"form-group\">\r\n                        <label class=\"control-label col-sm-4\">功率：</label>\r\n                        <div class=\"col-sm-8\">\r\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\">\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-sm-3\">\r\n                    <div class=\"form-group\">\r\n                        <label class=\"control-label col-sm-4\">来源：</label>\r\n                        <div class=\"col-sm-4 input-box pr0\">\r\n                            <v-select :value.sync=\"origin1\" :options=\"origins1\" placeholder=\"请选择\">\r\n                            </v-select>\r\n                        </div>\r\n                        <div class=\"col-sm-4 input-box pl0\">\r\n                            <v-select :value.sync=\"origin2\" :options=\"origins2\" placeholder=\"请选择\">\r\n                            </v-select>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"form-group\">\r\n                        <label class=\"control-label col-sm-4\">型号：</label>\r\n                        <div class=\"col-sm-8\">\r\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\">\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"form-group\">\r\n                        <label class=\"control-label col-sm-4\">入库时间：</label>\r\n                        <div class=\"col-sm-8\">\r\n                            <datepicker\r\n                              :value.sync=\"addTime\"\r\n                              :format=\"'yyyy-MM-dd'\"\r\n                              :show-reset-button=\"true\">\r\n                            </datepicker>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"form-group\">\r\n                        <label class=\"control-label col-sm-4\">出厂时间：</label>\r\n                        <div class=\"col-sm-8\">\r\n                            <datepicker\r\n                              :value.sync=\"factoryTime\"\r\n                              :format=\"'yyyy-MM-dd'\"\r\n                              :show-reset-button=\"true\">\r\n                            </datepicker>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"form-group\">\r\n                        <label class=\"control-label col-sm-4\">采购时间：</label>\r\n                        <div class=\"col-sm-8\">\r\n                            <datepicker\r\n                              :value.sync=\"procureTime\"\r\n                              :format=\"'yyyy-MM-dd'\"\r\n                              :show-reset-button=\"true\">\r\n                            </datepicker>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"form-group\">\r\n                        <label class=\"control-label col-sm-4\">所属部门：</label>\r\n                        <div class=\"col-sm-8\">\r\n                            <input type=\"text\" class=\"form-control\" :readonly=\"true\">\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"form-group\">\r\n                        <label class=\"control-label col-sm-4\">所属产品：</label>\r\n                        <div class=\"col-sm-8\">\r\n                            <input type=\"text\" class=\"form-control\" :readonly=\"true\">\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"form-group\">\r\n                        <label class=\"control-label col-sm-4\">运维负责人：</label>\r\n                        <div class=\"col-sm-8\">\r\n                            <input type=\"text\" class=\"form-control\" :readonly=\"true\">\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-sm-3\">\r\n                    <div class=\"form-group\">\r\n                        <label class=\"control-label col-sm-4\">所属Set：</label>\r\n                        <div class=\"col-sm-8\">\r\n                            <textarea rows=\"3\" class=\"form-control\" :readonly=\"true\"></textarea> \r\n                        </div>\r\n                    </div>\r\n                    <div class=\"form-group\">\r\n                        <label class=\"control-label col-sm-4\">所属Module：</label>\r\n                        <div class=\"col-sm-8\">\r\n                            <textarea rows=\"3\" class=\"form-control\" :readonly=\"true\"></textarea> \r\n                        </div>\r\n                    </div>\r\n                    <div class=\"form-group\">\r\n                        <label class=\"control-label col-sm-4\">IP：</label>\r\n                        <div class=\"col-sm-8\">\r\n                            <textarea rows=\"3\" class=\"form-control\" :readonly=\"true\"></textarea> \r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </form>\r\n            <div class=\"text-center mt30 mb20\">\r\n                <button type=\"button\" class=\"btn btn-default\">保存</button>\r\n                <button type=\"button\" class=\"btn btn-default\">更新</button>\r\n                <button type=\"button\" class=\"btn btn-default\" @click='editServerModal = false'>取消</button>\r\n            </div>\r\n            <table class=\"table table-hover table-small table-scroll\">\r\n                <thead>\r\n                    <tr>\r\n                        <th>端口号</th>\r\n                        <th>IP</th>\r\n                        <th>MAC</th>\r\n                        <th>速率</th>\r\n                        <th>状态</th>\r\n                        <th>用途</th>\r\n                        <th>对端设备</th>\r\n                        <th>对端设备VLAN</th>\r\n                        <th>对端设备端口</th>\r\n                    </tr>\r\n                </thead>\r\n                <tbody>\r\n                    <tr v-for=\"port in ports\" v-show=\"ports.length !== 0\">\r\n                        <td v-text=\"port.portNum\"></td>\r\n                        <td v-text=\"port.ip\"></td>\r\n                        <td v-text=\"port.mac\"></td>\r\n                        <td v-text=\"port.speed\"></td>\r\n                        <td v-text=\"port.status\"></td>\r\n                        <td v-text=\"port.use\"></td>\r\n                        <td v-text=\"port.device\"></td>\r\n                        <td v-text=\"port.deviceVlan\"></td>\r\n                        <td v-text=\"port.devicePort\"></td>\r\n                    </tr>\r\n                    <tr v-show=\"ports.length === 0\" class=\"text-center\">\r\n                        <td colspan=\"9\">暂无数据</td>\r\n                    </tr>\r\n                </tbody>\r\n            </table>\r\n        </div>\r\n        <div slot=\"modal-footer\" class=\"modal-footer\">\r\n        </div>\r\n    </modal>\r\n</template>\r\n\r\n<script>\r\nimport { modal, datepicker } from 'vue-strap'\r\nimport vSelect from '../../global/Select.vue'\r\n\r\nlet origin = {\r\n        editServerModal: false,\r\n        ports: [\r\n            {portNum: '111', ip: '', mac: '', speed: '', status: '', use: '', device: '', deviceVlan: '', devicePort: ''}\r\n        ],\r\n        rooms: [],\r\n        room: '',\r\n        frames: [],\r\n        frame: '',\r\n        seats: [],\r\n        seat: '',\r\n        statusArr: [],\r\n        status: '',\r\n        systems: [],\r\n        system: '',\r\n        firms: [],\r\n        firm: '',\r\n        origins1: [{value: '蜗牛', label: '蜗牛'}],\r\n        origin1: '蜗牛',\r\n        origins2: [{value: '北京蜗牛', label: '北京蜗牛'}],\r\n        origin2: '北京蜗牛',\r\n        addTime: '',\r\n        factoryTime: '',\r\n        procureTime: ''\r\n    },\r\n    init = Object.assign({}, origin);\r\n\r\nexport default {\r\n    data () {\r\n        return origin\r\n    },\r\n    methods: {\r\n\r\n    },\r\n    components: {\r\n        modal,\r\n        vSelect,\r\n        datepicker\r\n    },\r\n    events: {\r\n        'showEditServer' () {\r\n            this.editServerModal = true\r\n        }\r\n    }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\nlabel.col-sm-4 {\r\n    padding-right: 5px;\r\n    padding-left: 5px;\r\n}\r\n</style>"],"sourceRoot":"webpack://"}]);
+	exports.push([module.id, "\r\nlabel.col-sm-4[_v-aaff09e8] {\r\n    padding-right: 5px;\r\n    padding-left: 5px;\r\n}\r\n", "", {"version":3,"sources":["/./src/components/server/server_search/EditServer.vue.style"],"names":[],"mappings":";AA8SA;IACA,mBAAA;IACA,kBAAA;CACA","file":"EditServer.vue","sourcesContent":["<!-- 编辑服务器 -->\r\n<template>\r\n    <modal :show.sync=\"editServerModal\" effect=\"fade\" width=\"1200px\">\r\n        <div slot=\"modal-header\" class=\"modal-header\">\r\n            <h4 class=\"modal-title\">编辑服务器</h4>\r\n        </div>\r\n        <div slot=\"modal-body\" class=\"modal-body\">\r\n            <form class=\"form-horizontal clearfix form-input\">\r\n                <div class=\"col-sm-3\">\r\n                    <div class=\"form-group\">\r\n                        <label class=\"control-label col-sm-4\">SN：</label>\r\n                        <div class=\"col-sm-8\">\r\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\">\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"form-group input-box\">\r\n                        <label class=\"control-label col-sm-4\">类型：</label>\r\n                        <div class=\"col-sm-8\">\r\n                            <v-select :value.sync=\"system\" :options=\"systems\" placeholder=\"请选择\">\r\n                            </v-select>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"form-group input-box\">\r\n                        <label class=\"control-label col-sm-4\">机房：</label>\r\n                        <div class=\"col-sm-8\">\r\n                            <v-select :value.sync=\"room\" :options=\"rooms\" placeholder=\"请选择\">\r\n                            </v-select>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"form-group input-box\">\r\n                        <label class=\"control-label col-sm-4\">机架：</label>\r\n                        <div class=\"col-sm-8\">\r\n                            <v-select :value.sync=\"frame\" :options=\"frames\" placeholder=\"请选择\">\r\n                            </v-select>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"form-group input-box\">\r\n                        <label class=\"control-label col-sm-4\">机位：</label>\r\n                        <div class=\"col-sm-8\">\r\n                            <v-select :value.sync=\"seat\" :options=\"seats\" placeholder=\"请选择\">\r\n                            </v-select>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"form-group input-box\">\r\n                        <label class=\"control-label col-sm-4\">状态：</label>\r\n                        <div class=\"col-sm-8\">\r\n                            <v-select :value.sync=\"status\" :options=\"statusArr\" placeholder=\"请选择\">\r\n                            </v-select>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"form-group input-box\">\r\n                        <label class=\"control-label col-sm-4\">厂商：</label>\r\n                        <div class=\"col-sm-8\">\r\n                            <v-select :value.sync=\"firm\" :options=\"firms\" placeholder=\"请选择\">\r\n                            </v-select>\r\n                        </div>\r\n                    </div>   \r\n                     <div class=\"form-group\">\r\n                        <label class=\"control-label col-sm-4\">质保期限：</label>\r\n                        <div class=\"col-sm-8\">\r\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\">\r\n                        </div>\r\n                    </div>     \r\n                    <div class=\"form-group\">\r\n                        <label class=\"control-label col-sm-4\">备注：</label>\r\n                        <div class=\"col-sm-8\">\r\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\">\r\n                        </div>\r\n                    </div>            \r\n                </div>\r\n                <div class=\"col-sm-3\">\r\n                   <div class=\"form-group\">\r\n                        <label class=\"control-label col-sm-4\">设备编号：</label>\r\n                        <div class=\"col-sm-8\">\r\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\">\r\n                        </div>\r\n                    </div>\r\n                     <div class=\"form-group\">\r\n                        <label class=\"control-label col-sm-4\">物理主机编号：</label>\r\n                        <div class=\"col-sm-8\">\r\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\">\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"form-group\">\r\n                        <label class=\"control-label col-sm-4\">资产编号：</label>\r\n                        <div class=\"col-sm-8\">\r\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\">\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"form-group\">\r\n                        <label class=\"control-label col-sm-4\">财务编号：</label>\r\n                        <div class=\"col-sm-8\">\r\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\">\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"form-group\">\r\n                        <label class=\"control-label col-sm-4\">发票编号：</label>\r\n                        <div class=\"col-sm-8\">\r\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\">\r\n                        </div>\r\n                    </div>\r\n                     <div class=\"form-group\">\r\n                        <label class=\"control-label col-sm-4\">电压：</label>\r\n                        <div class=\"col-sm-8\">\r\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\">\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"form-group\">\r\n                        <label class=\"control-label col-sm-4\">电流：</label>\r\n                        <div class=\"col-sm-8\">\r\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\">\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"form-group\">\r\n                        <label class=\"control-label col-sm-4\">功率：</label>\r\n                        <div class=\"col-sm-8\">\r\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\">\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-sm-3\">\r\n                    <div class=\"form-group\">\r\n                        <label class=\"control-label col-sm-4\">来源：</label>\r\n                        <div class=\"col-sm-4 input-box pr0\">\r\n                            <v-select :value.sync=\"origin1\" :options=\"origins1\" placeholder=\"请选择\" class=\"fs12\">\r\n                            </v-select>\r\n                        </div>\r\n                        <div class=\"col-sm-4 input-box pl0\">\r\n                            <v-select :value.sync=\"origin2\" :options=\"origins2\" placeholder=\"请选择\" class=\"fs12\">\r\n                            </v-select>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"form-group\">\r\n                        <label class=\"control-label col-sm-4\">型号：</label>\r\n                        <div class=\"col-sm-8\">\r\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\">\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"form-group\">\r\n                        <label class=\"control-label col-sm-4\">入库时间：</label>\r\n                        <div class=\"col-sm-8\">\r\n                            <datepicker\r\n                              :value.sync=\"addTime\"\r\n                              :format=\"'yyyy-MM-dd'\"\r\n                              :show-reset-button=\"true\">\r\n                            </datepicker>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"form-group\">\r\n                        <label class=\"control-label col-sm-4\">出厂时间：</label>\r\n                        <div class=\"col-sm-8\">\r\n                            <datepicker\r\n                              :value.sync=\"factoryTime\"\r\n                              :format=\"'yyyy-MM-dd'\"\r\n                              :show-reset-button=\"true\">\r\n                            </datepicker>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"form-group\">\r\n                        <label class=\"control-label col-sm-4\">采购时间：</label>\r\n                        <div class=\"col-sm-8\">\r\n                            <datepicker\r\n                              :value.sync=\"procureTime\"\r\n                              :format=\"'yyyy-MM-dd'\"\r\n                              :show-reset-button=\"true\">\r\n                            </datepicker>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"form-group\">\r\n                        <label class=\"control-label col-sm-4\">所属部门：</label>\r\n                        <div class=\"col-sm-8\">\r\n                            <input type=\"text\" class=\"form-control\" :readonly=\"true\">\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"form-group\">\r\n                        <label class=\"control-label col-sm-4\">所属产品：</label>\r\n                        <div class=\"col-sm-8\">\r\n                            <input type=\"text\" class=\"form-control\" :readonly=\"true\">\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"form-group\">\r\n                        <label class=\"control-label col-sm-4\">运维负责人：</label>\r\n                        <div class=\"col-sm-8\">\r\n                            <input type=\"text\" class=\"form-control\" :readonly=\"true\">\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-sm-3\">\r\n                    <div class=\"form-group\">\r\n                        <label class=\"control-label col-sm-4\">所属Set：</label>\r\n                        <div class=\"col-sm-8\">\r\n                            <textarea rows=\"4\" class=\"form-control\" :readonly=\"true\"></textarea> \r\n                        </div>\r\n                    </div>\r\n                    <div class=\"form-group\">\r\n                        <label class=\"control-label col-sm-4\">所属Module：</label>\r\n                        <div class=\"col-sm-8\">\r\n                            <textarea rows=\"4\" class=\"form-control\" :readonly=\"true\"></textarea> \r\n                        </div>\r\n                    </div>\r\n                    <div class=\"form-group\">\r\n                        <label class=\"control-label col-sm-4\">IP：</label>\r\n                        <div class=\"col-sm-8\">\r\n                            <textarea rows=\"4\" class=\"form-control\" :readonly=\"true\"></textarea> \r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </form>\r\n            <div class=\"text-center mt30 mb20\">\r\n                <button type=\"button\" class=\"btn btn-default\">保存</button>\r\n                <button type=\"button\" class=\"btn btn-default\">更新</button>\r\n                <button type=\"button\" class=\"btn btn-default\" @click='editServerModal = false'>取消</button>\r\n            </div>\r\n            <table class=\"table table-hover table-small table-scroll\">\r\n                <thead>\r\n                    <tr>\r\n                        <th>端口号</th>\r\n                        <th>IP</th>\r\n                        <th>MAC</th>\r\n                        <th>速率</th>\r\n                        <th>状态</th>\r\n                        <th>用途</th>\r\n                        <th>对端设备</th>\r\n                        <th>对端设备VLAN</th>\r\n                        <th>对端设备端口</th>\r\n                    </tr>\r\n                </thead>\r\n                <tbody>\r\n                    <tr v-for=\"port in ports\" v-show=\"ports.length !== 0\">\r\n                        <td v-text=\"port.portNum\"></td>\r\n                        <td v-text=\"port.ip\"></td>\r\n                        <td v-text=\"port.mac\"></td>\r\n                        <td v-text=\"port.speed\"></td>\r\n                        <td v-text=\"port.status\"></td>\r\n                        <td v-text=\"port.use\"></td>\r\n                        <td v-text=\"port.device\"></td>\r\n                        <td v-text=\"port.deviceVlan\"></td>\r\n                        <td v-text=\"port.devicePort\"></td>\r\n                    </tr>\r\n                    <tr v-show=\"ports.length === 0\" class=\"text-center\">\r\n                        <td colspan=\"9\">暂无数据</td>\r\n                    </tr>\r\n                </tbody>\r\n            </table>\r\n        </div>\r\n        <div slot=\"modal-footer\" class=\"modal-footer\">\r\n        </div>\r\n    </modal>\r\n</template>\r\n\r\n<script>\r\nimport { modal, datepicker } from 'vue-strap'\r\nimport vSelect from '../../global/Select.vue'\r\n\r\nlet origin = {\r\n        editServerModal: false,\r\n        ports: [\r\n            {portNum: '111', ip: '', mac: '', speed: '', status: '', use: '', device: '', deviceVlan: '', devicePort: ''}\r\n        ],\r\n        rooms: [],\r\n        room: '',\r\n        frames: [],\r\n        frame: '',\r\n        seats: [],\r\n        seat: '',\r\n        statusArr: [],\r\n        status: '',\r\n        systems: [],\r\n        system: '',\r\n        firms: [],\r\n        firm: '',\r\n        origins1: [{value: '蜗牛', label: '蜗牛'}],\r\n        origin1: '蜗牛',\r\n        origins2: [{value: '北京蜗牛', label: '北京蜗牛'}],\r\n        origin2: '北京蜗牛',\r\n        addTime: '',\r\n        factoryTime: '',\r\n        procureTime: ''\r\n    },\r\n    init = Object.assign({}, origin);\r\n\r\nexport default {\r\n    data () {\r\n        return origin\r\n    },\r\n    methods: {\r\n\r\n    },\r\n    components: {\r\n        modal,\r\n        vSelect,\r\n        datepicker\r\n    },\r\n    events: {\r\n        'showEditServer' () {\r\n            this.editServerModal = true\r\n        }\r\n    }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\nlabel.col-sm-4 {\r\n    padding-right: 5px;\r\n    padding-left: 5px;\r\n}\r\n</style>"],"sourceRoot":"webpack://"}]);
 	
 	// exports
 
 
 /***/ },
-/* 193 */
+/* 194 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3499,13 +3540,13 @@ webpackJsonp([6],Array(31).concat([
 	    value: true
 	});
 	
-	var _assign = __webpack_require__(31);
+	var _assign = __webpack_require__(32);
 	
 	var _assign2 = _interopRequireDefault(_assign);
 	
-	var _vueStrap = __webpack_require__(77);
+	var _vueStrap = __webpack_require__(69);
 	
-	var _Select = __webpack_require__(78);
+	var _Select = __webpack_require__(79);
 	
 	var _Select2 = _interopRequireDefault(_Select);
 	
@@ -3518,7 +3559,7 @@ webpackJsonp([6],Array(31).concat([
 	//             <h4 class="modal-title">编辑服务器</h4>
 	//         </div>
 	//         <div slot="modal-body" class="modal-body">
-	//             <form class="form-horizontal clearfix form-input form-min">
+	//             <form class="form-horizontal clearfix form-input">
 	//                 <div class="col-sm-3">
 	//                     <div class="form-group">
 	//                         <label class="control-label col-sm-4">SN：</label>
@@ -3635,11 +3676,11 @@ webpackJsonp([6],Array(31).concat([
 	//                     <div class="form-group">
 	//                         <label class="control-label col-sm-4">来源：</label>
 	//                         <div class="col-sm-4 input-box pr0">
-	//                             <v-select :value.sync="origin1" :options="origins1" placeholder="请选择">
+	//                             <v-select :value.sync="origin1" :options="origins1" placeholder="请选择" class="fs12">
 	//                             </v-select>
 	//                         </div>
 	//                         <div class="col-sm-4 input-box pl0">
-	//                             <v-select :value.sync="origin2" :options="origins2" placeholder="请选择">
+	//                             <v-select :value.sync="origin2" :options="origins2" placeholder="请选择" class="fs12">
 	//                             </v-select>
 	//                         </div>
 	//                     </div>
@@ -3702,19 +3743,19 @@ webpackJsonp([6],Array(31).concat([
 	//                     <div class="form-group">
 	//                         <label class="control-label col-sm-4">所属Set：</label>
 	//                         <div class="col-sm-8">
-	//                             <textarea rows="3" class="form-control" :readonly="true"></textarea>
+	//                             <textarea rows="4" class="form-control" :readonly="true"></textarea>
 	//                         </div>
 	//                     </div>
 	//                     <div class="form-group">
 	//                         <label class="control-label col-sm-4">所属Module：</label>
 	//                         <div class="col-sm-8">
-	//                             <textarea rows="3" class="form-control" :readonly="true"></textarea>
+	//                             <textarea rows="4" class="form-control" :readonly="true"></textarea>
 	//                         </div>
 	//                     </div>
 	//                     <div class="form-group">
 	//                         <label class="control-label col-sm-4">IP：</label>
 	//                         <div class="col-sm-8">
-	//                             <textarea rows="3" class="form-control" :readonly="true"></textarea>
+	//                             <textarea rows="4" class="form-control" :readonly="true"></textarea>
 	//                         </div>
 	//                     </div>
 	//                 </div>
@@ -3817,16 +3858,16 @@ webpackJsonp([6],Array(31).concat([
 	/* generated by vue-loader */
 
 /***/ },
-/* 194 */
-/***/ function(module, exports) {
-
-	module.exports = "\n    <modal :show.sync=\"editServerModal\" effect=\"fade\" width=\"1200px\" _v-aaff09e8=\"\">\n        <div slot=\"modal-header\" class=\"modal-header\" _v-aaff09e8=\"\">\n            <h4 class=\"modal-title\" _v-aaff09e8=\"\">编辑服务器</h4>\n        </div>\n        <div slot=\"modal-body\" class=\"modal-body\" _v-aaff09e8=\"\">\n            <form class=\"form-horizontal clearfix form-input form-min\" _v-aaff09e8=\"\">\n                <div class=\"col-sm-3\" _v-aaff09e8=\"\">\n                    <div class=\"form-group\" _v-aaff09e8=\"\">\n                        <label class=\"control-label col-sm-4\" _v-aaff09e8=\"\">SN：</label>\n                        <div class=\"col-sm-8\" _v-aaff09e8=\"\">\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\" _v-aaff09e8=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group input-box\" _v-aaff09e8=\"\">\n                        <label class=\"control-label col-sm-4\" _v-aaff09e8=\"\">类型：</label>\n                        <div class=\"col-sm-8\" _v-aaff09e8=\"\">\n                            <v-select :value.sync=\"system\" :options=\"systems\" placeholder=\"请选择\" _v-aaff09e8=\"\">\n                            </v-select>\n                        </div>\n                    </div>\n                    <div class=\"form-group input-box\" _v-aaff09e8=\"\">\n                        <label class=\"control-label col-sm-4\" _v-aaff09e8=\"\">机房：</label>\n                        <div class=\"col-sm-8\" _v-aaff09e8=\"\">\n                            <v-select :value.sync=\"room\" :options=\"rooms\" placeholder=\"请选择\" _v-aaff09e8=\"\">\n                            </v-select>\n                        </div>\n                    </div>\n                    <div class=\"form-group input-box\" _v-aaff09e8=\"\">\n                        <label class=\"control-label col-sm-4\" _v-aaff09e8=\"\">机架：</label>\n                        <div class=\"col-sm-8\" _v-aaff09e8=\"\">\n                            <v-select :value.sync=\"frame\" :options=\"frames\" placeholder=\"请选择\" _v-aaff09e8=\"\">\n                            </v-select>\n                        </div>\n                    </div>\n                    <div class=\"form-group input-box\" _v-aaff09e8=\"\">\n                        <label class=\"control-label col-sm-4\" _v-aaff09e8=\"\">机位：</label>\n                        <div class=\"col-sm-8\" _v-aaff09e8=\"\">\n                            <v-select :value.sync=\"seat\" :options=\"seats\" placeholder=\"请选择\" _v-aaff09e8=\"\">\n                            </v-select>\n                        </div>\n                    </div>\n                    <div class=\"form-group input-box\" _v-aaff09e8=\"\">\n                        <label class=\"control-label col-sm-4\" _v-aaff09e8=\"\">状态：</label>\n                        <div class=\"col-sm-8\" _v-aaff09e8=\"\">\n                            <v-select :value.sync=\"status\" :options=\"statusArr\" placeholder=\"请选择\" _v-aaff09e8=\"\">\n                            </v-select>\n                        </div>\n                    </div>\n                    <div class=\"form-group input-box\" _v-aaff09e8=\"\">\n                        <label class=\"control-label col-sm-4\" _v-aaff09e8=\"\">厂商：</label>\n                        <div class=\"col-sm-8\" _v-aaff09e8=\"\">\n                            <v-select :value.sync=\"firm\" :options=\"firms\" placeholder=\"请选择\" _v-aaff09e8=\"\">\n                            </v-select>\n                        </div>\n                    </div>   \n                     <div class=\"form-group\" _v-aaff09e8=\"\">\n                        <label class=\"control-label col-sm-4\" _v-aaff09e8=\"\">质保期限：</label>\n                        <div class=\"col-sm-8\" _v-aaff09e8=\"\">\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\" _v-aaff09e8=\"\">\n                        </div>\n                    </div>     \n                    <div class=\"form-group\" _v-aaff09e8=\"\">\n                        <label class=\"control-label col-sm-4\" _v-aaff09e8=\"\">备注：</label>\n                        <div class=\"col-sm-8\" _v-aaff09e8=\"\">\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\" _v-aaff09e8=\"\">\n                        </div>\n                    </div>            \n                </div>\n                <div class=\"col-sm-3\" _v-aaff09e8=\"\">\n                   <div class=\"form-group\" _v-aaff09e8=\"\">\n                        <label class=\"control-label col-sm-4\" _v-aaff09e8=\"\">设备编号：</label>\n                        <div class=\"col-sm-8\" _v-aaff09e8=\"\">\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\" _v-aaff09e8=\"\">\n                        </div>\n                    </div>\n                     <div class=\"form-group\" _v-aaff09e8=\"\">\n                        <label class=\"control-label col-sm-4\" _v-aaff09e8=\"\">物理主机编号：</label>\n                        <div class=\"col-sm-8\" _v-aaff09e8=\"\">\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\" _v-aaff09e8=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-aaff09e8=\"\">\n                        <label class=\"control-label col-sm-4\" _v-aaff09e8=\"\">资产编号：</label>\n                        <div class=\"col-sm-8\" _v-aaff09e8=\"\">\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\" _v-aaff09e8=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-aaff09e8=\"\">\n                        <label class=\"control-label col-sm-4\" _v-aaff09e8=\"\">财务编号：</label>\n                        <div class=\"col-sm-8\" _v-aaff09e8=\"\">\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\" _v-aaff09e8=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-aaff09e8=\"\">\n                        <label class=\"control-label col-sm-4\" _v-aaff09e8=\"\">发票编号：</label>\n                        <div class=\"col-sm-8\" _v-aaff09e8=\"\">\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\" _v-aaff09e8=\"\">\n                        </div>\n                    </div>\n                     <div class=\"form-group\" _v-aaff09e8=\"\">\n                        <label class=\"control-label col-sm-4\" _v-aaff09e8=\"\">电压：</label>\n                        <div class=\"col-sm-8\" _v-aaff09e8=\"\">\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\" _v-aaff09e8=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-aaff09e8=\"\">\n                        <label class=\"control-label col-sm-4\" _v-aaff09e8=\"\">电流：</label>\n                        <div class=\"col-sm-8\" _v-aaff09e8=\"\">\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\" _v-aaff09e8=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-aaff09e8=\"\">\n                        <label class=\"control-label col-sm-4\" _v-aaff09e8=\"\">功率：</label>\n                        <div class=\"col-sm-8\" _v-aaff09e8=\"\">\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\" _v-aaff09e8=\"\">\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-sm-3\" _v-aaff09e8=\"\">\n                    <div class=\"form-group\" _v-aaff09e8=\"\">\n                        <label class=\"control-label col-sm-4\" _v-aaff09e8=\"\">来源：</label>\n                        <div class=\"col-sm-4 input-box pr0\" _v-aaff09e8=\"\">\n                            <v-select :value.sync=\"origin1\" :options=\"origins1\" placeholder=\"请选择\" _v-aaff09e8=\"\">\n                            </v-select>\n                        </div>\n                        <div class=\"col-sm-4 input-box pl0\" _v-aaff09e8=\"\">\n                            <v-select :value.sync=\"origin2\" :options=\"origins2\" placeholder=\"请选择\" _v-aaff09e8=\"\">\n                            </v-select>\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-aaff09e8=\"\">\n                        <label class=\"control-label col-sm-4\" _v-aaff09e8=\"\">型号：</label>\n                        <div class=\"col-sm-8\" _v-aaff09e8=\"\">\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\" _v-aaff09e8=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-aaff09e8=\"\">\n                        <label class=\"control-label col-sm-4\" _v-aaff09e8=\"\">入库时间：</label>\n                        <div class=\"col-sm-8\" _v-aaff09e8=\"\">\n                            <datepicker :value.sync=\"addTime\" :format=\"'yyyy-MM-dd'\" :show-reset-button=\"true\" _v-aaff09e8=\"\">\n                            </datepicker>\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-aaff09e8=\"\">\n                        <label class=\"control-label col-sm-4\" _v-aaff09e8=\"\">出厂时间：</label>\n                        <div class=\"col-sm-8\" _v-aaff09e8=\"\">\n                            <datepicker :value.sync=\"factoryTime\" :format=\"'yyyy-MM-dd'\" :show-reset-button=\"true\" _v-aaff09e8=\"\">\n                            </datepicker>\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-aaff09e8=\"\">\n                        <label class=\"control-label col-sm-4\" _v-aaff09e8=\"\">采购时间：</label>\n                        <div class=\"col-sm-8\" _v-aaff09e8=\"\">\n                            <datepicker :value.sync=\"procureTime\" :format=\"'yyyy-MM-dd'\" :show-reset-button=\"true\" _v-aaff09e8=\"\">\n                            </datepicker>\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-aaff09e8=\"\">\n                        <label class=\"control-label col-sm-4\" _v-aaff09e8=\"\">所属部门：</label>\n                        <div class=\"col-sm-8\" _v-aaff09e8=\"\">\n                            <input type=\"text\" class=\"form-control\" :readonly=\"true\" _v-aaff09e8=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-aaff09e8=\"\">\n                        <label class=\"control-label col-sm-4\" _v-aaff09e8=\"\">所属产品：</label>\n                        <div class=\"col-sm-8\" _v-aaff09e8=\"\">\n                            <input type=\"text\" class=\"form-control\" :readonly=\"true\" _v-aaff09e8=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-aaff09e8=\"\">\n                        <label class=\"control-label col-sm-4\" _v-aaff09e8=\"\">运维负责人：</label>\n                        <div class=\"col-sm-8\" _v-aaff09e8=\"\">\n                            <input type=\"text\" class=\"form-control\" :readonly=\"true\" _v-aaff09e8=\"\">\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-sm-3\" _v-aaff09e8=\"\">\n                    <div class=\"form-group\" _v-aaff09e8=\"\">\n                        <label class=\"control-label col-sm-4\" _v-aaff09e8=\"\">所属Set：</label>\n                        <div class=\"col-sm-8\" _v-aaff09e8=\"\">\n                            <textarea rows=\"3\" class=\"form-control\" :readonly=\"true\" _v-aaff09e8=\"\"></textarea> \n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-aaff09e8=\"\">\n                        <label class=\"control-label col-sm-4\" _v-aaff09e8=\"\">所属Module：</label>\n                        <div class=\"col-sm-8\" _v-aaff09e8=\"\">\n                            <textarea rows=\"3\" class=\"form-control\" :readonly=\"true\" _v-aaff09e8=\"\"></textarea> \n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-aaff09e8=\"\">\n                        <label class=\"control-label col-sm-4\" _v-aaff09e8=\"\">IP：</label>\n                        <div class=\"col-sm-8\" _v-aaff09e8=\"\">\n                            <textarea rows=\"3\" class=\"form-control\" :readonly=\"true\" _v-aaff09e8=\"\"></textarea> \n                        </div>\n                    </div>\n                </div>\n            </form>\n            <div class=\"text-center mt30 mb20\" _v-aaff09e8=\"\">\n                <button type=\"button\" class=\"btn btn-default\" _v-aaff09e8=\"\">保存</button>\n                <button type=\"button\" class=\"btn btn-default\" _v-aaff09e8=\"\">更新</button>\n                <button type=\"button\" class=\"btn btn-default\" @click=\"editServerModal = false\" _v-aaff09e8=\"\">取消</button>\n            </div>\n            <table class=\"table table-hover table-small table-scroll\" _v-aaff09e8=\"\">\n                <thead _v-aaff09e8=\"\">\n                    <tr _v-aaff09e8=\"\">\n                        <th _v-aaff09e8=\"\">端口号</th>\n                        <th _v-aaff09e8=\"\">IP</th>\n                        <th _v-aaff09e8=\"\">MAC</th>\n                        <th _v-aaff09e8=\"\">速率</th>\n                        <th _v-aaff09e8=\"\">状态</th>\n                        <th _v-aaff09e8=\"\">用途</th>\n                        <th _v-aaff09e8=\"\">对端设备</th>\n                        <th _v-aaff09e8=\"\">对端设备VLAN</th>\n                        <th _v-aaff09e8=\"\">对端设备端口</th>\n                    </tr>\n                </thead>\n                <tbody _v-aaff09e8=\"\">\n                    <tr v-for=\"port in ports\" v-show=\"ports.length !== 0\" _v-aaff09e8=\"\">\n                        <td v-text=\"port.portNum\" _v-aaff09e8=\"\"></td>\n                        <td v-text=\"port.ip\" _v-aaff09e8=\"\"></td>\n                        <td v-text=\"port.mac\" _v-aaff09e8=\"\"></td>\n                        <td v-text=\"port.speed\" _v-aaff09e8=\"\"></td>\n                        <td v-text=\"port.status\" _v-aaff09e8=\"\"></td>\n                        <td v-text=\"port.use\" _v-aaff09e8=\"\"></td>\n                        <td v-text=\"port.device\" _v-aaff09e8=\"\"></td>\n                        <td v-text=\"port.deviceVlan\" _v-aaff09e8=\"\"></td>\n                        <td v-text=\"port.devicePort\" _v-aaff09e8=\"\"></td>\n                    </tr>\n                    <tr v-show=\"ports.length === 0\" class=\"text-center\" _v-aaff09e8=\"\">\n                        <td colspan=\"9\" _v-aaff09e8=\"\">暂无数据</td>\n                    </tr>\n                </tbody>\n            </table>\n        </div>\n        <div slot=\"modal-footer\" class=\"modal-footer\" _v-aaff09e8=\"\">\n        </div>\n    </modal>\n";
-
-/***/ },
 /* 195 */
 /***/ function(module, exports) {
 
-	module.exports = "\n    <div _v-1eb1c1ac=\"\">\n        <form class=\"form-horizontal clearfix form-search\" _v-1eb1c1ac=\"\">\n            <div class=\"col-sm-3\" _v-1eb1c1ac=\"\">\n                <div class=\"form-group\" _v-1eb1c1ac=\"\">\n                    <label class=\"control-label col-sm-4\" _v-1eb1c1ac=\"\">SN：</label>\n                    <div class=\"col-sm-8\" _v-1eb1c1ac=\"\">\n                        <input type=\"text\" class=\"form-control\" placeholder=\"多个，精确\" onfocus=\"this.blur()\" v-model=\"param.sn\" @click=\"showBroad('param.sn')\" _v-1eb1c1ac=\"\">\n                    </div>\n                </div>\n                <div class=\"form-group\" _v-1eb1c1ac=\"\">\n                    <label class=\"control-label col-sm-4\" _v-1eb1c1ac=\"\">设备编号：</label>\n                    <div class=\"col-sm-8\" _v-1eb1c1ac=\"\">\n                        <input type=\"text\" class=\"form-control\" placeholder=\"多个，精确\" onfocus=\"this.blur()\" v-model=\"param.serverNum\" @click=\"showBroad('param.serverNum')\" _v-1eb1c1ac=\"\">\n                    </div>\n                </div>\n                <div class=\"form-group input-box\" _v-1eb1c1ac=\"\">\n                    <label class=\"control-label col-sm-4\" _v-1eb1c1ac=\"\">所在机房：</label>\n                    <div class=\"col-sm-8\" _v-1eb1c1ac=\"\">\n                        <v-select :value.sync=\"param.room\" :options=\"rooms\" placeholder=\"请选择\" _v-1eb1c1ac=\"\">\n                        </v-select>\n                    </div>\n                </div>\n                <div class=\"form-group\" _v-1eb1c1ac=\"\">\n                    <label class=\"control-label col-sm-4\" _v-1eb1c1ac=\"\">入库时间：</label>\n                    <div class=\"col-sm-8\" _v-1eb1c1ac=\"\">\n                        <input type=\"text\" class=\"form-control time-input fs12\" onfocus=\"this.blur()\" @click=\"showCalendar('show1', $event)\" v-model=\"param.addTime\" placeholder=\"选择范围\" _v-1eb1c1ac=\"\">\n                        <calendar :show.sync=\"show1\" :value.sync=\"param.addTime\" :x=\"x\" :y=\"y\" :range=\"range\" :type=\"type\" _v-1eb1c1ac=\"\"></calendar>\n                    </div>\n                </div>\n                <div class=\"form-group input-box\" _v-1eb1c1ac=\"\">\n                    <label class=\"control-label col-sm-4\" _v-1eb1c1ac=\"\">所属产品：</label>\n                    <div class=\"col-sm-8\" _v-1eb1c1ac=\"\">\n                        <v-select :value.sync=\"param.product\" :options=\"products\" placeholder=\"请选择\" _v-1eb1c1ac=\"\">\n                        </v-select>\n                    </div>\n                </div>\n                <div class=\"form-group\" _v-1eb1c1ac=\"\">\n                    <label class=\"control-label col-sm-4\" _v-1eb1c1ac=\"\">运维负责人：</label>\n                    <div class=\"col-sm-8\" _v-1eb1c1ac=\"\">\n                        <input type=\"text\" class=\"form-control\" value=\"\" _v-1eb1c1ac=\"\">\n                    </div>\n                </div>\n            </div>\n            <div class=\"col-sm-3\" _v-1eb1c1ac=\"\">\n                <div class=\"form-group\" _v-1eb1c1ac=\"\">\n                    <label class=\"control-label col-sm-4\" _v-1eb1c1ac=\"\">资产编号：</label>\n                    <div class=\"col-sm-8\" _v-1eb1c1ac=\"\">\n                        <input type=\"text\" class=\"form-control\" placeholder=\"多个，精确\" onfocus=\"this.blur()\" v-model=\"param.assetNum\" @click=\"showBroad('param.assetNum')\" _v-1eb1c1ac=\"\">\n                    </div>\n                </div>\n                <div class=\"form-group input-box\" _v-1eb1c1ac=\"\">\n                    <label class=\"control-label col-sm-4\" _v-1eb1c1ac=\"\">类型：</label>\n                    <div class=\"col-sm-8\" _v-1eb1c1ac=\"\">\n                        <v-select :value.sync=\"param.serverType\" :options=\"serverTypes\" placeholder=\"请选择\" _v-1eb1c1ac=\"\">\n                        </v-select>\n                    </div>\n                </div>\n                <div class=\"form-group input-box\" _v-1eb1c1ac=\"\">\n                    <label class=\"control-label col-sm-4\" _v-1eb1c1ac=\"\">所在机架：</label>\n                    <div class=\"col-sm-8\" _v-1eb1c1ac=\"\">\n                        <v-select :value.sync=\"param.frame\" :options=\"frames\" placeholder=\"请选择\" _v-1eb1c1ac=\"\">\n                        </v-select>\n                    </div>\n                </div>\n                <div class=\"form-group\" _v-1eb1c1ac=\"\">\n                    <label class=\"control-label col-sm-4\" _v-1eb1c1ac=\"\">出厂时间：</label>\n                    <div class=\"col-sm-8\" _v-1eb1c1ac=\"\">\n                        <input type=\"text\" class=\"form-control time-input fs12\" onfocus=\"this.blur()\" @click=\"showCalendar('show3', $event)\" v-model=\"param.factoryTime\" placeholder=\"选择范围\" _v-1eb1c1ac=\"\">\n                        <calendar :show.sync=\"show3\" :value.sync=\"param.factoryTime\" :x=\"x\" :y=\"y\" :range=\"range\" :type=\"type\" _v-1eb1c1ac=\"\"></calendar>\n                    </div>\n                </div>\n                <div class=\"form-group input-box\" _v-1eb1c1ac=\"\">\n                    <label class=\"control-label col-sm-4\" _v-1eb1c1ac=\"\">所属部门：</label>\n                    <div class=\"col-sm-8\" _v-1eb1c1ac=\"\">\n                        <v-select :value.sync=\"param.department\" :options=\"departments\" placeholder=\"请选择\" _v-1eb1c1ac=\"\">\n                        </v-select>\n                    </div>\n                </div>\n                <div class=\"form-group\" _v-1eb1c1ac=\"\">\n                    <label class=\"control-label col-sm-4\" _v-1eb1c1ac=\"\">IP：</label>\n                    <div class=\"col-sm-8\" _v-1eb1c1ac=\"\">\n                        <input type=\"text\" class=\"form-control\" placeholder=\"多个，精确\" onfocus=\"this.blur()\" v-model=\"param.ip\" @click=\"showBroad('param.ip')\" _v-1eb1c1ac=\"\">\n                    </div>\n                </div>\n            </div>\n            <div class=\"col-sm-3 input-box\" _v-1eb1c1ac=\"\">\n                <div class=\"form-group\" _v-1eb1c1ac=\"\">\n                    <label class=\"control-label col-sm-4\" _v-1eb1c1ac=\"\">财务编号：</label>\n                    <div class=\"col-sm-8\" _v-1eb1c1ac=\"\">\n                        <input type=\"text\" class=\"form-control\" placeholder=\"多个，精确\" onfocus=\"this.blur()\" v-model=\"param.financeNum\" @click=\"showBroad('param.financeNum')\" _v-1eb1c1ac=\"\">\n                    </div>\n                </div>\n                <div class=\"form-group input-box\" _v-1eb1c1ac=\"\">\n                    <label class=\"control-label col-sm-4\" _v-1eb1c1ac=\"\">操作系统：</label>\n                    <div class=\"col-sm-8\" _v-1eb1c1ac=\"\">\n                        <v-select :value.sync=\"param.system\" :options=\"systems\" placeholder=\"请选择\" _v-1eb1c1ac=\"\">\n                        </v-select>\n                    </div>\n                </div>\n                <div class=\"form-group\" _v-1eb1c1ac=\"\">\n                    <label class=\"control-label col-sm-4\" _v-1eb1c1ac=\"\">来源：</label>\n                    <div class=\"col-sm-4 input-box pr0\" _v-1eb1c1ac=\"\">\n                        <v-select :value.sync=\"param.origin1\" :options=\"origins1\" placeholder=\"请选择\" _v-1eb1c1ac=\"\">\n                        </v-select>\n                    </div>\n                    <div class=\"col-sm-4 input-box pl0\" _v-1eb1c1ac=\"\">\n                        <v-select :value.sync=\"param.origin2\" :options=\"origins2\" placeholder=\"请选择\" _v-1eb1c1ac=\"\">\n                        </v-select>\n                    </div>\n                </div>\n                <div class=\"form-group\" _v-1eb1c1ac=\"\">\n                    <label class=\"control-label col-sm-4\" _v-1eb1c1ac=\"\">采购时间：</label>\n                    <div class=\"col-sm-8\" _v-1eb1c1ac=\"\">\n                        <input type=\"text\" class=\"form-control time-input fs12\" onfocus=\"this.blur()\" @click=\"showCalendar('show2', $event)\" v-model=\"param.procureTime\" placeholder=\"选择范围\" _v-1eb1c1ac=\"\">\n                        <calendar :show.sync=\"show2\" :value.sync=\"param.procureTime\" :x=\"x\" :y=\"y\" :range=\"range\" :type=\"type\" _v-1eb1c1ac=\"\"></calendar>\n                    </div>\n                </div>\n                <div class=\"form-group\" _v-1eb1c1ac=\"\">\n                    <label class=\"control-label col-sm-4\" _v-1eb1c1ac=\"\">Set：</label>\n                    <div class=\"col-sm-8\" _v-1eb1c1ac=\"\">\n                        <input type=\"text\" class=\"form-control\" value=\"\" _v-1eb1c1ac=\"\">\n                    </div>\n                </div>\n            </div>\n            <div class=\"col-sm-3\" _v-1eb1c1ac=\"\">\n                <div class=\"form-group\" _v-1eb1c1ac=\"\">\n                    <label class=\"control-label col-sm-4\" _v-1eb1c1ac=\"\">发票编号：</label>\n                    <div class=\"col-sm-8\" _v-1eb1c1ac=\"\">\n                        <input type=\"text\" class=\"form-control\" placeholder=\"多个，精确\" onfocus=\"this.blur()\" v-model=\"param.invoiceNum\" @click=\"showBroad('param.invoiceNum')\" _v-1eb1c1ac=\"\">\n                    </div>\n                </div>\n                <div class=\"form-group input-box\" _v-1eb1c1ac=\"\">\n                    <label class=\"control-label col-sm-4\" _v-1eb1c1ac=\"\">状态：</label>\n                    <div class=\"col-sm-8\" _v-1eb1c1ac=\"\">\n                        <v-select :value.sync=\"param.status\" :options=\"statusArr\" placeholder=\"请选择\" _v-1eb1c1ac=\"\">\n                        </v-select>\n                    </div>\n                </div>\n                <div class=\"form-group\" _v-1eb1c1ac=\"\">\n                    <label class=\"control-label col-sm-4\" _v-1eb1c1ac=\"\">型号：</label>\n                    <div class=\"col-sm-8\" _v-1eb1c1ac=\"\">\n                        <input type=\"text\" class=\"form-control\" value=\"模糊\" _v-1eb1c1ac=\"\">\n                    </div>\n                </div>\n                <div class=\"form-group input-box\" _v-1eb1c1ac=\"\">\n                    <label class=\"control-label col-sm-4\" _v-1eb1c1ac=\"\">厂商：</label>\n                    <div class=\"col-sm-8\" _v-1eb1c1ac=\"\">\n                        <v-select :value.sync=\"param.firm\" :options=\"firms\" placeholder=\"请选择\" _v-1eb1c1ac=\"\">\n                        </v-select>\n                    </div>\n                </div>\n                <div class=\"form-group\" _v-1eb1c1ac=\"\">\n                    <label class=\"control-label col-sm-4\" _v-1eb1c1ac=\"\">Module：</label>\n                    <div class=\"col-sm-8\" _v-1eb1c1ac=\"\">\n                        <input type=\"text\" class=\"form-control\" value=\"\" _v-1eb1c1ac=\"\">\n                    </div>\n                </div>\n            </div>\n        </form>\n        <div class=\"text-center btn-operate\" _v-1eb1c1ac=\"\">\n            <button type=\"button\" class=\"btn btn-default\" _v-1eb1c1ac=\"\">\n                查询\n            </button>\n            <button type=\"button\" class=\"btn btn-default\" @click=\"$broadcast('showCreateServer')\" _v-1eb1c1ac=\"\">\n                新增服务器\n            </button>\n            <button type=\"button\" class=\"btn btn-default\" _v-1eb1c1ac=\"\">\n                分配到产品\n            </button>\n            <button type=\"button\" class=\"btn btn-default\" @click=\"batchEdit\" _v-1eb1c1ac=\"\">\n                批量修改\n            </button>\n            <button type=\"button\" class=\"btn btn-default\" _v-1eb1c1ac=\"\">\n                批量退库\n            </button>\n            <button type=\"button\" class=\"btn btn-default\" _v-1eb1c1ac=\"\">\n                导出\n            </button>\n            <button type=\"button\" class=\"btn btn-default\" _v-1eb1c1ac=\"\">\n                应用回收\n            </button>\n            <button type=\"button\" class=\"btn btn-default\" _v-1eb1c1ac=\"\">\n                退换IDC\n            </button>\n        </div>\n        <div class=\"text-center table-title\" _v-1eb1c1ac=\"\">\n            查询结果\n            <div class=\"pull-right\" _v-1eb1c1ac=\"\">\n                <button type=\"button\" class=\"btn btn-default set-btn\" _v-1eb1c1ac=\"\">\n                    <span class=\"glyphicon glyphicon-cog\" _v-1eb1c1ac=\"\"></span>\n                </button>\n            </div>\n        </div>\n        <div class=\"table-box\" _v-1eb1c1ac=\"\">\n            <table class=\"table table-hover table-bordered\" _v-1eb1c1ac=\"\">\n                <thead _v-1eb1c1ac=\"\">\n                    <tr _v-1eb1c1ac=\"\">\n                        <th width=\"3%\" _v-1eb1c1ac=\"\"><input type=\"checkbox\" v-model=\"checkedAll\" _v-1eb1c1ac=\"\"></th>\n                        <th v-for=\"title in titles\" v-text=\"title\" _v-1eb1c1ac=\"\"></th>\n                    </tr>\n                </thead>\n                <tbody _v-1eb1c1ac=\"\">\n                    <tr v-for=\"list in tableList\" v-if=\"tableList.length !== 0\" v-show=\"tableList.length !== 0\" _v-1eb1c1ac=\"\">\n                        <td _v-1eb1c1ac=\"\"><input type=\"checkbox\" :id=\"list.id\" :value=\"list.id\" v-model=\"checkedIds\" _v-1eb1c1ac=\"\"></td>\n                        <td v-show=\"list.serverNum !== 'undefined'\" _v-1eb1c1ac=\"\"><a class=\"pointer\" v-text=\"list.serverNum\" @click=\"$broadcast('showEditServer', list.id)\" _v-1eb1c1ac=\"\"></a></td>\n                        <td :title=\"list.ip\" v-text=\"list.ip\" v-show=\"list.ip !== 'undefined'\" _v-1eb1c1ac=\"\"></td>\n                        <td :title=\"list.SN\" v-text=\"list.SN\" v-show=\"list.SN !== 'undefined'\" _v-1eb1c1ac=\"\"></td>\n                        <td :title=\"list.type\" v-text=\"list.type\" v-show=\"list.type !== 'undefined'\" _v-1eb1c1ac=\"\"></td>\n                        <td :title=\"list.system\" v-text=\"list.system\" v-show=\"list.system !== 'undefined'\" _v-1eb1c1ac=\"\"></td>\n                        <td :title=\"list.status\" v-text=\"list.status\" v-show=\"list.status !== 'undefined'\" _v-1eb1c1ac=\"\"></td>\n                        <td :title=\"list.room\" v-text=\"list.room\" v-show=\"list.room !== 'undefined'\" _v-1eb1c1ac=\"\"></td>\n                        <td :title=\"list.frame\" v-text=\"list.frame\" v-show=\"list.frame !== 'undefined'\" _v-1eb1c1ac=\"\"></td>\n                        <td :title=\"list.seats\" v-text=\"list.seats\" v-show=\"list.seats !== 'undefined'\" _v-1eb1c1ac=\"\"></td>\n                    </tr>\n                    <tr class=\"text-center\" v-show=\"tableList.length === 0\" _v-1eb1c1ac=\"\">\n                        <td :colspan=\"titles.length\" _v-1eb1c1ac=\"\">暂无数据</td>\n                    </tr>\n                </tbody>\n            </table>\n        </div>\n        <div class=\"clearfix mt30\" _v-1eb1c1ac=\"\">\n            <boot-page :async=\"false\" :lens=\"lenArr\" :page-len=\"pageLen\" :url=\"url\" :param=\"param\" _v-1eb1c1ac=\"\"></boot-page>\n        </div>\n\n        <create-server-modal _v-1eb1c1ac=\"\"></create-server-modal>\n        <batch-edit-modal _v-1eb1c1ac=\"\"></batch-edit-modal>\n        <edit-server-modal _v-1eb1c1ac=\"\"></edit-server-modal>\n    </div>\n";
+	module.exports = "\n    <modal :show.sync=\"editServerModal\" effect=\"fade\" width=\"1200px\" _v-aaff09e8=\"\">\n        <div slot=\"modal-header\" class=\"modal-header\" _v-aaff09e8=\"\">\n            <h4 class=\"modal-title\" _v-aaff09e8=\"\">编辑服务器</h4>\n        </div>\n        <div slot=\"modal-body\" class=\"modal-body\" _v-aaff09e8=\"\">\n            <form class=\"form-horizontal clearfix form-input\" _v-aaff09e8=\"\">\n                <div class=\"col-sm-3\" _v-aaff09e8=\"\">\n                    <div class=\"form-group\" _v-aaff09e8=\"\">\n                        <label class=\"control-label col-sm-4\" _v-aaff09e8=\"\">SN：</label>\n                        <div class=\"col-sm-8\" _v-aaff09e8=\"\">\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\" _v-aaff09e8=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group input-box\" _v-aaff09e8=\"\">\n                        <label class=\"control-label col-sm-4\" _v-aaff09e8=\"\">类型：</label>\n                        <div class=\"col-sm-8\" _v-aaff09e8=\"\">\n                            <v-select :value.sync=\"system\" :options=\"systems\" placeholder=\"请选择\" _v-aaff09e8=\"\">\n                            </v-select>\n                        </div>\n                    </div>\n                    <div class=\"form-group input-box\" _v-aaff09e8=\"\">\n                        <label class=\"control-label col-sm-4\" _v-aaff09e8=\"\">机房：</label>\n                        <div class=\"col-sm-8\" _v-aaff09e8=\"\">\n                            <v-select :value.sync=\"room\" :options=\"rooms\" placeholder=\"请选择\" _v-aaff09e8=\"\">\n                            </v-select>\n                        </div>\n                    </div>\n                    <div class=\"form-group input-box\" _v-aaff09e8=\"\">\n                        <label class=\"control-label col-sm-4\" _v-aaff09e8=\"\">机架：</label>\n                        <div class=\"col-sm-8\" _v-aaff09e8=\"\">\n                            <v-select :value.sync=\"frame\" :options=\"frames\" placeholder=\"请选择\" _v-aaff09e8=\"\">\n                            </v-select>\n                        </div>\n                    </div>\n                    <div class=\"form-group input-box\" _v-aaff09e8=\"\">\n                        <label class=\"control-label col-sm-4\" _v-aaff09e8=\"\">机位：</label>\n                        <div class=\"col-sm-8\" _v-aaff09e8=\"\">\n                            <v-select :value.sync=\"seat\" :options=\"seats\" placeholder=\"请选择\" _v-aaff09e8=\"\">\n                            </v-select>\n                        </div>\n                    </div>\n                    <div class=\"form-group input-box\" _v-aaff09e8=\"\">\n                        <label class=\"control-label col-sm-4\" _v-aaff09e8=\"\">状态：</label>\n                        <div class=\"col-sm-8\" _v-aaff09e8=\"\">\n                            <v-select :value.sync=\"status\" :options=\"statusArr\" placeholder=\"请选择\" _v-aaff09e8=\"\">\n                            </v-select>\n                        </div>\n                    </div>\n                    <div class=\"form-group input-box\" _v-aaff09e8=\"\">\n                        <label class=\"control-label col-sm-4\" _v-aaff09e8=\"\">厂商：</label>\n                        <div class=\"col-sm-8\" _v-aaff09e8=\"\">\n                            <v-select :value.sync=\"firm\" :options=\"firms\" placeholder=\"请选择\" _v-aaff09e8=\"\">\n                            </v-select>\n                        </div>\n                    </div>   \n                     <div class=\"form-group\" _v-aaff09e8=\"\">\n                        <label class=\"control-label col-sm-4\" _v-aaff09e8=\"\">质保期限：</label>\n                        <div class=\"col-sm-8\" _v-aaff09e8=\"\">\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\" _v-aaff09e8=\"\">\n                        </div>\n                    </div>     \n                    <div class=\"form-group\" _v-aaff09e8=\"\">\n                        <label class=\"control-label col-sm-4\" _v-aaff09e8=\"\">备注：</label>\n                        <div class=\"col-sm-8\" _v-aaff09e8=\"\">\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\" _v-aaff09e8=\"\">\n                        </div>\n                    </div>            \n                </div>\n                <div class=\"col-sm-3\" _v-aaff09e8=\"\">\n                   <div class=\"form-group\" _v-aaff09e8=\"\">\n                        <label class=\"control-label col-sm-4\" _v-aaff09e8=\"\">设备编号：</label>\n                        <div class=\"col-sm-8\" _v-aaff09e8=\"\">\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\" _v-aaff09e8=\"\">\n                        </div>\n                    </div>\n                     <div class=\"form-group\" _v-aaff09e8=\"\">\n                        <label class=\"control-label col-sm-4\" _v-aaff09e8=\"\">物理主机编号：</label>\n                        <div class=\"col-sm-8\" _v-aaff09e8=\"\">\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\" _v-aaff09e8=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-aaff09e8=\"\">\n                        <label class=\"control-label col-sm-4\" _v-aaff09e8=\"\">资产编号：</label>\n                        <div class=\"col-sm-8\" _v-aaff09e8=\"\">\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\" _v-aaff09e8=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-aaff09e8=\"\">\n                        <label class=\"control-label col-sm-4\" _v-aaff09e8=\"\">财务编号：</label>\n                        <div class=\"col-sm-8\" _v-aaff09e8=\"\">\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\" _v-aaff09e8=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-aaff09e8=\"\">\n                        <label class=\"control-label col-sm-4\" _v-aaff09e8=\"\">发票编号：</label>\n                        <div class=\"col-sm-8\" _v-aaff09e8=\"\">\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\" _v-aaff09e8=\"\">\n                        </div>\n                    </div>\n                     <div class=\"form-group\" _v-aaff09e8=\"\">\n                        <label class=\"control-label col-sm-4\" _v-aaff09e8=\"\">电压：</label>\n                        <div class=\"col-sm-8\" _v-aaff09e8=\"\">\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\" _v-aaff09e8=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-aaff09e8=\"\">\n                        <label class=\"control-label col-sm-4\" _v-aaff09e8=\"\">电流：</label>\n                        <div class=\"col-sm-8\" _v-aaff09e8=\"\">\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\" _v-aaff09e8=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-aaff09e8=\"\">\n                        <label class=\"control-label col-sm-4\" _v-aaff09e8=\"\">功率：</label>\n                        <div class=\"col-sm-8\" _v-aaff09e8=\"\">\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\" _v-aaff09e8=\"\">\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-sm-3\" _v-aaff09e8=\"\">\n                    <div class=\"form-group\" _v-aaff09e8=\"\">\n                        <label class=\"control-label col-sm-4\" _v-aaff09e8=\"\">来源：</label>\n                        <div class=\"col-sm-4 input-box pr0\" _v-aaff09e8=\"\">\n                            <v-select :value.sync=\"origin1\" :options=\"origins1\" placeholder=\"请选择\" class=\"fs12\" _v-aaff09e8=\"\">\n                            </v-select>\n                        </div>\n                        <div class=\"col-sm-4 input-box pl0\" _v-aaff09e8=\"\">\n                            <v-select :value.sync=\"origin2\" :options=\"origins2\" placeholder=\"请选择\" class=\"fs12\" _v-aaff09e8=\"\">\n                            </v-select>\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-aaff09e8=\"\">\n                        <label class=\"control-label col-sm-4\" _v-aaff09e8=\"\">型号：</label>\n                        <div class=\"col-sm-8\" _v-aaff09e8=\"\">\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\" _v-aaff09e8=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-aaff09e8=\"\">\n                        <label class=\"control-label col-sm-4\" _v-aaff09e8=\"\">入库时间：</label>\n                        <div class=\"col-sm-8\" _v-aaff09e8=\"\">\n                            <datepicker :value.sync=\"addTime\" :format=\"'yyyy-MM-dd'\" :show-reset-button=\"true\" _v-aaff09e8=\"\">\n                            </datepicker>\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-aaff09e8=\"\">\n                        <label class=\"control-label col-sm-4\" _v-aaff09e8=\"\">出厂时间：</label>\n                        <div class=\"col-sm-8\" _v-aaff09e8=\"\">\n                            <datepicker :value.sync=\"factoryTime\" :format=\"'yyyy-MM-dd'\" :show-reset-button=\"true\" _v-aaff09e8=\"\">\n                            </datepicker>\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-aaff09e8=\"\">\n                        <label class=\"control-label col-sm-4\" _v-aaff09e8=\"\">采购时间：</label>\n                        <div class=\"col-sm-8\" _v-aaff09e8=\"\">\n                            <datepicker :value.sync=\"procureTime\" :format=\"'yyyy-MM-dd'\" :show-reset-button=\"true\" _v-aaff09e8=\"\">\n                            </datepicker>\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-aaff09e8=\"\">\n                        <label class=\"control-label col-sm-4\" _v-aaff09e8=\"\">所属部门：</label>\n                        <div class=\"col-sm-8\" _v-aaff09e8=\"\">\n                            <input type=\"text\" class=\"form-control\" :readonly=\"true\" _v-aaff09e8=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-aaff09e8=\"\">\n                        <label class=\"control-label col-sm-4\" _v-aaff09e8=\"\">所属产品：</label>\n                        <div class=\"col-sm-8\" _v-aaff09e8=\"\">\n                            <input type=\"text\" class=\"form-control\" :readonly=\"true\" _v-aaff09e8=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-aaff09e8=\"\">\n                        <label class=\"control-label col-sm-4\" _v-aaff09e8=\"\">运维负责人：</label>\n                        <div class=\"col-sm-8\" _v-aaff09e8=\"\">\n                            <input type=\"text\" class=\"form-control\" :readonly=\"true\" _v-aaff09e8=\"\">\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-sm-3\" _v-aaff09e8=\"\">\n                    <div class=\"form-group\" _v-aaff09e8=\"\">\n                        <label class=\"control-label col-sm-4\" _v-aaff09e8=\"\">所属Set：</label>\n                        <div class=\"col-sm-8\" _v-aaff09e8=\"\">\n                            <textarea rows=\"4\" class=\"form-control\" :readonly=\"true\" _v-aaff09e8=\"\"></textarea> \n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-aaff09e8=\"\">\n                        <label class=\"control-label col-sm-4\" _v-aaff09e8=\"\">所属Module：</label>\n                        <div class=\"col-sm-8\" _v-aaff09e8=\"\">\n                            <textarea rows=\"4\" class=\"form-control\" :readonly=\"true\" _v-aaff09e8=\"\"></textarea> \n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-aaff09e8=\"\">\n                        <label class=\"control-label col-sm-4\" _v-aaff09e8=\"\">IP：</label>\n                        <div class=\"col-sm-8\" _v-aaff09e8=\"\">\n                            <textarea rows=\"4\" class=\"form-control\" :readonly=\"true\" _v-aaff09e8=\"\"></textarea> \n                        </div>\n                    </div>\n                </div>\n            </form>\n            <div class=\"text-center mt30 mb20\" _v-aaff09e8=\"\">\n                <button type=\"button\" class=\"btn btn-default\" _v-aaff09e8=\"\">保存</button>\n                <button type=\"button\" class=\"btn btn-default\" _v-aaff09e8=\"\">更新</button>\n                <button type=\"button\" class=\"btn btn-default\" @click=\"editServerModal = false\" _v-aaff09e8=\"\">取消</button>\n            </div>\n            <table class=\"table table-hover table-small table-scroll\" _v-aaff09e8=\"\">\n                <thead _v-aaff09e8=\"\">\n                    <tr _v-aaff09e8=\"\">\n                        <th _v-aaff09e8=\"\">端口号</th>\n                        <th _v-aaff09e8=\"\">IP</th>\n                        <th _v-aaff09e8=\"\">MAC</th>\n                        <th _v-aaff09e8=\"\">速率</th>\n                        <th _v-aaff09e8=\"\">状态</th>\n                        <th _v-aaff09e8=\"\">用途</th>\n                        <th _v-aaff09e8=\"\">对端设备</th>\n                        <th _v-aaff09e8=\"\">对端设备VLAN</th>\n                        <th _v-aaff09e8=\"\">对端设备端口</th>\n                    </tr>\n                </thead>\n                <tbody _v-aaff09e8=\"\">\n                    <tr v-for=\"port in ports\" v-show=\"ports.length !== 0\" _v-aaff09e8=\"\">\n                        <td v-text=\"port.portNum\" _v-aaff09e8=\"\"></td>\n                        <td v-text=\"port.ip\" _v-aaff09e8=\"\"></td>\n                        <td v-text=\"port.mac\" _v-aaff09e8=\"\"></td>\n                        <td v-text=\"port.speed\" _v-aaff09e8=\"\"></td>\n                        <td v-text=\"port.status\" _v-aaff09e8=\"\"></td>\n                        <td v-text=\"port.use\" _v-aaff09e8=\"\"></td>\n                        <td v-text=\"port.device\" _v-aaff09e8=\"\"></td>\n                        <td v-text=\"port.deviceVlan\" _v-aaff09e8=\"\"></td>\n                        <td v-text=\"port.devicePort\" _v-aaff09e8=\"\"></td>\n                    </tr>\n                    <tr v-show=\"ports.length === 0\" class=\"text-center\" _v-aaff09e8=\"\">\n                        <td colspan=\"9\" _v-aaff09e8=\"\">暂无数据</td>\n                    </tr>\n                </tbody>\n            </table>\n        </div>\n        <div slot=\"modal-footer\" class=\"modal-footer\" _v-aaff09e8=\"\">\n        </div>\n    </modal>\n";
+
+/***/ },
+/* 196 */
+/***/ function(module, exports) {
+
+	module.exports = "\n    <div _v-1eb1c1ac=\"\">\n        <form class=\"form-horizontal clearfix form-search\" _v-1eb1c1ac=\"\">\n            <div class=\"col-sm-3\" _v-1eb1c1ac=\"\">\n                <div class=\"form-group\" _v-1eb1c1ac=\"\">\n                    <label class=\"control-label col-sm-4\" _v-1eb1c1ac=\"\">SN：</label>\n                    <div class=\"col-sm-8\" _v-1eb1c1ac=\"\">\n                        <input type=\"text\" class=\"form-control\" placeholder=\"多个，精确\" onfocus=\"this.blur()\" v-model=\"param.sn\" @click=\"showBroad('param.sn')\" _v-1eb1c1ac=\"\">\n                    </div>\n                </div>\n                <div class=\"form-group\" _v-1eb1c1ac=\"\">\n                    <label class=\"control-label col-sm-4\" _v-1eb1c1ac=\"\">设备编号：</label>\n                    <div class=\"col-sm-8\" _v-1eb1c1ac=\"\">\n                        <input type=\"text\" class=\"form-control\" placeholder=\"多个，精确\" onfocus=\"this.blur()\" v-model=\"param.serverNum\" @click=\"showBroad('param.serverNum')\" _v-1eb1c1ac=\"\">\n                    </div>\n                </div>\n                <div class=\"form-group input-box\" _v-1eb1c1ac=\"\">\n                    <label class=\"control-label col-sm-4\" _v-1eb1c1ac=\"\">所在机房：</label>\n                    <div class=\"col-sm-8\" _v-1eb1c1ac=\"\">\n                        <v-select :value.sync=\"param.room\" :options=\"rooms\" placeholder=\"请选择\" _v-1eb1c1ac=\"\">\n                        </v-select>\n                    </div>\n                </div>\n                <div class=\"form-group\" _v-1eb1c1ac=\"\">\n                    <label class=\"control-label col-sm-4\" _v-1eb1c1ac=\"\">入库时间：</label>\n                    <div class=\"col-sm-8\" _v-1eb1c1ac=\"\">\n                        <input type=\"text\" class=\"form-control time-input fs12\" onfocus=\"this.blur()\" @click=\"showCalendar('show1', $event)\" v-model=\"param.addTime\" placeholder=\"选择范围\" _v-1eb1c1ac=\"\">\n                        <calendar :show.sync=\"show1\" :value.sync=\"param.addTime\" :x=\"x\" :y=\"y\" :range=\"range\" :type=\"type\" _v-1eb1c1ac=\"\"></calendar>\n                    </div>\n                </div>\n                <div class=\"form-group input-box\" _v-1eb1c1ac=\"\">\n                    <label class=\"control-label col-sm-4\" _v-1eb1c1ac=\"\">所属产品：</label>\n                    <div class=\"col-sm-8\" _v-1eb1c1ac=\"\">\n                        <v-select :value.sync=\"param.product\" :options=\"products\" placeholder=\"请选择\" _v-1eb1c1ac=\"\">\n                        </v-select>\n                    </div>\n                </div>\n                <div class=\"form-group\" _v-1eb1c1ac=\"\">\n                    <label class=\"control-label col-sm-4\" _v-1eb1c1ac=\"\">运维负责人：</label>\n                    <div class=\"col-sm-8\" _v-1eb1c1ac=\"\">\n                        <input type=\"text\" class=\"form-control\" value=\"\" _v-1eb1c1ac=\"\">\n                    </div>\n                </div>\n            </div>\n            <div class=\"col-sm-3\" _v-1eb1c1ac=\"\">\n                <div class=\"form-group\" _v-1eb1c1ac=\"\">\n                    <label class=\"control-label col-sm-4\" _v-1eb1c1ac=\"\">资产编号：</label>\n                    <div class=\"col-sm-8\" _v-1eb1c1ac=\"\">\n                        <input type=\"text\" class=\"form-control\" placeholder=\"多个，精确\" onfocus=\"this.blur()\" v-model=\"param.assetNum\" @click=\"showBroad('param.assetNum')\" _v-1eb1c1ac=\"\">\n                    </div>\n                </div>\n                <div class=\"form-group input-box\" _v-1eb1c1ac=\"\">\n                    <label class=\"control-label col-sm-4\" _v-1eb1c1ac=\"\">类型：</label>\n                    <div class=\"col-sm-8\" _v-1eb1c1ac=\"\">\n                        <v-select :value.sync=\"param.serverType\" :options=\"serverTypes\" placeholder=\"请选择\" _v-1eb1c1ac=\"\">\n                        </v-select>\n                    </div>\n                </div>\n                <div class=\"form-group input-box\" _v-1eb1c1ac=\"\">\n                    <label class=\"control-label col-sm-4\" _v-1eb1c1ac=\"\">所在机架：</label>\n                    <div class=\"col-sm-8\" _v-1eb1c1ac=\"\">\n                        <v-select :value.sync=\"param.frame\" :options=\"frames\" placeholder=\"请选择\" _v-1eb1c1ac=\"\">\n                        </v-select>\n                    </div>\n                </div>\n                <div class=\"form-group\" _v-1eb1c1ac=\"\">\n                    <label class=\"control-label col-sm-4\" _v-1eb1c1ac=\"\">出厂时间：</label>\n                    <div class=\"col-sm-8\" _v-1eb1c1ac=\"\">\n                        <input type=\"text\" class=\"form-control time-input fs12\" onfocus=\"this.blur()\" @click=\"showCalendar('show3', $event)\" v-model=\"param.factoryTime\" placeholder=\"选择范围\" _v-1eb1c1ac=\"\">\n                        <calendar :show.sync=\"show3\" :value.sync=\"param.factoryTime\" :x=\"x\" :y=\"y\" :range=\"range\" :type=\"type\" _v-1eb1c1ac=\"\"></calendar>\n                    </div>\n                </div>\n                <div class=\"form-group input-box\" _v-1eb1c1ac=\"\">\n                    <label class=\"control-label col-sm-4\" _v-1eb1c1ac=\"\">所属部门：</label>\n                    <div class=\"col-sm-8\" _v-1eb1c1ac=\"\">\n                        <v-select :value.sync=\"param.department\" :options=\"departments\" placeholder=\"请选择\" _v-1eb1c1ac=\"\">\n                        </v-select>\n                    </div>\n                </div>\n                <div class=\"form-group\" _v-1eb1c1ac=\"\">\n                    <label class=\"control-label col-sm-4\" _v-1eb1c1ac=\"\">IP：</label>\n                    <div class=\"col-sm-8\" _v-1eb1c1ac=\"\">\n                        <input type=\"text\" class=\"form-control\" placeholder=\"多个，精确\" onfocus=\"this.blur()\" v-model=\"param.ip\" @click=\"showBroad('param.ip')\" _v-1eb1c1ac=\"\">\n                    </div>\n                </div>\n            </div>\n            <div class=\"col-sm-3 input-box\" _v-1eb1c1ac=\"\">\n                <div class=\"form-group\" _v-1eb1c1ac=\"\">\n                    <label class=\"control-label col-sm-4\" _v-1eb1c1ac=\"\">财务编号：</label>\n                    <div class=\"col-sm-8\" _v-1eb1c1ac=\"\">\n                        <input type=\"text\" class=\"form-control\" placeholder=\"多个，精确\" onfocus=\"this.blur()\" v-model=\"param.financeNum\" @click=\"showBroad('param.financeNum')\" _v-1eb1c1ac=\"\">\n                    </div>\n                </div>\n                <div class=\"form-group input-box\" _v-1eb1c1ac=\"\">\n                    <label class=\"control-label col-sm-4\" _v-1eb1c1ac=\"\">操作系统：</label>\n                    <div class=\"col-sm-8\" _v-1eb1c1ac=\"\">\n                        <v-select :value.sync=\"param.system\" :options=\"systems\" placeholder=\"请选择\" _v-1eb1c1ac=\"\">\n                        </v-select>\n                    </div>\n                </div>\n                <div class=\"form-group\" _v-1eb1c1ac=\"\">\n                    <label class=\"control-label col-sm-4\" _v-1eb1c1ac=\"\">来源：</label>\n                    <div class=\"col-sm-4 input-box pr0\" _v-1eb1c1ac=\"\">\n                        <v-select :value.sync=\"param.origin1\" :options=\"origins1\" placeholder=\"请选择\" _v-1eb1c1ac=\"\">\n                        </v-select>\n                    </div>\n                    <div class=\"col-sm-4 input-box pl0\" _v-1eb1c1ac=\"\">\n                        <v-select :value.sync=\"param.origin2\" :options=\"origins2\" placeholder=\"请选择\" _v-1eb1c1ac=\"\">\n                        </v-select>\n                    </div>\n                </div>\n                <div class=\"form-group\" _v-1eb1c1ac=\"\">\n                    <label class=\"control-label col-sm-4\" _v-1eb1c1ac=\"\">采购时间：</label>\n                    <div class=\"col-sm-8\" _v-1eb1c1ac=\"\">\n                        <input type=\"text\" class=\"form-control time-input fs12\" onfocus=\"this.blur()\" @click=\"showCalendar('show2', $event)\" v-model=\"param.procureTime\" placeholder=\"选择范围\" _v-1eb1c1ac=\"\">\n                        <calendar :show.sync=\"show2\" :value.sync=\"param.procureTime\" :x=\"x\" :y=\"y\" :range=\"range\" :type=\"type\" _v-1eb1c1ac=\"\"></calendar>\n                    </div>\n                </div>\n                <div class=\"form-group\" _v-1eb1c1ac=\"\">\n                    <label class=\"control-label col-sm-4\" _v-1eb1c1ac=\"\">Set：</label>\n                    <div class=\"col-sm-8\" _v-1eb1c1ac=\"\">\n                        <input type=\"text\" class=\"form-control\" value=\"\" _v-1eb1c1ac=\"\">\n                    </div>\n                </div>\n            </div>\n            <div class=\"col-sm-3\" _v-1eb1c1ac=\"\">\n                <div class=\"form-group\" _v-1eb1c1ac=\"\">\n                    <label class=\"control-label col-sm-4\" _v-1eb1c1ac=\"\">发票编号：</label>\n                    <div class=\"col-sm-8\" _v-1eb1c1ac=\"\">\n                        <input type=\"text\" class=\"form-control\" placeholder=\"多个，精确\" onfocus=\"this.blur()\" v-model=\"param.invoiceNum\" @click=\"showBroad('param.invoiceNum')\" _v-1eb1c1ac=\"\">\n                    </div>\n                </div>\n                <div class=\"form-group input-box\" _v-1eb1c1ac=\"\">\n                    <label class=\"control-label col-sm-4\" _v-1eb1c1ac=\"\">状态：</label>\n                    <div class=\"col-sm-8\" _v-1eb1c1ac=\"\">\n                        <v-select :value.sync=\"param.status\" :options=\"statusArr\" placeholder=\"请选择\" _v-1eb1c1ac=\"\">\n                        </v-select>\n                    </div>\n                </div>\n                <div class=\"form-group\" _v-1eb1c1ac=\"\">\n                    <label class=\"control-label col-sm-4\" _v-1eb1c1ac=\"\">型号：</label>\n                    <div class=\"col-sm-8\" _v-1eb1c1ac=\"\">\n                        <input type=\"text\" class=\"form-control\" value=\"模糊\" _v-1eb1c1ac=\"\">\n                    </div>\n                </div>\n                <div class=\"form-group input-box\" _v-1eb1c1ac=\"\">\n                    <label class=\"control-label col-sm-4\" _v-1eb1c1ac=\"\">厂商：</label>\n                    <div class=\"col-sm-8\" _v-1eb1c1ac=\"\">\n                        <v-select :value.sync=\"param.firm\" :options=\"firms\" placeholder=\"请选择\" _v-1eb1c1ac=\"\">\n                        </v-select>\n                    </div>\n                </div>\n                <div class=\"form-group\" _v-1eb1c1ac=\"\">\n                    <label class=\"control-label col-sm-4\" _v-1eb1c1ac=\"\">Module：</label>\n                    <div class=\"col-sm-8\" _v-1eb1c1ac=\"\">\n                        <input type=\"text\" class=\"form-control\" value=\"\" _v-1eb1c1ac=\"\">\n                    </div>\n                </div>\n            </div>\n        </form>\n        <div class=\"text-center btn-operate\" _v-1eb1c1ac=\"\">\n            <button type=\"button\" class=\"btn btn-default\" _v-1eb1c1ac=\"\">\n                查询\n            </button>\n            <button type=\"button\" class=\"btn btn-default\" @click=\"$broadcast('showCreateServer')\" _v-1eb1c1ac=\"\">\n                新增服务器\n            </button>\n            <button type=\"button\" class=\"btn btn-default\" _v-1eb1c1ac=\"\">\n                分配到产品\n            </button>\n            <button type=\"button\" class=\"btn btn-default\" @click=\"batchEdit\" _v-1eb1c1ac=\"\">\n                批量修改\n            </button>\n            <button type=\"button\" class=\"btn btn-default\" _v-1eb1c1ac=\"\">\n                批量退库\n            </button>\n            <button type=\"button\" class=\"btn btn-default\" _v-1eb1c1ac=\"\">\n                导出\n            </button>\n            <button type=\"button\" class=\"btn btn-default\" _v-1eb1c1ac=\"\">\n                应用回收\n            </button>\n            <button type=\"button\" class=\"btn btn-default\" _v-1eb1c1ac=\"\">\n                退换IDC\n            </button>\n        </div>\n        <div class=\"text-center table-title\" _v-1eb1c1ac=\"\">\n            查询结果\n            <div class=\"pull-left\" _v-1eb1c1ac=\"\">\n                <dropdown _v-1eb1c1ac=\"\">\n                    <button type=\"button\" class=\"btn btn-default set-btn\" data-toggle=\"dropdown\" _v-1eb1c1ac=\"\">\n                        <span class=\"glyphicon glyphicon-cog\" _v-1eb1c1ac=\"\"></span>\n                    </button>\n                    <div slot=\"dropdown-menu\" class=\"dropdown-menu dropdown-width\" _v-1eb1c1ac=\"\">\n                        <ul class=\"pull-left dropdown-width\" _v-1eb1c1ac=\"\">\n                            <li v-for=\"check in checkArr\" class=\"pull-left dropdown-li\" track-by=\"$index\" _v-1eb1c1ac=\"\">\n                                <input :id=\"'fliter' + $index\" type=\"checkbox\" :checked=\"check.checked\" @click=\"fliter($index)\" _v-1eb1c1ac=\"\"> \n                                <label :for=\"'fliter' + $index\" v-text=\"check.label\" _v-1eb1c1ac=\"\"></label>\n                            </li>\n                        </ul>\n                    </div>\n                </dropdown>\n            </div>\n        </div>\n        <div class=\"table-box\" _v-1eb1c1ac=\"\">\n            <table class=\"table table-hover table-bordered\" _v-1eb1c1ac=\"\">\n                <thead _v-1eb1c1ac=\"\">\n                    <tr _v-1eb1c1ac=\"\">\n                        <th width=\"3%\" _v-1eb1c1ac=\"\"><input type=\"checkbox\" v-model=\"checkedAll\" _v-1eb1c1ac=\"\"></th>\n                        <th v-for=\"title in titles\" v-text=\"title\" _v-1eb1c1ac=\"\"></th>\n                    </tr>\n                </thead>\n                <tbody _v-1eb1c1ac=\"\">\n                    <tr v-for=\"list in tableList\" v-if=\"tableList.length !== 0\" v-show=\"tableList.length !== 0\" _v-1eb1c1ac=\"\">\n                        <td _v-1eb1c1ac=\"\"><input type=\"checkbox\" :id=\"list.id\" :value=\"list.id\" v-model=\"checkedIds\" _v-1eb1c1ac=\"\"></td>\n                        <td v-show=\"list.serverNum !== 'undefined'\" _v-1eb1c1ac=\"\"><a class=\"pointer\" v-text=\"list.serverNum\" @click=\"$broadcast('showEditServer', list.id)\" _v-1eb1c1ac=\"\"></a></td>\n                        <td :title=\"list.ip\" v-text=\"list.ip\" v-show=\"list.ip !== 'undefined'\" _v-1eb1c1ac=\"\"></td>\n                        <td :title=\"list.SN\" v-text=\"list.SN\" v-show=\"list.SN !== 'undefined'\" _v-1eb1c1ac=\"\"></td>\n                        <td :title=\"list.type\" v-text=\"list.type\" v-show=\"list.type !== 'undefined'\" _v-1eb1c1ac=\"\"></td>\n                        <td :title=\"list.system\" v-text=\"list.system\" v-show=\"list.system !== 'undefined'\" _v-1eb1c1ac=\"\"></td>\n                        <td :title=\"list.status\" v-text=\"list.status\" v-show=\"list.status !== 'undefined'\" _v-1eb1c1ac=\"\"></td>\n                        <td :title=\"list.room\" v-text=\"list.room\" v-show=\"list.room !== 'undefined'\" _v-1eb1c1ac=\"\"></td>\n                        <td :title=\"list.frame\" v-text=\"list.frame\" v-show=\"list.frame !== 'undefined'\" _v-1eb1c1ac=\"\"></td>\n                        <td :title=\"list.seats\" v-text=\"list.seats\" v-show=\"list.seats !== 'undefined'\" _v-1eb1c1ac=\"\"></td>\n                    </tr>\n                    <tr class=\"text-center\" v-show=\"tableList.length === 0\" _v-1eb1c1ac=\"\">\n                        <td :colspan=\"titles.length\" _v-1eb1c1ac=\"\">暂无数据</td>\n                    </tr>\n                </tbody>\n            </table>\n        </div>\n        <div class=\"clearfix mt30\" _v-1eb1c1ac=\"\">\n            <boot-page :async=\"false\" :lens=\"lenArr\" :page-len=\"pageLen\" :url=\"url\" :param=\"param\" _v-1eb1c1ac=\"\"></boot-page>\n        </div>\n\n        <create-server-modal _v-1eb1c1ac=\"\"></create-server-modal>\n        <batch-edit-modal _v-1eb1c1ac=\"\"></batch-edit-modal>\n        <edit-server-modal _v-1eb1c1ac=\"\"></edit-server-modal>\n    </div>\n";
 
 /***/ }
 ]));

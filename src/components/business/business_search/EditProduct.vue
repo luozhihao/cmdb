@@ -14,13 +14,6 @@
                         </div>
                     </div>
                     <div class="form-group input-box">
-                        <label class="control-label col-sm-4">部门：</label>
-                        <div class="col-sm-8">
-                            <v-select :value.sync="department" :options="departments" placeholder="请选择">
-                            </v-select>
-                        </div>
-                    </div>
-                    <div class="form-group input-box">
                         <label class="control-label col-sm-4">业务类型：</label>
                         <div class="col-sm-8">
                             <v-select :value.sync="businessType" :options="businessTypes" placeholder="请选择">
@@ -48,12 +41,19 @@
                             </v-select>
                         </div>
                     </div>
-                </div>
-                <div class="col-sm-6">
                     <div class="form-group input-box">
                         <label class="control-label col-sm-4">运营阶段：</label>
                         <div class="col-sm-8">
-                            <v-select :value.sync="param.phase" :options="phases" placeholder="请选择">
+                            <v-select :value.sync="phase" :options="phases" placeholder="请选择">
+                            </v-select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group input-box">
+                        <label class="control-label col-sm-4">部门：</label>
+                        <div class="col-sm-8">
+                            <v-select :value.sync="department" :options="departments" placeholder="请选择">
                             </v-select>
                         </div>
                     </div>
@@ -81,10 +81,11 @@
                             <input type="text" class="form-control" value="">
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group input-box">
                         <label class="control-label col-sm-4">产品级别：</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" value="">
+                            <v-select :value.sync="productLevel" :options="productLevels" placeholder="请选择">
+                            </v-select>
                         </div>
                     </div>
                 </div>
@@ -109,12 +110,14 @@ let origin = {
         platformTypes: [],
         developModels: [],
         phases: [],
+        productLevels: [],
         department: '',
         businessType: '',
         gameType: '',
         platformType: '',
         developModel: '',
-        phase: ''
+        phase: '',
+        productLevel: ''
     },
     init = Object.assign({}, origin);
 

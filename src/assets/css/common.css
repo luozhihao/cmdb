@@ -259,7 +259,7 @@ fieldset[disabled] .form-control {
 .table-scroll tbody {
     display: block;
     overflow: auto;
-    max-height: 150px;
+    max-height: 500px;
 }
 
 .table-scroll thead {
@@ -272,4 +272,8 @@ fieldset[disabled] .form-control {
 
 .datepicker-input {
     width: 100% !important;
+}
+
+.fs12 .dropdown-toggle {
+    font-size: 12px;
 }

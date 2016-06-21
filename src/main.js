@@ -8,12 +8,14 @@
 import Vue from 'vue'
 import Vue_Router from 'vue-router'
 import Vue_Resource from 'vue-resource'
+import Vue_Validator from 'vue-validator'
 
 import routerMap from './routers.js'
 import App from './App.vue'
 
 Vue.use(Vue_Router)
 Vue.use(Vue_Resource)
+Vue.use(Vue_Validator)
 
 // 请求编码转换
 Vue.http.options.emulateJSON = true

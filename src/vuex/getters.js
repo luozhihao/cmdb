@@ -13,3 +13,13 @@
 export function username (state) {
     return state.username
 }
+
+// 获取机房位置
+export function idcs (state) {
+    return state.roomLocation
+}
+
+// 获取机房状态
+export function statusArr (state) {
+    return state.roomStatus
+}

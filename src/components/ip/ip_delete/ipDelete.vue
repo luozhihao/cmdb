@@ -6,7 +6,7 @@
             <div class="form-group">
                 <label class="col-sm-4 control-label">SN：</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" value="多个">
+                    <input type="text" class="form-control" placeholder="多个，精确" onfocus="this.blur()" v-model="param.sn" @click="showBroad('param.sn')">
                 </div>
             </div>
             </div>
@@ -14,7 +14,7 @@
                 <div class="form-group">
                     <label class="col-sm-4 control-label">设备编号：</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" value="多个">
+                        <input type="text" class="form-control" placeholder="多个，精确" onfocus="this.blur()" v-model="param.deviceNum" @click="showBroad('param.deviceNum')">
                     </div>
                 </div>
             </div>
@@ -22,7 +22,7 @@
                 <div class="form-group">
                     <label class="col-sm-4 control-label">IP地址：</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" value="多个">
+                        <input type="text" class="form-control" placeholder="多个，精确" onfocus="this.blur()" v-model="param.ip" @click="showBroad('param.ip')">
                     </div>
                 </div>
             </div>
@@ -92,7 +92,9 @@ export default {
             pageLen: 5,
             url: '',
             param: {
-
+                sn: '',
+                deviceNum: '',
+                ip: ''
             }
         }
     },
@@ -101,7 +103,19 @@ export default {
         // 刷新数据
         refresh () {
             this.$broadcast('refresh')
-        }
+        },
+
+        // 输入面板
+        showBroad (target) {
+            let obj = target.split('.')
+
+            let param = {
+                value: this[obj[0]][obj[1]],
+                name: target
+            }
+
+            this.$dispatch('showBroad', param)
+        },
     },
     components: {
         bootPage
@@ -129,6 +143,13 @@ export default {
             } else {
                 this.checkedAll = false
             }
+        }
+    },
+    events: {
+        'getTxt' (param) {
+            let obj = param.name.split('.')
+
+            this[obj[0]][obj[1]] = param.val
         }
     }
 }

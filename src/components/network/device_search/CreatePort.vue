@@ -11,10 +11,11 @@
                         <input type="text" class="form-control">
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group input-box">
                     <label class="control-label col-sm-3">所属VLAN：</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control"  placeholder="下拉">
+                        <v-select :value.sync="vlan" :options="vlans" placeholder="请选择">
+                        </v-select>
                     </div>
                 </div>
                 <div class="form-group">
@@ -41,16 +42,18 @@
                         <input type="text" class="form-control">
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group input-box">
                     <label class="control-label col-sm-3">对端设备编号：</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" placeholder="下拉">
+                        <v-select :value.sync="code" :options="codes" placeholder="请选择">
+                        </v-select>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group input-box">
                     <label class="control-label col-sm-3">对端设备端口：</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" placeholder="下拉">
+                        <v-select :value.sync="port" :options="ports" placeholder="请选择">
+                        </v-select>
                     </div>
                 </div>
             </form>
@@ -68,6 +71,12 @@ import vSelect from '../../global/Select.vue'
 
 let origin = {
         createPortModal: false,
+        vlans: [],
+        vlan: '',
+        codes: [],
+        code: '',
+        ports: [],
+        port: ''
     },
     init = Object.assign({}, origin);
 

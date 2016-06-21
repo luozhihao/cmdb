@@ -23,3 +23,17 @@ export function getUserInfo({ dispatch, state }) {
     })
 }
 
+
+// 获取机房、状态
+export function getRoomSearch({ dispatch, state }) {
+    this.$http({
+        url: '/idc/home/',
+        method: 'GET'
+    })
+    .then(response => {
+        if (response.data.code === 200) {
+            dispatch('GETROOMSEARCH', response.data) 
+        } 
+    })
+}
+

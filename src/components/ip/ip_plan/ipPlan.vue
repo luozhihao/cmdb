@@ -3,10 +3,11 @@
     <div>
         <form class="form-horizontal clearfix form-search">
         <div class="col-sm-3">
-                <div class="form-group">
+                <div class="form-group input-box">
                     <label class="col-sm-4 control-label">网络类型：</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" value="下拉框">
+                        <v-select :value.sync="network" :options="networks" placeholder="请选择">
+                        </v-select>
                     </div>
                 </div>
                 <div class="form-group">
@@ -16,11 +17,12 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-3 input-box">
                 <div class="form-group">
                     <label class="col-sm-4 control-label">规划机房：</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" value="下拉，多选">
+                        <v-select :value.sync="idc" :options="idcs" placeholder="请选择" multiple>
+                        </v-select>
                     </div>
                 </div>
             </div>
@@ -50,17 +52,24 @@
 </template>
 
 <script>
+import vSelect from '../../global/Select.vue'
+
+let origin = {
+        networks: [],
+        network: '',
+        idcs: [],
+        idc: []
+    }
+
 export default {
     data () {
-        return {
- 
-        }
+        return origin
     },
     methods: {
 
     },
     components: {
-
+        vSelect
     }
 }
 </script>

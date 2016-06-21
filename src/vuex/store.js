@@ -15,7 +15,9 @@ Vue.use(Vue_Resource)
 
 // 创建一个 object 存储应用启动时的状态
 const state = {
-    username: ''
+    username: '',
+    roomLocation: [],
+    roomStatus: []
 }   
 
 // 创建一个 object 存储 mutation 函数
@@ -24,6 +26,12 @@ const mutations = {
     // 获取用户名
     GETUSER (state, data) {
         state.username = data
+    },
+
+    // 获取机房、状态
+    GETROOMSEARCH (state, data) {
+        state.roomLocation = data.idc
+        state.roomStatus = data.status
     }
 }
 

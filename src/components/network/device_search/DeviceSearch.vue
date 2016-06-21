@@ -112,10 +112,20 @@
         </div>
         <div class="text-center table-title">
             查询结果
-            <div class="pull-right">
-                <button type="button" class="btn btn-default set-btn">
-                    <span class="glyphicon glyphicon-cog"></span>
-                </button>
+            <div class="pull-left">
+                <dropdown>
+                    <button type="button" class="btn btn-default set-btn" data-toggle="dropdown">
+                        <span class="glyphicon glyphicon-cog"></span>
+                    </button>
+                    <div slot="dropdown-menu" class="dropdown-menu dropdown-width">
+                        <ul class="pull-left dropdown-width">
+                            <li v-for="check in checkArr" class="pull-left dropdown-li" track-by="$index">
+                                <input :id="'fliter' + $index" type="checkbox" :checked="check.checked" @click="fliter($index)"> 
+                                <label :for="'fliter' + $index" v-text="check.label"></label>
+                            </li>
+                        </ul>
+                    </div>
+                </dropdown>
             </div>
         </div>
         <div class="table-box">
@@ -159,6 +169,7 @@
 </template>
 
 <script>
+import { dropdown } from 'vue-strap'
 import bootPage from '../../global/BootPage.vue'
 import createModal from './CreateDevice.vue'
 import batchEditModal from './BatchEdit.vue'
@@ -193,8 +204,23 @@ let origin = {
             addTime: '',
             procureTime: '',
             factoryTime: '',
-            model: ''
+            model: '',
+            titles: []
         },
+        checkArr: [
+            {label: '设备编号', checked: true},
+            {label: '设备名称', checked: true},
+            {label: '机器名', checked: true},
+            {label: 'SN', checked: true},
+            {label: '型号', checked: true},
+            {label: '设备类型', checked: true},
+            {label: '厂商', checked: true},
+            {label: '设备状态', checked: true},
+            {label: '所在机房', checked: true},
+            {label: '所在机架', checked: true},
+            {label: '所在机位', checked: true},
+            {label: '来源', checked: true}
+        ],
         show1: false,
         show2: false,
         show3: false,
@@ -214,6 +240,23 @@ export default {
         // 刷新数据
         refresh () {
             this.$broadcast('refresh')
+        },
+
+        // 筛选
+        fliter (index) {
+            console.log(index)
+
+            this.checkArr[index].checked ? this.checkArr[index].checked = false : this.checkArr[index].checked = true
+
+            console.log(this.checkArr[index].checked)
+
+            this.param.titles = []
+
+            this.checkArr.forEach((e) => {
+                e.checked ? this.param.titles.push(e.label) : ''
+            })
+
+            console.log(this.param.titles)
         },
 
         // 批量修改
@@ -263,7 +306,8 @@ export default {
         batchEditModal,
         editDeviceModal,
         vSelect,
-        calendar
+        calendar,
+        dropdown
     },
     watch: {
         'checkedAll' (newVal) {
@@ -301,5 +345,11 @@ export default {
 </script>
 
 <style scoped>
+.dropdown-width {
+    width: 500px;
+}
 
+.dropdown-li {
+    width: 50%;
+}
 </style>

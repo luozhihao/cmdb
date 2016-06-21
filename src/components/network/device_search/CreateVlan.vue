@@ -23,10 +23,11 @@
                         <input type="text" class="form-control">
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group input-box">
                     <label class="control-label col-sm-3">IP：</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" placeholder="下拉">
+                        <v-select :value.sync="ip" :options="ips" placeholder="请选择">
+                        </v-select>
                     </div>
                 </div>
             </form>
@@ -44,6 +45,8 @@ import vSelect from '../../global/Select.vue'
 
 let origin = {
         createVlanModal: false,
+        ips: [],
+        ip: ''
     },
     init = Object.assign({}, origin);
 
