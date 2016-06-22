@@ -2,7 +2,7 @@
 <template>
     <div>  
         <div class="text-center mb20">
-            <v-select :value.sync="dimension" :options="dimensions" placeholder="请选择视角">
+            <v-select :value.sync="param.dimension" :options="dimensions" placeholder="请选择视角">
             </v-select>
         </div>
         <form class="form-horizontal clearfix form-search">
@@ -28,21 +28,29 @@
                 <div class="form-group">
                     <label class="col-sm-4 control-label">编号：</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" v-model="param.number">
                     </div>
                 </div>
             </div>
         </form>
         <div class="text-center btn-operate">
-            <button type="button" class="btn btn-default">
+            <button type="button" class="btn btn-default" @click="refresh">
                 查询
             </button>
             <button type="button" class="btn btn-default" @click="$broadcast('showCreate')">
                 新增机房
             </button>
-            <button type="button" class="btn btn-default">
-                批量删除
-            </button>
+            <dropdown v-el:confirm>
+                <button type="button" class="btn btn-default" data-toggle="dropdown">
+                    批量删除
+                    <span class="caret"></span>
+                </button>
+                <div slot="dropdown-menu" class="dropdown-menu pd20">
+                    <span class="text-danger fs12">注：删除机房将删除其下所有机架和机位</span>
+                    <button type="button" class="btn btn-danger btn-block mt20" @click="deleteFn">确定</button>
+                    <button type="button" class="btn btn-default btn-block" @click="cancelFn">取消</button>
+                </div>
+            </dropdown>
             <button type="button" class="btn btn-default">
                 导出
             </button>
@@ -93,7 +101,7 @@
             </table>
         </div>
         <div class="clearfix mt30">
-            <boot-page :async="false" :lens="lenArr" :page-len="pageLen" :url="url" :param="param"></boot-page>
+            <boot-page :async="true" :lens="lenArr" :page-len="pageLen" :url="url" :param="param"></boot-page>
         </div>
 
         <create-modal></create-modal> 
@@ -116,37 +124,33 @@ import { idcs, statusArr } from '../../../vuex/getters.js'
 
 let origin = {
         dimensions: [
-            {value: '机房', label: '机房视角'},
-            {value: '机架', label: '机架视角'},
-            {value: '机位', label: '机位视角'}
+            {value: '1', label: '机房视角'},
+            {value: '2', label: '机架视角'},
+            {value: '3', label: '机位视角'}
         ],
-        dimension: '',
         checkedAll: false,
         checkedIds: [],
-        titles: ['机房名称', '机架编号', '机位编号', '机房地址', '网络类型', '业务类型', '所在城市', '机房状态', '客服电话', '业务经理名称'],
-        tableList: [
-            {id: 1, idcName: '台湾机房', frameName: 'Z14', seatsName: '10U', idcAddress: 'awdawd', network: '电信', productType: '租用盛大', city: 'awd', status: 'dawd', phone: '1212', bossName: 'ddd'},
-        ],
+        titles: [],
+        tableList: [],
         lenArr: [10, 50, 100],
         pageLen: 5,
-        url: '',
+        url: '/idc/query/',
         param: {
+            dimension: '1',
             idc: '',
-            status: ''
+            status: '',
+            number: ''
         },
         checkArr: [
-            {label: '机房名称', value: 'idcName', checked: true},
-            {label: '机架编号', value: 'frameName', checked: true},
-            {label: '机位编号', value: 'seatsName', checked: true},
             {label: '机房地址', value: 'idcAddress', checked: true},
             {label: '网络类型', value: 'network', checked: true},
             {label: '业务类型', value: 'productType', checked: true},
             {label: '所在城市', value: 'city', checked: true},
             {label: '机房状态', value: 'status', checked: true},
-            {label: '客服电话', value: 'phone', checked: true},
-            {label: '业务经理名称', value: 'bossName', checked: true}
+            {label: '业务经理名称', value: 'bossName', checked: true},
+            {label: '客服电话', value: 'phone', checked: true}
         ],
-        valueArr: ['idcName', 'frameName', 'seatsName', 'idcAddress', 'network', 'productType', 'city', 'status', 'phone', 'bossName']
+        valueArr: []
     },
     init = Object.assign({}, origin);
 
@@ -158,6 +162,7 @@ export default {
 
         // 刷新数据
         refresh () {
+            this.checkedIds = []
             this.$broadcast('refresh')
         },
 
@@ -165,16 +170,71 @@ export default {
         fliter (index) {
             this.checkArr[index].checked ? this.checkArr[index].checked = false : this.checkArr[index].checked = true
 
+            this.originFilter()
+        },
+
+        // 初始化筛选
+        originFilter () {
+            let _this = this
+
             this.titles = []
             this.valueArr = []
 
             this.checkArr.forEach((e) => {
                 if (e.checked) {
-                    this.titles.push(e.label)
-                    this.valueArr.push(e.value)
+                    _this.titles.push(e.label)
+                    _this.valueArr.push(e.value)
                 }
             })
-        }
+
+            switch (this.param.dimension) {
+                case '1':
+                    this.titles.unshift('机房名称')
+                    this.valueArr.unshift('idcName')
+                    break;
+                case '2':
+                    this.titles.unshift('机架编号', '机房名称')
+                    this.valueArr.unshift('frameName', 'idcName')
+                    break;
+                case '3':
+                    this.titles.unshift('机位编号', '机架编号', '机房名称')
+                    this.valueArr.unshift('seatsName', 'frameName', 'idcName')
+                    break;
+            }
+        },
+
+        // 批量删除
+        deleteFn () {
+            if (this.checkedIds.length) {
+                this.$http({
+                    url: '/idc/delete/',
+                    method: 'POST',
+                    data: {
+                        checkedIds: this.checkedIds,
+                        dimension: this.param.dimension
+                    }
+                })
+                .then((response) => {
+                    if (response.data.code === 200) {
+                        this.checkedIds = []
+                        this.refresh()
+
+                        this.$dispatch('show-success', '删除成功')
+                    } else {
+                        this.$dispatch('show-success', '删除失败了')
+                    }
+                })
+            } else {
+                this.$dispatch('show-notify', '请选择删除项')
+            }
+
+            this.$els.confirm.classList.toggle('open')
+        },
+
+        // 取消删除
+        cancelFn () {
+            this.$els.confirm.classList.toggle('open')
+        },
     },
     components: {
         bootPage,
@@ -196,6 +256,8 @@ export default {
     },
     ready () {
         this.getRoomSearch()
+
+        this.originFilter()
     },
     watch: {
         'checkedAll' (newVal) {
@@ -220,9 +282,25 @@ export default {
             } else {
                 this.checkedAll = false
             }
+        },
+        'param.dimension' (newVal) {
+            this.originFilter()
+
+            this.refresh()
         }
     },
     events: {
+
+        // 获取表格数据
+        'data' (param) {
+            this.tableList = param.data
+            this.checkedIds = []
+        },
+
+        // 刷新表格
+        'refresh' () {
+            this.refresh()
+        },
         
         // 新增机架
         'showCreateFrame' (param) {
@@ -244,5 +322,13 @@ export default {
 
 .dropdown-li {
     width: 50%;
+}
+
+.pd20 {
+    padding: 20px;
+}
+
+.mt20 {
+    margin-top: 20px;
 }
 </style>

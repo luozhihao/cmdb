@@ -17,21 +17,31 @@ Vue.use(Vue_Resource)
 const state = {
     username: '',
     roomLocation: [],
-    roomStatus: []
+    roomStatus: [],
+    operators: [],
+    productTypes: [],
+    cityArr1: []
 }   
 
 // 创建一个 object 存储 mutation 函数
 const mutations = {
 
-    // 获取用户名
+    // 设置用户名
     GETUSER (state, data) {
         state.username = data
     },
 
-    // 获取机房、状态
+    // 设置机房、状态
     GETROOMSEARCH (state, data) {
         state.roomLocation = data.idc
         state.roomStatus = data.status
+    },
+
+    // 设置运营商、业务类型、一级城市
+    GETROOMCREATE (state, data) {
+        state.operators = data.operators
+        state.productTypes = data.productTypes
+        state.cityArr1 = data.cityArr1
     }
 }
 

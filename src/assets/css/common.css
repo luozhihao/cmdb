@@ -217,11 +217,13 @@ fieldset[disabled] .form-control {
 
 .table-box {
     width: 100%;
+    min-height: 500px;
     overflow-x: auto; 
 }
 
 .table-box .table {
     width: 2000px;
+    max-width: none;
 }
 
 .table-hover>tbody>tr:hover {

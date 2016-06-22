@@ -9,6 +9,11 @@
 
 export default function (router) {
     router.map({
+        '/': {
+            component: function (resolve) {
+                require(['./components/idc/room_search/RoomSearch.vue'], resolve)
+            }
+        },
         '/roomSearch': {
             component: function (resolve) {
                 require(['./components/idc/room_search/RoomSearch.vue'], resolve)
@@ -26,12 +31,12 @@ export default function (router) {
         },
         '/ipPlan': {
             component: function (resolve) {
-                require(['./components/ip/ip_plan/ipPlan.vue'], resolve)
+                require(['./components/ip/ip_plan/IpPlan.vue'], resolve)
             }
         },
         '/ipDelete': {
             component: function (resolve) {
-                require(['./components/ip/ip_delete/ipDelete.vue'], resolve)
+                require(['./components/ip/ip_delete/IpDelete.vue'], resolve)
             }
         },
         '/serverSearch': {

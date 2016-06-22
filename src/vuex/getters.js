@@ -23,3 +23,18 @@ export function idcs (state) {
 export function statusArr (state) {
     return state.roomStatus
 }
+
+// 获取运营商
+export function operators (state) {
+    return state.operators
+}
+
+// 获取业务类型
+export function productTypes (state) {
+    return state.productTypes
+}
+
+// 获取一级城市
+export function cityArr1 (state) {
+    return state.cityArr1
+}

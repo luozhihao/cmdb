@@ -37,3 +37,16 @@ export function getRoomSearch({ dispatch, state }) {
     })
 }
 
+// 获取运营商、业务类型、一级城市
+export function getRoomCreate({ dispatch, state }) {
+    this.$http({
+        url: '/idc/room_page_data/',
+        method: 'GET'
+    })
+    .then(response => {
+        if (response.data.code === 200) {
+            dispatch('GETROOMCREATE', response.data) 
+        } 
+    })
+}
+
