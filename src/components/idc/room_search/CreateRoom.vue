@@ -3,7 +3,7 @@
         <div slot="modal-header" class="modal-header">
             <h4 class="modal-title">新增机房</h4>
         </div>
-        <div slot="modal-body" class="modal-body">
+        <div slot="modal-body" class="modal-body mh500">
             <form class="form-horizontal clearfix">
                 <div class="col-sm-6">
                     <div class="form-group">
@@ -148,13 +148,12 @@ export default {
             this.$http({
                 url: '/idc/room/add/',
                 method: 'POST',
-                data: origin
+                data: this.$data
             })
             .then((response) => {
                 if (response.data.code === 200) {
-                    this.$data = Object.assign({}, init)
-
                     this.creatModal = false
+                    this.$data = Object.assign({}, init)
 
                     this.$dispatch('refresh')
                     this.$dispatch('show-success')

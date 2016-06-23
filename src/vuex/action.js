@@ -6,9 +6,8 @@
  */
 
  // action 会收到 store 作为它的第一个参数
- // 在 store 里我们只需要 dispatch （在有些情况下需要 state）
- // 我们可以利用 ES6 的解构（destructuring）语法来简化参数的使用
-
+ // 在 store 里只需要 dispatch （在有些情况下需要 state）
+ // 可以利用 ES6 的解构语法来简化参数的使用
 
 // 获取用户信息
 export function getUserInfo({ dispatch, state }) {
@@ -22,7 +21,6 @@ export function getUserInfo({ dispatch, state }) {
         }
     })
 }
-
 
 // 获取机房、状态
 export function getRoomSearch({ dispatch, state }) {
@@ -46,6 +44,58 @@ export function getRoomCreate({ dispatch, state }) {
     .then(response => {
         if (response.data.code === 200) {
             dispatch('GETROOMCREATE', response.data) 
+        } 
+    })
+}
+
+// 获取业务管理下拉框内容
+export function getBusinessSearch({ dispatch, state }) {
+    this.$http({
+        url: '/product/home/',
+        method: 'GET'
+    })
+    .then(response => {
+        if (response.data.code === 200) {
+            dispatch('GETBUSINESSSEARCH', response.data) 
+        } 
+    })
+}
+
+// 获取交换机查询下拉框内容
+export function getDeviceSearch({ dispatch, state }) {
+    this.$http({
+        url: '/device/home/',
+        method: 'GET'
+    })
+    .then(response => {
+        if (response.data.code === 200) {
+            dispatch('GETDEVICESEARCH', response.data) 
+        } 
+    })
+}
+
+// 获取机架、机位
+export function getFramesSeats({ dispatch, state }, newVal, name) {
+    this.$http({
+        url: '/device/idc_query/?id=' + newVal + '&type=' + name,
+        method: 'GET'
+    })
+    .then(response => {
+        if (response.data.code === 200) {
+            name === 'room' ? dispatch('GETFRAMES', response.data) : dispatch('GETSEATS', response.data)
+        } 
+    })
+}
+
+// 获取二级来源
+export function getOrigins({ dispatch, state }, newVal) {
+    this.$http({
+        url: '/device/source_query/?id=' + newVal,
+        method: 'GET'
+    })
+    .then(response => {
+        if (response.data.code === 200) {
+           dispatch('GETORIGINS', response.data)
         } 
     })
 }

@@ -6,35 +6,62 @@
  */
 
 // 这个 getter 函数会返回 count 的值
-// 在 ES6 里你可以写成：
+// 在 ES6 里可以写成：
 // export const getCount = state => state.count
 
 // 获取用户名
-export function username (state) {
-    return state.username
-}
+export const username = state => state.username
 
 // 获取机房位置
-export function idcs (state) {
-    return state.roomLocation
-}
+export const idcs = state => state.roomLocation
 
 // 获取机房状态
-export function statusArr (state) {
-    return state.roomStatus
-}
+export const statusArr = state => state.roomStatus
 
 // 获取运营商
-export function operators (state) {
-    return state.operators
-}
+export const operators = state => state.operators
 
 // 获取业务类型
-export function productTypes (state) {
-    return state.productTypes
-}
+export const productTypes = state => state.productTypes
 
 // 获取一级城市
-export function cityArr1 (state) {
-    return state.cityArr1
-}
+export const cityArr1 = state => state.cityArr1
+
+// 获取部门
+export const departments = state => state.departments
+
+// 获取运营阶段
+export const phases = state => state.phases
+
+// 获取游戏类型
+export const gameTypes = state => state.gameTypes
+
+// 获取平台类型
+export const platformTypes = state => state.platformTypes
+
+// 获取研发模式
+export const developModels = state => state.developModels
+
+// 获取游戏列表
+export const gameLists = state => state.gameLists
+
+// 获取产品级别
+export const productLevels = state => state.productLevels
+
+// 获取厂商
+export const firms = state => state.firms
+
+// 获取一级来源
+export const origins1 = state => state.origins1
+
+// 获取交换机状态
+export const deviceStatus = state => state.deviceStatus
+
+// 获取机架
+export const frames = state => state.frames
+
+// 获取机位
+export const seats = state => state.seats
+
+// 获取二级来源
+export const origins2 = state => state.origins2

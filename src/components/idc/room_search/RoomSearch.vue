@@ -87,8 +87,8 @@
 
                         <td v-for="value in valueArr" v-if="value === 'idcName' || value === 'frameName' || value === 'seatsName'">
                             <a class="pointer" v-if="value === 'idcName'" v-text="list[value]" @click="$broadcast('showEditRoom', list.id)"></a>
-                            <a class="pointer" v-if="value === 'frameName'" v-text="list[value]" @click="$broadcast('showEditRoom', list.id)"></a>
-                            <a class="pointer" v-if="value === 'seatsName'" v-text="list[value]" @click="$broadcast('showEditRoom', list.id)"></a>
+                            <a class="pointer" v-if="value === 'frameName'" v-text="list[value]" @click="$broadcast('showEditFrame', list.id)"></a>
+                            <a class="pointer" v-if="value === 'seatsName'" v-text="list[value]" @click="$broadcast('showEditSeats', list.id)"></a>
                         </td>
 
                         <td v-for="value in valueArr" :title="list[value]" v-text="list[value]" v-if="value !== 'idcName' && value !== 'frameName' && value !== 'seatsName'">

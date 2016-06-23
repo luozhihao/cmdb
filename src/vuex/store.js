@@ -20,7 +20,20 @@ const state = {
     roomStatus: [],
     operators: [],
     productTypes: [],
-    cityArr1: []
+    cityArr1: [],
+    departments: [],
+    gameTypes: [],
+    platformTypes: [],
+    developModels: [],
+    phases: [],
+    productLevels: [],
+    gameLists: [],
+    firms: [],
+    origins1: [],
+    origins2: [],
+    deviceStatus: [],
+    frames: [],
+    seats: []
 }   
 
 // 创建一个 object 存储 mutation 函数
@@ -42,6 +55,41 @@ const mutations = {
         state.operators = data.operators
         state.productTypes = data.productTypes
         state.cityArr1 = data.cityArr1
+    },
+
+    // 设置业务管理下拉框内容
+    GETBUSINESSSEARCH (state, data) {
+        state.departments = data.departments
+        state.productTypes = data.businessTypes
+        state.gameTypes = data.gameTypes
+        state.platformTypes = data.platformTypes
+        state.developModels = data.developModels
+        state.phases = data.phases
+        state.productLevels = data.productLevels
+        state.gameLists = data.gameLists
+    },
+
+    // 获取交换机查询下拉框内容
+    GETDEVICESEARCH (state, data) {
+        state.roomLocation = data.rooms
+        state.firms = data.firms
+        state.origins1 = data.origins1
+        state.deviceStatus = data.statusArr
+    },
+
+    // 获取机架
+    GETFRAMES (state, data) {
+        state.frames = data.items
+    },
+
+    // 获取机位
+    GETSEATS (state, data) {
+        state.seats = data.items
+    },
+
+    // 获取二级来源
+    GETORIGINS (state, data) {
+        state.origins2 = data.items
     }
 }
 

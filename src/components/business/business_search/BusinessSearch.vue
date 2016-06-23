@@ -6,7 +6,7 @@
                 <div class="form-group">
                     <label class="control-label col-sm-4">产品名称：</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" value="">
+                        <input type="text" class="form-control" v-model="param.productName">
                     </div>
                 </div>
                 <div class="form-group input-box">
@@ -19,7 +19,7 @@
                <div class="form-group">
                     <label class="control-label col-sm-4">运维负责人：</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" value="">
+                        <input type="text" class="form-control" v-model="param.maintainManager">
                     </div>
                 </div>
             </div>
@@ -41,7 +41,7 @@
                 <div class="form-group">
                     <label class="control-label col-sm-4">运营负责人：</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" value="">
+                        <input type="text" class="form-control" v-model="param.operationalManager">
                     </div>
                 </div>
             </div>
@@ -63,7 +63,7 @@
                 <div class="form-group">
                     <label class="control-label col-sm-4">项目负责人：</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" value="">
+                        <input type="text" class="form-control" v-model="param.projectManager">
                     </div>
                 </div>
             </div>
@@ -75,10 +75,17 @@
                         </v-select>
                     </div>
                 </div>
+                <div class="form-group input-box">
+                    <label class="control-label col-sm-4">产品级别：</label>
+                    <div class="col-sm-8">
+                        <v-select :value.sync="productLevel" :options="productLevels" placeholder="请选择">
+                        </v-select>
+                    </div>
+                </div>
                 <div class="form-group">
                     <label class="control-label col-sm-4">市场负责人：</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" value="">
+                        <input type="text" class="form-control" v-model="param.marketManager">
                     </div>
                 </div>
             </div>
@@ -111,8 +118,17 @@
                 <tr v-for="list in tableList" v-if="tableList.length !== 0" v-show="tableList.length !== 0">
                     <td><input type="checkbox" :id="list.id" :value="list.id" v-model="checkedIds"></td>
                     <td :title="list.productName"><a class="pointer" v-text="list.productName" @click="$broadcast('showEditProduct', list.id)"></td>
-                    <td v-for="value in list" :title="value" v-text="value" v-if="$key !== 'productName' && $key !== 'id'">
-                    </td>
+                    <td :title="list.businessType" v-text="list.businessType"></td>
+                    <td :title="list.productLevel" v-text="list.productLevel"></td>
+                    <td :title="list.platformType" v-text="list.platformType"></td>
+                    <td :title="list.gameType" v-text="list.gameType"></td>
+                    <td :title="list.developModel" v-text="list.developModel"></td>
+                    <td :title="list.department" v-text="list.department"></td>
+                    <td :title="list.phase" v-text="list.phase"></td>
+                    <td :title="list.projectManager" v-text="list.projectManager"></td>
+                    <td :title="list.operationalManager" v-text="list.operationalManager"></td>
+                    <td :title="list.maintainManager" v-text="list.maintainManager"></td>
+                    <td :title="list.marketManager" v-text="list.marketManager"></td>
                 </tr>
                 <tr class="text-center" v-show="tableList.length === 0">
                     <td :colspan="titles.length">暂无数据</td>
@@ -133,6 +149,8 @@ import bootPage from '../../global/BootPage.vue'
 import createProductModal from './CreateProduct.vue'
 import editProductModal from './EditProduct.vue'
 import vSelect from '../../global/Select.vue'
+import { getBusinessSearch } from '../../../vuex/action.js'
+import { departments, productTypes, phases, gameTypes, platformTypes, developModels, productLevels } from '../../../vuex/getters.js'
 
 let origin = {
         checkedAll: false,
@@ -144,19 +162,19 @@ let origin = {
         lenArr: [10, 50, 100],
         pageLen: 5,
         url: '',
-        departments: [],
-        businessTypes: [],
-        gameTypes: [],
-        platformTypes: [],
-        developModels: [],
-        phases: [],
         param: {
+            productName: '',
             department: '',
             businessType: '',
             gameType: '',
             platformType: '',
             developModel: '',
-            phase: ''
+            phase: '',
+            productLevel: '',
+            maintainManager: '',
+            operationalManager: '',
+            projectManager: '',
+            marketManager: ''
         }
     },
     init = Object.assign({}, origin);
@@ -177,6 +195,23 @@ export default {
         createProductModal,
         editProductModal,
         vSelect
+    },
+    vuex: {
+        actions: {
+            getBusinessSearch
+        },
+        getters: {
+            departments,
+            businessTypes: productTypes,
+            phases,
+            gameTypes,
+            platformTypes,
+            developModels,
+            productLevels
+        }
+    },
+    ready () {
+        this.getBusinessSearch()
     },
     watch: {
         'checkedAll' (newVal) {

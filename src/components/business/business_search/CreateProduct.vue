@@ -4,101 +4,205 @@
         <div slot="modal-header" class="modal-header">
             <h4 class="modal-title">新增产品</h4>
         </div>
-        <div slot="modal-body" class="modal-body">
+        <div slot="modal-body" class="modal-body mh500">
             <form class="form-horizontal clearfix">
-                <div class="col-sm-6">
+                <div class="col-sm-12">
                     <div class="form-group input-box">
-                        <label class="control-label col-sm-4">业务类型：</label>
-                        <div class="col-sm-8">
+                        <label class="control-label col-sm-2">业务类型：<span class="text-danger">*</span></label>
+                        <div class="col-sm-9">
                             <v-select :value.sync="businessType" :options="businessTypes" placeholder="请选择">
                             </v-select>
                         </div>
                     </div>
-                    <div class="form-group" v-show="isShow === 2">
-                        <label class="control-label col-sm-4">产品名称：</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" value="">
+                </div>
+                <div class="col-sm-12" v-show="businessType === '1'">
+                    <div class="col-sm-6" >
+                        <div class="form-group input-box">
+                            <label class="control-label col-sm-4">游戏列表：<span class="text-danger">*</span></label>
+                            <div class="col-sm-6">
+                                <v-select :value.sync="gameList" :options="gameLists" placeholder="请选择">
+                                </v-select>
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group input-box" v-show="isShow === 1">
-                        <label class="control-label col-sm-4">游戏列表：</label>
-                        <div class="col-sm-8">
-                            <v-select :value.sync="gameList" :options="gameLists" placeholder="请选择">
-                            </v-select>
-                        </div>
-                    </div>
-                    <div class="form-group" v-show="isShow === 1">
-                        <label class="control-label col-sm-4">子类别：</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" v-model="childType">
-                        </div>
-                    </div>
-                    <div class="form-group input-box">
-                        <label class="control-label col-sm-4">游戏类型：</label>
-                        <div class="col-sm-8">
-                            <v-select :value.sync="gameType" :options="gameTypes" placeholder="请选择">
-                            </v-select>
-                        </div>
-                    </div>
-                    <div class="form-group input-box">
-                        <label class="control-label col-sm-4">平台类型：</label>
-                        <div class="col-sm-8">
-                            <v-select :value.sync="platformType" :options="platformTypes" placeholder="请选择">
-                            </v-select>
-                        </div>
-                    </div>
-                    <div class="form-group input-box">
-                        <label class="control-label col-sm-4">研发模式：</label>
-                        <div class="col-sm-8">
-                            <v-select :value.sync="developModel" :options="developModels" placeholder="请选择">
-                            </v-select>
-                        </div>
-                    </div>
-                    <div class="form-group input-box">
-                        <label class="control-label col-sm-4">运营阶段：</label>
-                        <div class="col-sm-8">
-                            <v-select :value.sync="phase" :options="phases" placeholder="请选择">
-                            </v-select>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label col-sm-4">区域名称：<span class="text-danger">*</span></label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" v-model="childType">
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6">
-                    <div class="form-group input-box">
-                        <label class="control-label col-sm-4">部门：</label>
-                        <div class="col-sm-8">
-                            <v-select :value.sync="department" :options="departments" placeholder="请选择">
-                            </v-select>
-                        </div>
-                    </div>
+                <div class="col-sm-12" v-show="businessType === '2'">
                     <div class="form-group">
-                        <label class="control-label col-sm-4">项目负责人：</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" value="">
+                        <label class="control-label col-sm-2">产品名称：<span class="text-danger">*</span></label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" v-model="productName">
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-4">运营负责人：</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" value="">
+                </div>
+                <div class="col-sm-12">
+                    <div class="col-sm-6">
+                        <div class="form-group input-box">
+                            <label class="control-label col-sm-4">部门：<span class="text-danger">*</span></label>
+                            <div class="col-sm-6">
+                                <v-select :value.sync="department" :options="departments" placeholder="请选择">
+                                </v-select>
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-4">运维负责人：</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" value="">
+                    <div class="col-sm-6">
+                        <div class="form-group input-box">
+                            <label class="control-label col-sm-4">产品级别：<span class="text-danger">*</span></label>
+                            <div class="col-sm-6">
+                                <v-select :value.sync="productLevel" :options="productLevels" placeholder="请选择">
+                                </v-select>
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-4">市场负责人：</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" value="">
+                </div>
+                <div class="col-sm-12" v-show="businessType === '1'">
+                    <div class="col-sm-6">
+                        <div class="form-group input-box">
+                            <label class="control-label col-sm-4">游戏类型：<span class="text-danger">*</span></label>
+                            <div class="col-sm-6">
+                                <v-select :value.sync="gameType" :options="gameTypes" placeholder="请选择">
+                                </v-select>
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group input-box">
-                        <label class="control-label col-sm-4">产品级别：</label>
-                        <div class="col-sm-8">
-                            <v-select :value.sync="productLevel" :options="productLevels" placeholder="请选择">
-                            </v-select>
+                    <div class="col-sm-6">
+                        <div class="form-group input-box">
+                            <label class="control-label col-sm-4">平台类型：<span class="text-danger">*</span></label>
+                            <div class="col-sm-6">
+                                <v-select :value.sync="platformType" :options="platformTypes" placeholder="请选择">
+                                </v-select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12" v-show="businessType === '1'">
+                    <div class="col-sm-6">
+                        <div class="form-group input-box">
+                            <label class="control-label col-sm-4">研发模式：<span class="text-danger">*</span></label>
+                            <div class="col-sm-6">
+                                <v-select :value.sync="developModel" :options="developModels" placeholder="请选择">
+                                </v-select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group input-box">
+                            <label class="control-label col-sm-4">运营阶段：<span class="text-danger">*</span></label>
+                            <div class="col-sm-6">
+                                <v-select :value.sync="phase" :options="phases" placeholder="请选择">
+                                </v-select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group mb0">
+                        <label class="control-label col-sm-2">项目负责人：</label>
+                        <div class="col-sm-9">
+                            <typeahead
+                                :on-hit="addProjectManager"
+                                :async="'/instance_ips/?name='"
+                                :key="'name'"
+                                placeholder="按回车键添加"
+                            >
+                            </typeahead>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group mb20">
+                        <div class="col-sm-9 col-sm-offset-2">
+                            <span class="selected-tag" v-for="projectManager in projectManagers" track-by="$index">
+                                <span v-text="projectManager"></span>
+                                <button type="button" class="close" @click="deleteUser($index, 'projectManagers')">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group mb0">
+                        <label class="control-label col-sm-2">运营负责人：</label>
+                        <div class="col-sm-9">
+                            <typeahead
+                                :on-hit="addOperationalManager"
+                                :async="'/instance_ips/?name='"
+                                :key="'name'"
+                                placeholder="按回车键添加"
+                            >
+                            </typeahead>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group mb20">
+                        <div class="col-sm-9 col-sm-offset-2">
+                            <span class="selected-tag" v-for="operationalManager in operationalManagers" track-by="$index">
+                                <span v-text="operationalManager"></span>
+                                <button type="button" class="close" @click="deleteUser($index, 'operationalManagers')">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group mb0">
+                        <label class="control-label col-sm-2">运维负责人：<span class="text-danger">*</span></label>
+                        <div class="col-sm-9">
+                            <typeahead
+                                :on-hit="addMaintainManager"
+                                :async="'/instance_ips/?name='"
+                                :key="'name'"
+                                placeholder="按回车键添加"
+                            >
+                            </typeahead>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group mb20">
+                        <div class="col-sm-9 col-sm-offset-2">
+                            <span class="selected-tag" v-for="maintainManager in maintainManagers" track-by="$index">
+                                <span v-text="maintainManager"></span>
+                                <button type="button" class="close" @click="deleteUser($index, 'maintainManagers')">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group mb0">
+                        <label class="control-label col-sm-2">市场负责人：</label>
+                        <div class="col-sm-9">
+                            <typeahead
+                                :on-hit="addMarketManager"
+                                :async="'/instance_ips/?name='"
+                                :key="'name'"
+                                placeholder="按回车键添加"
+                            >
+                            </typeahead>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group mb20">
+                        <div class="col-sm-9 col-sm-offset-2">
+                            <span class="selected-tag" v-for="marketManager in marketManagers" track-by="$index">
+                                <span v-text="marketManager"></span>
+                                <button type="button" class="close" @click="deleteUser($index, 'marketManagers')">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -112,29 +216,26 @@
 </template>
 
 <script>
-import { modal } from 'vue-strap'
+import { modal, typeahead } from 'vue-strap'
 import vSelect from '../../global/Select.vue'
+import { departments, productTypes, phases, gameTypes, platformTypes, developModels, gameLists, productLevels } from '../../../vuex/getters.js'
 
 let origin = {
         creatProductModal: false,
-        departments: [],
-        businessTypes: [{value: '游戏', label: '游戏'}, {value: '应用', label: '应用'}],
-        gameTypes: [],
-        platformTypes: [],
-        developModels: [],
-        phases: [],
-        productLevels: [],
-        gameLists: [],
+        businessType: '1',
         gameList: '',
+        childType: '',
         department: '',
-        businessType: '游戏',
+        productName: '',
+        productLevel: '',
         gameType: '',
         platformType: '',
         developModel: '',
         phase: '',
-        productLevel: '',
-        childType: '',
-        isShow: 1
+        projectManagers: ['王毅', '罗之浩', '王鑫', '沈建华'],
+        maintainManagers: ['王毅', '沈建华'],
+        operationalManagers: ['沈建华'],
+        marketManagers: ['王鑫', '罗之浩'],
     },
     init = Object.assign({}, origin);
 
@@ -144,29 +245,106 @@ export default {
     },
     methods: {
 
+        // 模糊搜索项目负责人
+        addProjectManager (items, targetVM) {
+            if ($.inArray(items, this.projectManagers) === -1 && items) {
+                this.projectManagers.push(items) 
+            }
+            
+            targetVM.reset()
+        },
+
+        // 模糊搜索运营负责人
+        addOperationalManager (items, targetVM) {
+            if ($.inArray(items, this.operationalManagers) === -1 && items) {
+                this.operationalManagers.push(items) 
+            }
+            
+            targetVM.reset()
+        },
+
+        // 模糊搜索运维负责人
+        addMaintainManager (items, targetVM) {
+            if ($.inArray(items, this.maintainManagers) === -1 && items) {
+                this.maintainManagers.push(items) 
+            }
+            
+            targetVM.reset()
+        },
+
+        // 模糊搜索市场负责人
+        addMarketManager (items, targetVM) {
+            if ($.inArray(items, this.marketManagers) === -1 && items) {
+                this.marketManagers.push(items) 
+            }
+            
+            targetVM.reset()
+        },
+
+        // 删除负责人
+        deleteUser (index, name) {
+            this[name].splice(index, 1)
+        }
     },
     components: {
         modal,
-        vSelect
+        vSelect,
+        typeahead
+    },
+    vuex: {
+        getters: {
+            departments,
+            businessTypes: productTypes,
+            phases,
+            gameTypes,
+            platformTypes,
+            developModels,
+            gameLists,
+            productLevels
+        }
     },
     events: {
         'showCreateProduct' () {
             this.creatProductModal = true
-        }
-    },
-    watch: {
-        'businessType' (newVal) {
-            if (newVal === '游戏') {
-                this.isShow = 1
-            } else if (newVal === '应用') {
-                this.isShow = 2
-            } else {
-                this.isShow = 0
-            }
         }
     }
 }
 </script>
 
 <style scoped>
+.selected-tag {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    height: 26px;
+    margin: 4px 1px 0 3px;
+    padding: 0 .25em;
+    float: left;
+    line-height: 1.7em;
+    color: #147688;
+    background-color: #d7f3f9;
+    border-color: #91ddec;
+}
+
+.selected-tag .close {
+    float: none;
+    margin-right: 0;
+    font-size: 20px;
+    -webkit-appearance: none;
+    padding: 0;
+    cursor: pointer;
+    background: 0 0;
+    border: 0;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    filter: alpha(opacity=20);
+    opacity: .2;
+}
+
+.selected-tag .close:hover {
+    color: #000;
+    filter: alpha(opacity=50);
+    opacity: .5;
+}
 </style>

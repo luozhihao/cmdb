@@ -56,7 +56,7 @@ webpackJsonp([1],Array(26).concat([
 	
 	
 	// module
-	exports.push([module.id, "\r\n.dropdown-width[_v-3476c4ae] {\r\n    width: 500px;\r\n}\r\n\r\n.dropdown-li[_v-3476c4ae] {\r\n    width: 50%;\r\n}\r\n\r\n.pd20[_v-3476c4ae] {\r\n    padding: 20px;\r\n}\r\n\r\n.mt20[_v-3476c4ae] {\r\n    margin-top: 20px;\r\n}\r\n", "", {"version":3,"sources":["/./src/components/idc/room_search/RoomSearch.vue.style"],"names":[],"mappings":";AA8TA;IACA,aAAA;CACA;;AAEA;IACA,WAAA;CACA;;AAEA;IACA,cAAA;CACA;;AAEA;IACA,iBAAA;CACA","file":"RoomSearch.vue","sourcesContent":["<!-- 机房查询 -->\r\n<template>\r\n    <div>  \r\n        <div class=\"text-center mb20\">\r\n            <v-select :value.sync=\"param.dimension\" :options=\"dimensions\" placeholder=\"请选择视角\">\r\n            </v-select>\r\n        </div>\r\n        <form class=\"form-horizontal clearfix form-search\">\r\n            <div class=\"col-sm-3\">\r\n                <div class=\"form-group input-box\">\r\n                    <label class=\"col-sm-4 control-label\">机房：</label>\r\n                    <div class=\"col-sm-8\">\r\n                        <v-select :value.sync=\"param.idc\" :options=\"idcs\" placeholder=\"请选择\">\r\n                        </v-select>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"col-sm-3\">\r\n                <div class=\"form-group input-box\">\r\n                    <label class=\"col-sm-4 control-label\">状态：</label>\r\n                    <div class=\"col-sm-8\">\r\n                        <v-select :value.sync=\"param.status\" :options=\"statusArr\" placeholder=\"请选择\">\r\n                        </v-select>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"col-sm-3\">\r\n                <div class=\"form-group\">\r\n                    <label class=\"col-sm-4 control-label\">编号：</label>\r\n                    <div class=\"col-sm-8\">\r\n                        <input type=\"text\" class=\"form-control\" v-model=\"param.number\">\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </form>\r\n        <div class=\"text-center btn-operate\">\r\n            <button type=\"button\" class=\"btn btn-default\" @click=\"refresh\">\r\n                查询\r\n            </button>\r\n            <button type=\"button\" class=\"btn btn-default\" @click=\"$broadcast('showCreate')\">\r\n                新增机房\r\n            </button>\r\n            <dropdown v-el:confirm>\r\n                <button type=\"button\" class=\"btn btn-default\" data-toggle=\"dropdown\">\r\n                    批量删除\r\n                    <span class=\"caret\"></span>\r\n                </button>\r\n                <div slot=\"dropdown-menu\" class=\"dropdown-menu pd20\">\r\n                    <span class=\"text-danger fs12\">注：删除机房将删除其下所有机架和机位</span>\r\n                    <button type=\"button\" class=\"btn btn-danger btn-block mt20\" @click=\"deleteFn\">确定</button>\r\n                    <button type=\"button\" class=\"btn btn-default btn-block\" @click=\"cancelFn\">取消</button>\r\n                </div>\r\n            </dropdown>\r\n            <button type=\"button\" class=\"btn btn-default\">\r\n                导出\r\n            </button>\r\n        </div>\r\n        <div class=\"text-center table-title\">\r\n            查询结果\r\n            <div class=\"pull-left\">\r\n                <dropdown>\r\n                    <button type=\"button\" class=\"btn btn-default set-btn\" data-toggle=\"dropdown\">\r\n                        <span class=\"glyphicon glyphicon-cog\"></span>\r\n                    </button>\r\n                    <div slot=\"dropdown-menu\" class=\"dropdown-menu dropdown-width\">\r\n                        <ul class=\"pull-left dropdown-width\">\r\n                            <li v-for=\"check in checkArr\" class=\"pull-left dropdown-li\" track-by=\"$index\">\r\n                                <input :id=\"'fliter' + $index\" type=\"checkbox\" :checked=\"check.checked\" @click=\"fliter($index)\"> \r\n                                <label :for=\"'fliter' + $index\" v-text=\"check.label\"></label>\r\n                            </li>\r\n                        </ul>\r\n                    </div>\r\n                </dropdown>\r\n            </div>\r\n        </div>\r\n        <div class=\"table-box\">\r\n            <table class=\"table table-hover table-bordered\">\r\n                <thead>\r\n                    <tr>\r\n                        <th width=\"3%\"><input type=\"checkbox\" v-model=\"checkedAll\"></th>\r\n                        <th v-for=\"title in titles\" v-text=\"title\"></th>\r\n                    </tr>\r\n                </thead>\r\n                <tbody>\r\n                    <tr v-for=\"list in tableList\" v-if=\"tableList.length !== 0\" v-show=\"tableList.length !== 0\">\r\n                        <td><input type=\"checkbox\" :id=\"list.id\" :value=\"list.id\" v-model=\"checkedIds\"></td>\r\n\r\n                        <td v-for=\"value in valueArr\" v-if=\"value === 'idcName' || value === 'frameName' || value === 'seatsName'\">\r\n                            <a class=\"pointer\" v-if=\"value === 'idcName'\" v-text=\"list[value]\" @click=\"$broadcast('showEditRoom', list.id)\"></a>\r\n                            <a class=\"pointer\" v-if=\"value === 'frameName'\" v-text=\"list[value]\" @click=\"$broadcast('showEditRoom', list.id)\"></a>\r\n                            <a class=\"pointer\" v-if=\"value === 'seatsName'\" v-text=\"list[value]\" @click=\"$broadcast('showEditRoom', list.id)\"></a>\r\n                        </td>\r\n\r\n                        <td v-for=\"value in valueArr\" :title=\"list[value]\" v-text=\"list[value]\" v-if=\"value !== 'idcName' && value !== 'frameName' && value !== 'seatsName'\">\r\n                        </td>\r\n                    </tr>\r\n                    <tr class=\"text-center\" v-show=\"tableList.length === 0\">\r\n                        <td :colspan=\"titles.length + 1\">暂无数据</td>\r\n                    </tr>\r\n                </tbody>\r\n            </table>\r\n        </div>\r\n        <div class=\"clearfix mt30\">\r\n            <boot-page :async=\"true\" :lens=\"lenArr\" :page-len=\"pageLen\" :url=\"url\" :param=\"param\"></boot-page>\r\n        </div>\r\n\r\n        <create-modal></create-modal> \r\n        <edit-room-modal></edit-room-modal> \r\n        <edit-frame-modal></edit-frame-modal> \r\n        <edit-seats-modal></edit-seats-modal> \r\n    </div>\r\n</template>\r\n\r\n<script>\r\nimport { dropdown } from 'vue-strap'\r\nimport bootPage from '../../global/BootPage.vue'\r\nimport createModal from './CreateRoom.vue'\r\nimport editRoomModal from './EditRoom.vue'\r\nimport editFrameModal from './EditFrame.vue'\r\nimport editSeatsModal from './EditSeats.vue'\r\nimport vSelect from '../../global/Select.vue'\r\nimport { getRoomSearch } from '../../../vuex/action.js'\r\nimport { idcs, statusArr } from '../../../vuex/getters.js'\r\n\r\nlet origin = {\r\n        dimensions: [\r\n            {value: '1', label: '机房视角'},\r\n            {value: '2', label: '机架视角'},\r\n            {value: '3', label: '机位视角'}\r\n        ],\r\n        checkedAll: false,\r\n        checkedIds: [],\r\n        titles: [],\r\n        tableList: [],\r\n        lenArr: [10, 50, 100],\r\n        pageLen: 5,\r\n        url: '/idc/query/',\r\n        param: {\r\n            dimension: '1',\r\n            idc: '',\r\n            status: '',\r\n            number: ''\r\n        },\r\n        checkArr: [\r\n            {label: '机房地址', value: 'idcAddress', checked: true},\r\n            {label: '网络类型', value: 'network', checked: true},\r\n            {label: '业务类型', value: 'productType', checked: true},\r\n            {label: '所在城市', value: 'city', checked: true},\r\n            {label: '机房状态', value: 'status', checked: true},\r\n            {label: '业务经理名称', value: 'bossName', checked: true},\r\n            {label: '客服电话', value: 'phone', checked: true}\r\n        ],\r\n        valueArr: []\r\n    },\r\n    init = Object.assign({}, origin);\r\n\r\nexport default {\r\n    data () {\r\n        return origin\r\n    },\r\n    methods: {\r\n\r\n        // 刷新数据\r\n        refresh () {\r\n            this.checkedIds = []\r\n            this.$broadcast('refresh')\r\n        },\r\n\r\n        // 筛选\r\n        fliter (index) {\r\n            this.checkArr[index].checked ? this.checkArr[index].checked = false : this.checkArr[index].checked = true\r\n\r\n            this.originFilter()\r\n        },\r\n\r\n        // 初始化筛选\r\n        originFilter () {\r\n            let _this = this\r\n\r\n            this.titles = []\r\n            this.valueArr = []\r\n\r\n            this.checkArr.forEach((e) => {\r\n                if (e.checked) {\r\n                    _this.titles.push(e.label)\r\n                    _this.valueArr.push(e.value)\r\n                }\r\n            })\r\n\r\n            switch (this.param.dimension) {\r\n                case '1':\r\n                    this.titles.unshift('机房名称')\r\n                    this.valueArr.unshift('idcName')\r\n                    break;\r\n                case '2':\r\n                    this.titles.unshift('机架编号', '机房名称')\r\n                    this.valueArr.unshift('frameName', 'idcName')\r\n                    break;\r\n                case '3':\r\n                    this.titles.unshift('机位编号', '机架编号', '机房名称')\r\n                    this.valueArr.unshift('seatsName', 'frameName', 'idcName')\r\n                    break;\r\n            }\r\n        },\r\n\r\n        // 批量删除\r\n        deleteFn () {\r\n            if (this.checkedIds.length) {\r\n                this.$http({\r\n                    url: '/idc/delete/',\r\n                    method: 'POST',\r\n                    data: {\r\n                        checkedIds: this.checkedIds,\r\n                        dimension: this.param.dimension\r\n                    }\r\n                })\r\n                .then((response) => {\r\n                    if (response.data.code === 200) {\r\n                        this.checkedIds = []\r\n                        this.refresh()\r\n\r\n                        this.$dispatch('show-success', '删除成功')\r\n                    } else {\r\n                        this.$dispatch('show-success', '删除失败了')\r\n                    }\r\n                })\r\n            } else {\r\n                this.$dispatch('show-notify', '请选择删除项')\r\n            }\r\n\r\n            this.$els.confirm.classList.toggle('open')\r\n        },\r\n\r\n        // 取消删除\r\n        cancelFn () {\r\n            this.$els.confirm.classList.toggle('open')\r\n        },\r\n    },\r\n    components: {\r\n        bootPage,\r\n        vSelect,\r\n        createModal,\r\n        editRoomModal,\r\n        editFrameModal,\r\n        editSeatsModal,\r\n        dropdown\r\n    },\r\n    vuex: {\r\n        actions: {\r\n            getRoomSearch\r\n        },\r\n        getters: {\r\n            idcs,   // 获取机房位置\r\n            statusArr  // 获取机房状态\r\n        }\r\n    },\r\n    ready () {\r\n        this.getRoomSearch()\r\n\r\n        this.originFilter()\r\n    },\r\n    watch: {\r\n        'checkedAll' (newVal) {\r\n            if (newVal) {\r\n                if (this.checkedIds.length !== this.tableList.length) {\r\n                    let _this = this\r\n\r\n                    _this.checkedIds = []\r\n                    _this.tableList.forEach(function(e) {\r\n                        _this.checkedIds.push(e.id)\r\n                    })\r\n                }\r\n            } else {\r\n                if (this.checkedIds.length === this.tableList.length) {\r\n                    this.checkedIds = []\r\n                }\r\n            }\r\n        },\r\n        'checkedIds' (newVal) {\r\n            if (newVal.length === this.tableList.length && this.tableList.length !== 0) {\r\n                this.checkedAll = true\r\n            } else {\r\n                this.checkedAll = false\r\n            }\r\n        },\r\n        'param.dimension' (newVal) {\r\n            this.originFilter()\r\n\r\n            this.refresh()\r\n        }\r\n    },\r\n    events: {\r\n\r\n        // 获取表格数据\r\n        'data' (param) {\r\n            this.tableList = param.data\r\n            this.checkedIds = []\r\n        },\r\n\r\n        // 刷新表格\r\n        'refresh' () {\r\n            this.refresh()\r\n        },\r\n        \r\n        // 新增机架\r\n        'showCreateFrame' (param) {\r\n            this.$broadcast('showCreateFrame', param)\r\n        },\r\n\r\n        // 新增机位\r\n        'showCreateSeats' (param) {\r\n            this.$broadcast('showCreateSeats', param)\r\n        }\r\n    }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.dropdown-width {\r\n    width: 500px;\r\n}\r\n\r\n.dropdown-li {\r\n    width: 50%;\r\n}\r\n\r\n.pd20 {\r\n    padding: 20px;\r\n}\r\n\r\n.mt20 {\r\n    margin-top: 20px;\r\n}\r\n</style>\r\n"],"sourceRoot":"webpack://"}]);
+	exports.push([module.id, "\r\n.dropdown-width[_v-3476c4ae] {\r\n    width: 500px;\r\n}\r\n\r\n.dropdown-li[_v-3476c4ae] {\r\n    width: 50%;\r\n}\r\n\r\n.pd20[_v-3476c4ae] {\r\n    padding: 20px;\r\n}\r\n\r\n.mt20[_v-3476c4ae] {\r\n    margin-top: 20px;\r\n}\r\n", "", {"version":3,"sources":["/./src/components/idc/room_search/RoomSearch.vue.style"],"names":[],"mappings":";AA8TA;IACA,aAAA;CACA;;AAEA;IACA,WAAA;CACA;;AAEA;IACA,cAAA;CACA;;AAEA;IACA,iBAAA;CACA","file":"RoomSearch.vue","sourcesContent":["<!-- 机房查询 -->\r\n<template>\r\n    <div>  \r\n        <div class=\"text-center mb20\">\r\n            <v-select :value.sync=\"param.dimension\" :options=\"dimensions\" placeholder=\"请选择视角\">\r\n            </v-select>\r\n        </div>\r\n        <form class=\"form-horizontal clearfix form-search\">\r\n            <div class=\"col-sm-3\">\r\n                <div class=\"form-group input-box\">\r\n                    <label class=\"col-sm-4 control-label\">机房：</label>\r\n                    <div class=\"col-sm-8\">\r\n                        <v-select :value.sync=\"param.idc\" :options=\"idcs\" placeholder=\"请选择\">\r\n                        </v-select>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"col-sm-3\">\r\n                <div class=\"form-group input-box\">\r\n                    <label class=\"col-sm-4 control-label\">状态：</label>\r\n                    <div class=\"col-sm-8\">\r\n                        <v-select :value.sync=\"param.status\" :options=\"statusArr\" placeholder=\"请选择\">\r\n                        </v-select>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"col-sm-3\">\r\n                <div class=\"form-group\">\r\n                    <label class=\"col-sm-4 control-label\">编号：</label>\r\n                    <div class=\"col-sm-8\">\r\n                        <input type=\"text\" class=\"form-control\" v-model=\"param.number\">\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </form>\r\n        <div class=\"text-center btn-operate\">\r\n            <button type=\"button\" class=\"btn btn-default\" @click=\"refresh\">\r\n                查询\r\n            </button>\r\n            <button type=\"button\" class=\"btn btn-default\" @click=\"$broadcast('showCreate')\">\r\n                新增机房\r\n            </button>\r\n            <dropdown v-el:confirm>\r\n                <button type=\"button\" class=\"btn btn-default\" data-toggle=\"dropdown\">\r\n                    批量删除\r\n                    <span class=\"caret\"></span>\r\n                </button>\r\n                <div slot=\"dropdown-menu\" class=\"dropdown-menu pd20\">\r\n                    <span class=\"text-danger fs12\">注：删除机房将删除其下所有机架和机位</span>\r\n                    <button type=\"button\" class=\"btn btn-danger btn-block mt20\" @click=\"deleteFn\">确定</button>\r\n                    <button type=\"button\" class=\"btn btn-default btn-block\" @click=\"cancelFn\">取消</button>\r\n                </div>\r\n            </dropdown>\r\n            <button type=\"button\" class=\"btn btn-default\">\r\n                导出\r\n            </button>\r\n        </div>\r\n        <div class=\"text-center table-title\">\r\n            查询结果\r\n            <div class=\"pull-left\">\r\n                <dropdown>\r\n                    <button type=\"button\" class=\"btn btn-default set-btn\" data-toggle=\"dropdown\">\r\n                        <span class=\"glyphicon glyphicon-cog\"></span>\r\n                    </button>\r\n                    <div slot=\"dropdown-menu\" class=\"dropdown-menu dropdown-width\">\r\n                        <ul class=\"pull-left dropdown-width\">\r\n                            <li v-for=\"check in checkArr\" class=\"pull-left dropdown-li\" track-by=\"$index\">\r\n                                <input :id=\"'fliter' + $index\" type=\"checkbox\" :checked=\"check.checked\" @click=\"fliter($index)\"> \r\n                                <label :for=\"'fliter' + $index\" v-text=\"check.label\"></label>\r\n                            </li>\r\n                        </ul>\r\n                    </div>\r\n                </dropdown>\r\n            </div>\r\n        </div>\r\n        <div class=\"table-box\">\r\n            <table class=\"table table-hover table-bordered\">\r\n                <thead>\r\n                    <tr>\r\n                        <th width=\"3%\"><input type=\"checkbox\" v-model=\"checkedAll\"></th>\r\n                        <th v-for=\"title in titles\" v-text=\"title\"></th>\r\n                    </tr>\r\n                </thead>\r\n                <tbody>\r\n                    <tr v-for=\"list in tableList\" v-if=\"tableList.length !== 0\" v-show=\"tableList.length !== 0\">\r\n                        <td><input type=\"checkbox\" :id=\"list.id\" :value=\"list.id\" v-model=\"checkedIds\"></td>\r\n\r\n                        <td v-for=\"value in valueArr\" v-if=\"value === 'idcName' || value === 'frameName' || value === 'seatsName'\">\r\n                            <a class=\"pointer\" v-if=\"value === 'idcName'\" v-text=\"list[value]\" @click=\"$broadcast('showEditRoom', list.id)\"></a>\r\n                            <a class=\"pointer\" v-if=\"value === 'frameName'\" v-text=\"list[value]\" @click=\"$broadcast('showEditFrame', list.id)\"></a>\r\n                            <a class=\"pointer\" v-if=\"value === 'seatsName'\" v-text=\"list[value]\" @click=\"$broadcast('showEditSeats', list.id)\"></a>\r\n                        </td>\r\n\r\n                        <td v-for=\"value in valueArr\" :title=\"list[value]\" v-text=\"list[value]\" v-if=\"value !== 'idcName' && value !== 'frameName' && value !== 'seatsName'\">\r\n                        </td>\r\n                    </tr>\r\n                    <tr class=\"text-center\" v-show=\"tableList.length === 0\">\r\n                        <td :colspan=\"titles.length + 1\">暂无数据</td>\r\n                    </tr>\r\n                </tbody>\r\n            </table>\r\n        </div>\r\n        <div class=\"clearfix mt30\">\r\n            <boot-page :async=\"true\" :lens=\"lenArr\" :page-len=\"pageLen\" :url=\"url\" :param=\"param\"></boot-page>\r\n        </div>\r\n\r\n        <create-modal></create-modal> \r\n        <edit-room-modal></edit-room-modal> \r\n        <edit-frame-modal></edit-frame-modal> \r\n        <edit-seats-modal></edit-seats-modal> \r\n    </div>\r\n</template>\r\n\r\n<script>\r\nimport { dropdown } from 'vue-strap'\r\nimport bootPage from '../../global/BootPage.vue'\r\nimport createModal from './CreateRoom.vue'\r\nimport editRoomModal from './EditRoom.vue'\r\nimport editFrameModal from './EditFrame.vue'\r\nimport editSeatsModal from './EditSeats.vue'\r\nimport vSelect from '../../global/Select.vue'\r\nimport { getRoomSearch } from '../../../vuex/action.js'\r\nimport { idcs, statusArr } from '../../../vuex/getters.js'\r\n\r\nlet origin = {\r\n        dimensions: [\r\n            {value: '1', label: '机房视角'},\r\n            {value: '2', label: '机架视角'},\r\n            {value: '3', label: '机位视角'}\r\n        ],\r\n        checkedAll: false,\r\n        checkedIds: [],\r\n        titles: [],\r\n        tableList: [],\r\n        lenArr: [10, 50, 100],\r\n        pageLen: 5,\r\n        url: '/idc/query/',\r\n        param: {\r\n            dimension: '1',\r\n            idc: '',\r\n            status: '',\r\n            number: ''\r\n        },\r\n        checkArr: [\r\n            {label: '机房地址', value: 'idcAddress', checked: true},\r\n            {label: '网络类型', value: 'network', checked: true},\r\n            {label: '业务类型', value: 'productType', checked: true},\r\n            {label: '所在城市', value: 'city', checked: true},\r\n            {label: '机房状态', value: 'status', checked: true},\r\n            {label: '业务经理名称', value: 'bossName', checked: true},\r\n            {label: '客服电话', value: 'phone', checked: true}\r\n        ],\r\n        valueArr: []\r\n    },\r\n    init = Object.assign({}, origin);\r\n\r\nexport default {\r\n    data () {\r\n        return origin\r\n    },\r\n    methods: {\r\n\r\n        // 刷新数据\r\n        refresh () {\r\n            this.checkedIds = []\r\n            this.$broadcast('refresh')\r\n        },\r\n\r\n        // 筛选\r\n        fliter (index) {\r\n            this.checkArr[index].checked ? this.checkArr[index].checked = false : this.checkArr[index].checked = true\r\n\r\n            this.originFilter()\r\n        },\r\n\r\n        // 初始化筛选\r\n        originFilter () {\r\n            let _this = this\r\n\r\n            this.titles = []\r\n            this.valueArr = []\r\n\r\n            this.checkArr.forEach((e) => {\r\n                if (e.checked) {\r\n                    _this.titles.push(e.label)\r\n                    _this.valueArr.push(e.value)\r\n                }\r\n            })\r\n\r\n            switch (this.param.dimension) {\r\n                case '1':\r\n                    this.titles.unshift('机房名称')\r\n                    this.valueArr.unshift('idcName')\r\n                    break;\r\n                case '2':\r\n                    this.titles.unshift('机架编号', '机房名称')\r\n                    this.valueArr.unshift('frameName', 'idcName')\r\n                    break;\r\n                case '3':\r\n                    this.titles.unshift('机位编号', '机架编号', '机房名称')\r\n                    this.valueArr.unshift('seatsName', 'frameName', 'idcName')\r\n                    break;\r\n            }\r\n        },\r\n\r\n        // 批量删除\r\n        deleteFn () {\r\n            if (this.checkedIds.length) {\r\n                this.$http({\r\n                    url: '/idc/delete/',\r\n                    method: 'POST',\r\n                    data: {\r\n                        checkedIds: this.checkedIds,\r\n                        dimension: this.param.dimension\r\n                    }\r\n                })\r\n                .then((response) => {\r\n                    if (response.data.code === 200) {\r\n                        this.checkedIds = []\r\n                        this.refresh()\r\n\r\n                        this.$dispatch('show-success', '删除成功')\r\n                    } else {\r\n                        this.$dispatch('show-success', '删除失败了')\r\n                    }\r\n                })\r\n            } else {\r\n                this.$dispatch('show-notify', '请选择删除项')\r\n            }\r\n\r\n            this.$els.confirm.classList.toggle('open')\r\n        },\r\n\r\n        // 取消删除\r\n        cancelFn () {\r\n            this.$els.confirm.classList.toggle('open')\r\n        },\r\n    },\r\n    components: {\r\n        bootPage,\r\n        vSelect,\r\n        createModal,\r\n        editRoomModal,\r\n        editFrameModal,\r\n        editSeatsModal,\r\n        dropdown\r\n    },\r\n    vuex: {\r\n        actions: {\r\n            getRoomSearch\r\n        },\r\n        getters: {\r\n            idcs,   // 获取机房位置\r\n            statusArr  // 获取机房状态\r\n        }\r\n    },\r\n    ready () {\r\n        this.getRoomSearch()\r\n\r\n        this.originFilter()\r\n    },\r\n    watch: {\r\n        'checkedAll' (newVal) {\r\n            if (newVal) {\r\n                if (this.checkedIds.length !== this.tableList.length) {\r\n                    let _this = this\r\n\r\n                    _this.checkedIds = []\r\n                    _this.tableList.forEach(function(e) {\r\n                        _this.checkedIds.push(e.id)\r\n                    })\r\n                }\r\n            } else {\r\n                if (this.checkedIds.length === this.tableList.length) {\r\n                    this.checkedIds = []\r\n                }\r\n            }\r\n        },\r\n        'checkedIds' (newVal) {\r\n            if (newVal.length === this.tableList.length && this.tableList.length !== 0) {\r\n                this.checkedAll = true\r\n            } else {\r\n                this.checkedAll = false\r\n            }\r\n        },\r\n        'param.dimension' (newVal) {\r\n            this.originFilter()\r\n\r\n            this.refresh()\r\n        }\r\n    },\r\n    events: {\r\n\r\n        // 获取表格数据\r\n        'data' (param) {\r\n            this.tableList = param.data\r\n            this.checkedIds = []\r\n        },\r\n\r\n        // 刷新表格\r\n        'refresh' () {\r\n            this.refresh()\r\n        },\r\n        \r\n        // 新增机架\r\n        'showCreateFrame' (param) {\r\n            this.$broadcast('showCreateFrame', param)\r\n        },\r\n\r\n        // 新增机位\r\n        'showCreateSeats' (param) {\r\n            this.$broadcast('showCreateSeats', param)\r\n        }\r\n    }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.dropdown-width {\r\n    width: 500px;\r\n}\r\n\r\n.dropdown-li {\r\n    width: 50%;\r\n}\r\n\r\n.pd20 {\r\n    padding: 20px;\r\n}\r\n\r\n.mt20 {\r\n    margin-top: 20px;\r\n}\r\n</style>\r\n"],"sourceRoot":"webpack://"}]);
 	
 	// exports
 
@@ -216,8 +216,8 @@ webpackJsonp([1],Array(26).concat([
 	//
 	//                         <td v-for="value in valueArr" v-if="value === 'idcName' || value === 'frameName' || value === 'seatsName'">
 	//                             <a class="pointer" v-if="value === 'idcName'" v-text="list[value]" @click="$broadcast('showEditRoom', list.id)"></a>
-	//                             <a class="pointer" v-if="value === 'frameName'" v-text="list[value]" @click="$broadcast('showEditRoom', list.id)"></a>
-	//                             <a class="pointer" v-if="value === 'seatsName'" v-text="list[value]" @click="$broadcast('showEditRoom', list.id)"></a>
+	//                             <a class="pointer" v-if="value === 'frameName'" v-text="list[value]" @click="$broadcast('showEditFrame', list.id)"></a>
+	//                             <a class="pointer" v-if="value === 'seatsName'" v-text="list[value]" @click="$broadcast('showEditSeats', list.id)"></a>
 	//                         </td>
 	//
 	//                         <td v-for="value in valueArr" :title="list[value]" v-text="list[value]" v-if="value !== 'idcName' && value !== 'frameName' && value !== 'seatsName'">
@@ -1410,7 +1410,7 @@ webpackJsonp([1],Array(26).concat([
 	//         <div slot="modal-header" class="modal-header">
 	//             <h4 class="modal-title">新增机房</h4>
 	//         </div>
-	//         <div slot="modal-body" class="modal-body">
+	//         <div slot="modal-body" class="modal-body mh500">
 	//             <form class="form-horizontal clearfix">
 	//                 <div class="col-sm-6">
 	//                     <div class="form-group">
@@ -1556,12 +1556,11 @@ webpackJsonp([1],Array(26).concat([
 	            this.$http({
 	                url: '/idc/room/add/',
 	                method: 'POST',
-	                data: origin
+	                data: this.$data
 	            }).then(function (response) {
 	                if (response.data.code === 200) {
-	                    _this.$data = (0, _assign2.default)({}, init);
-	
 	                    _this.creatModal = false;
+	                    _this.$data = (0, _assign2.default)({}, init);
 	
 	                    _this.$dispatch('refresh');
 	                    _this.$dispatch('show-success');
@@ -2436,7 +2435,7 @@ webpackJsonp([1],Array(26).concat([
 /* 112 */
 /***/ function(module, exports) {
 
-	module.exports = "\n    <modal :show.sync=\"creatModal\" effect=\"fade\" width=\"950px\" _v-0af9e93d=\"\">\n        <div slot=\"modal-header\" class=\"modal-header\" _v-0af9e93d=\"\">\n            <h4 class=\"modal-title\" _v-0af9e93d=\"\">新增机房</h4>\n        </div>\n        <div slot=\"modal-body\" class=\"modal-body\" _v-0af9e93d=\"\">\n            <form class=\"form-horizontal clearfix\" _v-0af9e93d=\"\">\n                <div class=\"col-sm-6\" _v-0af9e93d=\"\">\n                    <div class=\"form-group\" _v-0af9e93d=\"\">\n                        <label class=\"control-label col-sm-4\" _v-0af9e93d=\"\">名称：<span class=\"text-danger\" _v-0af9e93d=\"\">*</span></label>\n                        <div class=\"col-sm-8\" _v-0af9e93d=\"\">\n                            <input type=\"text\" class=\"form-control\" v-model=\"idcName\" _v-0af9e93d=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-0af9e93d=\"\">\n                        <label class=\"control-label col-sm-4\" _v-0af9e93d=\"\">地址：<span class=\"text-danger\" _v-0af9e93d=\"\">*</span></label>\n                        <div class=\"col-sm-8\" _v-0af9e93d=\"\">\n                            <input type=\"text\" class=\"form-control\" v-model=\"idcAddress\" _v-0af9e93d=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group input-box\" _v-0af9e93d=\"\">\n                        <label class=\"control-label col-sm-4\" _v-0af9e93d=\"\">运营商：<span class=\"text-danger\" _v-0af9e93d=\"\">*</span></label>\n                        <div class=\"col-sm-8\" _v-0af9e93d=\"\">\n                            <v-select :value.sync=\"operator\" :options=\"operators\" placeholder=\"请选择\" _v-0af9e93d=\"\">\n                            </v-select>\n                        </div>\n                    </div>\n                    <div class=\"form-group input-box\" _v-0af9e93d=\"\">\n                        <label class=\"control-label col-sm-4\" _v-0af9e93d=\"\">业务类型：<span class=\"text-danger\" _v-0af9e93d=\"\">*</span></label>\n                        <div class=\"col-sm-8\" _v-0af9e93d=\"\">\n                            <v-select :value.sync=\"productType\" :options=\"productTypes\" placeholder=\"请选择\" _v-0af9e93d=\"\">\n                            </v-select>\n                        </div>\n                    </div>\n                    <div class=\"form-group input-box\" _v-0af9e93d=\"\">\n                        <label class=\"control-label col-sm-4\" _v-0af9e93d=\"\">城市：<span class=\"text-danger\" _v-0af9e93d=\"\">*</span></label>\n                        <div class=\"col-sm-4 pr0\" _v-0af9e93d=\"\">\n                            <v-select :value.sync=\"city1\" :options=\"cityArr1\" placeholder=\"请选择\" _v-0af9e93d=\"\">\n                            </v-select>\n                        </div>\n                        <div class=\"col-sm-4 pl0\" _v-0af9e93d=\"\">\n                            <v-select :value.sync=\"city2\" :options=\"cityArr2\" placeholder=\"请选择\" _v-0af9e93d=\"\">\n                            </v-select>\n                        </div>\n                    </div>\n                    <div class=\"form-group input-box\" _v-0af9e93d=\"\">\n                        <label class=\"control-label col-sm-4\" _v-0af9e93d=\"\">状态：<span class=\"text-danger\" _v-0af9e93d=\"\">*</span></label>\n                        <div class=\"col-sm-8\" _v-0af9e93d=\"\">\n                            <v-select :value.sync=\"status\" :options=\"statusArr\" placeholder=\"请选择\" _v-0af9e93d=\"\">\n                            </v-select>\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-0af9e93d=\"\">\n                        <label class=\"control-label col-sm-4\" _v-0af9e93d=\"\">客服电话：</label>\n                        <div class=\"col-sm-8\" _v-0af9e93d=\"\">\n                            <input type=\"text\" class=\"form-control\" v-model=\"phone\" _v-0af9e93d=\"\">\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-sm-6\" _v-0af9e93d=\"\">\n                    <div class=\"form-group\" _v-0af9e93d=\"\">\n                        <label class=\"control-label col-sm-4\" _v-0af9e93d=\"\">服务经理：</label>\n                        <div class=\"col-sm-8\" _v-0af9e93d=\"\">\n                            <input type=\"text\" class=\"form-control\" v-model=\"bossName\" _v-0af9e93d=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-0af9e93d=\"\">\n                        <label class=\"control-label col-sm-4\" _v-0af9e93d=\"\">服务经理电话：</label>\n                        <div class=\"col-sm-8\" _v-0af9e93d=\"\">\n                            <input type=\"text\" class=\"form-control\" v-model=\"bossPhone\" _v-0af9e93d=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-0af9e93d=\"\">\n                        <label class=\"control-label col-sm-4\" _v-0af9e93d=\"\">服务经理邮箱：</label>\n                        <div class=\"col-sm-8\" _v-0af9e93d=\"\">\n                            <input type=\"text\" class=\"form-control\" v-model=\"bossMail\" _v-0af9e93d=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-0af9e93d=\"\">\n                        <label class=\"control-label col-sm-4\" _v-0af9e93d=\"\">技术联系人：</label>\n                        <div class=\"col-sm-8\" _v-0af9e93d=\"\">\n                            <input type=\"text\" class=\"form-control\" v-model=\"TechName\" _v-0af9e93d=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-0af9e93d=\"\">\n                        <label class=\"control-label col-sm-4\" _v-0af9e93d=\"\">技术联系人电话：</label>\n                        <div class=\"col-sm-8\" _v-0af9e93d=\"\">\n                            <input type=\"text\" class=\"form-control\" v-model=\"TechPhone\" _v-0af9e93d=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-0af9e93d=\"\">\n                        <label class=\"control-label col-sm-4\" _v-0af9e93d=\"\">技术联系人邮箱：</label>\n                        <div class=\"col-sm-8\" _v-0af9e93d=\"\">\n                            <input type=\"text\" class=\"form-control\" v-model=\"TechMail\" _v-0af9e93d=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-0af9e93d=\"\">\n                        <label class=\"control-label col-sm-4\" _v-0af9e93d=\"\">备注：</label>\n                        <div class=\"col-sm-8\" _v-0af9e93d=\"\">\n                            <input type=\"text\" class=\"form-control\" v-model=\"remark\" _v-0af9e93d=\"\">\n                        </div>\n                    </div>\n                </div>\n            </form>\n        </div>\n        <div slot=\"modal-footer\" class=\"modal-footer\" _v-0af9e93d=\"\">\n            <button type=\"button\" class=\"btn btn-default\" @click=\"saveFn\" :disabled=\"idcName.trim() &amp;&amp; idcAddress.trim() &amp;&amp; operator &amp;&amp; productType &amp;&amp; city1 &amp;&amp; city2 &amp;&amp; status ? false : true\" _v-0af9e93d=\"\">保存</button>\n            <button type=\"button\" class=\"btn btn-default\" @click=\"creatModal = false\" _v-0af9e93d=\"\">取消</button>\n        </div>\n    </modal>\n";
+	module.exports = "\n    <modal :show.sync=\"creatModal\" effect=\"fade\" width=\"950px\" _v-0af9e93d=\"\">\n        <div slot=\"modal-header\" class=\"modal-header\" _v-0af9e93d=\"\">\n            <h4 class=\"modal-title\" _v-0af9e93d=\"\">新增机房</h4>\n        </div>\n        <div slot=\"modal-body\" class=\"modal-body mh500\" _v-0af9e93d=\"\">\n            <form class=\"form-horizontal clearfix\" _v-0af9e93d=\"\">\n                <div class=\"col-sm-6\" _v-0af9e93d=\"\">\n                    <div class=\"form-group\" _v-0af9e93d=\"\">\n                        <label class=\"control-label col-sm-4\" _v-0af9e93d=\"\">名称：<span class=\"text-danger\" _v-0af9e93d=\"\">*</span></label>\n                        <div class=\"col-sm-8\" _v-0af9e93d=\"\">\n                            <input type=\"text\" class=\"form-control\" v-model=\"idcName\" _v-0af9e93d=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-0af9e93d=\"\">\n                        <label class=\"control-label col-sm-4\" _v-0af9e93d=\"\">地址：<span class=\"text-danger\" _v-0af9e93d=\"\">*</span></label>\n                        <div class=\"col-sm-8\" _v-0af9e93d=\"\">\n                            <input type=\"text\" class=\"form-control\" v-model=\"idcAddress\" _v-0af9e93d=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group input-box\" _v-0af9e93d=\"\">\n                        <label class=\"control-label col-sm-4\" _v-0af9e93d=\"\">运营商：<span class=\"text-danger\" _v-0af9e93d=\"\">*</span></label>\n                        <div class=\"col-sm-8\" _v-0af9e93d=\"\">\n                            <v-select :value.sync=\"operator\" :options=\"operators\" placeholder=\"请选择\" _v-0af9e93d=\"\">\n                            </v-select>\n                        </div>\n                    </div>\n                    <div class=\"form-group input-box\" _v-0af9e93d=\"\">\n                        <label class=\"control-label col-sm-4\" _v-0af9e93d=\"\">业务类型：<span class=\"text-danger\" _v-0af9e93d=\"\">*</span></label>\n                        <div class=\"col-sm-8\" _v-0af9e93d=\"\">\n                            <v-select :value.sync=\"productType\" :options=\"productTypes\" placeholder=\"请选择\" _v-0af9e93d=\"\">\n                            </v-select>\n                        </div>\n                    </div>\n                    <div class=\"form-group input-box\" _v-0af9e93d=\"\">\n                        <label class=\"control-label col-sm-4\" _v-0af9e93d=\"\">城市：<span class=\"text-danger\" _v-0af9e93d=\"\">*</span></label>\n                        <div class=\"col-sm-4 pr0\" _v-0af9e93d=\"\">\n                            <v-select :value.sync=\"city1\" :options=\"cityArr1\" placeholder=\"请选择\" _v-0af9e93d=\"\">\n                            </v-select>\n                        </div>\n                        <div class=\"col-sm-4 pl0\" _v-0af9e93d=\"\">\n                            <v-select :value.sync=\"city2\" :options=\"cityArr2\" placeholder=\"请选择\" _v-0af9e93d=\"\">\n                            </v-select>\n                        </div>\n                    </div>\n                    <div class=\"form-group input-box\" _v-0af9e93d=\"\">\n                        <label class=\"control-label col-sm-4\" _v-0af9e93d=\"\">状态：<span class=\"text-danger\" _v-0af9e93d=\"\">*</span></label>\n                        <div class=\"col-sm-8\" _v-0af9e93d=\"\">\n                            <v-select :value.sync=\"status\" :options=\"statusArr\" placeholder=\"请选择\" _v-0af9e93d=\"\">\n                            </v-select>\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-0af9e93d=\"\">\n                        <label class=\"control-label col-sm-4\" _v-0af9e93d=\"\">客服电话：</label>\n                        <div class=\"col-sm-8\" _v-0af9e93d=\"\">\n                            <input type=\"text\" class=\"form-control\" v-model=\"phone\" _v-0af9e93d=\"\">\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-sm-6\" _v-0af9e93d=\"\">\n                    <div class=\"form-group\" _v-0af9e93d=\"\">\n                        <label class=\"control-label col-sm-4\" _v-0af9e93d=\"\">服务经理：</label>\n                        <div class=\"col-sm-8\" _v-0af9e93d=\"\">\n                            <input type=\"text\" class=\"form-control\" v-model=\"bossName\" _v-0af9e93d=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-0af9e93d=\"\">\n                        <label class=\"control-label col-sm-4\" _v-0af9e93d=\"\">服务经理电话：</label>\n                        <div class=\"col-sm-8\" _v-0af9e93d=\"\">\n                            <input type=\"text\" class=\"form-control\" v-model=\"bossPhone\" _v-0af9e93d=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-0af9e93d=\"\">\n                        <label class=\"control-label col-sm-4\" _v-0af9e93d=\"\">服务经理邮箱：</label>\n                        <div class=\"col-sm-8\" _v-0af9e93d=\"\">\n                            <input type=\"text\" class=\"form-control\" v-model=\"bossMail\" _v-0af9e93d=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-0af9e93d=\"\">\n                        <label class=\"control-label col-sm-4\" _v-0af9e93d=\"\">技术联系人：</label>\n                        <div class=\"col-sm-8\" _v-0af9e93d=\"\">\n                            <input type=\"text\" class=\"form-control\" v-model=\"TechName\" _v-0af9e93d=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-0af9e93d=\"\">\n                        <label class=\"control-label col-sm-4\" _v-0af9e93d=\"\">技术联系人电话：</label>\n                        <div class=\"col-sm-8\" _v-0af9e93d=\"\">\n                            <input type=\"text\" class=\"form-control\" v-model=\"TechPhone\" _v-0af9e93d=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-0af9e93d=\"\">\n                        <label class=\"control-label col-sm-4\" _v-0af9e93d=\"\">技术联系人邮箱：</label>\n                        <div class=\"col-sm-8\" _v-0af9e93d=\"\">\n                            <input type=\"text\" class=\"form-control\" v-model=\"TechMail\" _v-0af9e93d=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-0af9e93d=\"\">\n                        <label class=\"control-label col-sm-4\" _v-0af9e93d=\"\">备注：</label>\n                        <div class=\"col-sm-8\" _v-0af9e93d=\"\">\n                            <input type=\"text\" class=\"form-control\" v-model=\"remark\" _v-0af9e93d=\"\">\n                        </div>\n                    </div>\n                </div>\n            </form>\n        </div>\n        <div slot=\"modal-footer\" class=\"modal-footer\" _v-0af9e93d=\"\">\n            <button type=\"button\" class=\"btn btn-default\" @click=\"saveFn\" :disabled=\"idcName.trim() &amp;&amp; idcAddress.trim() &amp;&amp; operator &amp;&amp; productType &amp;&amp; city1 &amp;&amp; city2 &amp;&amp; status ? false : true\" _v-0af9e93d=\"\">保存</button>\n            <button type=\"button\" class=\"btn btn-default\" @click=\"creatModal = false\" _v-0af9e93d=\"\">取消</button>\n        </div>\n    </modal>\n";
 
 /***/ },
 /* 113 */
@@ -2532,7 +2531,7 @@ webpackJsonp([1],Array(26).concat([
 	//         <div slot="modal-header" class="modal-header">
 	//             <h4 class="modal-title">修改机房</h4>
 	//         </div>
-	//         <div slot="modal-body" class="modal-body">
+	//         <div slot="modal-body" class="modal-body mh500">
 	//             <form class="form-horizontal clearfix">
 	//                 <div class="col-sm-6">
 	//                     <div class="form-group">
@@ -2645,7 +2644,7 @@ webpackJsonp([1],Array(26).concat([
 	
 	var origin = {
 	    editRoomModal: false,
-	    idNum: null,
+	    id: null,
 	    idcName: '',
 	    idcAddress: '',
 	    operator: '',
@@ -2677,7 +2676,7 @@ webpackJsonp([1],Array(26).concat([
 	        createFrame: function createFrame() {
 	            var _this = this;
 	
-	            this.$dispatch('showCreateFrame', _this.idNum);
+	            this.$dispatch('showCreateFrame', _this.id);
 	        },
 	
 	
@@ -2736,19 +2735,16 @@ webpackJsonp([1],Array(26).concat([
 	        'showEditRoom': function showEditRoom(param) {
 	            var _this4 = this;
 	
-	            this.idNum = param;
-	
 	            this.getRoomCreate();
 	
 	            this.$http({
-	                url: '/idc/room/get/?id=' + this.idNum,
+	                url: '/idc/room/get/?id=' + param,
 	                method: 'GET'
 	            }).then(function (response) {
 	                if (response.data.code === 200) {
 	                    _this4.$data = (0, _assign2.default)({}, origin, response.data);
 	
-	                    _this4.getCity(_this4.city1);
-	
+	                    _this4.id = param;
 	                    _this4.editRoomModal = true;
 	                } else {
 	                    _this4.$dispatch('show-error');
@@ -2767,6 +2763,11 @@ webpackJsonp([1],Array(26).concat([
 	                this.city2 = '';
 	                this.cityArr2 = [];
 	            }
+	        },
+	        'editRoomModal': function editRoomModal(newVal) {
+	            if (!newVal) {
+	                this.city1 = '';
+	            }
 	        }
 	    }
 	};
@@ -2780,7 +2781,7 @@ webpackJsonp([1],Array(26).concat([
 /* 117 */
 /***/ function(module, exports) {
 
-	module.exports = "\n    <modal :show.sync=\"editRoomModal\" effect=\"fade\" width=\"950px\" _v-cae1086a=\"\">\n        <div slot=\"modal-header\" class=\"modal-header\" _v-cae1086a=\"\">\n            <h4 class=\"modal-title\" _v-cae1086a=\"\">修改机房</h4>\n        </div>\n        <div slot=\"modal-body\" class=\"modal-body\" _v-cae1086a=\"\">\n            <form class=\"form-horizontal clearfix\" _v-cae1086a=\"\">\n                <div class=\"col-sm-6\" _v-cae1086a=\"\">\n                    <div class=\"form-group\" _v-cae1086a=\"\">\n                        <label class=\"control-label col-sm-4\" _v-cae1086a=\"\">名称：<span class=\"text-danger\" _v-cae1086a=\"\">*</span></label>\n                        <div class=\"col-sm-8\" _v-cae1086a=\"\">\n                            <input type=\"text\" class=\"form-control\" v-model=\"idcName\" _v-cae1086a=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-cae1086a=\"\">\n                        <label class=\"control-label col-sm-4\" _v-cae1086a=\"\">地址：<span class=\"text-danger\" _v-cae1086a=\"\">*</span></label>\n                        <div class=\"col-sm-8\" _v-cae1086a=\"\">\n                            <input type=\"text\" class=\"form-control\" v-model=\"idcAddress\" _v-cae1086a=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group input-box\" _v-cae1086a=\"\">\n                        <label class=\"control-label col-sm-4\" _v-cae1086a=\"\">运营商：<span class=\"text-danger\" _v-cae1086a=\"\">*</span></label>\n                        <div class=\"col-sm-8\" _v-cae1086a=\"\">\n                            <v-select :value.sync=\"operator\" :options=\"operators\" placeholder=\"请选择\" _v-cae1086a=\"\">\n                            </v-select>\n                        </div>\n                    </div>\n                    <div class=\"form-group input-box\" _v-cae1086a=\"\">\n                        <label class=\"control-label col-sm-4\" _v-cae1086a=\"\">业务类型：<span class=\"text-danger\" _v-cae1086a=\"\">*</span></label>\n                        <div class=\"col-sm-8\" _v-cae1086a=\"\">\n                            <v-select :value.sync=\"productType\" :options=\"productTypes\" placeholder=\"请选择\" _v-cae1086a=\"\">\n                            </v-select>\n                        </div>\n                    </div>\n                    <div class=\"form-group input-box\" _v-cae1086a=\"\">\n                        <label class=\"control-label col-sm-4\" _v-cae1086a=\"\">城市：<span class=\"text-danger\" _v-cae1086a=\"\">*</span></label>\n                        <div class=\"col-sm-4 pr0\" _v-cae1086a=\"\">\n                            <v-select :value.sync=\"city1\" :options=\"cityArr1\" placeholder=\"请选择\" _v-cae1086a=\"\">\n                            </v-select>\n                        </div>\n                        <div class=\"col-sm-4 pl0\" _v-cae1086a=\"\">\n                            <v-select :value.sync=\"city2\" :options=\"cityArr2\" placeholder=\"请选择\" _v-cae1086a=\"\">\n                            </v-select>\n                        </div>\n                    </div>\n                    <div class=\"form-group input-box\" _v-cae1086a=\"\">\n                        <label class=\"control-label col-sm-4\" _v-cae1086a=\"\">状态：<span class=\"text-danger\" _v-cae1086a=\"\">*</span></label>\n                        <div class=\"col-sm-8\" _v-cae1086a=\"\">\n                            <v-select :value.sync=\"status\" :options=\"statusArr\" placeholder=\"请选择\" _v-cae1086a=\"\">\n                            </v-select>\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-cae1086a=\"\">\n                        <label class=\"control-label col-sm-4\" _v-cae1086a=\"\">客服电话：</label>\n                        <div class=\"col-sm-8\" _v-cae1086a=\"\">\n                            <input type=\"text\" class=\"form-control\" v-model=\"phone\" _v-cae1086a=\"\">\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-sm-6\" _v-cae1086a=\"\">\n                    <div class=\"form-group\" _v-cae1086a=\"\">\n                        <label class=\"control-label col-sm-4\" _v-cae1086a=\"\">服务经理：</label>\n                        <div class=\"col-sm-8\" _v-cae1086a=\"\">\n                            <input type=\"text\" class=\"form-control\" v-model=\"bossName\" _v-cae1086a=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-cae1086a=\"\">\n                        <label class=\"control-label col-sm-4\" _v-cae1086a=\"\">服务经理电话：</label>\n                        <div class=\"col-sm-8\" _v-cae1086a=\"\">\n                            <input type=\"text\" class=\"form-control\" v-model=\"bossPhone\" _v-cae1086a=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-cae1086a=\"\">\n                        <label class=\"control-label col-sm-4\" _v-cae1086a=\"\">服务经理邮箱：</label>\n                        <div class=\"col-sm-8\" _v-cae1086a=\"\">\n                            <input type=\"text\" class=\"form-control\" v-model=\"bossMail\" _v-cae1086a=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-cae1086a=\"\">\n                        <label class=\"control-label col-sm-4\" _v-cae1086a=\"\">技术联系人：</label>\n                        <div class=\"col-sm-8\" _v-cae1086a=\"\">\n                            <input type=\"text\" class=\"form-control\" v-model=\"TechName\" _v-cae1086a=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-cae1086a=\"\">\n                        <label class=\"control-label col-sm-4\" _v-cae1086a=\"\">技术联系人电话：</label>\n                        <div class=\"col-sm-8\" _v-cae1086a=\"\">\n                            <input type=\"text\" class=\"form-control\" v-model=\"TechPhone\" _v-cae1086a=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-cae1086a=\"\">\n                        <label class=\"control-label col-sm-4\" _v-cae1086a=\"\">技术联系人邮箱：</label>\n                        <div class=\"col-sm-8\" _v-cae1086a=\"\">\n                            <input type=\"text\" class=\"form-control\" v-model=\"TechMail\" _v-cae1086a=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-cae1086a=\"\">\n                        <label class=\"control-label col-sm-4\" _v-cae1086a=\"\">备注：</label>\n                        <div class=\"col-sm-8\" _v-cae1086a=\"\">\n                            <input type=\"text\" class=\"form-control\" v-model=\"remark\" _v-cae1086a=\"\">\n                        </div>\n                    </div>\n                </div>\n            </form>\n        </div>\n        <div slot=\"modal-footer\" class=\"modal-footer\" _v-cae1086a=\"\">\n            <button type=\"button\" class=\"btn btn-default\" :disabled=\"idcName.trim() &amp;&amp; idcAddress.trim() &amp;&amp; operator &amp;&amp; productType &amp;&amp; city1 &amp;&amp; city2 &amp;&amp; status ? false : true\" @click=\"saveFn\" _v-cae1086a=\"\">保存</button>\n            <button type=\"button\" class=\"btn btn-default\" @click=\"createFrame\" _v-cae1086a=\"\">新增机架</button>\n            <button type=\"button\" class=\"btn btn-default\" @click=\"editRoomModal = false\" _v-cae1086a=\"\">取消</button>\n        </div>\n    </modal>\n";
+	module.exports = "\n    <modal :show.sync=\"editRoomModal\" effect=\"fade\" width=\"950px\" _v-cae1086a=\"\">\n        <div slot=\"modal-header\" class=\"modal-header\" _v-cae1086a=\"\">\n            <h4 class=\"modal-title\" _v-cae1086a=\"\">修改机房</h4>\n        </div>\n        <div slot=\"modal-body\" class=\"modal-body mh500\" _v-cae1086a=\"\">\n            <form class=\"form-horizontal clearfix\" _v-cae1086a=\"\">\n                <div class=\"col-sm-6\" _v-cae1086a=\"\">\n                    <div class=\"form-group\" _v-cae1086a=\"\">\n                        <label class=\"control-label col-sm-4\" _v-cae1086a=\"\">名称：<span class=\"text-danger\" _v-cae1086a=\"\">*</span></label>\n                        <div class=\"col-sm-8\" _v-cae1086a=\"\">\n                            <input type=\"text\" class=\"form-control\" v-model=\"idcName\" _v-cae1086a=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-cae1086a=\"\">\n                        <label class=\"control-label col-sm-4\" _v-cae1086a=\"\">地址：<span class=\"text-danger\" _v-cae1086a=\"\">*</span></label>\n                        <div class=\"col-sm-8\" _v-cae1086a=\"\">\n                            <input type=\"text\" class=\"form-control\" v-model=\"idcAddress\" _v-cae1086a=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group input-box\" _v-cae1086a=\"\">\n                        <label class=\"control-label col-sm-4\" _v-cae1086a=\"\">运营商：<span class=\"text-danger\" _v-cae1086a=\"\">*</span></label>\n                        <div class=\"col-sm-8\" _v-cae1086a=\"\">\n                            <v-select :value.sync=\"operator\" :options=\"operators\" placeholder=\"请选择\" _v-cae1086a=\"\">\n                            </v-select>\n                        </div>\n                    </div>\n                    <div class=\"form-group input-box\" _v-cae1086a=\"\">\n                        <label class=\"control-label col-sm-4\" _v-cae1086a=\"\">业务类型：<span class=\"text-danger\" _v-cae1086a=\"\">*</span></label>\n                        <div class=\"col-sm-8\" _v-cae1086a=\"\">\n                            <v-select :value.sync=\"productType\" :options=\"productTypes\" placeholder=\"请选择\" _v-cae1086a=\"\">\n                            </v-select>\n                        </div>\n                    </div>\n                    <div class=\"form-group input-box\" _v-cae1086a=\"\">\n                        <label class=\"control-label col-sm-4\" _v-cae1086a=\"\">城市：<span class=\"text-danger\" _v-cae1086a=\"\">*</span></label>\n                        <div class=\"col-sm-4 pr0\" _v-cae1086a=\"\">\n                            <v-select :value.sync=\"city1\" :options=\"cityArr1\" placeholder=\"请选择\" _v-cae1086a=\"\">\n                            </v-select>\n                        </div>\n                        <div class=\"col-sm-4 pl0\" _v-cae1086a=\"\">\n                            <v-select :value.sync=\"city2\" :options=\"cityArr2\" placeholder=\"请选择\" _v-cae1086a=\"\">\n                            </v-select>\n                        </div>\n                    </div>\n                    <div class=\"form-group input-box\" _v-cae1086a=\"\">\n                        <label class=\"control-label col-sm-4\" _v-cae1086a=\"\">状态：<span class=\"text-danger\" _v-cae1086a=\"\">*</span></label>\n                        <div class=\"col-sm-8\" _v-cae1086a=\"\">\n                            <v-select :value.sync=\"status\" :options=\"statusArr\" placeholder=\"请选择\" _v-cae1086a=\"\">\n                            </v-select>\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-cae1086a=\"\">\n                        <label class=\"control-label col-sm-4\" _v-cae1086a=\"\">客服电话：</label>\n                        <div class=\"col-sm-8\" _v-cae1086a=\"\">\n                            <input type=\"text\" class=\"form-control\" v-model=\"phone\" _v-cae1086a=\"\">\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-sm-6\" _v-cae1086a=\"\">\n                    <div class=\"form-group\" _v-cae1086a=\"\">\n                        <label class=\"control-label col-sm-4\" _v-cae1086a=\"\">服务经理：</label>\n                        <div class=\"col-sm-8\" _v-cae1086a=\"\">\n                            <input type=\"text\" class=\"form-control\" v-model=\"bossName\" _v-cae1086a=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-cae1086a=\"\">\n                        <label class=\"control-label col-sm-4\" _v-cae1086a=\"\">服务经理电话：</label>\n                        <div class=\"col-sm-8\" _v-cae1086a=\"\">\n                            <input type=\"text\" class=\"form-control\" v-model=\"bossPhone\" _v-cae1086a=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-cae1086a=\"\">\n                        <label class=\"control-label col-sm-4\" _v-cae1086a=\"\">服务经理邮箱：</label>\n                        <div class=\"col-sm-8\" _v-cae1086a=\"\">\n                            <input type=\"text\" class=\"form-control\" v-model=\"bossMail\" _v-cae1086a=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-cae1086a=\"\">\n                        <label class=\"control-label col-sm-4\" _v-cae1086a=\"\">技术联系人：</label>\n                        <div class=\"col-sm-8\" _v-cae1086a=\"\">\n                            <input type=\"text\" class=\"form-control\" v-model=\"TechName\" _v-cae1086a=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-cae1086a=\"\">\n                        <label class=\"control-label col-sm-4\" _v-cae1086a=\"\">技术联系人电话：</label>\n                        <div class=\"col-sm-8\" _v-cae1086a=\"\">\n                            <input type=\"text\" class=\"form-control\" v-model=\"TechPhone\" _v-cae1086a=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-cae1086a=\"\">\n                        <label class=\"control-label col-sm-4\" _v-cae1086a=\"\">技术联系人邮箱：</label>\n                        <div class=\"col-sm-8\" _v-cae1086a=\"\">\n                            <input type=\"text\" class=\"form-control\" v-model=\"TechMail\" _v-cae1086a=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-cae1086a=\"\">\n                        <label class=\"control-label col-sm-4\" _v-cae1086a=\"\">备注：</label>\n                        <div class=\"col-sm-8\" _v-cae1086a=\"\">\n                            <input type=\"text\" class=\"form-control\" v-model=\"remark\" _v-cae1086a=\"\">\n                        </div>\n                    </div>\n                </div>\n            </form>\n        </div>\n        <div slot=\"modal-footer\" class=\"modal-footer\" _v-cae1086a=\"\">\n            <button type=\"button\" class=\"btn btn-default\" :disabled=\"idcName.trim() &amp;&amp; idcAddress.trim() &amp;&amp; operator &amp;&amp; productType &amp;&amp; city1 &amp;&amp; city2 &amp;&amp; status ? false : true\" @click=\"saveFn\" _v-cae1086a=\"\">保存</button>\n            <button type=\"button\" class=\"btn btn-default\" @click=\"createFrame\" _v-cae1086a=\"\">新增机架</button>\n            <button type=\"button\" class=\"btn btn-default\" @click=\"editRoomModal = false\" _v-cae1086a=\"\">取消</button>\n        </div>\n    </modal>\n";
 
 /***/ },
 /* 118 */
@@ -2865,12 +2866,29 @@ webpackJsonp([1],Array(26).concat([
 	
 	var _Select2 = _interopRequireDefault(_Select);
 	
+	var _getters = __webpack_require__(111);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	var origin = {
+	    editFrameModal: false,
+	    roomId: null,
+	    frameId: null,
+	    frameNum: '',
+	    capacity: '',
+	    electricTotal: '',
+	    intranetTotal: '',
+	    remark: '',
+	    status: '',
+	    location: '',
+	    managementNetworkTotal: '',
+	    extranetTotal: ''
+	},
+	    init = (0, _assign2.default)({}, origin); // <!-- 新建修改机架 -->
 	// <template>
 	//     <modal :show.sync="editFrameModal" effect="fade" width="800px">
 	//         <div slot="modal-header" class="modal-header">
-	//             <h4 class="modal-title" v-text="creatId ? '新增机架' : '修改机架'"></h4>
+	//             <h4 class="modal-title" v-text="roomId !== null ? '新增机架' : '修改机架'"></h4>
 	//         </div>
 	//         <div slot="modal-body" class="modal-body">
 	//             <form class="form-horizontal clearfix">
@@ -2878,66 +2896,66 @@ webpackJsonp([1],Array(26).concat([
 	//                     <div class="form-group">
 	//                         <label class="control-label col-sm-4">机架编号：<span class="text-danger">*</span></label>
 	//                         <div class="col-sm-8">
-	//                             <input type="text" class="form-control">
+	//                             <input type="text" class="form-control" v-model="frameNum">
 	//                         </div>
 	//                     </div>
 	//                     <div class="form-group">
-	//                         <label class="control-label col-sm-4">容量：</label>
+	//                         <label class="control-label col-sm-4">容量：<span class="text-danger">*</span></label>
 	//                         <div class="col-sm-8">
-	//                             <input type="text" class="form-control">
+	//                             <input type="text" class="form-control" v-model="capacity">
 	//                         </div>
 	//                     </div>
 	//                     <div class="form-group">
 	//                         <label class="control-label col-sm-4">电流总量：</label>
 	//                         <div class="col-sm-8">
-	//                             <input type="text" class="form-control">
+	//                             <input type="text" class="form-control" v-model="electricTotal">
 	//                         </div>
 	//                     </div>
 	//                     <div class="form-group">
 	//                         <label class="control-label col-sm-4">内网总量：</label>
 	//                         <div class="col-sm-8">
-	//                             <input type="text" class="form-control">
+	//                             <input type="text" class="form-control" v-model="intranetTotal">
 	//                         </div>
 	//                     </div>
 	//                     <div class="form-group">
 	//                         <label class="control-label col-sm-4">备注：</label>
 	//                         <div class="col-sm-8">
-	//                             <input type="text" class="form-control">
+	//                             <input type="text" class="form-control" v-model="remark">
 	//                         </div>
 	//                     </div>
 	//                 </div>
 	//                 <div class="col-sm-6 input-box">
 	//                     <div class="form-group">
-	//                         <label class="control-label col-sm-4">状态：</label>
+	//                         <label class="control-label col-sm-4">状态：<span class="text-danger">*</span></label>
 	//                         <div class="col-sm-8">
 	//                             <v-select :value.sync="status" :options="statusArr" placeholder="请选择">
 	//                             </v-select>
 	//                         </div>
 	//                     </div>
 	//                     <div class="form-group">
-	//                         <label class="control-label col-sm-4">位置：</label>
+	//                         <label class="control-label col-sm-4">位置：<span class="text-danger">*</span></label>
 	//                         <div class="col-sm-8">
-	//                             <input type="text" class="form-control">
+	//                             <input type="text" class="form-control" v-model="location">
 	//                         </div>
 	//                     </div>
 	//                     <div class="form-group">
 	//                         <label class="control-label col-sm-4">管理网总量：</label>
 	//                         <div class="col-sm-8">
-	//                             <input type="text" class="form-control">
+	//                             <input type="text" class="form-control" v-model="managementNetworkTotal">
 	//                         </div>
 	//                     </div>
 	//                     <div class="form-group">
 	//                         <label class="control-label col-sm-4">外网总量：</label>
 	//                         <div class="col-sm-8">
-	//                             <input type="text" class="form-control">
+	//                             <input type="text" class="form-control" v-model="extranetTotal">
 	//                         </div>
 	//                     </div>
 	//                 </div>
 	//             </form>
 	//         </div>
 	//         <div slot="modal-footer" class="modal-footer">
-	//             <button type="button" class="btn btn-default">保存</button>
-	//             <button type="button" class="btn btn-default" v-if="editId" @click="createSeats">新增机位</button>
+	//             <button type="button" class="btn btn-default" @click="saveFn" :disabled="frameNum.trim() && status && capacity.trim() && location.trim() ? false : true">保存</button>
+	//             <button type="button" class="btn btn-default" v-if="frameId" @click="createSeats">新增机位</button>
 	//             <button type="button" class="btn btn-default" @click='editFrameModal = false'>取消</button>
 	//         </div>
 	//     </modal>
@@ -2946,15 +2964,6 @@ webpackJsonp([1],Array(26).concat([
 	// <script>
 	
 	
-	var origin = {
-	    editFrameModal: false,
-	    creatId: null,
-	    editId: null,
-	    statusArr: [],
-	    status: ''
-	},
-	    init = (0, _assign2.default)({}, origin);
-	
 	exports.default = {
 	    data: function data() {
 	        return origin;
@@ -2962,29 +2971,89 @@ webpackJsonp([1],Array(26).concat([
 	
 	    methods: {
 	
-	        // 新增机位
+	        // 保存机架
 	
+	        saveFn: function saveFn() {
+	            var _this2 = this;
+	
+	            if (this.frameId === null) {
+	                this.$http({
+	                    url: '/idc/shelf/add/',
+	                    method: 'POST',
+	                    data: this.$data
+	                }).then(function (response) {
+	                    if (response.data.code === 200) {
+	                        _this2.$data = (0, _assign2.default)({}, origin, init);
+	
+	                        _this2.editFrameModal = false;
+	
+	                        _this2.$dispatch('refresh');
+	                        _this2.$dispatch('show-success');
+	                    } else {
+	                        _this2.$dispatch('show-error');
+	                    }
+	                });
+	            }
+	
+	            if (this.roomId === null) {
+	                this.$http({
+	                    url: '/idc/shelf/edit/',
+	                    method: 'POST',
+	                    data: this.$data
+	                }).then(function (response) {
+	                    if (response.data.code === 200) {
+	                        _this2.$data = (0, _assign2.default)({}, origin, init);
+	                        _this2.editFrameModal = false;
+	
+	                        _this2.$dispatch('refresh');
+	                        _this2.$dispatch('show-success');
+	                    } else {
+	                        _this2.$dispatch('show-error');
+	                    }
+	                });
+	            }
+	        },
+	
+	
+	        // 新增机位
 	        createSeats: function createSeats() {
 	            var _this = this;
 	
-	            this.$dispatch('showCreateSeats', _this.creatId);
+	            this.$dispatch('showCreateSeats', _this.frameId);
 	        }
 	    },
 	    components: {
 	        modal: _vueStrap.modal,
 	        vSelect: _Select2.default
 	    },
+	    vuex: {
+	        getters: {
+	            statusArr: _getters.statusArr
+	        }
+	    },
 	    events: {
 	        'showEditFrame': function showEditFrame(param) {
+	            var _this3 = this;
+	
 	            this.$data = (0, _assign2.default)({}, origin, init);
 	
-	            this.editId = param;
-	            this.editFrameModal = true;
+	            this.$http({
+	                url: '/idc/shelf/get/?id=' + param,
+	                method: 'GET'
+	            }).then(function (response) {
+	                if (response.data.code === 200) {
+	                    _this3.$data = (0, _assign2.default)({}, origin, response.data);
+	
+	                    _this3.frameId = param;
+	                    _this3.editFrameModal = true;
+	                } else {
+	                    _this3.$dispatch('show-error');
+	                }
+	            });
 	        },
 	        'showCreateFrame': function showCreateFrame(param) {
 	            this.$data = (0, _assign2.default)({}, origin, init);
-	
-	            this.creatId = param;
+	            this.roomId = param;
 	            this.editFrameModal = true;
 	        }
 	    }
@@ -2999,7 +3068,7 @@ webpackJsonp([1],Array(26).concat([
 /* 122 */
 /***/ function(module, exports) {
 
-	module.exports = "\n    <modal :show.sync=\"editFrameModal\" effect=\"fade\" width=\"800px\" _v-1a1d6aad=\"\">\n        <div slot=\"modal-header\" class=\"modal-header\" _v-1a1d6aad=\"\">\n            <h4 class=\"modal-title\" v-text=\"creatId ? '新增机架' : '修改机架'\" _v-1a1d6aad=\"\"></h4>\n        </div>\n        <div slot=\"modal-body\" class=\"modal-body\" _v-1a1d6aad=\"\">\n            <form class=\"form-horizontal clearfix\" _v-1a1d6aad=\"\">\n                <div class=\"col-sm-6\" _v-1a1d6aad=\"\">\n                    <div class=\"form-group\" _v-1a1d6aad=\"\">\n                        <label class=\"control-label col-sm-4\" _v-1a1d6aad=\"\">机架编号：<span class=\"text-danger\" _v-1a1d6aad=\"\">*</span></label>\n                        <div class=\"col-sm-8\" _v-1a1d6aad=\"\">\n                            <input type=\"text\" class=\"form-control\" _v-1a1d6aad=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-1a1d6aad=\"\">\n                        <label class=\"control-label col-sm-4\" _v-1a1d6aad=\"\">容量：</label>\n                        <div class=\"col-sm-8\" _v-1a1d6aad=\"\">\n                            <input type=\"text\" class=\"form-control\" _v-1a1d6aad=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-1a1d6aad=\"\">\n                        <label class=\"control-label col-sm-4\" _v-1a1d6aad=\"\">电流总量：</label>\n                        <div class=\"col-sm-8\" _v-1a1d6aad=\"\">\n                            <input type=\"text\" class=\"form-control\" _v-1a1d6aad=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-1a1d6aad=\"\">\n                        <label class=\"control-label col-sm-4\" _v-1a1d6aad=\"\">内网总量：</label>\n                        <div class=\"col-sm-8\" _v-1a1d6aad=\"\">\n                            <input type=\"text\" class=\"form-control\" _v-1a1d6aad=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-1a1d6aad=\"\">\n                        <label class=\"control-label col-sm-4\" _v-1a1d6aad=\"\">备注：</label>\n                        <div class=\"col-sm-8\" _v-1a1d6aad=\"\">\n                            <input type=\"text\" class=\"form-control\" _v-1a1d6aad=\"\">\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-sm-6 input-box\" _v-1a1d6aad=\"\">\n                    <div class=\"form-group\" _v-1a1d6aad=\"\">\n                        <label class=\"control-label col-sm-4\" _v-1a1d6aad=\"\">状态：</label>\n                        <div class=\"col-sm-8\" _v-1a1d6aad=\"\">\n                            <v-select :value.sync=\"status\" :options=\"statusArr\" placeholder=\"请选择\" _v-1a1d6aad=\"\">\n                            </v-select>\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-1a1d6aad=\"\">\n                        <label class=\"control-label col-sm-4\" _v-1a1d6aad=\"\">位置：</label>\n                        <div class=\"col-sm-8\" _v-1a1d6aad=\"\">\n                            <input type=\"text\" class=\"form-control\" _v-1a1d6aad=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-1a1d6aad=\"\">\n                        <label class=\"control-label col-sm-4\" _v-1a1d6aad=\"\">管理网总量：</label>\n                        <div class=\"col-sm-8\" _v-1a1d6aad=\"\">\n                            <input type=\"text\" class=\"form-control\" _v-1a1d6aad=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-1a1d6aad=\"\">\n                        <label class=\"control-label col-sm-4\" _v-1a1d6aad=\"\">外网总量：</label>\n                        <div class=\"col-sm-8\" _v-1a1d6aad=\"\">\n                            <input type=\"text\" class=\"form-control\" _v-1a1d6aad=\"\">\n                        </div>\n                    </div>\n                </div>\n            </form>\n        </div>\n        <div slot=\"modal-footer\" class=\"modal-footer\" _v-1a1d6aad=\"\">\n            <button type=\"button\" class=\"btn btn-default\" _v-1a1d6aad=\"\">保存</button>\n            <button type=\"button\" class=\"btn btn-default\" v-if=\"editId\" @click=\"createSeats\" _v-1a1d6aad=\"\">新增机位</button>\n            <button type=\"button\" class=\"btn btn-default\" @click=\"editFrameModal = false\" _v-1a1d6aad=\"\">取消</button>\n        </div>\n    </modal>\n";
+	module.exports = "\n    <modal :show.sync=\"editFrameModal\" effect=\"fade\" width=\"800px\" _v-1a1d6aad=\"\">\n        <div slot=\"modal-header\" class=\"modal-header\" _v-1a1d6aad=\"\">\n            <h4 class=\"modal-title\" v-text=\"roomId !== null ? '新增机架' : '修改机架'\" _v-1a1d6aad=\"\"></h4>\n        </div>\n        <div slot=\"modal-body\" class=\"modal-body\" _v-1a1d6aad=\"\">\n            <form class=\"form-horizontal clearfix\" _v-1a1d6aad=\"\">\n                <div class=\"col-sm-6\" _v-1a1d6aad=\"\">\n                    <div class=\"form-group\" _v-1a1d6aad=\"\">\n                        <label class=\"control-label col-sm-4\" _v-1a1d6aad=\"\">机架编号：<span class=\"text-danger\" _v-1a1d6aad=\"\">*</span></label>\n                        <div class=\"col-sm-8\" _v-1a1d6aad=\"\">\n                            <input type=\"text\" class=\"form-control\" v-model=\"frameNum\" _v-1a1d6aad=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-1a1d6aad=\"\">\n                        <label class=\"control-label col-sm-4\" _v-1a1d6aad=\"\">容量：<span class=\"text-danger\" _v-1a1d6aad=\"\">*</span></label>\n                        <div class=\"col-sm-8\" _v-1a1d6aad=\"\">\n                            <input type=\"text\" class=\"form-control\" v-model=\"capacity\" _v-1a1d6aad=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-1a1d6aad=\"\">\n                        <label class=\"control-label col-sm-4\" _v-1a1d6aad=\"\">电流总量：</label>\n                        <div class=\"col-sm-8\" _v-1a1d6aad=\"\">\n                            <input type=\"text\" class=\"form-control\" v-model=\"electricTotal\" _v-1a1d6aad=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-1a1d6aad=\"\">\n                        <label class=\"control-label col-sm-4\" _v-1a1d6aad=\"\">内网总量：</label>\n                        <div class=\"col-sm-8\" _v-1a1d6aad=\"\">\n                            <input type=\"text\" class=\"form-control\" v-model=\"intranetTotal\" _v-1a1d6aad=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-1a1d6aad=\"\">\n                        <label class=\"control-label col-sm-4\" _v-1a1d6aad=\"\">备注：</label>\n                        <div class=\"col-sm-8\" _v-1a1d6aad=\"\">\n                            <input type=\"text\" class=\"form-control\" v-model=\"remark\" _v-1a1d6aad=\"\">\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-sm-6 input-box\" _v-1a1d6aad=\"\">\n                    <div class=\"form-group\" _v-1a1d6aad=\"\">\n                        <label class=\"control-label col-sm-4\" _v-1a1d6aad=\"\">状态：<span class=\"text-danger\" _v-1a1d6aad=\"\">*</span></label>\n                        <div class=\"col-sm-8\" _v-1a1d6aad=\"\">\n                            <v-select :value.sync=\"status\" :options=\"statusArr\" placeholder=\"请选择\" _v-1a1d6aad=\"\">\n                            </v-select>\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-1a1d6aad=\"\">\n                        <label class=\"control-label col-sm-4\" _v-1a1d6aad=\"\">位置：<span class=\"text-danger\" _v-1a1d6aad=\"\">*</span></label>\n                        <div class=\"col-sm-8\" _v-1a1d6aad=\"\">\n                            <input type=\"text\" class=\"form-control\" v-model=\"location\" _v-1a1d6aad=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-1a1d6aad=\"\">\n                        <label class=\"control-label col-sm-4\" _v-1a1d6aad=\"\">管理网总量：</label>\n                        <div class=\"col-sm-8\" _v-1a1d6aad=\"\">\n                            <input type=\"text\" class=\"form-control\" v-model=\"managementNetworkTotal\" _v-1a1d6aad=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-1a1d6aad=\"\">\n                        <label class=\"control-label col-sm-4\" _v-1a1d6aad=\"\">外网总量：</label>\n                        <div class=\"col-sm-8\" _v-1a1d6aad=\"\">\n                            <input type=\"text\" class=\"form-control\" v-model=\"extranetTotal\" _v-1a1d6aad=\"\">\n                        </div>\n                    </div>\n                </div>\n            </form>\n        </div>\n        <div slot=\"modal-footer\" class=\"modal-footer\" _v-1a1d6aad=\"\">\n            <button type=\"button\" class=\"btn btn-default\" @click=\"saveFn\" :disabled=\"frameNum.trim() &amp;&amp; status &amp;&amp; capacity.trim() &amp;&amp; location.trim() ? false : true\" _v-1a1d6aad=\"\">保存</button>\n            <button type=\"button\" class=\"btn btn-default\" v-if=\"frameId\" @click=\"createSeats\" _v-1a1d6aad=\"\">新增机位</button>\n            <button type=\"button\" class=\"btn btn-default\" @click=\"editFrameModal = false\" _v-1a1d6aad=\"\">取消</button>\n        </div>\n    </modal>\n";
 
 /***/ },
 /* 123 */
@@ -3084,54 +3153,67 @@ webpackJsonp([1],Array(26).concat([
 	
 	var _Select2 = _interopRequireDefault(_Select);
 	
+	var _getters = __webpack_require__(111);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	var origin = {
+	    editSeatsModal: false,
+	    frameId: null,
+	    seatsId: null,
+	    seatsNum: '',
+	    startLocation: '',
+	    endLocation: '',
+	    status: '',
+	    remark: ''
+	},
+	    init = (0, _assign2.default)({}, origin); // <!-- 新建修改机位 -->
 	// <template>
 	//     <modal :show.sync="editSeatsModal" effect="fade" width="800px">
 	//         <div slot="modal-header" class="modal-header">
-	//             <h4 class="modal-title" v-text="creatId ? '新增机位' : '修改机位'"></h4>
+	//             <h4 class="modal-title" v-text="frameId !== null ? '新增机位' : '修改机位'"></h4>
 	//         </div>
 	//         <div slot="modal-body" class="modal-body">
 	//             <form class="form-horizontal clearfix">
 	//                 <div class="col-sm-6">
 	//                     <div class="form-group">
-	//                         <label class="control-label col-sm-4">机位编号：</label>
+	//                         <label class="control-label col-sm-4">机位编号：<span class="text-danger">*</span></label>
 	//                         <div class="col-sm-8">
-	//                             <input type="text" class="form-control" value="">
+	//                             <input type="text" class="form-control" v-model="seatsNum">
 	//                         </div>
 	//                     </div>
 	//                     <div class="form-group">
-	//                         <label class="control-label col-sm-4">开始位置：</label>
+	//                         <label class="control-label col-sm-4">开始位置：<span class="text-danger">*</span></label>
 	//                         <div class="col-sm-8">
-	//                             <input type="text" class="form-control" value="">
+	//                             <input type="text" class="form-control" v-model="startLocation">
 	//                         </div>
 	//                     </div>
 	//                     <div class="form-group">
 	//                         <label class="control-label col-sm-4">备注：</label>
 	//                         <div class="col-sm-8">
-	//                             <input type="text" class="form-control" value="">
+	//                             <input type="text" class="form-control" v-model="remark">
 	//                         </div>
 	//                     </div>
 	//                 </div>
 	//                 <div class="col-sm-6">
 	//                     <div class="form-group input-box">
-	//                         <label class="control-label col-sm-4">状态：</label>
+	//                         <label class="control-label col-sm-4">状态：<span class="text-danger">*</span></label>
 	//                         <div class="col-sm-8">
 	//                             <v-select :value.sync="status" :options="statusArr" placeholder="请选择">
 	//                             </v-select>
 	//                         </div>
 	//                     </div>
 	//                     <div class="form-group">
-	//                         <label class="control-label col-sm-4">结束位置：</label>
+	//                         <label class="control-label col-sm-4">结束位置：<span class="text-danger">*</span></label>
 	//                         <div class="col-sm-8">
-	//                             <input type="text" class="form-control" value="">
+	//                             <input type="text" class="form-control" v-model="endLocation">
 	//                         </div>
 	//                     </div>
 	//                 </div>
 	//             </form>
 	//         </div>
 	//         <div slot="modal-footer" class="modal-footer">
-	//             <button type="button" class="btn btn-default">保存</button>
+	//             <button type="button" class="btn btn-default" @click="saveFn" :disabled="seatsNum.trim() && startLocation.trim() && endLocation.trim() && status ? false : true">保存</button>
 	//             <button type="button" class="btn btn-default" @click='editSeatsModal = false'>取消</button>
 	//         </div>
 	//     </modal>
@@ -3140,37 +3222,92 @@ webpackJsonp([1],Array(26).concat([
 	// <script>
 	
 	
-	var origin = {
-	    editSeatsModal: false,
-	    creatId: null,
-	    editId: null,
-	    statusArr: [],
-	    status: ''
-	},
-	    init = (0, _assign2.default)({}, origin);
-	
 	exports.default = {
 	    data: function data() {
 	        return origin;
 	    },
 	
-	    methods: {},
+	    methods: {
+	
+	        // 保存机位
+	
+	        saveFn: function saveFn() {
+	            var _this = this;
+	
+	            if (this.seatsId === null) {
+	                this.$http({
+	                    url: '/idc/position/add/',
+	                    method: 'POST',
+	                    data: this.$data
+	                }).then(function (response) {
+	                    if (response.data.code === 200) {
+	                        _this.$data = (0, _assign2.default)({}, origin, init);
+	
+	                        _this.editSeatsModal = false;
+	
+	                        _this.$dispatch('refresh');
+	                        _this.$dispatch('show-success');
+	                    } else {
+	                        _this.$dispatch('show-error');
+	                    }
+	                });
+	            }
+	
+	            if (this.frameId === null) {
+	                this.$http({
+	                    url: '/idc/position/edit/',
+	                    method: 'POST',
+	                    data: this.$data
+	                }).then(function (response) {
+	                    if (response.data.code === 200) {
+	                        _this.$data = (0, _assign2.default)({}, origin, init);
+	                        _this.editSeatsModal = false;
+	
+	                        _this.$dispatch('refresh');
+	                        _this.$dispatch('show-success');
+	                    } else {
+	                        _this.$dispatch('show-error');
+	                    }
+	                });
+	            }
+	        }
+	    },
 	    components: {
 	        modal: _vueStrap.modal,
 	        vSelect: _Select2.default
 	    },
+	    vuex: {
+	        getters: {
+	            statusArr: _getters.statusArr
+	        }
+	    },
 	    events: {
 	        'showEditSeats': function showEditSeats(param) {
+	            var _this2 = this;
+	
 	            this.$data = (0, _assign2.default)({}, origin, init);
 	
-	            this.editId = param;
-	            this.editSeatsModal = true;
+	            this.$http({
+	                url: '/idc/position/get/?id=' + param,
+	                method: 'GET'
+	            }).then(function (response) {
+	                if (response.data.code === 200) {
+	                    _this2.$data = (0, _assign2.default)({}, origin, response.data);
+	
+	                    _this2.seatsId = param;
+	                    _this2.editSeatsModal = true;
+	                } else {
+	                    _this2.$dispatch('show-error');
+	                }
+	            });
 	        },
 	        'showCreateSeats': function showCreateSeats(param) {
 	            this.$data = (0, _assign2.default)({}, origin, init);
 	
-	            this.creatId = param;
+	            this.frameId = param;
 	            this.editSeatsModal = true;
+	
+	            console.log(this.frameId);
 	        }
 	    }
 	};
@@ -3184,13 +3321,13 @@ webpackJsonp([1],Array(26).concat([
 /* 127 */
 /***/ function(module, exports) {
 
-	module.exports = "\n    <modal :show.sync=\"editSeatsModal\" effect=\"fade\" width=\"800px\" _v-67defbce=\"\">\n        <div slot=\"modal-header\" class=\"modal-header\" _v-67defbce=\"\">\n            <h4 class=\"modal-title\" v-text=\"creatId ? '新增机位' : '修改机位'\" _v-67defbce=\"\"></h4>\n        </div>\n        <div slot=\"modal-body\" class=\"modal-body\" _v-67defbce=\"\">\n            <form class=\"form-horizontal clearfix\" _v-67defbce=\"\">\n                <div class=\"col-sm-6\" _v-67defbce=\"\">\n                    <div class=\"form-group\" _v-67defbce=\"\">\n                        <label class=\"control-label col-sm-4\" _v-67defbce=\"\">机位编号：</label>\n                        <div class=\"col-sm-8\" _v-67defbce=\"\">\n                            <input type=\"text\" class=\"form-control\" value=\"\" _v-67defbce=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-67defbce=\"\">\n                        <label class=\"control-label col-sm-4\" _v-67defbce=\"\">开始位置：</label>\n                        <div class=\"col-sm-8\" _v-67defbce=\"\">\n                            <input type=\"text\" class=\"form-control\" value=\"\" _v-67defbce=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-67defbce=\"\">\n                        <label class=\"control-label col-sm-4\" _v-67defbce=\"\">备注：</label>\n                        <div class=\"col-sm-8\" _v-67defbce=\"\">\n                            <input type=\"text\" class=\"form-control\" value=\"\" _v-67defbce=\"\">\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-sm-6\" _v-67defbce=\"\">\n                    <div class=\"form-group input-box\" _v-67defbce=\"\">\n                        <label class=\"control-label col-sm-4\" _v-67defbce=\"\">状态：</label>\n                        <div class=\"col-sm-8\" _v-67defbce=\"\">\n                            <v-select :value.sync=\"status\" :options=\"statusArr\" placeholder=\"请选择\" _v-67defbce=\"\">\n                            </v-select>\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-67defbce=\"\">\n                        <label class=\"control-label col-sm-4\" _v-67defbce=\"\">结束位置：</label>\n                        <div class=\"col-sm-8\" _v-67defbce=\"\">\n                            <input type=\"text\" class=\"form-control\" value=\"\" _v-67defbce=\"\">\n                        </div>\n                    </div>\n                </div>\n            </form>\n        </div>\n        <div slot=\"modal-footer\" class=\"modal-footer\" _v-67defbce=\"\">\n            <button type=\"button\" class=\"btn btn-default\" _v-67defbce=\"\">保存</button>\n            <button type=\"button\" class=\"btn btn-default\" @click=\"editSeatsModal = false\" _v-67defbce=\"\">取消</button>\n        </div>\n    </modal>\n";
+	module.exports = "\n    <modal :show.sync=\"editSeatsModal\" effect=\"fade\" width=\"800px\" _v-67defbce=\"\">\n        <div slot=\"modal-header\" class=\"modal-header\" _v-67defbce=\"\">\n            <h4 class=\"modal-title\" v-text=\"frameId !== null ? '新增机位' : '修改机位'\" _v-67defbce=\"\"></h4>\n        </div>\n        <div slot=\"modal-body\" class=\"modal-body\" _v-67defbce=\"\">\n            <form class=\"form-horizontal clearfix\" _v-67defbce=\"\">\n                <div class=\"col-sm-6\" _v-67defbce=\"\">\n                    <div class=\"form-group\" _v-67defbce=\"\">\n                        <label class=\"control-label col-sm-4\" _v-67defbce=\"\">机位编号：<span class=\"text-danger\" _v-67defbce=\"\">*</span></label>\n                        <div class=\"col-sm-8\" _v-67defbce=\"\">\n                            <input type=\"text\" class=\"form-control\" v-model=\"seatsNum\" _v-67defbce=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-67defbce=\"\">\n                        <label class=\"control-label col-sm-4\" _v-67defbce=\"\">开始位置：<span class=\"text-danger\" _v-67defbce=\"\">*</span></label>\n                        <div class=\"col-sm-8\" _v-67defbce=\"\">\n                            <input type=\"text\" class=\"form-control\" v-model=\"startLocation\" _v-67defbce=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-67defbce=\"\">\n                        <label class=\"control-label col-sm-4\" _v-67defbce=\"\">备注：</label>\n                        <div class=\"col-sm-8\" _v-67defbce=\"\">\n                            <input type=\"text\" class=\"form-control\" v-model=\"remark\" _v-67defbce=\"\">\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-sm-6\" _v-67defbce=\"\">\n                    <div class=\"form-group input-box\" _v-67defbce=\"\">\n                        <label class=\"control-label col-sm-4\" _v-67defbce=\"\">状态：<span class=\"text-danger\" _v-67defbce=\"\">*</span></label>\n                        <div class=\"col-sm-8\" _v-67defbce=\"\">\n                            <v-select :value.sync=\"status\" :options=\"statusArr\" placeholder=\"请选择\" _v-67defbce=\"\">\n                            </v-select>\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-67defbce=\"\">\n                        <label class=\"control-label col-sm-4\" _v-67defbce=\"\">结束位置：<span class=\"text-danger\" _v-67defbce=\"\">*</span></label>\n                        <div class=\"col-sm-8\" _v-67defbce=\"\">\n                            <input type=\"text\" class=\"form-control\" v-model=\"endLocation\" _v-67defbce=\"\">\n                        </div>\n                    </div>\n                </div>\n            </form>\n        </div>\n        <div slot=\"modal-footer\" class=\"modal-footer\" _v-67defbce=\"\">\n            <button type=\"button\" class=\"btn btn-default\" @click=\"saveFn\" :disabled=\"seatsNum.trim() &amp;&amp; startLocation.trim() &amp;&amp; endLocation.trim() &amp;&amp; status ? false : true\" _v-67defbce=\"\">保存</button>\n            <button type=\"button\" class=\"btn btn-default\" @click=\"editSeatsModal = false\" _v-67defbce=\"\">取消</button>\n        </div>\n    </modal>\n";
 
 /***/ },
 /* 128 */
 /***/ function(module, exports) {
 
-	module.exports = "\n    <div _v-3476c4ae=\"\">  \n        <div class=\"text-center mb20\" _v-3476c4ae=\"\">\n            <v-select :value.sync=\"param.dimension\" :options=\"dimensions\" placeholder=\"请选择视角\" _v-3476c4ae=\"\">\n            </v-select>\n        </div>\n        <form class=\"form-horizontal clearfix form-search\" _v-3476c4ae=\"\">\n            <div class=\"col-sm-3\" _v-3476c4ae=\"\">\n                <div class=\"form-group input-box\" _v-3476c4ae=\"\">\n                    <label class=\"col-sm-4 control-label\" _v-3476c4ae=\"\">机房：</label>\n                    <div class=\"col-sm-8\" _v-3476c4ae=\"\">\n                        <v-select :value.sync=\"param.idc\" :options=\"idcs\" placeholder=\"请选择\" _v-3476c4ae=\"\">\n                        </v-select>\n                    </div>\n                </div>\n            </div>\n            <div class=\"col-sm-3\" _v-3476c4ae=\"\">\n                <div class=\"form-group input-box\" _v-3476c4ae=\"\">\n                    <label class=\"col-sm-4 control-label\" _v-3476c4ae=\"\">状态：</label>\n                    <div class=\"col-sm-8\" _v-3476c4ae=\"\">\n                        <v-select :value.sync=\"param.status\" :options=\"statusArr\" placeholder=\"请选择\" _v-3476c4ae=\"\">\n                        </v-select>\n                    </div>\n                </div>\n            </div>\n            <div class=\"col-sm-3\" _v-3476c4ae=\"\">\n                <div class=\"form-group\" _v-3476c4ae=\"\">\n                    <label class=\"col-sm-4 control-label\" _v-3476c4ae=\"\">编号：</label>\n                    <div class=\"col-sm-8\" _v-3476c4ae=\"\">\n                        <input type=\"text\" class=\"form-control\" v-model=\"param.number\" _v-3476c4ae=\"\">\n                    </div>\n                </div>\n            </div>\n        </form>\n        <div class=\"text-center btn-operate\" _v-3476c4ae=\"\">\n            <button type=\"button\" class=\"btn btn-default\" @click=\"refresh\" _v-3476c4ae=\"\">\n                查询\n            </button>\n            <button type=\"button\" class=\"btn btn-default\" @click=\"$broadcast('showCreate')\" _v-3476c4ae=\"\">\n                新增机房\n            </button>\n            <dropdown v-el:confirm=\"\" _v-3476c4ae=\"\">\n                <button type=\"button\" class=\"btn btn-default\" data-toggle=\"dropdown\" _v-3476c4ae=\"\">\n                    批量删除\n                    <span class=\"caret\" _v-3476c4ae=\"\"></span>\n                </button>\n                <div slot=\"dropdown-menu\" class=\"dropdown-menu pd20\" _v-3476c4ae=\"\">\n                    <span class=\"text-danger fs12\" _v-3476c4ae=\"\">注：删除机房将删除其下所有机架和机位</span>\n                    <button type=\"button\" class=\"btn btn-danger btn-block mt20\" @click=\"deleteFn\" _v-3476c4ae=\"\">确定</button>\n                    <button type=\"button\" class=\"btn btn-default btn-block\" @click=\"cancelFn\" _v-3476c4ae=\"\">取消</button>\n                </div>\n            </dropdown>\n            <button type=\"button\" class=\"btn btn-default\" _v-3476c4ae=\"\">\n                导出\n            </button>\n        </div>\n        <div class=\"text-center table-title\" _v-3476c4ae=\"\">\n            查询结果\n            <div class=\"pull-left\" _v-3476c4ae=\"\">\n                <dropdown _v-3476c4ae=\"\">\n                    <button type=\"button\" class=\"btn btn-default set-btn\" data-toggle=\"dropdown\" _v-3476c4ae=\"\">\n                        <span class=\"glyphicon glyphicon-cog\" _v-3476c4ae=\"\"></span>\n                    </button>\n                    <div slot=\"dropdown-menu\" class=\"dropdown-menu dropdown-width\" _v-3476c4ae=\"\">\n                        <ul class=\"pull-left dropdown-width\" _v-3476c4ae=\"\">\n                            <li v-for=\"check in checkArr\" class=\"pull-left dropdown-li\" track-by=\"$index\" _v-3476c4ae=\"\">\n                                <input :id=\"'fliter' + $index\" type=\"checkbox\" :checked=\"check.checked\" @click=\"fliter($index)\" _v-3476c4ae=\"\"> \n                                <label :for=\"'fliter' + $index\" v-text=\"check.label\" _v-3476c4ae=\"\"></label>\n                            </li>\n                        </ul>\n                    </div>\n                </dropdown>\n            </div>\n        </div>\n        <div class=\"table-box\" _v-3476c4ae=\"\">\n            <table class=\"table table-hover table-bordered\" _v-3476c4ae=\"\">\n                <thead _v-3476c4ae=\"\">\n                    <tr _v-3476c4ae=\"\">\n                        <th width=\"3%\" _v-3476c4ae=\"\"><input type=\"checkbox\" v-model=\"checkedAll\" _v-3476c4ae=\"\"></th>\n                        <th v-for=\"title in titles\" v-text=\"title\" _v-3476c4ae=\"\"></th>\n                    </tr>\n                </thead>\n                <tbody _v-3476c4ae=\"\">\n                    <tr v-for=\"list in tableList\" v-if=\"tableList.length !== 0\" v-show=\"tableList.length !== 0\" _v-3476c4ae=\"\">\n                        <td _v-3476c4ae=\"\"><input type=\"checkbox\" :id=\"list.id\" :value=\"list.id\" v-model=\"checkedIds\" _v-3476c4ae=\"\"></td>\n\n                        <td v-for=\"value in valueArr\" v-if=\"value === 'idcName' || value === 'frameName' || value === 'seatsName'\" _v-3476c4ae=\"\">\n                            <a class=\"pointer\" v-if=\"value === 'idcName'\" v-text=\"list[value]\" @click=\"$broadcast('showEditRoom', list.id)\" _v-3476c4ae=\"\"></a>\n                            <a class=\"pointer\" v-if=\"value === 'frameName'\" v-text=\"list[value]\" @click=\"$broadcast('showEditRoom', list.id)\" _v-3476c4ae=\"\"></a>\n                            <a class=\"pointer\" v-if=\"value === 'seatsName'\" v-text=\"list[value]\" @click=\"$broadcast('showEditRoom', list.id)\" _v-3476c4ae=\"\"></a>\n                        </td>\n\n                        <td v-for=\"value in valueArr\" :title=\"list[value]\" v-text=\"list[value]\" v-if=\"value !== 'idcName' &amp;&amp; value !== 'frameName' &amp;&amp; value !== 'seatsName'\" _v-3476c4ae=\"\">\n                        </td>\n                    </tr>\n                    <tr class=\"text-center\" v-show=\"tableList.length === 0\" _v-3476c4ae=\"\">\n                        <td :colspan=\"titles.length + 1\" _v-3476c4ae=\"\">暂无数据</td>\n                    </tr>\n                </tbody>\n            </table>\n        </div>\n        <div class=\"clearfix mt30\" _v-3476c4ae=\"\">\n            <boot-page :async=\"true\" :lens=\"lenArr\" :page-len=\"pageLen\" :url=\"url\" :param=\"param\" _v-3476c4ae=\"\"></boot-page>\n        </div>\n\n        <create-modal _v-3476c4ae=\"\"></create-modal> \n        <edit-room-modal _v-3476c4ae=\"\"></edit-room-modal> \n        <edit-frame-modal _v-3476c4ae=\"\"></edit-frame-modal> \n        <edit-seats-modal _v-3476c4ae=\"\"></edit-seats-modal> \n    </div>\n";
+	module.exports = "\n    <div _v-3476c4ae=\"\">  \n        <div class=\"text-center mb20\" _v-3476c4ae=\"\">\n            <v-select :value.sync=\"param.dimension\" :options=\"dimensions\" placeholder=\"请选择视角\" _v-3476c4ae=\"\">\n            </v-select>\n        </div>\n        <form class=\"form-horizontal clearfix form-search\" _v-3476c4ae=\"\">\n            <div class=\"col-sm-3\" _v-3476c4ae=\"\">\n                <div class=\"form-group input-box\" _v-3476c4ae=\"\">\n                    <label class=\"col-sm-4 control-label\" _v-3476c4ae=\"\">机房：</label>\n                    <div class=\"col-sm-8\" _v-3476c4ae=\"\">\n                        <v-select :value.sync=\"param.idc\" :options=\"idcs\" placeholder=\"请选择\" _v-3476c4ae=\"\">\n                        </v-select>\n                    </div>\n                </div>\n            </div>\n            <div class=\"col-sm-3\" _v-3476c4ae=\"\">\n                <div class=\"form-group input-box\" _v-3476c4ae=\"\">\n                    <label class=\"col-sm-4 control-label\" _v-3476c4ae=\"\">状态：</label>\n                    <div class=\"col-sm-8\" _v-3476c4ae=\"\">\n                        <v-select :value.sync=\"param.status\" :options=\"statusArr\" placeholder=\"请选择\" _v-3476c4ae=\"\">\n                        </v-select>\n                    </div>\n                </div>\n            </div>\n            <div class=\"col-sm-3\" _v-3476c4ae=\"\">\n                <div class=\"form-group\" _v-3476c4ae=\"\">\n                    <label class=\"col-sm-4 control-label\" _v-3476c4ae=\"\">编号：</label>\n                    <div class=\"col-sm-8\" _v-3476c4ae=\"\">\n                        <input type=\"text\" class=\"form-control\" v-model=\"param.number\" _v-3476c4ae=\"\">\n                    </div>\n                </div>\n            </div>\n        </form>\n        <div class=\"text-center btn-operate\" _v-3476c4ae=\"\">\n            <button type=\"button\" class=\"btn btn-default\" @click=\"refresh\" _v-3476c4ae=\"\">\n                查询\n            </button>\n            <button type=\"button\" class=\"btn btn-default\" @click=\"$broadcast('showCreate')\" _v-3476c4ae=\"\">\n                新增机房\n            </button>\n            <dropdown v-el:confirm=\"\" _v-3476c4ae=\"\">\n                <button type=\"button\" class=\"btn btn-default\" data-toggle=\"dropdown\" _v-3476c4ae=\"\">\n                    批量删除\n                    <span class=\"caret\" _v-3476c4ae=\"\"></span>\n                </button>\n                <div slot=\"dropdown-menu\" class=\"dropdown-menu pd20\" _v-3476c4ae=\"\">\n                    <span class=\"text-danger fs12\" _v-3476c4ae=\"\">注：删除机房将删除其下所有机架和机位</span>\n                    <button type=\"button\" class=\"btn btn-danger btn-block mt20\" @click=\"deleteFn\" _v-3476c4ae=\"\">确定</button>\n                    <button type=\"button\" class=\"btn btn-default btn-block\" @click=\"cancelFn\" _v-3476c4ae=\"\">取消</button>\n                </div>\n            </dropdown>\n            <button type=\"button\" class=\"btn btn-default\" _v-3476c4ae=\"\">\n                导出\n            </button>\n        </div>\n        <div class=\"text-center table-title\" _v-3476c4ae=\"\">\n            查询结果\n            <div class=\"pull-left\" _v-3476c4ae=\"\">\n                <dropdown _v-3476c4ae=\"\">\n                    <button type=\"button\" class=\"btn btn-default set-btn\" data-toggle=\"dropdown\" _v-3476c4ae=\"\">\n                        <span class=\"glyphicon glyphicon-cog\" _v-3476c4ae=\"\"></span>\n                    </button>\n                    <div slot=\"dropdown-menu\" class=\"dropdown-menu dropdown-width\" _v-3476c4ae=\"\">\n                        <ul class=\"pull-left dropdown-width\" _v-3476c4ae=\"\">\n                            <li v-for=\"check in checkArr\" class=\"pull-left dropdown-li\" track-by=\"$index\" _v-3476c4ae=\"\">\n                                <input :id=\"'fliter' + $index\" type=\"checkbox\" :checked=\"check.checked\" @click=\"fliter($index)\" _v-3476c4ae=\"\"> \n                                <label :for=\"'fliter' + $index\" v-text=\"check.label\" _v-3476c4ae=\"\"></label>\n                            </li>\n                        </ul>\n                    </div>\n                </dropdown>\n            </div>\n        </div>\n        <div class=\"table-box\" _v-3476c4ae=\"\">\n            <table class=\"table table-hover table-bordered\" _v-3476c4ae=\"\">\n                <thead _v-3476c4ae=\"\">\n                    <tr _v-3476c4ae=\"\">\n                        <th width=\"3%\" _v-3476c4ae=\"\"><input type=\"checkbox\" v-model=\"checkedAll\" _v-3476c4ae=\"\"></th>\n                        <th v-for=\"title in titles\" v-text=\"title\" _v-3476c4ae=\"\"></th>\n                    </tr>\n                </thead>\n                <tbody _v-3476c4ae=\"\">\n                    <tr v-for=\"list in tableList\" v-if=\"tableList.length !== 0\" v-show=\"tableList.length !== 0\" _v-3476c4ae=\"\">\n                        <td _v-3476c4ae=\"\"><input type=\"checkbox\" :id=\"list.id\" :value=\"list.id\" v-model=\"checkedIds\" _v-3476c4ae=\"\"></td>\n\n                        <td v-for=\"value in valueArr\" v-if=\"value === 'idcName' || value === 'frameName' || value === 'seatsName'\" _v-3476c4ae=\"\">\n                            <a class=\"pointer\" v-if=\"value === 'idcName'\" v-text=\"list[value]\" @click=\"$broadcast('showEditRoom', list.id)\" _v-3476c4ae=\"\"></a>\n                            <a class=\"pointer\" v-if=\"value === 'frameName'\" v-text=\"list[value]\" @click=\"$broadcast('showEditFrame', list.id)\" _v-3476c4ae=\"\"></a>\n                            <a class=\"pointer\" v-if=\"value === 'seatsName'\" v-text=\"list[value]\" @click=\"$broadcast('showEditSeats', list.id)\" _v-3476c4ae=\"\"></a>\n                        </td>\n\n                        <td v-for=\"value in valueArr\" :title=\"list[value]\" v-text=\"list[value]\" v-if=\"value !== 'idcName' &amp;&amp; value !== 'frameName' &amp;&amp; value !== 'seatsName'\" _v-3476c4ae=\"\">\n                        </td>\n                    </tr>\n                    <tr class=\"text-center\" v-show=\"tableList.length === 0\" _v-3476c4ae=\"\">\n                        <td :colspan=\"titles.length + 1\" _v-3476c4ae=\"\">暂无数据</td>\n                    </tr>\n                </tbody>\n            </table>\n        </div>\n        <div class=\"clearfix mt30\" _v-3476c4ae=\"\">\n            <boot-page :async=\"true\" :lens=\"lenArr\" :page-len=\"pageLen\" :url=\"url\" :param=\"param\" _v-3476c4ae=\"\"></boot-page>\n        </div>\n\n        <create-modal _v-3476c4ae=\"\"></create-modal> \n        <edit-room-modal _v-3476c4ae=\"\"></edit-room-modal> \n        <edit-frame-modal _v-3476c4ae=\"\"></edit-frame-modal> \n        <edit-seats-modal _v-3476c4ae=\"\"></edit-seats-modal> \n    </div>\n";
 
 /***/ }
 ]));

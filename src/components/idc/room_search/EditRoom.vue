@@ -3,7 +3,7 @@
         <div slot="modal-header" class="modal-header">
             <h4 class="modal-title">修改机房</h4>
         </div>
-        <div slot="modal-body" class="modal-body">
+        <div slot="modal-body" class="modal-body mh500">
             <form class="form-horizontal clearfix">
                 <div class="col-sm-6">
                     <div class="form-group">
@@ -119,7 +119,7 @@ import { operators, productTypes, cityArr1, statusArr } from '../../../vuex/gett
 
 let origin = {
         editRoomModal: false,
-        idNum: null,
+        id: null,
         idcName: '',
         idcAddress: '',
         operator: '',
@@ -149,7 +149,7 @@ export default {
         createFrame () {
             let _this = this
 
-            this.$dispatch('showCreateFrame', _this.idNum)
+            this.$dispatch('showCreateFrame', _this.id)
         },
 
         // 保存修改
@@ -202,20 +202,17 @@ export default {
     },
     events: {
         'showEditRoom' (param) {
-            this.idNum = param
-
             this.getRoomCreate()
 
             this.$http({
-                url: '/idc/room/get/?id=' + this.idNum,
+                url: '/idc/room/get/?id=' + param,
                 method: 'GET'
             })
             .then((response) => {
                 if (response.data.code === 200) {
                     this.$data = Object.assign({}, origin, response.data)
 
-                    this.getCity(this.city1)
-
+                    this.id = param
                     this.editRoomModal = true
                 } else {
                     this.$dispatch('show-error')
@@ -233,6 +230,11 @@ export default {
             } else {
                 this.city2 = ''
                 this.cityArr2 = []
+            }
+        },
+        'editRoomModal' (newVal) {
+            if (!newVal) {
+                this.city1 = ''
             }
         }
     }

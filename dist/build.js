@@ -33352,6 +33352,10 @@
 	exports.getUserInfo = getUserInfo;
 	exports.getRoomSearch = getRoomSearch;
 	exports.getRoomCreate = getRoomCreate;
+	exports.getBusinessSearch = getBusinessSearch;
+	exports.getDeviceSearch = getDeviceSearch;
+	exports.getFramesSeats = getFramesSeats;
+	exports.getOrigins = getOrigins;
 	/**
 	 * 
 	 * @authors luozh@snail.com
@@ -33360,8 +33364,8 @@
 	 */
 	
 	// action 会收到 store 作为它的第一个参数
-	// 在 store 里我们只需要 dispatch （在有些情况下需要 state）
-	// 我们可以利用 ES6 的解构（destructuring）语法来简化参数的使用
+	// 在 store 里只需要 dispatch （在有些情况下需要 state）
+	// 可以利用 ES6 的解构语法来简化参数的使用
 	
 	// 获取用户信息
 	function getUserInfo(_ref) {
@@ -33407,6 +33411,66 @@
 	        }
 	    });
 	}
+	
+	// 获取业务管理下拉框内容
+	function getBusinessSearch(_ref4) {
+	    var dispatch = _ref4.dispatch;
+	    var state = _ref4.state;
+	
+	    this.$http({
+	        url: '/product/home/',
+	        method: 'GET'
+	    }).then(function (response) {
+	        if (response.data.code === 200) {
+	            dispatch('GETBUSINESSSEARCH', response.data);
+	        }
+	    });
+	}
+	
+	// 获取交换机查询下拉框内容
+	function getDeviceSearch(_ref5) {
+	    var dispatch = _ref5.dispatch;
+	    var state = _ref5.state;
+	
+	    this.$http({
+	        url: '/device/home/',
+	        method: 'GET'
+	    }).then(function (response) {
+	        if (response.data.code === 200) {
+	            dispatch('GETDEVICESEARCH', response.data);
+	        }
+	    });
+	}
+	
+	// 获取机架、机位
+	function getFramesSeats(_ref6, newVal, name) {
+	    var dispatch = _ref6.dispatch;
+	    var state = _ref6.state;
+	
+	    this.$http({
+	        url: '/device/idc_query/?id=' + newVal + '&type=' + name,
+	        method: 'GET'
+	    }).then(function (response) {
+	        if (response.data.code === 200) {
+	            name === 'room' ? dispatch('GETFRAMES', response.data) : dispatch('GETSEATS', response.data);
+	        }
+	    });
+	}
+	
+	// 获取二级来源
+	function getOrigins(_ref7, newVal) {
+	    var dispatch = _ref7.dispatch;
+	    var state = _ref7.state;
+	
+	    this.$http({
+	        url: '/device/source_query/?id=' + newVal,
+	        method: 'GET'
+	    }).then(function (response) {
+	        if (response.data.code === 200) {
+	            dispatch('GETORIGINS', response.data);
+	        }
+	    });
+	}
 
 /***/ },
 /* 111 */
@@ -33415,14 +33479,8 @@
 	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	  value: true
 	});
-	exports.username = username;
-	exports.idcs = idcs;
-	exports.statusArr = statusArr;
-	exports.operators = operators;
-	exports.productTypes = productTypes;
-	exports.cityArr1 = cityArr1;
 	/**
 	 * 
 	 * @authors luozh@snail.com
@@ -33431,38 +33489,103 @@
 	 */
 	
 	// 这个 getter 函数会返回 count 的值
-	// 在 ES6 里你可以写成：
+	// 在 ES6 里可以写成：
 	// export const getCount = state => state.count
 	
 	// 获取用户名
-	function username(state) {
-	    return state.username;
-	}
+	var username = exports.username = function username(state) {
+	  return state.username;
+	};
 	
 	// 获取机房位置
-	function idcs(state) {
-	    return state.roomLocation;
-	}
+	var idcs = exports.idcs = function idcs(state) {
+	  return state.roomLocation;
+	};
 	
 	// 获取机房状态
-	function statusArr(state) {
-	    return state.roomStatus;
-	}
+	var statusArr = exports.statusArr = function statusArr(state) {
+	  return state.roomStatus;
+	};
 	
 	// 获取运营商
-	function operators(state) {
-	    return state.operators;
-	}
+	var operators = exports.operators = function operators(state) {
+	  return state.operators;
+	};
 	
 	// 获取业务类型
-	function productTypes(state) {
-	    return state.productTypes;
-	}
+	var productTypes = exports.productTypes = function productTypes(state) {
+	  return state.productTypes;
+	};
 	
 	// 获取一级城市
-	function cityArr1(state) {
-	    return state.cityArr1;
-	}
+	var cityArr1 = exports.cityArr1 = function cityArr1(state) {
+	  return state.cityArr1;
+	};
+	
+	// 获取部门
+	var departments = exports.departments = function departments(state) {
+	  return state.departments;
+	};
+	
+	// 获取运营阶段
+	var phases = exports.phases = function phases(state) {
+	  return state.phases;
+	};
+	
+	// 获取游戏类型
+	var gameTypes = exports.gameTypes = function gameTypes(state) {
+	  return state.gameTypes;
+	};
+	
+	// 获取平台类型
+	var platformTypes = exports.platformTypes = function platformTypes(state) {
+	  return state.platformTypes;
+	};
+	
+	// 获取研发模式
+	var developModels = exports.developModels = function developModels(state) {
+	  return state.developModels;
+	};
+	
+	// 获取游戏列表
+	var gameLists = exports.gameLists = function gameLists(state) {
+	  return state.gameLists;
+	};
+	
+	// 获取产品级别
+	var productLevels = exports.productLevels = function productLevels(state) {
+	  return state.productLevels;
+	};
+	
+	// 获取厂商
+	var firms = exports.firms = function firms(state) {
+	  return state.firms;
+	};
+	
+	// 获取一级来源
+	var origins1 = exports.origins1 = function origins1(state) {
+	  return state.origins1;
+	};
+	
+	// 获取交换机状态
+	var deviceStatus = exports.deviceStatus = function deviceStatus(state) {
+	  return state.deviceStatus;
+	};
+	
+	// 获取机架
+	var frames = exports.frames = function frames(state) {
+	  return state.frames;
+	};
+	
+	// 获取机位
+	var seats = exports.seats = function seats(state) {
+	  return state.seats;
+	};
+	
+	// 获取二级来源
+	var origins2 = exports.origins2 = function origins2(state) {
+	  return state.origins2;
+	};
 
 /***/ },
 /* 112 */,
@@ -33688,7 +33811,7 @@
 	
 	
 	// module
-	exports.push([module.id, "@charset \"UTF-8\";\r\n/**\r\n * \r\n * @authors luozh@snail.com\r\n * @date    2016-03-22 11:24:40\r\n * @description 公用样式\r\n */\r\n\r\nhtml,\r\nbody {\r\n    font-family: Arial, \"Helvetica Neue\", \"Luxi Sans\", \"DejaVu Sans\", Tahoma, \"Hiragino Sans GB\", STHeiti, \"Microsoft YaHei\";\r\n}\r\n\r\nbody {\r\n    background-color: #ffffff;\r\n}\r\n\r\na {\r\n   color: #005380;\r\n}\r\n\r\na:active,\r\na:focus {\r\n    outline: none !important;\r\n}\r\n\r\nul {\r\n    list-style: none;\r\n}\r\n\r\ninput:focus,\r\nselect:focus,\r\ntextarea:focus {\r\n    border-color: #ccc !important;\r\n    box-shadow: none !important;\r\n    outline: none !important;\r\n}\r\n\r\nbutton:focus {\r\n    border-color: none !important;\r\n    outline: none !important;\r\n}\r\n\r\ntextarea {\r\n    resize: none !important;\r\n}\r\n\r\n.form-control[disabled],\r\nfieldset[disabled] .form-control {\r\n    cursor: default !important;\r\n}\r\n\r\n.mt30 {\r\n    margin-top: 30px !important;\r\n}\r\n\r\n.ml15 {\r\n    margin-left: 15px;\r\n}\r\n\r\n.mb0 {\r\n    margin-bottom: 0;\r\n}\r\n\r\n.mb20 {\r\n    margin-bottom: 20px;\r\n}\r\n\r\n.pr0 {\r\n    padding-right: 0;\r\n}\r\n\r\n.pl0 {\r\n    padding-left: 0;\r\n}\r\n\r\n.pl20 {\r\n    padding-left: 20px !important;\r\n}\r\n\r\n.pd0 {\r\n    padding: 0 !important;\r\n}\r\n\r\n.fs12 {\r\n    font-size: 12px !important;\r\n}\r\n\r\n.table {\r\n    table-layout: fixed;\r\n}\r\n\r\n.table tr td,\r\n.table tr th {\r\n    overflow: hidden;\r\n    text-overflow: ellipsis;\r\n    white-space: nowrap;\r\n    word-break: keep-all;\r\n    font-size: 12px;\r\n    vertical-align: middle !important;\r\n}\r\n\r\n.btn-small {\r\n    padding: 0px 3px;\r\n    border: none;\r\n    font-size: 12px;\r\n    margin-right: 10px;\r\n}\r\n\r\n.modal-backdrop {\r\n    z-index: 0;\r\n}\r\n\r\n.main {\r\n    position: absolute;\r\n    width: 100%;\r\n    top: 0;\r\n    bottom: 0;\r\n    background-color: #000;\r\n    z-index: 100;\r\n}\r\n\r\n.pointer {\r\n    cursor: pointer;\r\n}\r\n\r\n.input-box .dropdown-toggle {\r\n    width: 100%;\r\n    overflow: hidden;\r\n}\r\n\r\n.input-box .dropdown-menu {\r\n    width: 100%;\r\n    max-height: 300px;\r\n    overflow-y: auto;\r\n}\r\n\r\n.input-box .btn-group {\r\n    width: 100%\r\n}\r\n\r\n.input-search .dropdown-menu {\r\n    max-height: 300px;\r\n    overflow: auto;\r\n}\r\n\r\n.input-search .form-control {\r\n    width: 100% !important;\r\n}\r\n\r\n.btn-box {\r\n    width: 100px;\r\n}\r\n\r\n.table-icon {\r\n    font-size: 12px;\r\n    cursor: pointer;\r\n}\r\n\r\n.table-bg tbody {\r\n    background: #fff;\r\n}\r\n\r\n.table-btn {\r\n    padding: 5px;\r\n    border: 1px solid #DDD;\r\n    border-bottom-width: 0;\r\n}\r\n\r\n.btn-pd {\r\n    padding: 2px 10px;\r\n}\r\n\r\n.modal-footer {\r\n    text-align: center !important;\r\n}\r\n\r\n.alert {\r\n    z-index: 9999 !important;\r\n}\r\n\r\n.form-search {\r\n    border: 1px solid #ccc;\r\n    border-radius: 5px;\r\n    padding: 10px 0;\r\n}\r\n\r\n.form-input .form-group {\r\n    margin-bottom: 3px;\r\n}\r\n\r\n.form-input .control-label {\r\n    font-size: 12px;\r\n}\r\n\r\n.form-min input.form-control {\r\n    height: 26px;\r\n}\r\n\r\n.form-min .dropdown-toggle {\r\n    height: 26px;\r\n    line-height: 15px;\r\n}\r\n\r\n.form-search .form-group {\r\n    margin-bottom: 8px;\r\n}\r\n\r\n.form-search .control-label {\r\n    font-size: 12px;\r\n    color: #666;\r\n}\r\n\r\n.btn-operate {\r\n    margin: 20px 0;\r\n}\r\n\r\n.table-box {\r\n    width: 100%;\r\n    min-height: 500px;\r\n    overflow-x: auto; \r\n}\r\n\r\n.table-box .table {\r\n    width: 2000px;\r\n    max-width: none;\r\n}\r\n\r\n.table-hover>tbody>tr:hover {\r\n    background-color: #fff !important;\r\n}\r\n\r\n.table-title {\r\n    height: 30px;\r\n    line-height: 30px;\r\n    background: #E2E2E2;\r\n    border: 1px solid #DDD;\r\n    border-bottom: 0;\r\n}\r\n\r\n.set-btn {\r\n    padding: 2px 8px;\r\n    margin-top: -4px;\r\n}\r\n\r\n.table-small>tbody>tr>td {\r\n    padding: 5px;\r\n}\r\n\r\n.table-scroll thead,\r\n.table-scroll tbody tr {\r\n    display: table;\r\n    width: 100% !important;\r\n    table-layout: fixed;\r\n}\r\n\r\n.table-scroll thead {\r\n    width: calc( 100% - 1em);\r\n}\r\n\r\n.table-scroll tbody {\r\n    display: block;\r\n    overflow: auto;\r\n    max-height: 500px;\r\n}\r\n\r\n.table-scroll thead {\r\n    width: calc( 100% - 1em);\r\n}\r\n\r\n.datepicker {\r\n    width: 100%;\r\n}\r\n\r\n.datepicker-input {\r\n    width: 100% !important;\r\n}\r\n\r\n.fs12 .dropdown-toggle {\r\n    font-size: 12px;\r\n}", "", {"version":3,"sources":["/./src/assets/css/common.css"],"names":[],"mappings":"AAAA,iBAAiB;AACjB;;;;;GAKG;;AAEH;;IAEI,yHAAyH;CAC5H;;AAED;IACI,0BAA0B;CAC7B;;AAED;GACG,eAAe;CACjB;;AAED;;IAEI,yBAAyB;CAC5B;;AAED;IACI,iBAAiB;CACpB;;AAED;;;IAGI,8BAA8B;IAC9B,4BAA4B;IAC5B,yBAAyB;CAC5B;;AAED;IACI,8BAA8B;IAC9B,yBAAyB;CAC5B;;AAED;IACI,wBAAwB;CAC3B;;AAED;;IAEI,2BAA2B;CAC9B;;AAED;IACI,4BAA4B;CAC/B;;AAED;IACI,kBAAkB;CACrB;;AAED;IACI,iBAAiB;CACpB;;AAED;IACI,oBAAoB;CACvB;;AAED;IACI,iBAAiB;CACpB;;AAED;IACI,gBAAgB;CACnB;;AAED;IACI,8BAA8B;CACjC;;AAED;IACI,sBAAsB;CACzB;;AAED;IACI,2BAA2B;CAC9B;;AAED;IACI,oBAAoB;CACvB;;AAED;;IAEI,iBAAiB;IACjB,wBAAwB;IACxB,oBAAoB;IACpB,qBAAqB;IACrB,gBAAgB;IAChB,kCAAkC;CACrC;;AAED;IACI,iBAAiB;IACjB,aAAa;IACb,gBAAgB;IAChB,mBAAmB;CACtB;;AAED;IACI,WAAW;CACd;;AAED;IACI,mBAAmB;IACnB,YAAY;IACZ,OAAO;IACP,UAAU;IACV,uBAAuB;IACvB,aAAa;CAChB;;AAED;IACI,gBAAgB;CACnB;;AAED;IACI,YAAY;IACZ,iBAAiB;CACpB;;AAED;IACI,YAAY;IACZ,kBAAkB;IAClB,iBAAiB;CACpB;;AAED;IACI,WAAW;CACd;;AAED;IACI,kBAAkB;IAClB,eAAe;CAClB;;AAED;IACI,uBAAuB;CAC1B;;AAED;IACI,aAAa;CAChB;;AAED;IACI,gBAAgB;IAChB,gBAAgB;CACnB;;AAED;IACI,iBAAiB;CACpB;;AAED;IACI,aAAa;IACb,uBAAuB;IACvB,uBAAuB;CAC1B;;AAED;IACI,kBAAkB;CACrB;;AAED;IACI,8BAA8B;CACjC;;AAED;IACI,yBAAyB;CAC5B;;AAED;IACI,uBAAuB;IACvB,mBAAmB;IACnB,gBAAgB;CACnB;;AAED;IACI,mBAAmB;CACtB;;AAED;IACI,gBAAgB;CACnB;;AAED;IACI,aAAa;CAChB;;AAED;IACI,aAAa;IACb,kBAAkB;CACrB;;AAED;IACI,mBAAmB;CACtB;;AAED;IACI,gBAAgB;IAChB,YAAY;CACf;;AAED;IACI,eAAe;CAClB;;AAED;IACI,YAAY;IACZ,kBAAkB;IAClB,iBAAiB;CACpB;;AAED;IACI,cAAc;IACd,gBAAgB;CACnB;;AAED;IACI,kCAAkC;CACrC;;AAED;IACI,aAAa;IACb,kBAAkB;IAClB,oBAAoB;IACpB,uBAAuB;IACvB,iBAAiB;CACpB;;AAED;IACI,iBAAiB;IACjB,iBAAiB;CACpB;;AAED;IACI,aAAa;CAChB;;AAED;;IAEI,eAAe;IACf,uBAAuB;IACvB,oBAAoB;CACvB;;AAED;IACI,yBAAyB;CAC5B;;AAED;IACI,eAAe;IACf,eAAe;IACf,kBAAkB;CACrB;;AAED;IACI,yBAAyB;CAC5B;;AAED;IACI,YAAY;CACf;;AAED;IACI,uBAAuB;CAC1B;;AAED;IACI,gBAAgB;CACnB","file":"common.css","sourcesContent":["@charset \"UTF-8\";\r\n/**\r\n * \r\n * @authors luozh@snail.com\r\n * @date    2016-03-22 11:24:40\r\n * @description 公用样式\r\n */\r\n\r\nhtml,\r\nbody {\r\n    font-family: Arial, \"Helvetica Neue\", \"Luxi Sans\", \"DejaVu Sans\", Tahoma, \"Hiragino Sans GB\", STHeiti, \"Microsoft YaHei\";\r\n}\r\n\r\nbody {\r\n    background-color: #ffffff;\r\n}\r\n\r\na {\r\n   color: #005380;\r\n}\r\n\r\na:active,\r\na:focus {\r\n    outline: none !important;\r\n}\r\n\r\nul {\r\n    list-style: none;\r\n}\r\n\r\ninput:focus,\r\nselect:focus,\r\ntextarea:focus {\r\n    border-color: #ccc !important;\r\n    box-shadow: none !important;\r\n    outline: none !important;\r\n}\r\n\r\nbutton:focus {\r\n    border-color: none !important;\r\n    outline: none !important;\r\n}\r\n\r\ntextarea {\r\n    resize: none !important;\r\n}\r\n\r\n.form-control[disabled],\r\nfieldset[disabled] .form-control {\r\n    cursor: default !important;\r\n}\r\n\r\n.mt30 {\r\n    margin-top: 30px !important;\r\n}\r\n\r\n.ml15 {\r\n    margin-left: 15px;\r\n}\r\n\r\n.mb0 {\r\n    margin-bottom: 0;\r\n}\r\n\r\n.mb20 {\r\n    margin-bottom: 20px;\r\n}\r\n\r\n.pr0 {\r\n    padding-right: 0;\r\n}\r\n\r\n.pl0 {\r\n    padding-left: 0;\r\n}\r\n\r\n.pl20 {\r\n    padding-left: 20px !important;\r\n}\r\n\r\n.pd0 {\r\n    padding: 0 !important;\r\n}\r\n\r\n.fs12 {\r\n    font-size: 12px !important;\r\n}\r\n\r\n.table {\r\n    table-layout: fixed;\r\n}\r\n\r\n.table tr td,\r\n.table tr th {\r\n    overflow: hidden;\r\n    text-overflow: ellipsis;\r\n    white-space: nowrap;\r\n    word-break: keep-all;\r\n    font-size: 12px;\r\n    vertical-align: middle !important;\r\n}\r\n\r\n.btn-small {\r\n    padding: 0px 3px;\r\n    border: none;\r\n    font-size: 12px;\r\n    margin-right: 10px;\r\n}\r\n\r\n.modal-backdrop {\r\n    z-index: 0;\r\n}\r\n\r\n.main {\r\n    position: absolute;\r\n    width: 100%;\r\n    top: 0;\r\n    bottom: 0;\r\n    background-color: #000;\r\n    z-index: 100;\r\n}\r\n\r\n.pointer {\r\n    cursor: pointer;\r\n}\r\n\r\n.input-box .dropdown-toggle {\r\n    width: 100%;\r\n    overflow: hidden;\r\n}\r\n\r\n.input-box .dropdown-menu {\r\n    width: 100%;\r\n    max-height: 300px;\r\n    overflow-y: auto;\r\n}\r\n\r\n.input-box .btn-group {\r\n    width: 100%\r\n}\r\n\r\n.input-search .dropdown-menu {\r\n    max-height: 300px;\r\n    overflow: auto;\r\n}\r\n\r\n.input-search .form-control {\r\n    width: 100% !important;\r\n}\r\n\r\n.btn-box {\r\n    width: 100px;\r\n}\r\n\r\n.table-icon {\r\n    font-size: 12px;\r\n    cursor: pointer;\r\n}\r\n\r\n.table-bg tbody {\r\n    background: #fff;\r\n}\r\n\r\n.table-btn {\r\n    padding: 5px;\r\n    border: 1px solid #DDD;\r\n    border-bottom-width: 0;\r\n}\r\n\r\n.btn-pd {\r\n    padding: 2px 10px;\r\n}\r\n\r\n.modal-footer {\r\n    text-align: center !important;\r\n}\r\n\r\n.alert {\r\n    z-index: 9999 !important;\r\n}\r\n\r\n.form-search {\r\n    border: 1px solid #ccc;\r\n    border-radius: 5px;\r\n    padding: 10px 0;\r\n}\r\n\r\n.form-input .form-group {\r\n    margin-bottom: 3px;\r\n}\r\n\r\n.form-input .control-label {\r\n    font-size: 12px;\r\n}\r\n\r\n.form-min input.form-control {\r\n    height: 26px;\r\n}\r\n\r\n.form-min .dropdown-toggle {\r\n    height: 26px;\r\n    line-height: 15px;\r\n}\r\n\r\n.form-search .form-group {\r\n    margin-bottom: 8px;\r\n}\r\n\r\n.form-search .control-label {\r\n    font-size: 12px;\r\n    color: #666;\r\n}\r\n\r\n.btn-operate {\r\n    margin: 20px 0;\r\n}\r\n\r\n.table-box {\r\n    width: 100%;\r\n    min-height: 500px;\r\n    overflow-x: auto; \r\n}\r\n\r\n.table-box .table {\r\n    width: 2000px;\r\n    max-width: none;\r\n}\r\n\r\n.table-hover>tbody>tr:hover {\r\n    background-color: #fff !important;\r\n}\r\n\r\n.table-title {\r\n    height: 30px;\r\n    line-height: 30px;\r\n    background: #E2E2E2;\r\n    border: 1px solid #DDD;\r\n    border-bottom: 0;\r\n}\r\n\r\n.set-btn {\r\n    padding: 2px 8px;\r\n    margin-top: -4px;\r\n}\r\n\r\n.table-small>tbody>tr>td {\r\n    padding: 5px;\r\n}\r\n\r\n.table-scroll thead,\r\n.table-scroll tbody tr {\r\n    display: table;\r\n    width: 100% !important;\r\n    table-layout: fixed;\r\n}\r\n\r\n.table-scroll thead {\r\n    width: calc( 100% - 1em);\r\n}\r\n\r\n.table-scroll tbody {\r\n    display: block;\r\n    overflow: auto;\r\n    max-height: 500px;\r\n}\r\n\r\n.table-scroll thead {\r\n    width: calc( 100% - 1em);\r\n}\r\n\r\n.datepicker {\r\n    width: 100%;\r\n}\r\n\r\n.datepicker-input {\r\n    width: 100% !important;\r\n}\r\n\r\n.fs12 .dropdown-toggle {\r\n    font-size: 12px;\r\n}"],"sourceRoot":"webpack://"}]);
+	exports.push([module.id, "@charset \"UTF-8\";\r\n/**\r\n * \r\n * @authors luozh@snail.com\r\n * @date    2016-03-22 11:24:40\r\n * @description 公用样式\r\n */\r\n\r\nhtml,\r\nbody {\r\n    font-family: Arial, \"Helvetica Neue\", \"Luxi Sans\", \"DejaVu Sans\", Tahoma, \"Hiragino Sans GB\", STHeiti, \"Microsoft YaHei\";\r\n}\r\n\r\nbody {\r\n    background-color: #ffffff;\r\n}\r\n\r\na {\r\n   color: #005380;\r\n}\r\n\r\na:active,\r\na:focus {\r\n    outline: none !important;\r\n}\r\n\r\nul {\r\n    list-style: none;\r\n}\r\n\r\ninput:focus,\r\nselect:focus,\r\ntextarea:focus {\r\n    border-color: #ccc !important;\r\n    box-shadow: none !important;\r\n    outline: none !important;\r\n}\r\n\r\nbutton:focus {\r\n    border-color: none !important;\r\n    outline: none !important;\r\n}\r\n\r\ntextarea {\r\n    resize: none !important;\r\n}\r\n\r\n.form-control[disabled],\r\nfieldset[disabled] .form-control {\r\n    cursor: default !important;\r\n}\r\n\r\n.mt30 {\r\n    margin-top: 30px !important;\r\n}\r\n\r\n.ml15 {\r\n    margin-left: 15px;\r\n}\r\n\r\n.mb0 {\r\n    margin-bottom: 0;\r\n}\r\n\r\n.mb20 {\r\n    margin-bottom: 20px;\r\n}\r\n\r\n.pr0 {\r\n    padding-right: 0;\r\n}\r\n\r\n.pl0 {\r\n    padding-left: 0;\r\n}\r\n\r\n.pl20 {\r\n    padding-left: 20px !important;\r\n}\r\n\r\n.pd0 {\r\n    padding: 0 !important;\r\n}\r\n\r\n.fs12 {\r\n    font-size: 12px !important;\r\n}\r\n\r\n.table {\r\n    table-layout: fixed;\r\n}\r\n\r\n.table tr td,\r\n.table tr th {\r\n    overflow: hidden;\r\n    text-overflow: ellipsis;\r\n    white-space: nowrap;\r\n    word-break: keep-all;\r\n    font-size: 12px;\r\n    vertical-align: middle !important;\r\n}\r\n\r\n.btn-small {\r\n    padding: 0px 3px;\r\n    border: none;\r\n    font-size: 12px;\r\n    margin-right: 10px;\r\n}\r\n\r\n.modal-backdrop {\r\n    z-index: 0;\r\n}\r\n\r\n.main {\r\n    position: absolute;\r\n    width: 100%;\r\n    top: 0;\r\n    bottom: 0;\r\n    background-color: #000;\r\n    z-index: 100;\r\n}\r\n\r\n.pointer {\r\n    cursor: pointer;\r\n}\r\n\r\n.input-box .dropdown-toggle {\r\n    width: 100%;\r\n    overflow: hidden;\r\n}\r\n\r\n.input-box .dropdown-menu {\r\n    width: 100%;\r\n    max-height: 300px;\r\n    overflow-y: auto;\r\n}\r\n\r\n.input-box .btn-group {\r\n    width: 100%\r\n}\r\n\r\n.input-search .dropdown-menu {\r\n    max-height: 300px;\r\n    overflow: auto;\r\n}\r\n\r\n.input-search .form-control {\r\n    width: 100% !important;\r\n}\r\n\r\n.btn-box {\r\n    width: 100px;\r\n}\r\n\r\n.table-icon {\r\n    font-size: 12px;\r\n    cursor: pointer;\r\n}\r\n\r\n.table-bg tbody {\r\n    background: #fff;\r\n}\r\n\r\n.table-btn {\r\n    padding: 5px;\r\n    border: 1px solid #DDD;\r\n    border-bottom-width: 0;\r\n}\r\n\r\n.btn-pd {\r\n    padding: 2px 10px;\r\n}\r\n\r\n.modal-footer {\r\n    text-align: center !important;\r\n}\r\n\r\n.alert {\r\n    z-index: 9999 !important;\r\n}\r\n\r\n.form-search {\r\n    border: 1px solid #ccc;\r\n    border-radius: 5px;\r\n    padding: 10px 0;\r\n}\r\n\r\n.form-input .form-group {\r\n    margin-bottom: 3px;\r\n}\r\n\r\n.form-input .control-label {\r\n    font-size: 12px;\r\n}\r\n\r\n.form-min input.form-control {\r\n    height: 26px;\r\n}\r\n\r\n.form-min .dropdown-toggle {\r\n    height: 26px;\r\n    line-height: 15px;\r\n}\r\n\r\n.form-search .form-group {\r\n    margin-bottom: 8px;\r\n}\r\n\r\n.form-search .control-label {\r\n    font-size: 12px;\r\n    color: #666;\r\n}\r\n\r\n.btn-operate {\r\n    margin: 20px 0;\r\n}\r\n\r\n.table-box {\r\n    width: 100%;\r\n    min-height: 500px;\r\n    overflow-x: auto; \r\n}\r\n\r\n.table-box .table {\r\n    width: 2000px;\r\n    max-width: none;\r\n}\r\n\r\n.table-hover>tbody>tr:hover {\r\n    background-color: #fff !important;\r\n}\r\n\r\n.table-title {\r\n    height: 30px;\r\n    line-height: 30px;\r\n    background: #E2E2E2;\r\n    border: 1px solid #DDD;\r\n    border-bottom: 0;\r\n}\r\n\r\n.set-btn {\r\n    padding: 2px 8px;\r\n    margin-top: -4px;\r\n}\r\n\r\n.table-small>tbody>tr>td {\r\n    padding: 5px;\r\n}\r\n\r\n.table-scroll thead,\r\n.table-scroll tbody tr {\r\n    display: table;\r\n    width: 100% !important;\r\n    table-layout: fixed;\r\n}\r\n\r\n.table-scroll thead {\r\n    width: calc( 100% - 1em);\r\n}\r\n\r\n.table-scroll tbody {\r\n    display: block;\r\n    overflow: auto;\r\n    max-height: 500px;\r\n}\r\n\r\n.table-scroll thead {\r\n    width: calc( 100% - 1em);\r\n}\r\n\r\n.datepicker {\r\n    width: 100%;\r\n}\r\n\r\n.datepicker-input {\r\n    width: 100% !important;\r\n}\r\n\r\n.fs12 .dropdown-toggle {\r\n    font-size: 12px;\r\n}\r\n\r\n.mh500 {\r\n    min-height: 500px;\r\n}", "", {"version":3,"sources":["/./src/assets/css/common.css"],"names":[],"mappings":"AAAA,iBAAiB;AACjB;;;;;GAKG;;AAEH;;IAEI,yHAAyH;CAC5H;;AAED;IACI,0BAA0B;CAC7B;;AAED;GACG,eAAe;CACjB;;AAED;;IAEI,yBAAyB;CAC5B;;AAED;IACI,iBAAiB;CACpB;;AAED;;;IAGI,8BAA8B;IAC9B,4BAA4B;IAC5B,yBAAyB;CAC5B;;AAED;IACI,8BAA8B;IAC9B,yBAAyB;CAC5B;;AAED;IACI,wBAAwB;CAC3B;;AAED;;IAEI,2BAA2B;CAC9B;;AAED;IACI,4BAA4B;CAC/B;;AAED;IACI,kBAAkB;CACrB;;AAED;IACI,iBAAiB;CACpB;;AAED;IACI,oBAAoB;CACvB;;AAED;IACI,iBAAiB;CACpB;;AAED;IACI,gBAAgB;CACnB;;AAED;IACI,8BAA8B;CACjC;;AAED;IACI,sBAAsB;CACzB;;AAED;IACI,2BAA2B;CAC9B;;AAED;IACI,oBAAoB;CACvB;;AAED;;IAEI,iBAAiB;IACjB,wBAAwB;IACxB,oBAAoB;IACpB,qBAAqB;IACrB,gBAAgB;IAChB,kCAAkC;CACrC;;AAED;IACI,iBAAiB;IACjB,aAAa;IACb,gBAAgB;IAChB,mBAAmB;CACtB;;AAED;IACI,WAAW;CACd;;AAED;IACI,mBAAmB;IACnB,YAAY;IACZ,OAAO;IACP,UAAU;IACV,uBAAuB;IACvB,aAAa;CAChB;;AAED;IACI,gBAAgB;CACnB;;AAED;IACI,YAAY;IACZ,iBAAiB;CACpB;;AAED;IACI,YAAY;IACZ,kBAAkB;IAClB,iBAAiB;CACpB;;AAED;IACI,WAAW;CACd;;AAED;IACI,kBAAkB;IAClB,eAAe;CAClB;;AAED;IACI,uBAAuB;CAC1B;;AAED;IACI,aAAa;CAChB;;AAED;IACI,gBAAgB;IAChB,gBAAgB;CACnB;;AAED;IACI,iBAAiB;CACpB;;AAED;IACI,aAAa;IACb,uBAAuB;IACvB,uBAAuB;CAC1B;;AAED;IACI,kBAAkB;CACrB;;AAED;IACI,8BAA8B;CACjC;;AAED;IACI,yBAAyB;CAC5B;;AAED;IACI,uBAAuB;IACvB,mBAAmB;IACnB,gBAAgB;CACnB;;AAED;IACI,mBAAmB;CACtB;;AAED;IACI,gBAAgB;CACnB;;AAED;IACI,aAAa;CAChB;;AAED;IACI,aAAa;IACb,kBAAkB;CACrB;;AAED;IACI,mBAAmB;CACtB;;AAED;IACI,gBAAgB;IAChB,YAAY;CACf;;AAED;IACI,eAAe;CAClB;;AAED;IACI,YAAY;IACZ,kBAAkB;IAClB,iBAAiB;CACpB;;AAED;IACI,cAAc;IACd,gBAAgB;CACnB;;AAED;IACI,kCAAkC;CACrC;;AAED;IACI,aAAa;IACb,kBAAkB;IAClB,oBAAoB;IACpB,uBAAuB;IACvB,iBAAiB;CACpB;;AAED;IACI,iBAAiB;IACjB,iBAAiB;CACpB;;AAED;IACI,aAAa;CAChB;;AAED;;IAEI,eAAe;IACf,uBAAuB;IACvB,oBAAoB;CACvB;;AAED;IACI,yBAAyB;CAC5B;;AAED;IACI,eAAe;IACf,eAAe;IACf,kBAAkB;CACrB;;AAED;IACI,yBAAyB;CAC5B;;AAED;IACI,YAAY;CACf;;AAED;IACI,uBAAuB;CAC1B;;AAED;IACI,gBAAgB;CACnB;;AAED;IACI,kBAAkB;CACrB","file":"common.css","sourcesContent":["@charset \"UTF-8\";\r\n/**\r\n * \r\n * @authors luozh@snail.com\r\n * @date    2016-03-22 11:24:40\r\n * @description 公用样式\r\n */\r\n\r\nhtml,\r\nbody {\r\n    font-family: Arial, \"Helvetica Neue\", \"Luxi Sans\", \"DejaVu Sans\", Tahoma, \"Hiragino Sans GB\", STHeiti, \"Microsoft YaHei\";\r\n}\r\n\r\nbody {\r\n    background-color: #ffffff;\r\n}\r\n\r\na {\r\n   color: #005380;\r\n}\r\n\r\na:active,\r\na:focus {\r\n    outline: none !important;\r\n}\r\n\r\nul {\r\n    list-style: none;\r\n}\r\n\r\ninput:focus,\r\nselect:focus,\r\ntextarea:focus {\r\n    border-color: #ccc !important;\r\n    box-shadow: none !important;\r\n    outline: none !important;\r\n}\r\n\r\nbutton:focus {\r\n    border-color: none !important;\r\n    outline: none !important;\r\n}\r\n\r\ntextarea {\r\n    resize: none !important;\r\n}\r\n\r\n.form-control[disabled],\r\nfieldset[disabled] .form-control {\r\n    cursor: default !important;\r\n}\r\n\r\n.mt30 {\r\n    margin-top: 30px !important;\r\n}\r\n\r\n.ml15 {\r\n    margin-left: 15px;\r\n}\r\n\r\n.mb0 {\r\n    margin-bottom: 0;\r\n}\r\n\r\n.mb20 {\r\n    margin-bottom: 20px;\r\n}\r\n\r\n.pr0 {\r\n    padding-right: 0;\r\n}\r\n\r\n.pl0 {\r\n    padding-left: 0;\r\n}\r\n\r\n.pl20 {\r\n    padding-left: 20px !important;\r\n}\r\n\r\n.pd0 {\r\n    padding: 0 !important;\r\n}\r\n\r\n.fs12 {\r\n    font-size: 12px !important;\r\n}\r\n\r\n.table {\r\n    table-layout: fixed;\r\n}\r\n\r\n.table tr td,\r\n.table tr th {\r\n    overflow: hidden;\r\n    text-overflow: ellipsis;\r\n    white-space: nowrap;\r\n    word-break: keep-all;\r\n    font-size: 12px;\r\n    vertical-align: middle !important;\r\n}\r\n\r\n.btn-small {\r\n    padding: 0px 3px;\r\n    border: none;\r\n    font-size: 12px;\r\n    margin-right: 10px;\r\n}\r\n\r\n.modal-backdrop {\r\n    z-index: 0;\r\n}\r\n\r\n.main {\r\n    position: absolute;\r\n    width: 100%;\r\n    top: 0;\r\n    bottom: 0;\r\n    background-color: #000;\r\n    z-index: 100;\r\n}\r\n\r\n.pointer {\r\n    cursor: pointer;\r\n}\r\n\r\n.input-box .dropdown-toggle {\r\n    width: 100%;\r\n    overflow: hidden;\r\n}\r\n\r\n.input-box .dropdown-menu {\r\n    width: 100%;\r\n    max-height: 300px;\r\n    overflow-y: auto;\r\n}\r\n\r\n.input-box .btn-group {\r\n    width: 100%\r\n}\r\n\r\n.input-search .dropdown-menu {\r\n    max-height: 300px;\r\n    overflow: auto;\r\n}\r\n\r\n.input-search .form-control {\r\n    width: 100% !important;\r\n}\r\n\r\n.btn-box {\r\n    width: 100px;\r\n}\r\n\r\n.table-icon {\r\n    font-size: 12px;\r\n    cursor: pointer;\r\n}\r\n\r\n.table-bg tbody {\r\n    background: #fff;\r\n}\r\n\r\n.table-btn {\r\n    padding: 5px;\r\n    border: 1px solid #DDD;\r\n    border-bottom-width: 0;\r\n}\r\n\r\n.btn-pd {\r\n    padding: 2px 10px;\r\n}\r\n\r\n.modal-footer {\r\n    text-align: center !important;\r\n}\r\n\r\n.alert {\r\n    z-index: 9999 !important;\r\n}\r\n\r\n.form-search {\r\n    border: 1px solid #ccc;\r\n    border-radius: 5px;\r\n    padding: 10px 0;\r\n}\r\n\r\n.form-input .form-group {\r\n    margin-bottom: 3px;\r\n}\r\n\r\n.form-input .control-label {\r\n    font-size: 12px;\r\n}\r\n\r\n.form-min input.form-control {\r\n    height: 26px;\r\n}\r\n\r\n.form-min .dropdown-toggle {\r\n    height: 26px;\r\n    line-height: 15px;\r\n}\r\n\r\n.form-search .form-group {\r\n    margin-bottom: 8px;\r\n}\r\n\r\n.form-search .control-label {\r\n    font-size: 12px;\r\n    color: #666;\r\n}\r\n\r\n.btn-operate {\r\n    margin: 20px 0;\r\n}\r\n\r\n.table-box {\r\n    width: 100%;\r\n    min-height: 500px;\r\n    overflow-x: auto; \r\n}\r\n\r\n.table-box .table {\r\n    width: 2000px;\r\n    max-width: none;\r\n}\r\n\r\n.table-hover>tbody>tr:hover {\r\n    background-color: #fff !important;\r\n}\r\n\r\n.table-title {\r\n    height: 30px;\r\n    line-height: 30px;\r\n    background: #E2E2E2;\r\n    border: 1px solid #DDD;\r\n    border-bottom: 0;\r\n}\r\n\r\n.set-btn {\r\n    padding: 2px 8px;\r\n    margin-top: -4px;\r\n}\r\n\r\n.table-small>tbody>tr>td {\r\n    padding: 5px;\r\n}\r\n\r\n.table-scroll thead,\r\n.table-scroll tbody tr {\r\n    display: table;\r\n    width: 100% !important;\r\n    table-layout: fixed;\r\n}\r\n\r\n.table-scroll thead {\r\n    width: calc( 100% - 1em);\r\n}\r\n\r\n.table-scroll tbody {\r\n    display: block;\r\n    overflow: auto;\r\n    max-height: 500px;\r\n}\r\n\r\n.table-scroll thead {\r\n    width: calc( 100% - 1em);\r\n}\r\n\r\n.datepicker {\r\n    width: 100%;\r\n}\r\n\r\n.datepicker-input {\r\n    width: 100% !important;\r\n}\r\n\r\n.fs12 .dropdown-toggle {\r\n    font-size: 12px;\r\n}\r\n\r\n.mh500 {\r\n    min-height: 500px;\r\n}"],"sourceRoot":"webpack://"}]);
 	
 	// exports
 
@@ -33808,7 +33931,7 @@
 	
 	
 	// module
-	exports.push([module.id, "\r\n.sidebar[_v-607c94e9] {\r\n    width: 200px;\r\n    display: block;\r\n    position: fixed;\r\n    top: 0;\r\n    bottom: 0;\r\n    background-color: #333;\r\n    z-index: 102;\r\n    overflow-x: hidden;\r\n}\r\n\r\n.logo img[_v-607c94e9] {\r\n    display: block;\r\n    margin: 20px auto;\r\n}\r\n\r\n.menu[_v-607c94e9] {\r\n    margin-top: 20px;\r\n}\r\n\r\n.aside-header[_v-607c94e9] {\r\n    position: relative;\r\n    width: 100%;\r\n    height: 42px;\r\n    line-height: 42px;\r\n    background: #404040;\r\n    padding: 0 16px 0 28px;\r\n    font-size: 12px;\r\n    color: #999;\r\n    cursor: pointer;\r\n    -webkit-transition: all .3s ease;\r\n    transition: all .3s ease;\r\n}\r\n\r\n.aside-header[_v-607c94e9]:hover {\r\n    color: #2db7f5;\r\n}\r\n\r\n.icon[_v-607c94e9] {\r\n    width: 20px;\r\n}\r\n\r\n.icon-arrow[_v-607c94e9] {\r\n    position: absolute;\r\n    right: 15px;\r\n    top: 15px;\r\n    font-size: 12px;\r\n}\r\n\r\n.aside-lists[_v-607c94e9] {\r\n    padding: 0;\r\n    margin: 0;\r\n}\r\n\r\n.aside-lists li[_v-607c94e9] {\r\n    width: 100%;\r\n    line-height: 42px;\r\n    height: 42px;\r\n    padding: 0 5px 0 50px;\r\n    background: #333;\r\n    color: #999;\r\n    font-size: 12px;\r\n    cursor: pointer;\r\n    -webkit-transition: all .3s ease;\r\n    -moaz-transition: all .3s ease;\r\n    transition: all .3s ease;\r\n}\r\n\r\n.aside-lists li[_v-607c94e9]:hover {\r\n    color: #fff;\r\n}\r\n\r\n.aside-lists li.active[_v-607c94e9] {\r\n    background: #2db7f5;\r\n    color: #fff;\r\n}\r\n", "", {"version":3,"sources":["/./src/views/Left.vue.style"],"names":[],"mappings":";AAoFA;IACA,aAAA;IACA,eAAA;IACA,gBAAA;IACA,OAAA;IACA,UAAA;IACA,uBAAA;IACA,aAAA;IACA,mBAAA;CACA;;AAEA;IACA,eAAA;IACA,kBAAA;CACA;;AAEA;IACA,iBAAA;CACA;;AAEA;IACA,mBAAA;IACA,YAAA;IACA,aAAA;IACA,kBAAA;IACA,oBAAA;IACA,uBAAA;IACA,gBAAA;IACA,YAAA;IACA,gBAAA;IACA,iCAAA;IACA,yBAAA;CACA;;AAEA;IACA,eAAA;CACA;;AAEA;IACA,YAAA;CACA;;AAEA;IACA,mBAAA;IACA,YAAA;IACA,UAAA;IACA,gBAAA;CACA;;AAEA;IACA,WAAA;IACA,UAAA;CACA;;AAEA;IACA,YAAA;IACA,kBAAA;IACA,aAAA;IACA,sBAAA;IACA,iBAAA;IACA,YAAA;IACA,gBAAA;IACA,gBAAA;IACA,iCAAA;IACA,+BAAA;IACA,yBAAA;CACA;;AAEA;IACA,YAAA;CACA;;AAEA;IACA,oBAAA;IACA,YAAA;CACA","file":"Left.vue","sourcesContent":["<template>\r\n    <div class=\"sidebar\">\r\n        <a class=\"logo\" v-link=\"{ path: '/' }\">\r\n            <img src=\"../assets/images/logo2.png\" height=\"35\" width=\"134\">\r\n        </a>\r\n        <aside class=\"menu\">\r\n            <div class=\"aside-header\">\r\n                <span class=\"icon glyphicon glyphicon-map-marker\"></span>\r\n                <span>IDC</span>\r\n                <span class=\"icon-arrow glyphicon glyphicon-menu-down\"></span>\r\n            </div>\r\n            <ul class=\"aside-lists\">\r\n                <li v-link=\"{ path: '/roomSearch' }\">\r\n                    <span>机房查询</span>\r\n                </li>\r\n            </ul>\r\n            <div class=\"aside-header\">\r\n                <span class=\"icon glyphicon glyphicon-inbox\"></span>\r\n                <span>网络设备</span>\r\n                <span class=\"icon-arrow glyphicon glyphicon-menu-down\"></span>\r\n            </div>\r\n            <ul class=\"aside-lists\">\r\n                <li v-link=\"{ path: '/deviceSearch' }\">\r\n                    <span>交换机查询</span>\r\n                </li>\r\n            </ul>\r\n            <div class=\"aside-header\">\r\n                <span class=\"icon glyphicon glyphicon-asterisk\"></span>\r\n                <span>IP</span>\r\n                <span class=\"icon-arrow glyphicon glyphicon-menu-down\"></span>\r\n            </div>\r\n            <ul class=\"aside-lists\">\r\n                <li v-link=\"{ path: '/ipSearch' }\">\r\n                    <span>IP查询</span>\r\n                </li>\r\n                <li v-link=\"{ path: '/ipPlan' }\">\r\n                    <span>IP规划</span>\r\n                </li>\r\n                <li v-link=\"{ path: '/ipDelete' }\">\r\n                    <span>IP回收</span>\r\n                </li>\r\n            </ul>\r\n            <div class=\"aside-header\">\r\n                <span class=\"icon glyphicon glyphicon-hdd\"></span>\r\n                <span>服务器</span>\r\n                <span class=\"icon-arrow glyphicon glyphicon-menu-down\"></span>\r\n            </div>\r\n            <ul class=\"aside-lists\">\r\n                <li v-link=\"{ path: '/serverSearch' }\">\r\n                    <span>服务器查询</span>\r\n                </li>\r\n            </ul>\r\n            <div class=\"aside-header\">\r\n                <span class=\"icon glyphicon glyphicon-th-large\"></span>\r\n                <span>业务</span>\r\n                <span class=\"icon-arrow glyphicon glyphicon-menu-down\"></span>\r\n            </div>\r\n            <ul class=\"aside-lists\">\r\n                <li v-link=\"{ path: '/businessSearch' }\">\r\n                    <span>业务管理</span>\r\n                </li>\r\n                <li>\r\n                    <span>业务树</span>\r\n                </li>\r\n            </ul>\r\n            <div class=\"aside-header\">\r\n                <span class=\"icon glyphicon glyphicon-th\"></span>\r\n                <span>其他</span>\r\n                <span class=\"icon-arrow glyphicon glyphicon-menu-down\"></span>\r\n            </div>\r\n            <ul class=\"aside-lists\">\r\n                <li v-link=\"{ path: '/import' }\">\r\n                    <span>导入</span>\r\n                </li>\r\n            </ul>\r\n        </aside>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    \r\n</script>\r\n\r\n<style scoped>\r\n.sidebar {\r\n    width: 200px;\r\n    display: block;\r\n    position: fixed;\r\n    top: 0;\r\n    bottom: 0;\r\n    background-color: #333;\r\n    z-index: 102;\r\n    overflow-x: hidden;\r\n}\r\n\r\n.logo img {\r\n    display: block;\r\n    margin: 20px auto;\r\n}\r\n\r\n.menu {\r\n    margin-top: 20px;\r\n}\r\n\r\n.aside-header {\r\n    position: relative;\r\n    width: 100%;\r\n    height: 42px;\r\n    line-height: 42px;\r\n    background: #404040;\r\n    padding: 0 16px 0 28px;\r\n    font-size: 12px;\r\n    color: #999;\r\n    cursor: pointer;\r\n    -webkit-transition: all .3s ease;\r\n    transition: all .3s ease;\r\n}\r\n\r\n.aside-header:hover {\r\n    color: #2db7f5;\r\n}\r\n\r\n.icon {\r\n    width: 20px;\r\n}\r\n\r\n.icon-arrow {\r\n    position: absolute;\r\n    right: 15px;\r\n    top: 15px;\r\n    font-size: 12px;\r\n}\r\n\r\n.aside-lists {\r\n    padding: 0;\r\n    margin: 0;\r\n}\r\n\r\n.aside-lists li {\r\n    width: 100%;\r\n    line-height: 42px;\r\n    height: 42px;\r\n    padding: 0 5px 0 50px;\r\n    background: #333;\r\n    color: #999;\r\n    font-size: 12px;\r\n    cursor: pointer;\r\n    -webkit-transition: all .3s ease;\r\n    -moaz-transition: all .3s ease;\r\n    transition: all .3s ease;\r\n}\r\n\r\n.aside-lists li:hover {\r\n    color: #fff;\r\n}\r\n\r\n.aside-lists li.active {\r\n    background: #2db7f5;\r\n    color: #fff;\r\n}\r\n</style>"],"sourceRoot":"webpack://"}]);
+	exports.push([module.id, "\r\n.sidebar[_v-607c94e9] {\r\n    width: 200px;\r\n    display: block;\r\n    position: fixed;\r\n    top: 0;\r\n    bottom: 0;\r\n    background-color: #333;\r\n    z-index: 102;\r\n    overflow-x: hidden;\r\n}\r\n\r\n.logo img[_v-607c94e9] {\r\n    display: block;\r\n    margin: 20px auto;\r\n}\r\n\r\n.menu[_v-607c94e9] {\r\n    margin-top: 20px;\r\n}\r\n\r\n.aside-header[_v-607c94e9] {\r\n    position: relative;\r\n    width: 100%;\r\n    height: 42px;\r\n    line-height: 42px;\r\n    background: #404040;\r\n    padding: 0 16px 0 28px;\r\n    font-size: 12px;\r\n    color: #999;\r\n    cursor: pointer;\r\n    -webkit-transition: all .3s ease;\r\n    transition: all .3s ease;\r\n}\r\n\r\n.aside-header[_v-607c94e9]:hover {\r\n    color: #2db7f5;\r\n}\r\n\r\n.icon[_v-607c94e9] {\r\n    width: 20px;\r\n}\r\n\r\n.icon-arrow[_v-607c94e9] {\r\n    position: absolute;\r\n    right: 15px;\r\n    top: 15px;\r\n    font-size: 12px;\r\n}\r\n\r\n.aside-lists[_v-607c94e9] {\r\n    padding: 0;\r\n    margin: 0;\r\n}\r\n\r\n.aside-lists li[_v-607c94e9] {\r\n    width: 100%;\r\n    line-height: 42px;\r\n    height: 42px;\r\n    padding: 0 5px 0 50px;\r\n    background: #333;\r\n    color: #999;\r\n    font-size: 12px;\r\n    cursor: pointer;\r\n    -webkit-transition: all .3s ease;\r\n    -moaz-transition: all .3s ease;\r\n    transition: all .3s ease;\r\n}\r\n\r\n.aside-lists li[_v-607c94e9]:hover {\r\n    color: #fff;\r\n}\r\n\r\n.aside-lists li.active[_v-607c94e9] {\r\n    background: #2db7f5;\r\n    color: #fff;\r\n}\r\n\r\n.aside-lists.open[_v-607c94e9] {\r\n    display: none;\r\n}\r\n", "", {"version":3,"sources":["/./src/views/Left.vue.style"],"names":[],"mappings":";AA4FA;IACA,aAAA;IACA,eAAA;IACA,gBAAA;IACA,OAAA;IACA,UAAA;IACA,uBAAA;IACA,aAAA;IACA,mBAAA;CACA;;AAEA;IACA,eAAA;IACA,kBAAA;CACA;;AAEA;IACA,iBAAA;CACA;;AAEA;IACA,mBAAA;IACA,YAAA;IACA,aAAA;IACA,kBAAA;IACA,oBAAA;IACA,uBAAA;IACA,gBAAA;IACA,YAAA;IACA,gBAAA;IACA,iCAAA;IACA,yBAAA;CACA;;AAEA;IACA,eAAA;CACA;;AAEA;IACA,YAAA;CACA;;AAEA;IACA,mBAAA;IACA,YAAA;IACA,UAAA;IACA,gBAAA;CACA;;AAEA;IACA,WAAA;IACA,UAAA;CACA;;AAEA;IACA,YAAA;IACA,kBAAA;IACA,aAAA;IACA,sBAAA;IACA,iBAAA;IACA,YAAA;IACA,gBAAA;IACA,gBAAA;IACA,iCAAA;IACA,+BAAA;IACA,yBAAA;CACA;;AAEA;IACA,YAAA;CACA;;AAEA;IACA,oBAAA;IACA,YAAA;CACA;;AAEA;IACA,cAAA;CACA","file":"Left.vue","sourcesContent":["<template>\r\n    <div class=\"sidebar\">\r\n        <a class=\"logo\" v-link=\"{ path: '/' }\">\r\n            <img src=\"../assets/images/logo2.png\" height=\"35\" width=\"134\">\r\n        </a>\r\n        <aside class=\"menu\">\r\n            <div class=\"aside-header\" @click=\"toggle('idc')\">\r\n                <span class=\"icon glyphicon glyphicon-map-marker\"></span>\r\n                <span>IDC</span>\r\n                <span class=\"icon-arrow glyphicon glyphicon-menu-down\"></span>\r\n            </div>\r\n            <ul class=\"aside-lists\" v-el:idc>\r\n                <li v-link=\"{ path: '/roomSearch' }\">\r\n                    <span>机房查询</span>\r\n                </li>\r\n            </ul>\r\n            <div class=\"aside-header\" @click=\"toggle('network')\">\r\n                <span class=\"icon glyphicon glyphicon-inbox\"></span>\r\n                <span>网络设备</span>\r\n                <span class=\"icon-arrow glyphicon glyphicon-menu-down\"></span>\r\n            </div>\r\n            <ul class=\"aside-lists\" v-el:network>\r\n                <li v-link=\"{ path: '/deviceSearch' }\">\r\n                    <span>交换机查询</span>\r\n                </li>\r\n            </ul>\r\n            <div class=\"aside-header\" @click=\"toggle('ip')\">\r\n                <span class=\"icon glyphicon glyphicon-asterisk\"></span>\r\n                <span>IP</span>\r\n                <span class=\"icon-arrow glyphicon glyphicon-menu-down\"></span>\r\n            </div>\r\n            <ul class=\"aside-lists\" v-el:ip>\r\n                <li v-link=\"{ path: '/ipSearch' }\">\r\n                    <span>IP查询</span>\r\n                </li>\r\n                <li v-link=\"{ path: '/ipPlan' }\">\r\n                    <span>IP规划</span>\r\n                </li>\r\n                <li v-link=\"{ path: '/ipDelete' }\">\r\n                    <span>IP回收</span>\r\n                </li>\r\n            </ul>\r\n            <div class=\"aside-header\" @click=\"toggle('server')\">\r\n                <span class=\"icon glyphicon glyphicon-hdd\"></span>\r\n                <span>服务器</span>\r\n                <span class=\"icon-arrow glyphicon glyphicon-menu-down\"></span>\r\n            </div>\r\n            <ul class=\"aside-lists\" v-el:server>\r\n                <li v-link=\"{ path: '/serverSearch' }\">\r\n                    <span>服务器查询</span>\r\n                </li>\r\n            </ul>\r\n            <div class=\"aside-header\" @click=\"toggle('business')\">\r\n                <span class=\"icon glyphicon glyphicon-th-large\"></span>\r\n                <span>业务</span>\r\n                <span class=\"icon-arrow glyphicon glyphicon-menu-down\"></span>\r\n            </div>\r\n            <ul class=\"aside-lists\" v-el:business>\r\n                <li v-link=\"{ path: '/businessSearch' }\">\r\n                    <span>业务管理</span>\r\n                </li>\r\n                <li>\r\n                    <span>业务树</span>\r\n                </li>\r\n            </ul>\r\n            <div class=\"aside-header\" @click=\"toggle('other')\">\r\n                <span class=\"icon glyphicon glyphicon-th\"></span>\r\n                <span>其他</span>\r\n                <span class=\"icon-arrow glyphicon glyphicon-menu-down\"></span>\r\n            </div>\r\n            <ul class=\"aside-lists\" v-el:other>\r\n                <li v-link=\"{ path: '/import' }\">\r\n                    <span>导入</span>\r\n                </li>\r\n            </ul>\r\n        </aside>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\nexport default {\r\n    methods: {\r\n\r\n        // 导航栏收缩\r\n        toggle (type) {\r\n            this.$els[type].classList.toggle('open')\r\n        }\r\n    }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.sidebar {\r\n    width: 200px;\r\n    display: block;\r\n    position: fixed;\r\n    top: 0;\r\n    bottom: 0;\r\n    background-color: #333;\r\n    z-index: 102;\r\n    overflow-x: hidden;\r\n}\r\n\r\n.logo img {\r\n    display: block;\r\n    margin: 20px auto;\r\n}\r\n\r\n.menu {\r\n    margin-top: 20px;\r\n}\r\n\r\n.aside-header {\r\n    position: relative;\r\n    width: 100%;\r\n    height: 42px;\r\n    line-height: 42px;\r\n    background: #404040;\r\n    padding: 0 16px 0 28px;\r\n    font-size: 12px;\r\n    color: #999;\r\n    cursor: pointer;\r\n    -webkit-transition: all .3s ease;\r\n    transition: all .3s ease;\r\n}\r\n\r\n.aside-header:hover {\r\n    color: #2db7f5;\r\n}\r\n\r\n.icon {\r\n    width: 20px;\r\n}\r\n\r\n.icon-arrow {\r\n    position: absolute;\r\n    right: 15px;\r\n    top: 15px;\r\n    font-size: 12px;\r\n}\r\n\r\n.aside-lists {\r\n    padding: 0;\r\n    margin: 0;\r\n}\r\n\r\n.aside-lists li {\r\n    width: 100%;\r\n    line-height: 42px;\r\n    height: 42px;\r\n    padding: 0 5px 0 50px;\r\n    background: #333;\r\n    color: #999;\r\n    font-size: 12px;\r\n    cursor: pointer;\r\n    -webkit-transition: all .3s ease;\r\n    -moaz-transition: all .3s ease;\r\n    transition: all .3s ease;\r\n}\r\n\r\n.aside-lists li:hover {\r\n    color: #fff;\r\n}\r\n\r\n.aside-lists li.active {\r\n    background: #2db7f5;\r\n    color: #fff;\r\n}\r\n\r\n.aside-lists.open {\r\n    display: none;\r\n}\r\n</style>"],"sourceRoot":"webpack://"}]);
 	
 	// exports
 
@@ -33817,38 +33940,43 @@
 /* 233 */
 /***/ function(module, exports) {
 
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
 	// <template>
 	//     <div class="sidebar">
 	//         <a class="logo" v-link="{ path: '/' }">
 	//             <img src="../assets/images/logo2.png" height="35" width="134">
 	//         </a>
 	//         <aside class="menu">
-	//             <div class="aside-header">
+	//             <div class="aside-header" @click="toggle('idc')">
 	//                 <span class="icon glyphicon glyphicon-map-marker"></span>
 	//                 <span>IDC</span>
 	//                 <span class="icon-arrow glyphicon glyphicon-menu-down"></span>
 	//             </div>
-	//             <ul class="aside-lists">
+	//             <ul class="aside-lists" v-el:idc>
 	//                 <li v-link="{ path: '/roomSearch' }">
 	//                     <span>机房查询</span>
 	//                 </li>
 	//             </ul>
-	//             <div class="aside-header">
+	//             <div class="aside-header" @click="toggle('network')">
 	//                 <span class="icon glyphicon glyphicon-inbox"></span>
 	//                 <span>网络设备</span>
 	//                 <span class="icon-arrow glyphicon glyphicon-menu-down"></span>
 	//             </div>
-	//             <ul class="aside-lists">
+	//             <ul class="aside-lists" v-el:network>
 	//                 <li v-link="{ path: '/deviceSearch' }">
 	//                     <span>交换机查询</span>
 	//                 </li>
 	//             </ul>
-	//             <div class="aside-header">
+	//             <div class="aside-header" @click="toggle('ip')">
 	//                 <span class="icon glyphicon glyphicon-asterisk"></span>
 	//                 <span>IP</span>
 	//                 <span class="icon-arrow glyphicon glyphicon-menu-down"></span>
 	//             </div>
-	//             <ul class="aside-lists">
+	//             <ul class="aside-lists" v-el:ip>
 	//                 <li v-link="{ path: '/ipSearch' }">
 	//                     <span>IP查询</span>
 	//                 </li>
@@ -33859,22 +33987,22 @@
 	//                     <span>IP回收</span>
 	//                 </li>
 	//             </ul>
-	//             <div class="aside-header">
+	//             <div class="aside-header" @click="toggle('server')">
 	//                 <span class="icon glyphicon glyphicon-hdd"></span>
 	//                 <span>服务器</span>
 	//                 <span class="icon-arrow glyphicon glyphicon-menu-down"></span>
 	//             </div>
-	//             <ul class="aside-lists">
+	//             <ul class="aside-lists" v-el:server>
 	//                 <li v-link="{ path: '/serverSearch' }">
 	//                     <span>服务器查询</span>
 	//                 </li>
 	//             </ul>
-	//             <div class="aside-header">
+	//             <div class="aside-header" @click="toggle('business')">
 	//                 <span class="icon glyphicon glyphicon-th-large"></span>
 	//                 <span>业务</span>
 	//                 <span class="icon-arrow glyphicon glyphicon-menu-down"></span>
 	//             </div>
-	//             <ul class="aside-lists">
+	//             <ul class="aside-lists" v-el:business>
 	//                 <li v-link="{ path: '/businessSearch' }">
 	//                     <span>业务管理</span>
 	//                 </li>
@@ -33882,12 +34010,12 @@
 	//                     <span>业务树</span>
 	//                 </li>
 	//             </ul>
-	//             <div class="aside-header">
+	//             <div class="aside-header" @click="toggle('other')">
 	//                 <span class="icon glyphicon glyphicon-th"></span>
 	//                 <span>其他</span>
 	//                 <span class="icon-arrow glyphicon glyphicon-menu-down"></span>
 	//             </div>
-	//             <ul class="aside-lists">
+	//             <ul class="aside-lists" v-el:other>
 	//                 <li v-link="{ path: '/import' }">
 	//                     <span>导入</span>
 	//                 </li>
@@ -33897,7 +34025,16 @@
 	// </template>
 	//
 	// <script>
-
+	exports.default = {
+	    methods: {
+	
+	        // 导航栏收缩
+	
+	        toggle: function toggle(type) {
+	            this.$els[type].classList.toggle('open');
+	        }
+	    }
+	};
 	// </script>
 	//
 	// <style scoped>
@@ -33977,15 +34114,18 @@
 	//     background: #2db7f5;
 	//     color: #fff;
 	// }
+	//
+	// .aside-lists.open {
+	//     display: none;
+	// }
 	// </style>
 	/* generated by vue-loader */
-	"use strict";
 
 /***/ },
 /* 234 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "\n    <div class=\"sidebar\" _v-607c94e9=\"\">\n        <a class=\"logo\" v-link=\"{ path: '/' }\" _v-607c94e9=\"\">\n            <img src=\"" + __webpack_require__(235) + "\" height=\"35\" width=\"134\" _v-607c94e9=\"\">\n        </a>\n        <aside class=\"menu\" _v-607c94e9=\"\">\n            <div class=\"aside-header\" _v-607c94e9=\"\">\n                <span class=\"icon glyphicon glyphicon-map-marker\" _v-607c94e9=\"\"></span>\n                <span _v-607c94e9=\"\">IDC</span>\n                <span class=\"icon-arrow glyphicon glyphicon-menu-down\" _v-607c94e9=\"\"></span>\n            </div>\n            <ul class=\"aside-lists\" _v-607c94e9=\"\">\n                <li v-link=\"{ path: '/roomSearch' }\" _v-607c94e9=\"\">\n                    <span _v-607c94e9=\"\">机房查询</span>\n                </li>\n            </ul>\n            <div class=\"aside-header\" _v-607c94e9=\"\">\n                <span class=\"icon glyphicon glyphicon-inbox\" _v-607c94e9=\"\"></span>\n                <span _v-607c94e9=\"\">网络设备</span>\n                <span class=\"icon-arrow glyphicon glyphicon-menu-down\" _v-607c94e9=\"\"></span>\n            </div>\n            <ul class=\"aside-lists\" _v-607c94e9=\"\">\n                <li v-link=\"{ path: '/deviceSearch' }\" _v-607c94e9=\"\">\n                    <span _v-607c94e9=\"\">交换机查询</span>\n                </li>\n            </ul>\n            <div class=\"aside-header\" _v-607c94e9=\"\">\n                <span class=\"icon glyphicon glyphicon-asterisk\" _v-607c94e9=\"\"></span>\n                <span _v-607c94e9=\"\">IP</span>\n                <span class=\"icon-arrow glyphicon glyphicon-menu-down\" _v-607c94e9=\"\"></span>\n            </div>\n            <ul class=\"aside-lists\" _v-607c94e9=\"\">\n                <li v-link=\"{ path: '/ipSearch' }\" _v-607c94e9=\"\">\n                    <span _v-607c94e9=\"\">IP查询</span>\n                </li>\n                <li v-link=\"{ path: '/ipPlan' }\" _v-607c94e9=\"\">\n                    <span _v-607c94e9=\"\">IP规划</span>\n                </li>\n                <li v-link=\"{ path: '/ipDelete' }\" _v-607c94e9=\"\">\n                    <span _v-607c94e9=\"\">IP回收</span>\n                </li>\n            </ul>\n            <div class=\"aside-header\" _v-607c94e9=\"\">\n                <span class=\"icon glyphicon glyphicon-hdd\" _v-607c94e9=\"\"></span>\n                <span _v-607c94e9=\"\">服务器</span>\n                <span class=\"icon-arrow glyphicon glyphicon-menu-down\" _v-607c94e9=\"\"></span>\n            </div>\n            <ul class=\"aside-lists\" _v-607c94e9=\"\">\n                <li v-link=\"{ path: '/serverSearch' }\" _v-607c94e9=\"\">\n                    <span _v-607c94e9=\"\">服务器查询</span>\n                </li>\n            </ul>\n            <div class=\"aside-header\" _v-607c94e9=\"\">\n                <span class=\"icon glyphicon glyphicon-th-large\" _v-607c94e9=\"\"></span>\n                <span _v-607c94e9=\"\">业务</span>\n                <span class=\"icon-arrow glyphicon glyphicon-menu-down\" _v-607c94e9=\"\"></span>\n            </div>\n            <ul class=\"aside-lists\" _v-607c94e9=\"\">\n                <li v-link=\"{ path: '/businessSearch' }\" _v-607c94e9=\"\">\n                    <span _v-607c94e9=\"\">业务管理</span>\n                </li>\n                <li _v-607c94e9=\"\">\n                    <span _v-607c94e9=\"\">业务树</span>\n                </li>\n            </ul>\n            <div class=\"aside-header\" _v-607c94e9=\"\">\n                <span class=\"icon glyphicon glyphicon-th\" _v-607c94e9=\"\"></span>\n                <span _v-607c94e9=\"\">其他</span>\n                <span class=\"icon-arrow glyphicon glyphicon-menu-down\" _v-607c94e9=\"\"></span>\n            </div>\n            <ul class=\"aside-lists\" _v-607c94e9=\"\">\n                <li v-link=\"{ path: '/import' }\" _v-607c94e9=\"\">\n                    <span _v-607c94e9=\"\">导入</span>\n                </li>\n            </ul>\n        </aside>\n    </div>\n";
+	module.exports = "\n    <div class=\"sidebar\" _v-607c94e9=\"\">\n        <a class=\"logo\" v-link=\"{ path: '/' }\" _v-607c94e9=\"\">\n            <img src=\"" + __webpack_require__(235) + "\" height=\"35\" width=\"134\" _v-607c94e9=\"\">\n        </a>\n        <aside class=\"menu\" _v-607c94e9=\"\">\n            <div class=\"aside-header\" @click=\"toggle('idc')\" _v-607c94e9=\"\">\n                <span class=\"icon glyphicon glyphicon-map-marker\" _v-607c94e9=\"\"></span>\n                <span _v-607c94e9=\"\">IDC</span>\n                <span class=\"icon-arrow glyphicon glyphicon-menu-down\" _v-607c94e9=\"\"></span>\n            </div>\n            <ul class=\"aside-lists\" v-el:idc=\"\" _v-607c94e9=\"\">\n                <li v-link=\"{ path: '/roomSearch' }\" _v-607c94e9=\"\">\n                    <span _v-607c94e9=\"\">机房查询</span>\n                </li>\n            </ul>\n            <div class=\"aside-header\" @click=\"toggle('network')\" _v-607c94e9=\"\">\n                <span class=\"icon glyphicon glyphicon-inbox\" _v-607c94e9=\"\"></span>\n                <span _v-607c94e9=\"\">网络设备</span>\n                <span class=\"icon-arrow glyphicon glyphicon-menu-down\" _v-607c94e9=\"\"></span>\n            </div>\n            <ul class=\"aside-lists\" v-el:network=\"\" _v-607c94e9=\"\">\n                <li v-link=\"{ path: '/deviceSearch' }\" _v-607c94e9=\"\">\n                    <span _v-607c94e9=\"\">交换机查询</span>\n                </li>\n            </ul>\n            <div class=\"aside-header\" @click=\"toggle('ip')\" _v-607c94e9=\"\">\n                <span class=\"icon glyphicon glyphicon-asterisk\" _v-607c94e9=\"\"></span>\n                <span _v-607c94e9=\"\">IP</span>\n                <span class=\"icon-arrow glyphicon glyphicon-menu-down\" _v-607c94e9=\"\"></span>\n            </div>\n            <ul class=\"aside-lists\" v-el:ip=\"\" _v-607c94e9=\"\">\n                <li v-link=\"{ path: '/ipSearch' }\" _v-607c94e9=\"\">\n                    <span _v-607c94e9=\"\">IP查询</span>\n                </li>\n                <li v-link=\"{ path: '/ipPlan' }\" _v-607c94e9=\"\">\n                    <span _v-607c94e9=\"\">IP规划</span>\n                </li>\n                <li v-link=\"{ path: '/ipDelete' }\" _v-607c94e9=\"\">\n                    <span _v-607c94e9=\"\">IP回收</span>\n                </li>\n            </ul>\n            <div class=\"aside-header\" @click=\"toggle('server')\" _v-607c94e9=\"\">\n                <span class=\"icon glyphicon glyphicon-hdd\" _v-607c94e9=\"\"></span>\n                <span _v-607c94e9=\"\">服务器</span>\n                <span class=\"icon-arrow glyphicon glyphicon-menu-down\" _v-607c94e9=\"\"></span>\n            </div>\n            <ul class=\"aside-lists\" v-el:server=\"\" _v-607c94e9=\"\">\n                <li v-link=\"{ path: '/serverSearch' }\" _v-607c94e9=\"\">\n                    <span _v-607c94e9=\"\">服务器查询</span>\n                </li>\n            </ul>\n            <div class=\"aside-header\" @click=\"toggle('business')\" _v-607c94e9=\"\">\n                <span class=\"icon glyphicon glyphicon-th-large\" _v-607c94e9=\"\"></span>\n                <span _v-607c94e9=\"\">业务</span>\n                <span class=\"icon-arrow glyphicon glyphicon-menu-down\" _v-607c94e9=\"\"></span>\n            </div>\n            <ul class=\"aside-lists\" v-el:business=\"\" _v-607c94e9=\"\">\n                <li v-link=\"{ path: '/businessSearch' }\" _v-607c94e9=\"\">\n                    <span _v-607c94e9=\"\">业务管理</span>\n                </li>\n                <li _v-607c94e9=\"\">\n                    <span _v-607c94e9=\"\">业务树</span>\n                </li>\n            </ul>\n            <div class=\"aside-header\" @click=\"toggle('other')\" _v-607c94e9=\"\">\n                <span class=\"icon glyphicon glyphicon-th\" _v-607c94e9=\"\"></span>\n                <span _v-607c94e9=\"\">其他</span>\n                <span class=\"icon-arrow glyphicon glyphicon-menu-down\" _v-607c94e9=\"\"></span>\n            </div>\n            <ul class=\"aside-lists\" v-el:other=\"\" _v-607c94e9=\"\">\n                <li v-link=\"{ path: '/import' }\" _v-607c94e9=\"\">\n                    <span _v-607c94e9=\"\">导入</span>\n                </li>\n            </ul>\n        </aside>\n    </div>\n";
 
 /***/ },
 /* 235 */
@@ -34592,7 +34732,20 @@
 	    roomStatus: [],
 	    operators: [],
 	    productTypes: [],
-	    cityArr1: []
+	    cityArr1: [],
+	    departments: [],
+	    gameTypes: [],
+	    platformTypes: [],
+	    developModels: [],
+	    phases: [],
+	    productLevels: [],
+	    gameLists: [],
+	    firms: [],
+	    origins1: [],
+	    origins2: [],
+	    deviceStatus: [],
+	    frames: [],
+	    seats: []
 	};
 	
 	// 创建一个 object 存储 mutation 函数
@@ -34617,6 +34770,46 @@
 	        state.operators = data.operators;
 	        state.productTypes = data.productTypes;
 	        state.cityArr1 = data.cityArr1;
+	    },
+	
+	
+	    // 设置业务管理下拉框内容
+	    GETBUSINESSSEARCH: function GETBUSINESSSEARCH(state, data) {
+	        state.departments = data.departments;
+	        state.productTypes = data.businessTypes;
+	        state.gameTypes = data.gameTypes;
+	        state.platformTypes = data.platformTypes;
+	        state.developModels = data.developModels;
+	        state.phases = data.phases;
+	        state.productLevels = data.productLevels;
+	        state.gameLists = data.gameLists;
+	    },
+	
+	
+	    // 获取交换机查询下拉框内容
+	    GETDEVICESEARCH: function GETDEVICESEARCH(state, data) {
+	        state.roomLocation = data.rooms;
+	        state.firms = data.firms;
+	        state.origins1 = data.origins1;
+	        state.deviceStatus = data.statusArr;
+	    },
+	
+	
+	    // 获取机架
+	    GETFRAMES: function GETFRAMES(state, data) {
+	        state.frames = data.items;
+	    },
+	
+	
+	    // 获取机位
+	    GETSEATS: function GETSEATS(state, data) {
+	        state.seats = data.items;
+	    },
+	
+	
+	    // 获取二级来源
+	    GETORIGINS: function GETORIGINS(state, data) {
+	        state.origins2 = data.items;
 	    }
 	};
 	

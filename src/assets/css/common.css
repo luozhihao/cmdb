@@ -279,3 +279,7 @@ fieldset[disabled] .form-control {
 .fs12 .dropdown-toggle {
     font-size: 12px;
 }
+
+.mh500 {
+    min-height: 500px;
+}

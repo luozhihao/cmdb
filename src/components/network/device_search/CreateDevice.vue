@@ -1,5 +1,5 @@
 <template>
-    <modal :show.sync="creatModal" effect="fade" width="1200px">
+    <modal :show.sync="createModal" effect="fade" width="1200px">
         <div slot="modal-header" class="modal-header">
             <h4 class="modal-title">新增交换机</h4>
         </div>
@@ -9,27 +9,27 @@
                     <div class="form-group">
                         <label class="control-label col-sm-4">SN：</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" placeholder="">
+                            <input type="text" class="form-control" v-model="sn">
                         </div>
                     </div>
                     <div class="form-group input-box">
                         <label class="control-label col-sm-4">机房：</label>
                         <div class="col-sm-8">
-                            <v-select :value.sync="room" :options="rooms" placeholder="请选择">
+                            <v-select :value.sync="room" :options="rooms" placeholder="请选择" :search="true">
                             </v-select>
                         </div>
                     </div>
                     <div class="form-group input-box">
                         <label class="control-label col-sm-4">机架：</label>
                         <div class="col-sm-8">
-                            <v-select :value.sync="frame" :options="frames" placeholder="请选择">
+                            <v-select :value.sync="frame" :options="frames" placeholder="请选择" :search="true">
                             </v-select>
                         </div>
                     </div>
                     <div class="form-group input-box">
                         <label class="control-label col-sm-4">机位：</label>
                         <div class="col-sm-8">
-                            <v-select :value.sync="seat" :options="seats" placeholder="请选择">
+                            <v-select :value.sync="seat" :options="seats" placeholder="请选择" :search="true">
                             </v-select>
                         </div>
                     </div>
@@ -47,7 +47,7 @@
                     <div class="form-group">
                         <label class="control-label col-sm-4">型号：</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" placeholder="">
+                            <input type="text" class="form-control" v-model="model">
                         </div>
                     </div>
                     <div class="form-group input-box">
@@ -67,19 +67,19 @@
                     <div class="form-group">
                         <label class="control-label col-sm-4">资产编号：</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" placeholder="">
+                            <input type="text" class="form-control" v-model="assetNum">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-4">财务编号：</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" placeholder="">
+                            <input type="text" class="form-control" v-model="financeNum">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-4">发票编号：</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" placeholder="">
+                            <input type="text" class="form-control" v-model="invoiceNum">
                         </div>
                     </div>
                 </div>
@@ -117,51 +117,51 @@
                     <div class="form-group">
                         <label class="control-label col-sm-4">电压：</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" placeholder="">
+                            <input type="text" class="form-control" v-model="voltage">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-4">电流：</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" placeholder="">
+                            <input type="text" class="form-control" v-model="electric">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-4">功率：</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" placeholder="">
+                            <input type="text" class="form-control" v-model="power">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-4">质保期限：</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" placeholder="">
+                            <input type="text" class="form-control" v-model="shelfLife">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-4">传输速率：</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" placeholder="">
+                            <input type="text" class="form-control" v-model="speed">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-4">接口总数：</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" placeholder="">
+                            <input type="text" class="form-control" v-model="interfaceTotal">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-4">备注：</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" placeholder="">
+                            <input type="text" class="form-control" v-model="remark">
                         </div>
                     </div>
                 </div>
             </form>
         </div>
         <div slot="modal-footer" class="modal-footer">
-            <button type="button" class="btn btn-default">保存</button>
-            <button type="button" class="btn btn-default" @click='creatModal = false'>取消</button>
+            <button type="button" class="btn btn-default" @click="saveFn">保存</button>
+            <button type="button" class="btn btn-default" @click='createModal = false'>取消</button>
         </div>
     </modal>
 </template>
@@ -169,26 +169,33 @@
 <script>
 import { modal, datepicker } from 'vue-strap'
 import vSelect from '../../global/Select.vue'
+import { getFramesSeats, getOrigins } from '../../../vuex/action.js'
+import { idcs, firms, origins1, deviceStatus, frames, seats, origins2 } from '../../../vuex/getters.js'
 
 let origin = {
-        creatModal: false,
-        firms: [],
+        createModal: false,
+        sn: '',
+        room: '',
+        frame: '',
+        seat :'',
+        origin1: '',
+        origin2: '',
+        model: '',
         firm: '',
-        statusArr: [],
         status: '',
+        assetNum: '',
+        financeNum: '',
+        invoiceNum: '',
         addTime: '',
         factoryTime: '',
         procureTime: '',
-        origins1: [],
-        origin1: '',
-        origins2: [],
-        origin2: '',
-        rooms: [],
-        room: '',
-        frames: [],
-        frame: '',
-        seats: [],
-        seat :''
+        voltage: '',
+        electric: '',
+        power: '',
+        shelfLife: '',
+        speed: '',
+        interfaceTotal: '',
+        remark: ''
     },
     init = Object.assign({}, origin);
 
@@ -198,15 +205,67 @@ export default {
     },
     methods: {
 
+        // 保存方法
+        saveFn () {
+            this.$http({
+                url: '/device/switch/add/',
+                method: 'POST',
+                data: this.$data
+            })
+            .then(response => {
+                if (response.data.code === 200) {
+                    this.createModal = false
+                    this.$data = Object.assign({}, init)
+                    
+                    this.$dispatch('refresh')                  
+                    this.$dispatch('show-success')
+                } else {
+                    this.$dispatch('show-error')
+                }
+            })
+        }
     },
     components: {
         modal,
         vSelect,
         datepicker
     },
+    vuex: {
+        actions: {
+            getFramesSeats,  // 获取机架机位
+            getOrigins // 获取二级来源
+        }, 
+        getters: {
+            rooms: idcs,
+            firms,
+            origins1,
+            statusArr: deviceStatus,
+            frames,
+            seats,
+            origins2
+        }
+    },
     events: {
         'showCreate' () {
-            this.creatModal = true
+            this.createModal = true
+        }
+    },
+    watch: {
+        'room' (newVal) {
+            this.frame = ''
+            this.seat = ''
+
+            this.getFramesSeats(newVal, 'room')
+        },
+        'frame' (newVal) {
+            this.seat = ''
+
+            this.getFramesSeats(newVal, 'shelf')
+        },
+        'origin1' (newVal) {
+            this.origin2 = ''
+
+            this.getOrigins(newVal)
         }
     }
 }
