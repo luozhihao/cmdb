@@ -37,7 +37,7 @@
                 <div class="form-group">
                     <label class="control-label col-sm-4">网段：</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" value="">
+                        <input type="text" class="form-control" v-model="param.network">
                     </div>
                 </div>
             </div>
@@ -112,7 +112,8 @@ let origin = {
             operator: '',
             room: '',
             type: '',
-            status: ''
+            status: '',
+            network: ''
         }
     },
     init = Object.assign({}, origin);

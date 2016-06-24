@@ -44,6 +44,13 @@ export default {
                 }
 
                 this.$dispatch('getTxt', param)
+            } else {
+                let param = {
+                    val: '',
+                    name: this.name
+                }
+
+                this.$dispatch('getTxt', param)
             }
 
             this.broadModal = false

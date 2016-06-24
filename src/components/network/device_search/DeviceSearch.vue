@@ -1,4 +1,4 @@
-<!-- 机房查询 -->
+<!-- 交换机查询 -->
 <template>
     <div>
         <form class="form-horizontal clearfix form-search">
@@ -94,7 +94,7 @@
             </div>
         </form>
         <div class="text-center btn-operate">
-            <button type="button" class="btn btn-default">
+            <button type="button" class="btn btn-default" @click="refresh">
                 查询
             </button>
             <button type="button" class="btn btn-default" @click="$broadcast('showCreate')">
@@ -105,11 +105,11 @@
             </button>
             <dropdown v-el:confirm>
                 <button type="button" class="btn btn-default" data-toggle="dropdown">
-                    批量退库
+                    批量删除
                     <span class="caret"></span>
                 </button>
                 <div slot="dropdown-menu" class="dropdown-menu pd20">
-                    <button type="button" class="btn btn-danger btn-block mt20" @click="deleteFn">确定</button>
+                    <button type="button" class="btn btn-danger btn-block" @click="deleteFn">确定</button>
                     <button type="button" class="btn btn-default btn-block" @click="cancelFn">取消</button>
                 </div>
             </dropdown>
@@ -159,7 +159,7 @@
             </table>
         </div>
         <div class="clearfix mt30">
-            <boot-page :async="false" :lens="lenArr" :page-len="pageLen" :url="url" :param="param"></boot-page>
+            <boot-page :async="true" :lens="lenArr" :page-len="pageLen" :url="url" :param="param"></boot-page>
         </div>
 
         <create-modal></create-modal>
@@ -183,12 +183,10 @@ let origin = {
         checkedAll: false,
         checkedIds: [],
         titles: [],
-        tableList: [
-            {id: 1, deviceNum: 'SGSW00001', deviceName: '华为 DS-6510B', machineName: 'none', SN: 'BRCBRW1906K01R', model: 'DS-6510B', deviceType: '交换机', firm: '华为', deviceStatus: '已启用', room: '北京亦庄联通机房', frame: 'L4M1-IDC-C003', seats: '46U', origin: '蜗牛公司'}
-        ],
+        tableList: [],
         lenArr: [10, 50, 100],
         pageLen: 5,
-        url: '',
+        url: '/device/switch/query/',
         param: {
             sn: '',
             deviceNum: '',
@@ -205,11 +203,8 @@ let origin = {
             model: ''
         },
         checkArr: [
-            {label: '设备名称', value: 'deviceName', checked: true},
-            {label: '机器名', value: 'machineName', checked: true},
             {label: 'SN', value: 'sn', checked: true},
             {label: '型号', value: 'model', checked: true},
-            {label: '设备类型', value: 'deviceType', checked: true},
             {label: '厂商', value: 'firm', checked: true},
             {label: '设备状态', value: 'deviceStatus', checked: true},
             {label: '所在机房', value: 'room', checked: true},
@@ -306,11 +301,11 @@ export default {
             }, 500);
         },
 
-        // 批量退库
+        // 批量删除
         deleteFn () {
             if (this.checkedIds.length) {
                 this.$http({
-                    url: '/idc/delete/',
+                    url: '/device/switch/delete/',
                     method: 'POST',
                     data: {
                         checkedIds: this.checkedIds
@@ -321,13 +316,13 @@ export default {
                         this.checkedIds = []
                         this.refresh()
 
-                        this.$dispatch('show-success', '退库成功')
+                        this.$dispatch('show-success', '删除成功')
                     } else {
-                        this.$dispatch('show-success', '退库失败了')
+                        this.$dispatch('show-error', '删除失败了')
                     }
                 })
             } else {
-                this.$dispatch('show-notify', '请选择退库项')
+                this.$dispatch('show-notify', '请选择删除项')
             }
 
             this.$els.confirm.classList.toggle('open')
@@ -394,7 +389,7 @@ export default {
         }
     },
     events: {
-        /*// 获取表格数据
+        // 获取表格数据
         'data' (param) {
             this.tableList = param.data
             this.checkedIds = []
@@ -403,7 +398,7 @@ export default {
         // 刷新表格
         'refresh' () {
             this.refresh()
-        },*/
+        },
 
         // 获取输入框内容
         'getTxt' (param) {

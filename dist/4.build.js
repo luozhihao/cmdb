@@ -1389,37 +1389,50 @@ webpackJsonp([4],Array(35).concat([
 	
 	var _Select2 = _interopRequireDefault(_Select);
 	
+	var _action = __webpack_require__(110);
+	
+	var _getters = __webpack_require__(111);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var origin = {
-	    networks: [],
+	    netType: '',
+	    idc: [],
 	    network: '',
-	    idcs: [],
-	    idc: []
+	    gateway: '',
+	    ips: '',
+	    operator: ''
 	}; // <!-- IP规划 -->
 	// <template>
 	//     <div>
 	//         <form class="form-horizontal clearfix form-search">
 	//         <div class="col-sm-3">
 	//                 <div class="form-group input-box">
-	//                     <label class="col-sm-4 control-label">网络类型：</label>
+	//                     <label class="col-sm-4 control-label">类型：</label>
 	//                     <div class="col-sm-8">
-	//                         <v-select :value.sync="network" :options="networks" placeholder="请选择">
+	//                         <v-select :value.sync="netType" :options="netTypes" placeholder="请选择">
 	//                         </v-select>
 	//                     </div>
 	//                 </div>
 	//                 <div class="form-group">
 	//                     <label class="col-sm-4 control-label">IP地址：</label>
 	//                     <div class="col-sm-8">
-	//                         <input type="text" class="form-control" value="多个">
+	//                         <input type="text" class="form-control" v-model="ips">
 	//                     </div>
 	//                 </div>
 	//             </div>
 	//             <div class="col-sm-3 input-box">
+	//                 <div class="form-group" v-show="netType === '3'">
+	//                     <label class="col-sm-4 control-label">运营商：</label>
+	//                     <div class="col-sm-8">
+	//                         <v-select :value.sync="operator" :options="operators" placeholder="请选择">
+	//                         </v-select>
+	//                     </div>
+	//                 </div>
 	//                 <div class="form-group">
 	//                     <label class="col-sm-4 control-label">规划机房：</label>
 	//                     <div class="col-sm-8">
-	//                         <v-select :value.sync="idc" :options="idcs" placeholder="请选择" multiple>
+	//                         <v-select :value.sync="idc" :options="idcs" placeholder="请选择" :search="true" multiple>
 	//                         </v-select>
 	//                     </div>
 	//                 </div>
@@ -1428,7 +1441,7 @@ webpackJsonp([4],Array(35).concat([
 	//                 <div class="form-group">
 	//                     <label class="col-sm-4 control-label">网段：</label>
 	//                     <div class="col-sm-8">
-	//                         <input type="text" class="form-control">
+	//                         <input type="text" class="form-control" v-model="network">
 	//                     </div>
 	//                 </div>
 	//             </div>
@@ -1436,7 +1449,7 @@ webpackJsonp([4],Array(35).concat([
 	//                 <div class="form-group">
 	//                     <label class="col-sm-4 control-label">网关：</label>
 	//                     <div class="col-sm-8">
-	//                         <input type="text" class="form-control">
+	//                         <input type="text" class="form-control" v-model="gateway">
 	//                     </div>
 	//                 </div>
 	//             </div>
@@ -1460,6 +1473,19 @@ webpackJsonp([4],Array(35).concat([
 	    methods: {},
 	    components: {
 	        vSelect: _Select2.default
+	    },
+	    vuex: {
+	        actions: {
+	            getIpPlan: _action.getIpPlan
+	        },
+	        getters: {
+	            idcs: _getters.idcs,
+	            netTypes: _getters.netTypes,
+	            operators: _getters.operators
+	        }
+	    },
+	    ready: function ready() {
+	        this.getIpPlan();
 	    }
 	};
 	// </script>
@@ -1474,7 +1500,7 @@ webpackJsonp([4],Array(35).concat([
 /* 173 */
 /***/ function(module, exports) {
 
-	module.exports = "\n    <div _v-709264ae=\"\">\n        <form class=\"form-horizontal clearfix form-search\" _v-709264ae=\"\">\n        <div class=\"col-sm-3\" _v-709264ae=\"\">\n                <div class=\"form-group input-box\" _v-709264ae=\"\">\n                    <label class=\"col-sm-4 control-label\" _v-709264ae=\"\">网络类型：</label>\n                    <div class=\"col-sm-8\" _v-709264ae=\"\">\n                        <v-select :value.sync=\"network\" :options=\"networks\" placeholder=\"请选择\" _v-709264ae=\"\">\n                        </v-select>\n                    </div>\n                </div>\n                <div class=\"form-group\" _v-709264ae=\"\">\n                    <label class=\"col-sm-4 control-label\" _v-709264ae=\"\">IP地址：</label>\n                    <div class=\"col-sm-8\" _v-709264ae=\"\">\n                        <input type=\"text\" class=\"form-control\" value=\"多个\" _v-709264ae=\"\">\n                    </div>\n                </div>\n            </div>\n            <div class=\"col-sm-3 input-box\" _v-709264ae=\"\">\n                <div class=\"form-group\" _v-709264ae=\"\">\n                    <label class=\"col-sm-4 control-label\" _v-709264ae=\"\">规划机房：</label>\n                    <div class=\"col-sm-8\" _v-709264ae=\"\">\n                        <v-select :value.sync=\"idc\" :options=\"idcs\" placeholder=\"请选择\" multiple=\"\" _v-709264ae=\"\">\n                        </v-select>\n                    </div>\n                </div>\n            </div>\n            <div class=\"col-sm-3\" _v-709264ae=\"\">\n                <div class=\"form-group\" _v-709264ae=\"\">\n                    <label class=\"col-sm-4 control-label\" _v-709264ae=\"\">网段：</label>\n                    <div class=\"col-sm-8\" _v-709264ae=\"\">\n                        <input type=\"text\" class=\"form-control\" _v-709264ae=\"\">\n                    </div>\n                </div>\n            </div>\n            <div class=\"col-sm-3\" _v-709264ae=\"\">\n                <div class=\"form-group\" _v-709264ae=\"\">\n                    <label class=\"col-sm-4 control-label\" _v-709264ae=\"\">网关：</label>\n                    <div class=\"col-sm-8\" _v-709264ae=\"\">\n                        <input type=\"text\" class=\"form-control\" _v-709264ae=\"\">\n                    </div>\n                </div>\n            </div>\n        </form>\n        <div class=\"text-center btn-operate\" _v-709264ae=\"\">\n            <button type=\"button\" class=\"btn btn-default\" _v-709264ae=\"\">\n                保存\n            </button>\n        </div>\n    </div>\n";
+	module.exports = "\n    <div _v-709264ae=\"\">\n        <form class=\"form-horizontal clearfix form-search\" _v-709264ae=\"\">\n        <div class=\"col-sm-3\" _v-709264ae=\"\">\n                <div class=\"form-group input-box\" _v-709264ae=\"\">\n                    <label class=\"col-sm-4 control-label\" _v-709264ae=\"\">类型：</label>\n                    <div class=\"col-sm-8\" _v-709264ae=\"\">\n                        <v-select :value.sync=\"netType\" :options=\"netTypes\" placeholder=\"请选择\" _v-709264ae=\"\">\n                        </v-select>\n                    </div>\n                </div>\n                <div class=\"form-group\" _v-709264ae=\"\">\n                    <label class=\"col-sm-4 control-label\" _v-709264ae=\"\">IP地址：</label>\n                    <div class=\"col-sm-8\" _v-709264ae=\"\">\n                        <input type=\"text\" class=\"form-control\" v-model=\"ips\" _v-709264ae=\"\">\n                    </div>\n                </div>\n            </div>\n            <div class=\"col-sm-3 input-box\" _v-709264ae=\"\">\n                <div class=\"form-group\" v-show=\"netType === '3'\" _v-709264ae=\"\">\n                    <label class=\"col-sm-4 control-label\" _v-709264ae=\"\">运营商：</label>\n                    <div class=\"col-sm-8\" _v-709264ae=\"\">\n                        <v-select :value.sync=\"operator\" :options=\"operators\" placeholder=\"请选择\" _v-709264ae=\"\">\n                        </v-select>\n                    </div>\n                </div>\n                <div class=\"form-group\" _v-709264ae=\"\">\n                    <label class=\"col-sm-4 control-label\" _v-709264ae=\"\">规划机房：</label>\n                    <div class=\"col-sm-8\" _v-709264ae=\"\">\n                        <v-select :value.sync=\"idc\" :options=\"idcs\" placeholder=\"请选择\" :search=\"true\" multiple=\"\" _v-709264ae=\"\">\n                        </v-select>\n                    </div>\n                </div>\n            </div>\n            <div class=\"col-sm-3\" _v-709264ae=\"\">\n                <div class=\"form-group\" _v-709264ae=\"\">\n                    <label class=\"col-sm-4 control-label\" _v-709264ae=\"\">网段：</label>\n                    <div class=\"col-sm-8\" _v-709264ae=\"\">\n                        <input type=\"text\" class=\"form-control\" v-model=\"network\" _v-709264ae=\"\">\n                    </div>\n                </div>\n            </div>\n            <div class=\"col-sm-3\" _v-709264ae=\"\">\n                <div class=\"form-group\" _v-709264ae=\"\">\n                    <label class=\"col-sm-4 control-label\" _v-709264ae=\"\">网关：</label>\n                    <div class=\"col-sm-8\" _v-709264ae=\"\">\n                        <input type=\"text\" class=\"form-control\" v-model=\"gateway\" _v-709264ae=\"\">\n                    </div>\n                </div>\n            </div>\n        </form>\n        <div class=\"text-center btn-operate\" _v-709264ae=\"\">\n            <button type=\"button\" class=\"btn btn-default\" _v-709264ae=\"\">\n                保存\n            </button>\n        </div>\n    </div>\n";
 
 /***/ }
 ]));

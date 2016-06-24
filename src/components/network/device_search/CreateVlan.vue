@@ -8,19 +8,19 @@
                 <div class="form-group">
                     <label class="control-label col-sm-3">名称：</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" v-model="name">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-3">速率：</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" v-model="speed">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-3">用途：</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" v-model="use">
                     </div>
                 </div>
                 <div class="form-group input-box">
@@ -45,8 +45,11 @@ import vSelect from '../../global/Select.vue'
 
 let origin = {
         createVlanModal: false,
-        ips: [],
-        ip: ''
+        name: '',
+        speed: '',
+        use: '',
+        ip: '',
+        ips: []
     },
     init = Object.assign({}, origin);
 

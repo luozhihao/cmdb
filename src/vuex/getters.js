@@ -65,3 +65,18 @@ export const seats = state => state.seats
 
 // 获取二级来源
 export const origins2 = state => state.origins2
+
+// 获取网络类型
+export const netTypes = state => state.networks
+
+// 获取产品类型
+export const products = state => state.products
+
+// 获取服务器类型
+export const serverTypes = state => state.serverTypes
+
+// 获取服务器状态
+export const serverStatus = state => state.serverStatus
+
+// 获取操作系统
+export const systems = state => state.systems

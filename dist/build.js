@@ -33356,6 +33356,8 @@
 	exports.getDeviceSearch = getDeviceSearch;
 	exports.getFramesSeats = getFramesSeats;
 	exports.getOrigins = getOrigins;
+	exports.getIpPlan = getIpPlan;
+	exports.getServerSearch = getServerSearch;
 	/**
 	 * 
 	 * @authors luozh@snail.com
@@ -33468,6 +33470,36 @@
 	    }).then(function (response) {
 	        if (response.data.code === 200) {
 	            dispatch('GETORIGINS', response.data);
+	        }
+	    });
+	}
+	
+	// 获取网络类型、规划机房、运营商
+	function getIpPlan(_ref8) {
+	    var dispatch = _ref8.dispatch;
+	    var state = _ref8.state;
+	
+	    this.$http({
+	        url: '/ip/ip_add/',
+	        method: 'GET'
+	    }).then(function (response) {
+	        if (response.data.code === 200) {
+	            dispatch('GETIPPLAN', response.data);
+	        }
+	    });
+	}
+	
+	// 获取服务器查询页下拉框数据
+	function getServerSearch(_ref9) {
+	    var dispatch = _ref9.dispatch;
+	    var state = _ref9.state;
+	
+	    this.$http({
+	        url: '/device/server/home/',
+	        method: 'GET'
+	    }).then(function (response) {
+	        if (response.data.code === 200) {
+	            dispatch('GETSERVERSEARCH', response.data);
 	        }
 	    });
 	}
@@ -33585,6 +33617,31 @@
 	// 获取二级来源
 	var origins2 = exports.origins2 = function origins2(state) {
 	  return state.origins2;
+	};
+	
+	// 获取网络类型
+	var netTypes = exports.netTypes = function netTypes(state) {
+	  return state.networks;
+	};
+	
+	// 获取产品类型
+	var products = exports.products = function products(state) {
+	  return state.products;
+	};
+	
+	// 获取服务器类型
+	var serverTypes = exports.serverTypes = function serverTypes(state) {
+	  return state.serverTypes;
+	};
+	
+	// 获取服务器状态
+	var serverStatus = exports.serverStatus = function serverStatus(state) {
+	  return state.serverStatus;
+	};
+	
+	// 获取操作系统
+	var systems = exports.systems = function systems(state) {
+	  return state.systems;
 	};
 
 /***/ },
@@ -33931,7 +33988,7 @@
 	
 	
 	// module
-	exports.push([module.id, "\r\n.sidebar[_v-607c94e9] {\r\n    width: 200px;\r\n    display: block;\r\n    position: fixed;\r\n    top: 0;\r\n    bottom: 0;\r\n    background-color: #333;\r\n    z-index: 102;\r\n    overflow-x: hidden;\r\n}\r\n\r\n.logo img[_v-607c94e9] {\r\n    display: block;\r\n    margin: 20px auto;\r\n}\r\n\r\n.menu[_v-607c94e9] {\r\n    margin-top: 20px;\r\n}\r\n\r\n.aside-header[_v-607c94e9] {\r\n    position: relative;\r\n    width: 100%;\r\n    height: 42px;\r\n    line-height: 42px;\r\n    background: #404040;\r\n    padding: 0 16px 0 28px;\r\n    font-size: 12px;\r\n    color: #999;\r\n    cursor: pointer;\r\n    -webkit-transition: all .3s ease;\r\n    transition: all .3s ease;\r\n}\r\n\r\n.aside-header[_v-607c94e9]:hover {\r\n    color: #2db7f5;\r\n}\r\n\r\n.icon[_v-607c94e9] {\r\n    width: 20px;\r\n}\r\n\r\n.icon-arrow[_v-607c94e9] {\r\n    position: absolute;\r\n    right: 15px;\r\n    top: 15px;\r\n    font-size: 12px;\r\n}\r\n\r\n.aside-lists[_v-607c94e9] {\r\n    padding: 0;\r\n    margin: 0;\r\n}\r\n\r\n.aside-lists li[_v-607c94e9] {\r\n    width: 100%;\r\n    line-height: 42px;\r\n    height: 42px;\r\n    padding: 0 5px 0 50px;\r\n    background: #333;\r\n    color: #999;\r\n    font-size: 12px;\r\n    cursor: pointer;\r\n    -webkit-transition: all .3s ease;\r\n    -moaz-transition: all .3s ease;\r\n    transition: all .3s ease;\r\n}\r\n\r\n.aside-lists li[_v-607c94e9]:hover {\r\n    color: #fff;\r\n}\r\n\r\n.aside-lists li.active[_v-607c94e9] {\r\n    background: #2db7f5;\r\n    color: #fff;\r\n}\r\n\r\n.aside-lists.open[_v-607c94e9] {\r\n    display: none;\r\n}\r\n", "", {"version":3,"sources":["/./src/views/Left.vue.style"],"names":[],"mappings":";AA4FA;IACA,aAAA;IACA,eAAA;IACA,gBAAA;IACA,OAAA;IACA,UAAA;IACA,uBAAA;IACA,aAAA;IACA,mBAAA;CACA;;AAEA;IACA,eAAA;IACA,kBAAA;CACA;;AAEA;IACA,iBAAA;CACA;;AAEA;IACA,mBAAA;IACA,YAAA;IACA,aAAA;IACA,kBAAA;IACA,oBAAA;IACA,uBAAA;IACA,gBAAA;IACA,YAAA;IACA,gBAAA;IACA,iCAAA;IACA,yBAAA;CACA;;AAEA;IACA,eAAA;CACA;;AAEA;IACA,YAAA;CACA;;AAEA;IACA,mBAAA;IACA,YAAA;IACA,UAAA;IACA,gBAAA;CACA;;AAEA;IACA,WAAA;IACA,UAAA;CACA;;AAEA;IACA,YAAA;IACA,kBAAA;IACA,aAAA;IACA,sBAAA;IACA,iBAAA;IACA,YAAA;IACA,gBAAA;IACA,gBAAA;IACA,iCAAA;IACA,+BAAA;IACA,yBAAA;CACA;;AAEA;IACA,YAAA;CACA;;AAEA;IACA,oBAAA;IACA,YAAA;CACA;;AAEA;IACA,cAAA;CACA","file":"Left.vue","sourcesContent":["<template>\r\n    <div class=\"sidebar\">\r\n        <a class=\"logo\" v-link=\"{ path: '/' }\">\r\n            <img src=\"../assets/images/logo2.png\" height=\"35\" width=\"134\">\r\n        </a>\r\n        <aside class=\"menu\">\r\n            <div class=\"aside-header\" @click=\"toggle('idc')\">\r\n                <span class=\"icon glyphicon glyphicon-map-marker\"></span>\r\n                <span>IDC</span>\r\n                <span class=\"icon-arrow glyphicon glyphicon-menu-down\"></span>\r\n            </div>\r\n            <ul class=\"aside-lists\" v-el:idc>\r\n                <li v-link=\"{ path: '/roomSearch' }\">\r\n                    <span>机房查询</span>\r\n                </li>\r\n            </ul>\r\n            <div class=\"aside-header\" @click=\"toggle('network')\">\r\n                <span class=\"icon glyphicon glyphicon-inbox\"></span>\r\n                <span>网络设备</span>\r\n                <span class=\"icon-arrow glyphicon glyphicon-menu-down\"></span>\r\n            </div>\r\n            <ul class=\"aside-lists\" v-el:network>\r\n                <li v-link=\"{ path: '/deviceSearch' }\">\r\n                    <span>交换机查询</span>\r\n                </li>\r\n            </ul>\r\n            <div class=\"aside-header\" @click=\"toggle('ip')\">\r\n                <span class=\"icon glyphicon glyphicon-asterisk\"></span>\r\n                <span>IP</span>\r\n                <span class=\"icon-arrow glyphicon glyphicon-menu-down\"></span>\r\n            </div>\r\n            <ul class=\"aside-lists\" v-el:ip>\r\n                <li v-link=\"{ path: '/ipSearch' }\">\r\n                    <span>IP查询</span>\r\n                </li>\r\n                <li v-link=\"{ path: '/ipPlan' }\">\r\n                    <span>IP规划</span>\r\n                </li>\r\n                <li v-link=\"{ path: '/ipDelete' }\">\r\n                    <span>IP回收</span>\r\n                </li>\r\n            </ul>\r\n            <div class=\"aside-header\" @click=\"toggle('server')\">\r\n                <span class=\"icon glyphicon glyphicon-hdd\"></span>\r\n                <span>服务器</span>\r\n                <span class=\"icon-arrow glyphicon glyphicon-menu-down\"></span>\r\n            </div>\r\n            <ul class=\"aside-lists\" v-el:server>\r\n                <li v-link=\"{ path: '/serverSearch' }\">\r\n                    <span>服务器查询</span>\r\n                </li>\r\n            </ul>\r\n            <div class=\"aside-header\" @click=\"toggle('business')\">\r\n                <span class=\"icon glyphicon glyphicon-th-large\"></span>\r\n                <span>业务</span>\r\n                <span class=\"icon-arrow glyphicon glyphicon-menu-down\"></span>\r\n            </div>\r\n            <ul class=\"aside-lists\" v-el:business>\r\n                <li v-link=\"{ path: '/businessSearch' }\">\r\n                    <span>业务管理</span>\r\n                </li>\r\n                <li>\r\n                    <span>业务树</span>\r\n                </li>\r\n            </ul>\r\n            <div class=\"aside-header\" @click=\"toggle('other')\">\r\n                <span class=\"icon glyphicon glyphicon-th\"></span>\r\n                <span>其他</span>\r\n                <span class=\"icon-arrow glyphicon glyphicon-menu-down\"></span>\r\n            </div>\r\n            <ul class=\"aside-lists\" v-el:other>\r\n                <li v-link=\"{ path: '/import' }\">\r\n                    <span>导入</span>\r\n                </li>\r\n            </ul>\r\n        </aside>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\nexport default {\r\n    methods: {\r\n\r\n        // 导航栏收缩\r\n        toggle (type) {\r\n            this.$els[type].classList.toggle('open')\r\n        }\r\n    }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.sidebar {\r\n    width: 200px;\r\n    display: block;\r\n    position: fixed;\r\n    top: 0;\r\n    bottom: 0;\r\n    background-color: #333;\r\n    z-index: 102;\r\n    overflow-x: hidden;\r\n}\r\n\r\n.logo img {\r\n    display: block;\r\n    margin: 20px auto;\r\n}\r\n\r\n.menu {\r\n    margin-top: 20px;\r\n}\r\n\r\n.aside-header {\r\n    position: relative;\r\n    width: 100%;\r\n    height: 42px;\r\n    line-height: 42px;\r\n    background: #404040;\r\n    padding: 0 16px 0 28px;\r\n    font-size: 12px;\r\n    color: #999;\r\n    cursor: pointer;\r\n    -webkit-transition: all .3s ease;\r\n    transition: all .3s ease;\r\n}\r\n\r\n.aside-header:hover {\r\n    color: #2db7f5;\r\n}\r\n\r\n.icon {\r\n    width: 20px;\r\n}\r\n\r\n.icon-arrow {\r\n    position: absolute;\r\n    right: 15px;\r\n    top: 15px;\r\n    font-size: 12px;\r\n}\r\n\r\n.aside-lists {\r\n    padding: 0;\r\n    margin: 0;\r\n}\r\n\r\n.aside-lists li {\r\n    width: 100%;\r\n    line-height: 42px;\r\n    height: 42px;\r\n    padding: 0 5px 0 50px;\r\n    background: #333;\r\n    color: #999;\r\n    font-size: 12px;\r\n    cursor: pointer;\r\n    -webkit-transition: all .3s ease;\r\n    -moaz-transition: all .3s ease;\r\n    transition: all .3s ease;\r\n}\r\n\r\n.aside-lists li:hover {\r\n    color: #fff;\r\n}\r\n\r\n.aside-lists li.active {\r\n    background: #2db7f5;\r\n    color: #fff;\r\n}\r\n\r\n.aside-lists.open {\r\n    display: none;\r\n}\r\n</style>"],"sourceRoot":"webpack://"}]);
+	exports.push([module.id, "\r\n.sidebar[_v-607c94e9] {\r\n    width: 200px;\r\n    display: block;\r\n    position: fixed;\r\n    top: 0;\r\n    bottom: 0;\r\n    background-color: #333;\r\n    z-index: 102;\r\n    overflow-x: hidden;\r\n}\r\n\r\n.logo img[_v-607c94e9] {\r\n    display: block;\r\n    margin: 20px auto;\r\n}\r\n\r\n.menu[_v-607c94e9] {\r\n    margin-top: 20px;\r\n}\r\n\r\n.aside-header[_v-607c94e9] {\r\n    position: relative;\r\n    width: 100%;\r\n    height: 42px;\r\n    line-height: 42px;\r\n    background: #404040;\r\n    padding: 0 16px 0 28px;\r\n    font-size: 12px;\r\n    color: #999;\r\n    cursor: pointer;\r\n    -webkit-transition: all .3s ease;\r\n    transition: all .3s ease;\r\n}\r\n\r\n.aside-header[_v-607c94e9]:hover {\r\n    color: #2db7f5;\r\n}\r\n\r\n.icon[_v-607c94e9] {\r\n    width: 20px;\r\n}\r\n\r\n.icon-arrow[_v-607c94e9] {\r\n    position: absolute;\r\n    right: 15px;\r\n    top: 15px;\r\n    font-size: 12px;\r\n}\r\n\r\n.aside-lists[_v-607c94e9] {\r\n    padding: 0;\r\n    margin: 0;\r\n}\r\n\r\n.aside-lists li[_v-607c94e9] {\r\n    width: 100%;\r\n    line-height: 42px;\r\n    height: 42px;\r\n    padding: 0 5px 0 50px;\r\n    background: #333;\r\n    color: #999;\r\n    font-size: 12px;\r\n    cursor: pointer;\r\n    -webkit-transition: all .3s ease;\r\n    -moaz-transition: all .3s ease;\r\n    transition: all .3s ease;\r\n}\r\n\r\n.aside-lists li[_v-607c94e9]:hover {\r\n    color: #fff;\r\n}\r\n\r\n.aside-lists li.active[_v-607c94e9] {\r\n    background: #2db7f5;\r\n    color: #fff;\r\n}\r\n\r\n.aside-lists.open[_v-607c94e9] {\r\n    display: none;\r\n}\r\n", "", {"version":3,"sources":["/./src/views/Left.vue.style"],"names":[],"mappings":";AA4FA;IACA,aAAA;IACA,eAAA;IACA,gBAAA;IACA,OAAA;IACA,UAAA;IACA,uBAAA;IACA,aAAA;IACA,mBAAA;CACA;;AAEA;IACA,eAAA;IACA,kBAAA;CACA;;AAEA;IACA,iBAAA;CACA;;AAEA;IACA,mBAAA;IACA,YAAA;IACA,aAAA;IACA,kBAAA;IACA,oBAAA;IACA,uBAAA;IACA,gBAAA;IACA,YAAA;IACA,gBAAA;IACA,iCAAA;IACA,yBAAA;CACA;;AAEA;IACA,eAAA;CACA;;AAEA;IACA,YAAA;CACA;;AAEA;IACA,mBAAA;IACA,YAAA;IACA,UAAA;IACA,gBAAA;CACA;;AAEA;IACA,WAAA;IACA,UAAA;CACA;;AAEA;IACA,YAAA;IACA,kBAAA;IACA,aAAA;IACA,sBAAA;IACA,iBAAA;IACA,YAAA;IACA,gBAAA;IACA,gBAAA;IACA,iCAAA;IACA,+BAAA;IACA,yBAAA;CACA;;AAEA;IACA,YAAA;CACA;;AAEA;IACA,oBAAA;IACA,YAAA;CACA;;AAEA;IACA,cAAA;CACA","file":"Left.vue","sourcesContent":["<template>\r\n    <div class=\"sidebar\">\r\n        <a class=\"logo\" v-link=\"{ path: '/' }\">\r\n            <img src=\"../assets/images/logo2.png\" height=\"35\" width=\"134\">\r\n        </a>\r\n        <aside class=\"menu\">\r\n            <div class=\"aside-header\" @click=\"toggle('idc')\">\r\n                <span class=\"icon glyphicon glyphicon-map-marker\"></span>\r\n                <span>IDC</span>\r\n                <span class=\"icon-arrow glyphicon glyphicon-cog\"></span>\r\n            </div>\r\n            <ul class=\"aside-lists\" v-el:idc>\r\n                <li v-link=\"{ path: '/roomSearch' }\">\r\n                    <span>机房查询</span>\r\n                </li>\r\n            </ul>\r\n            <div class=\"aside-header\" @click=\"toggle('network')\">\r\n                <span class=\"icon glyphicon glyphicon-inbox\"></span>\r\n                <span>网络设备</span>\r\n                <span class=\"icon-arrow glyphicon glyphicon-cog\"></span>\r\n            </div>\r\n            <ul class=\"aside-lists\" v-el:network>\r\n                <li v-link=\"{ path: '/deviceSearch' }\">\r\n                    <span>交换机查询</span>\r\n                </li>\r\n            </ul>\r\n            <div class=\"aside-header\" @click=\"toggle('ip')\">\r\n                <span class=\"icon glyphicon glyphicon-asterisk\"></span>\r\n                <span>IP</span>\r\n                <span class=\"icon-arrow glyphicon glyphicon-cog\"></span>\r\n            </div>\r\n            <ul class=\"aside-lists\" v-el:ip>\r\n                <li v-link=\"{ path: '/ipSearch' }\">\r\n                    <span>IP查询</span>\r\n                </li>\r\n                <li v-link=\"{ path: '/ipPlan' }\">\r\n                    <span>IP规划</span>\r\n                </li>\r\n                <li v-link=\"{ path: '/ipDelete' }\">\r\n                    <span>IP回收</span>\r\n                </li>\r\n            </ul>\r\n            <div class=\"aside-header\" @click=\"toggle('server')\">\r\n                <span class=\"icon glyphicon glyphicon-hdd\"></span>\r\n                <span>服务器</span>\r\n                <span class=\"icon-arrow glyphicon glyphicon-cog\"></span>\r\n            </div>\r\n            <ul class=\"aside-lists\" v-el:server>\r\n                <li v-link=\"{ path: '/serverSearch' }\">\r\n                    <span>服务器查询</span>\r\n                </li>\r\n            </ul>\r\n            <div class=\"aside-header\" @click=\"toggle('business')\">\r\n                <span class=\"icon glyphicon glyphicon-th-large\"></span>\r\n                <span>业务</span>\r\n                <span class=\"icon-arrow glyphicon glyphicon-cog\"></span>\r\n            </div>\r\n            <ul class=\"aside-lists\" v-el:business>\r\n                <li v-link=\"{ path: '/businessSearch' }\">\r\n                    <span>业务管理</span>\r\n                </li>\r\n                <li>\r\n                    <span>业务树</span>\r\n                </li>\r\n            </ul>\r\n            <div class=\"aside-header\" @click=\"toggle('other')\">\r\n                <span class=\"icon glyphicon glyphicon-th\"></span>\r\n                <span>其他</span>\r\n                <span class=\"icon-arrow glyphicon glyphicon-cog\"></span>\r\n            </div>\r\n            <ul class=\"aside-lists\" v-el:other>\r\n                <li v-link=\"{ path: '/import' }\">\r\n                    <span>导入</span>\r\n                </li>\r\n            </ul>\r\n        </aside>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\nexport default {\r\n    methods: {\r\n\r\n        // 导航栏收缩\r\n        toggle (type) {\r\n            this.$els[type].classList.toggle('open')\r\n        }\r\n    }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.sidebar {\r\n    width: 200px;\r\n    display: block;\r\n    position: fixed;\r\n    top: 0;\r\n    bottom: 0;\r\n    background-color: #333;\r\n    z-index: 102;\r\n    overflow-x: hidden;\r\n}\r\n\r\n.logo img {\r\n    display: block;\r\n    margin: 20px auto;\r\n}\r\n\r\n.menu {\r\n    margin-top: 20px;\r\n}\r\n\r\n.aside-header {\r\n    position: relative;\r\n    width: 100%;\r\n    height: 42px;\r\n    line-height: 42px;\r\n    background: #404040;\r\n    padding: 0 16px 0 28px;\r\n    font-size: 12px;\r\n    color: #999;\r\n    cursor: pointer;\r\n    -webkit-transition: all .3s ease;\r\n    transition: all .3s ease;\r\n}\r\n\r\n.aside-header:hover {\r\n    color: #2db7f5;\r\n}\r\n\r\n.icon {\r\n    width: 20px;\r\n}\r\n\r\n.icon-arrow {\r\n    position: absolute;\r\n    right: 15px;\r\n    top: 15px;\r\n    font-size: 12px;\r\n}\r\n\r\n.aside-lists {\r\n    padding: 0;\r\n    margin: 0;\r\n}\r\n\r\n.aside-lists li {\r\n    width: 100%;\r\n    line-height: 42px;\r\n    height: 42px;\r\n    padding: 0 5px 0 50px;\r\n    background: #333;\r\n    color: #999;\r\n    font-size: 12px;\r\n    cursor: pointer;\r\n    -webkit-transition: all .3s ease;\r\n    -moaz-transition: all .3s ease;\r\n    transition: all .3s ease;\r\n}\r\n\r\n.aside-lists li:hover {\r\n    color: #fff;\r\n}\r\n\r\n.aside-lists li.active {\r\n    background: #2db7f5;\r\n    color: #fff;\r\n}\r\n\r\n.aside-lists.open {\r\n    display: none;\r\n}\r\n</style>"],"sourceRoot":"webpack://"}]);
 	
 	// exports
 
@@ -33954,7 +34011,7 @@
 	//             <div class="aside-header" @click="toggle('idc')">
 	//                 <span class="icon glyphicon glyphicon-map-marker"></span>
 	//                 <span>IDC</span>
-	//                 <span class="icon-arrow glyphicon glyphicon-menu-down"></span>
+	//                 <span class="icon-arrow glyphicon glyphicon-cog"></span>
 	//             </div>
 	//             <ul class="aside-lists" v-el:idc>
 	//                 <li v-link="{ path: '/roomSearch' }">
@@ -33964,7 +34021,7 @@
 	//             <div class="aside-header" @click="toggle('network')">
 	//                 <span class="icon glyphicon glyphicon-inbox"></span>
 	//                 <span>网络设备</span>
-	//                 <span class="icon-arrow glyphicon glyphicon-menu-down"></span>
+	//                 <span class="icon-arrow glyphicon glyphicon-cog"></span>
 	//             </div>
 	//             <ul class="aside-lists" v-el:network>
 	//                 <li v-link="{ path: '/deviceSearch' }">
@@ -33974,7 +34031,7 @@
 	//             <div class="aside-header" @click="toggle('ip')">
 	//                 <span class="icon glyphicon glyphicon-asterisk"></span>
 	//                 <span>IP</span>
-	//                 <span class="icon-arrow glyphicon glyphicon-menu-down"></span>
+	//                 <span class="icon-arrow glyphicon glyphicon-cog"></span>
 	//             </div>
 	//             <ul class="aside-lists" v-el:ip>
 	//                 <li v-link="{ path: '/ipSearch' }">
@@ -33990,7 +34047,7 @@
 	//             <div class="aside-header" @click="toggle('server')">
 	//                 <span class="icon glyphicon glyphicon-hdd"></span>
 	//                 <span>服务器</span>
-	//                 <span class="icon-arrow glyphicon glyphicon-menu-down"></span>
+	//                 <span class="icon-arrow glyphicon glyphicon-cog"></span>
 	//             </div>
 	//             <ul class="aside-lists" v-el:server>
 	//                 <li v-link="{ path: '/serverSearch' }">
@@ -34000,7 +34057,7 @@
 	//             <div class="aside-header" @click="toggle('business')">
 	//                 <span class="icon glyphicon glyphicon-th-large"></span>
 	//                 <span>业务</span>
-	//                 <span class="icon-arrow glyphicon glyphicon-menu-down"></span>
+	//                 <span class="icon-arrow glyphicon glyphicon-cog"></span>
 	//             </div>
 	//             <ul class="aside-lists" v-el:business>
 	//                 <li v-link="{ path: '/businessSearch' }">
@@ -34013,7 +34070,7 @@
 	//             <div class="aside-header" @click="toggle('other')">
 	//                 <span class="icon glyphicon glyphicon-th"></span>
 	//                 <span>其他</span>
-	//                 <span class="icon-arrow glyphicon glyphicon-menu-down"></span>
+	//                 <span class="icon-arrow glyphicon glyphicon-cog"></span>
 	//             </div>
 	//             <ul class="aside-lists" v-el:other>
 	//                 <li v-link="{ path: '/import' }">
@@ -34125,7 +34182,7 @@
 /* 234 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "\n    <div class=\"sidebar\" _v-607c94e9=\"\">\n        <a class=\"logo\" v-link=\"{ path: '/' }\" _v-607c94e9=\"\">\n            <img src=\"" + __webpack_require__(235) + "\" height=\"35\" width=\"134\" _v-607c94e9=\"\">\n        </a>\n        <aside class=\"menu\" _v-607c94e9=\"\">\n            <div class=\"aside-header\" @click=\"toggle('idc')\" _v-607c94e9=\"\">\n                <span class=\"icon glyphicon glyphicon-map-marker\" _v-607c94e9=\"\"></span>\n                <span _v-607c94e9=\"\">IDC</span>\n                <span class=\"icon-arrow glyphicon glyphicon-menu-down\" _v-607c94e9=\"\"></span>\n            </div>\n            <ul class=\"aside-lists\" v-el:idc=\"\" _v-607c94e9=\"\">\n                <li v-link=\"{ path: '/roomSearch' }\" _v-607c94e9=\"\">\n                    <span _v-607c94e9=\"\">机房查询</span>\n                </li>\n            </ul>\n            <div class=\"aside-header\" @click=\"toggle('network')\" _v-607c94e9=\"\">\n                <span class=\"icon glyphicon glyphicon-inbox\" _v-607c94e9=\"\"></span>\n                <span _v-607c94e9=\"\">网络设备</span>\n                <span class=\"icon-arrow glyphicon glyphicon-menu-down\" _v-607c94e9=\"\"></span>\n            </div>\n            <ul class=\"aside-lists\" v-el:network=\"\" _v-607c94e9=\"\">\n                <li v-link=\"{ path: '/deviceSearch' }\" _v-607c94e9=\"\">\n                    <span _v-607c94e9=\"\">交换机查询</span>\n                </li>\n            </ul>\n            <div class=\"aside-header\" @click=\"toggle('ip')\" _v-607c94e9=\"\">\n                <span class=\"icon glyphicon glyphicon-asterisk\" _v-607c94e9=\"\"></span>\n                <span _v-607c94e9=\"\">IP</span>\n                <span class=\"icon-arrow glyphicon glyphicon-menu-down\" _v-607c94e9=\"\"></span>\n            </div>\n            <ul class=\"aside-lists\" v-el:ip=\"\" _v-607c94e9=\"\">\n                <li v-link=\"{ path: '/ipSearch' }\" _v-607c94e9=\"\">\n                    <span _v-607c94e9=\"\">IP查询</span>\n                </li>\n                <li v-link=\"{ path: '/ipPlan' }\" _v-607c94e9=\"\">\n                    <span _v-607c94e9=\"\">IP规划</span>\n                </li>\n                <li v-link=\"{ path: '/ipDelete' }\" _v-607c94e9=\"\">\n                    <span _v-607c94e9=\"\">IP回收</span>\n                </li>\n            </ul>\n            <div class=\"aside-header\" @click=\"toggle('server')\" _v-607c94e9=\"\">\n                <span class=\"icon glyphicon glyphicon-hdd\" _v-607c94e9=\"\"></span>\n                <span _v-607c94e9=\"\">服务器</span>\n                <span class=\"icon-arrow glyphicon glyphicon-menu-down\" _v-607c94e9=\"\"></span>\n            </div>\n            <ul class=\"aside-lists\" v-el:server=\"\" _v-607c94e9=\"\">\n                <li v-link=\"{ path: '/serverSearch' }\" _v-607c94e9=\"\">\n                    <span _v-607c94e9=\"\">服务器查询</span>\n                </li>\n            </ul>\n            <div class=\"aside-header\" @click=\"toggle('business')\" _v-607c94e9=\"\">\n                <span class=\"icon glyphicon glyphicon-th-large\" _v-607c94e9=\"\"></span>\n                <span _v-607c94e9=\"\">业务</span>\n                <span class=\"icon-arrow glyphicon glyphicon-menu-down\" _v-607c94e9=\"\"></span>\n            </div>\n            <ul class=\"aside-lists\" v-el:business=\"\" _v-607c94e9=\"\">\n                <li v-link=\"{ path: '/businessSearch' }\" _v-607c94e9=\"\">\n                    <span _v-607c94e9=\"\">业务管理</span>\n                </li>\n                <li _v-607c94e9=\"\">\n                    <span _v-607c94e9=\"\">业务树</span>\n                </li>\n            </ul>\n            <div class=\"aside-header\" @click=\"toggle('other')\" _v-607c94e9=\"\">\n                <span class=\"icon glyphicon glyphicon-th\" _v-607c94e9=\"\"></span>\n                <span _v-607c94e9=\"\">其他</span>\n                <span class=\"icon-arrow glyphicon glyphicon-menu-down\" _v-607c94e9=\"\"></span>\n            </div>\n            <ul class=\"aside-lists\" v-el:other=\"\" _v-607c94e9=\"\">\n                <li v-link=\"{ path: '/import' }\" _v-607c94e9=\"\">\n                    <span _v-607c94e9=\"\">导入</span>\n                </li>\n            </ul>\n        </aside>\n    </div>\n";
+	module.exports = "\n    <div class=\"sidebar\" _v-607c94e9=\"\">\n        <a class=\"logo\" v-link=\"{ path: '/' }\" _v-607c94e9=\"\">\n            <img src=\"" + __webpack_require__(235) + "\" height=\"35\" width=\"134\" _v-607c94e9=\"\">\n        </a>\n        <aside class=\"menu\" _v-607c94e9=\"\">\n            <div class=\"aside-header\" @click=\"toggle('idc')\" _v-607c94e9=\"\">\n                <span class=\"icon glyphicon glyphicon-map-marker\" _v-607c94e9=\"\"></span>\n                <span _v-607c94e9=\"\">IDC</span>\n                <span class=\"icon-arrow glyphicon glyphicon-cog\" _v-607c94e9=\"\"></span>\n            </div>\n            <ul class=\"aside-lists\" v-el:idc=\"\" _v-607c94e9=\"\">\n                <li v-link=\"{ path: '/roomSearch' }\" _v-607c94e9=\"\">\n                    <span _v-607c94e9=\"\">机房查询</span>\n                </li>\n            </ul>\n            <div class=\"aside-header\" @click=\"toggle('network')\" _v-607c94e9=\"\">\n                <span class=\"icon glyphicon glyphicon-inbox\" _v-607c94e9=\"\"></span>\n                <span _v-607c94e9=\"\">网络设备</span>\n                <span class=\"icon-arrow glyphicon glyphicon-cog\" _v-607c94e9=\"\"></span>\n            </div>\n            <ul class=\"aside-lists\" v-el:network=\"\" _v-607c94e9=\"\">\n                <li v-link=\"{ path: '/deviceSearch' }\" _v-607c94e9=\"\">\n                    <span _v-607c94e9=\"\">交换机查询</span>\n                </li>\n            </ul>\n            <div class=\"aside-header\" @click=\"toggle('ip')\" _v-607c94e9=\"\">\n                <span class=\"icon glyphicon glyphicon-asterisk\" _v-607c94e9=\"\"></span>\n                <span _v-607c94e9=\"\">IP</span>\n                <span class=\"icon-arrow glyphicon glyphicon-cog\" _v-607c94e9=\"\"></span>\n            </div>\n            <ul class=\"aside-lists\" v-el:ip=\"\" _v-607c94e9=\"\">\n                <li v-link=\"{ path: '/ipSearch' }\" _v-607c94e9=\"\">\n                    <span _v-607c94e9=\"\">IP查询</span>\n                </li>\n                <li v-link=\"{ path: '/ipPlan' }\" _v-607c94e9=\"\">\n                    <span _v-607c94e9=\"\">IP规划</span>\n                </li>\n                <li v-link=\"{ path: '/ipDelete' }\" _v-607c94e9=\"\">\n                    <span _v-607c94e9=\"\">IP回收</span>\n                </li>\n            </ul>\n            <div class=\"aside-header\" @click=\"toggle('server')\" _v-607c94e9=\"\">\n                <span class=\"icon glyphicon glyphicon-hdd\" _v-607c94e9=\"\"></span>\n                <span _v-607c94e9=\"\">服务器</span>\n                <span class=\"icon-arrow glyphicon glyphicon-cog\" _v-607c94e9=\"\"></span>\n            </div>\n            <ul class=\"aside-lists\" v-el:server=\"\" _v-607c94e9=\"\">\n                <li v-link=\"{ path: '/serverSearch' }\" _v-607c94e9=\"\">\n                    <span _v-607c94e9=\"\">服务器查询</span>\n                </li>\n            </ul>\n            <div class=\"aside-header\" @click=\"toggle('business')\" _v-607c94e9=\"\">\n                <span class=\"icon glyphicon glyphicon-th-large\" _v-607c94e9=\"\"></span>\n                <span _v-607c94e9=\"\">业务</span>\n                <span class=\"icon-arrow glyphicon glyphicon-cog\" _v-607c94e9=\"\"></span>\n            </div>\n            <ul class=\"aside-lists\" v-el:business=\"\" _v-607c94e9=\"\">\n                <li v-link=\"{ path: '/businessSearch' }\" _v-607c94e9=\"\">\n                    <span _v-607c94e9=\"\">业务管理</span>\n                </li>\n                <li _v-607c94e9=\"\">\n                    <span _v-607c94e9=\"\">业务树</span>\n                </li>\n            </ul>\n            <div class=\"aside-header\" @click=\"toggle('other')\" _v-607c94e9=\"\">\n                <span class=\"icon glyphicon glyphicon-th\" _v-607c94e9=\"\"></span>\n                <span _v-607c94e9=\"\">其他</span>\n                <span class=\"icon-arrow glyphicon glyphicon-cog\" _v-607c94e9=\"\"></span>\n            </div>\n            <ul class=\"aside-lists\" v-el:other=\"\" _v-607c94e9=\"\">\n                <li v-link=\"{ path: '/import' }\" _v-607c94e9=\"\">\n                    <span _v-607c94e9=\"\">导入</span>\n                </li>\n            </ul>\n        </aside>\n    </div>\n";
 
 /***/ },
 /* 235 */
@@ -34633,6 +34690,13 @@
 	
 	                    _this.$dispatch('getTxt', param);
 	                })();
+	            } else {
+	                var _param = {
+	                    val: '',
+	                    name: this.name
+	                };
+	
+	                this.$dispatch('getTxt', _param);
 	            }
 	
 	            this.broadModal = false;
@@ -34745,7 +34809,11 @@
 	    origins2: [],
 	    deviceStatus: [],
 	    frames: [],
-	    seats: []
+	    seats: [],
+	    networks: [],
+	    products: [],
+	    serverTypes: [],
+	    serverStatus: []
 	};
 	
 	// 创建一个 object 存储 mutation 函数
@@ -34810,6 +34878,27 @@
 	    // 获取二级来源
 	    GETORIGINS: function GETORIGINS(state, data) {
 	        state.origins2 = data.items;
+	    },
+	
+	
+	    // 获取网络类型、规划机房
+	    GETIPPLAN: function GETIPPLAN(state, data) {
+	        state.roomLocation = data.idcs;
+	        state.networks = data.types;
+	        state.operators = data.operators;
+	    },
+	
+	
+	    // 获取服务器查询页下拉框
+	    GETSERVERSEARCH: function GETSERVERSEARCH(state, data) {
+	        state.roomLocation = data.rooms;
+	        state.products = data.products;
+	        state.serverTypes = data.serverTypes;
+	        state.departments = data.departments;
+	        state.systems = data.systems;
+	        state.origins1 = data.origins1;
+	        state.serverStatus = data.statusArr;
+	        state.firms = data.firms;
 	    }
 	};
 	

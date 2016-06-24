@@ -100,3 +100,30 @@ export function getOrigins({ dispatch, state }, newVal) {
     })
 }
 
+// 获取网络类型、规划机房、运营商
+export function getIpPlan({ dispatch, state }) {
+    this.$http({
+        url: '/ip/ip_add/',
+        method: 'GET'
+    })
+    .then(response => {
+        if (response.data.code === 200) {
+           dispatch('GETIPPLAN', response.data)
+        } 
+    })
+}
+
+// 获取服务器查询页下拉框数据
+export function getServerSearch({ dispatch, state }) {
+    this.$http({
+        url: '/device/server/home/',
+        method: 'GET'
+    })
+    .then(response => {
+        if (response.data.code === 200) {
+           dispatch('GETSERVERSEARCH', response.data)
+        } 
+    })
+}
+
+

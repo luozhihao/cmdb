@@ -33,7 +33,11 @@ const state = {
     origins2: [],
     deviceStatus: [],
     frames: [],
-    seats: []
+    seats: [],
+    networks: [],
+    products: [],
+    serverTypes: [],
+    serverStatus: []
 }   
 
 // 创建一个 object 存储 mutation 函数
@@ -90,6 +94,25 @@ const mutations = {
     // 获取二级来源
     GETORIGINS (state, data) {
         state.origins2 = data.items
+    },
+
+    // 获取网络类型、规划机房
+    GETIPPLAN (state, data) {
+        state.roomLocation = data.idcs
+        state.networks = data.types
+        state.operators = data.operators
+    },
+
+    // 获取服务器查询页下拉框
+    GETSERVERSEARCH (state, data) {
+        state.roomLocation = data.rooms
+        state.products = data.products
+        state.serverTypes = data.serverTypes
+        state.departments = data.departments
+        state.systems = data.systems
+        state.origins1 = data.origins1
+        state.serverStatus = data.statusArr
+        state.firms = data.firms
     }
 }
 

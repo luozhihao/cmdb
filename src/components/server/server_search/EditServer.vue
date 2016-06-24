@@ -8,15 +8,15 @@
             <form class="form-horizontal clearfix form-input">
                 <div class="col-sm-3">
                     <div class="form-group">
-                        <label class="control-label col-sm-4">SN：</label>
+                        <label class="control-label col-sm-4">SN：<span class="text-danger">*</span></label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" placeholder="">
+                            <input type="text" class="form-control" v-model="sn">
                         </div>
                     </div>
                     <div class="form-group input-box">
                         <label class="control-label col-sm-4">类型：</label>
                         <div class="col-sm-8">
-                            <v-select :value.sync="system" :options="systems" placeholder="请选择">
+                            <v-select :value.sync="serverType" :options="serverTypes" placeholder="请选择">
                             </v-select>
                         </div>
                     </div>
@@ -58,13 +58,17 @@
                      <div class="form-group">
                         <label class="control-label col-sm-4">质保期限：</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" placeholder="">
+                            <datepicker
+                              :value.sync="shelfLife"
+                              :format="'yyyy-MM-dd'"
+                              :show-reset-button="true">
+                            </datepicker>
                         </div>
                     </div>     
                     <div class="form-group">
                         <label class="control-label col-sm-4">备注：</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" placeholder="">
+                            <input type="text" class="form-control" v-model="remark">
                         </div>
                     </div>            
                 </div>
@@ -72,49 +76,49 @@
                    <div class="form-group">
                         <label class="control-label col-sm-4">设备编号：</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" placeholder="">
+                            <input type="text" class="form-control" v-model="netNum">
                         </div>
                     </div>
                      <div class="form-group">
                         <label class="control-label col-sm-4">物理主机编号：</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" placeholder="">
+                            <input type="text" class="form-control" v-model="hostNum">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-4">资产编号：</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" placeholder="">
+                            <input type="text" class="form-control" v-model="assetNum">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-4">财务编号：</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" placeholder="">
+                            <input type="text" class="form-control" v-model="financeNum">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-4">发票编号：</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" placeholder="">
+                            <input type="text" class="form-control" v-model="invoiceNum">
                         </div>
                     </div>
                      <div class="form-group">
                         <label class="control-label col-sm-4">电压：</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" placeholder="">
+                            <input type="text" class="form-control" v-model="voltage">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-4">电流：</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" placeholder="">
+                            <input type="text" class="form-control" v-model="electric">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-4">功率：</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" placeholder="">
+                            <input type="text" class="form-control" v-model="power">
                         </div>
                     </div>
                 </div>
@@ -133,7 +137,7 @@
                     <div class="form-group">
                         <label class="control-label col-sm-4">型号：</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" placeholder="">
+                            <input type="text" class="form-control" v-model="model">
                         </div>
                     </div>
                     <div class="form-group">
@@ -169,19 +173,19 @@
                     <div class="form-group">
                         <label class="control-label col-sm-4">所属部门：</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" :readonly="true">
+                            <input type="text" class="form-control" :readonly="true" v-model="department">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-4">所属产品：</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" :readonly="true">
+                            <input type="text" class="form-control" :readonly="true" v-model="product">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-4">运维负责人：</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" :readonly="true">
+                            <input type="text" class="form-control" :readonly="true" v-model="maintainManager">
                         </div>
                     </div>
                 </div>
@@ -189,25 +193,25 @@
                     <div class="form-group">
                         <label class="control-label col-sm-4">所属Set：</label>
                         <div class="col-sm-8">
-                            <textarea rows="4" class="form-control" :readonly="true"></textarea> 
+                            <textarea rows="4" class="form-control" :readonly="true" v-model="set"></textarea> 
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-4">所属Module：</label>
                         <div class="col-sm-8">
-                            <textarea rows="4" class="form-control" :readonly="true"></textarea> 
+                            <textarea rows="4" class="form-control" :readonly="true" v-model="module"></textarea> 
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-4">IP：</label>
                         <div class="col-sm-8">
-                            <textarea rows="4" class="form-control" :readonly="true"></textarea> 
+                            <textarea rows="4" class="form-control" :readonly="true" v-model="ips"></textarea> 
                         </div>
                     </div>
                 </div>
             </form>
             <div class="text-center mt30 mb20">
-                <button type="button" class="btn btn-default">保存</button>
+                <button type="button" class="btn btn-default" @click="saveFn">保存</button>
                 <button type="button" class="btn btn-default">更新</button>
                 <button type="button" class="btn btn-default" @click='editServerModal = false'>取消</button>
             </div>
@@ -251,31 +255,44 @@
 <script>
 import { modal, datepicker } from 'vue-strap'
 import vSelect from '../../global/Select.vue'
+import { getFramesSeats, getOrigins } from '../../../vuex/action.js'
+import { idcs, frames, seats, serverTypes, serverStatus, firms, origins1, origins2 } from '../../../vuex/getters.js'
 
 let origin = {
         editServerModal: false,
         ports: [
             {portNum: '111', ip: '', mac: '', speed: '', status: '', use: '', device: '', deviceVlan: '', devicePort: ''}
         ],
-        rooms: [],
+        id: null,
+        netNum: '',
+        sn: '',
         room: '',
-        frames: [],
         frame: '',
-        seats: [],
         seat: '',
-        statusArr: [],
-        status: '',
-        systems: [],
-        system: '',
-        firms: [],
+        origin1: '',
+        origin2: '',
         firm: '',
-        origins1: [{value: '蜗牛', label: '蜗牛'}],
-        origin1: '蜗牛',
-        origins2: [{value: '北京蜗牛', label: '北京蜗牛'}],
-        origin2: '北京蜗牛',
+        status: '',
         addTime: '',
         factoryTime: '',
-        procureTime: ''
+        procureTime: '',
+        model: '',
+        shelfLife: '',
+        serverType: '',
+        hostNum: '',
+        assetNum: '',
+        financeNum: '',
+        invoiceNum: '',
+        voltage: '',
+        electric: '',
+        power: '',
+        remark: '',
+        department: '',
+        product: '',
+        maintainManager: '',
+        set: '',
+        module: '',
+        ips: ''
     },
     init = Object.assign({}, origin);
 
@@ -285,15 +302,106 @@ export default {
     },
     methods: {
 
+        // 保存编辑
+        saveFn () {
+            this.$http({
+                url: '/device/server/edit/',
+                method: 'POST',
+                data: this.$data
+            })
+            .then(response => {
+                if (response.data.code === 200) {
+                    this.editServerModal = false
+                    this.$data = Object.assign({}, init)
+
+                    this.$dispatch('refresh')       
+                    this.$dispatch('show-success')
+                } else {
+                    this.$dispatch('show-error')
+                }
+            })
+        }
     },
     components: {
         modal,
         vSelect,
         datepicker
     },
+    vuex: {
+        actions: {
+            getFramesSeats,
+            getOrigins
+        },
+        getters: {
+            rooms: idcs,
+            frames,
+            seats,
+            origins1,
+            origins2,
+            serverTypes,
+            statusArr: serverStatus,
+            firms
+        }
+    },
     events: {
-        'showEditServer' () {
-            this.editServerModal = true
+        'showEditServer' (param) {
+            this.$http({
+                url: '/device/server/get/?id=' + param,
+                method: 'GET'
+            })
+            .then(repsonse => {
+                if (repsonse.data.code === 200) {
+                    this.$data = Object.assign({}, origin, repsonse.data)
+
+                    this.id = param
+                    this.editServerModal = true
+                } else {
+                    this.$dispatch('show-error')
+                }
+            })
+        }
+    },
+    watch: {
+        'room' (newVal, oldVal) {
+            if (newVal) {
+                if (oldVal) {
+                    this.frame = ''
+                    this.seat = ''
+                }
+
+                this.getFramesSeats(newVal, 'room')
+            } else {
+                this.frame = ''
+                this.seat = ''
+            }
+        },
+        'frame' (newVal, oldVal) {
+            if (newVal) {
+                if (oldVal) {
+                    this.seat = ''
+                }
+
+                this.getFramesSeats(newVal, 'shelf')
+            } else {
+                this.seat = ''
+            }
+        },
+        'origin1' (newVal, oldVal) {
+            if (newVal) {
+                if (oldVal) {
+                    this.origin2 = ''
+                }
+
+                this.getOrigins(newVal)
+            } else {
+                this.origin2 = ''
+            }
+        },
+        'editDeviceModal' (newVal) {
+            if (!newVal) {
+                this.origin1 = ''
+                this.room = ''
+            }
         }
     }
 }

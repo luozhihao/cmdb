@@ -7,7 +7,7 @@
             <div class="aside-header" @click="toggle('idc')">
                 <span class="icon glyphicon glyphicon-map-marker"></span>
                 <span>IDC</span>
-                <span class="icon-arrow glyphicon glyphicon-menu-down"></span>
+                <span class="icon-arrow glyphicon glyphicon-cog"></span>
             </div>
             <ul class="aside-lists" v-el:idc>
                 <li v-link="{ path: '/roomSearch' }">
@@ -17,7 +17,7 @@
             <div class="aside-header" @click="toggle('network')">
                 <span class="icon glyphicon glyphicon-inbox"></span>
                 <span>网络设备</span>
-                <span class="icon-arrow glyphicon glyphicon-menu-down"></span>
+                <span class="icon-arrow glyphicon glyphicon-cog"></span>
             </div>
             <ul class="aside-lists" v-el:network>
                 <li v-link="{ path: '/deviceSearch' }">
@@ -27,7 +27,7 @@
             <div class="aside-header" @click="toggle('ip')">
                 <span class="icon glyphicon glyphicon-asterisk"></span>
                 <span>IP</span>
-                <span class="icon-arrow glyphicon glyphicon-menu-down"></span>
+                <span class="icon-arrow glyphicon glyphicon-cog"></span>
             </div>
             <ul class="aside-lists" v-el:ip>
                 <li v-link="{ path: '/ipSearch' }">
@@ -43,7 +43,7 @@
             <div class="aside-header" @click="toggle('server')">
                 <span class="icon glyphicon glyphicon-hdd"></span>
                 <span>服务器</span>
-                <span class="icon-arrow glyphicon glyphicon-menu-down"></span>
+                <span class="icon-arrow glyphicon glyphicon-cog"></span>
             </div>
             <ul class="aside-lists" v-el:server>
                 <li v-link="{ path: '/serverSearch' }">
@@ -53,7 +53,7 @@
             <div class="aside-header" @click="toggle('business')">
                 <span class="icon glyphicon glyphicon-th-large"></span>
                 <span>业务</span>
-                <span class="icon-arrow glyphicon glyphicon-menu-down"></span>
+                <span class="icon-arrow glyphicon glyphicon-cog"></span>
             </div>
             <ul class="aside-lists" v-el:business>
                 <li v-link="{ path: '/businessSearch' }">
@@ -66,7 +66,7 @@
             <div class="aside-header" @click="toggle('other')">
                 <span class="icon glyphicon glyphicon-th"></span>
                 <span>其他</span>
-                <span class="icon-arrow glyphicon glyphicon-menu-down"></span>
+                <span class="icon-arrow glyphicon glyphicon-cog"></span>
             </div>
             <ul class="aside-lists" v-el:other>
                 <li v-link="{ path: '/import' }">

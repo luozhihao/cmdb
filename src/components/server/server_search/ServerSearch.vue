@@ -18,7 +18,7 @@
                 <div class="form-group input-box">
                     <label class="control-label col-sm-4">所在机房：</label>
                     <div class="col-sm-8">
-                        <v-select :value.sync="param.room" :options="rooms" placeholder="请选择">
+                        <v-select :value.sync="param.room" :options="rooms" placeholder="请选择" :search="true">
                         </v-select>
                     </div>
                 </div>
@@ -32,7 +32,7 @@
                 <div class="form-group input-box">
                     <label class="control-label col-sm-4">所属产品：</label>
                     <div class="col-sm-8">
-                        <v-select :value.sync="param.product" :options="products" placeholder="请选择">
+                        <v-select :value.sync="param.product" :options="products" placeholder="请选择" :search="true">
                         </v-select>
                     </div>
                 </div>
@@ -60,7 +60,7 @@
                 <div class="form-group input-box">
                     <label class="control-label col-sm-4">所在机架：</label>
                     <div class="col-sm-8">
-                        <v-select :value.sync="param.frame" :options="frames" placeholder="请选择">
+                        <v-select :value.sync="param.frame" :options="frames" placeholder="请选择" :search="true">
                         </v-select>
                     </div>
                 </div>
@@ -74,7 +74,7 @@
                 <div class="form-group input-box">
                     <label class="control-label col-sm-4">所属部门：</label>
                     <div class="col-sm-8">
-                        <v-select :value.sync="param.department" :options="departments" placeholder="请选择">
+                        <v-select :value.sync="param.department" :options="departments" placeholder="请选择" :search="true">
                         </v-select>
                     </div>
                 </div>
@@ -141,7 +141,7 @@
                 <div class="form-group">
                     <label class="control-label col-sm-4">型号：</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" value="模糊">
+                        <input type="text" class="form-control" placeholder="模糊" v-model="">
                     </div>
                 </div>
                 <div class="form-group input-box">
@@ -171,9 +171,6 @@
             </button>
             <button type="button" class="btn btn-default"  @click="batchEdit">
                 批量修改
-            </button>
-            <button type="button" class="btn btn-default">
-                批量退库
             </button>
             <button type="button" class="btn btn-default">
                 导出
@@ -214,15 +211,11 @@
                 <tbody>
                     <tr v-for="list in tableList" v-if="tableList.length !== 0" v-show="tableList.length !== 0">
                         <td><input type="checkbox" :id="list.id" :value="list.id" v-model="checkedIds"></td>
-                        <td v-show="list.serverNum !== 'undefined'"><a class="pointer" v-text="list.serverNum" @click="$broadcast('showEditServer', list.id)"></a></td>
-                        <td :title="list.ip" v-text="list.ip" v-show="list.ip !== 'undefined'"></td>
-                        <td :title="list.SN" v-text="list.SN" v-show="list.SN !== 'undefined'"></td>
-                        <td :title="list.type" v-text="list.type" v-show="list.type !== 'undefined'"></td>
-                        <td :title="list.system" v-text="list.system" v-show="list.system !== 'undefined'"></td>
-                        <td :title="list.status" v-text="list.status" v-show="list.status !== 'undefined'"></td>
-                        <td :title="list.room" v-text="list.room" v-show="list.room !== 'undefined'"></td>
-                        <td :title="list.frame" v-text="list.frame" v-show="list.frame !== 'undefined'"></td>
-                        <td :title="list.seats" v-text="list.seats" v-show="list.seats !== 'undefined'"></td>
+                        <td v-for="value in valueArr" v-if="value === 'serverNum'">
+                            <a class="pointer" v-if="value === 'serverNum'" v-text="list[value]" @click="$broadcast('showEditServer', list.id)"></a>
+                        </td>
+                        <td v-for="value in valueArr" :title="list[value]" v-text="list[value]" v-if="value !== 'serverNum'">
+                        </td>
                     </tr>
                     <tr class="text-center" v-show="tableList.length === 0">
                         <td :colspan="titles.length">暂无数据</td>
@@ -248,29 +241,21 @@ import batchEditModal from './BatchEdit.vue'
 import editServerModal from './EditServer.vue'
 import vSelect from '../../global/Select.vue'
 import calendar from '../../global/Calendar.vue'
+import { getServerSearch, getFramesSeats, getOrigins } from '../../../vuex/action.js'
+import { idcs, frames, products, serverTypes, departments, systems, serverStatus, firms, origins1, origins2 } from '../../../vuex/getters.js'
 
 export default {
     data () {
         return {
             checkedAll: false,
             checkedIds: [],
-            titles: ['服务器编号', 'IP', 'SN', '类型', '操作系统', '状态', '所在机房', '所在机架', '所在机位'],
+            titles: [],
             tableList: [
-                {id: 1, serverNum: 'SGSW00001', ip: '117.121.13.56', SN: 'BRCBRW1906K01R', type: '物理机', system: 'windows 2003x64', status: '待运营', room: '北京亦庄联通机房', frame: 'L4M1-IDC-C003', seats: '46U'}
+                {id: 1, serverNum: 'SGSW00001', ip: '117.121.13.56', sn: 'BRCBRW1906K01R', serverType: '物理机', system: 'windows 2003x64', status: '待运营', room: '北京亦庄联通机房', frame: 'L4M1-IDC-C003', seat: '46U'}
             ],
             lenArr: [10, 50, 100],
             pageLen: 5,
             url: '',
-            firms: [],
-            rooms: [],
-            frames: [],
-            serverTypes: [],
-            statusArr: [],
-            systems: [],
-            origins1: [],
-            origins2: [],
-            departments: [],
-            products: [],
             param: {
                 serverNum: '',
                 sn: '',
@@ -290,22 +275,19 @@ export default {
                 factoryTime: '',
                 procureTime: '',
                 department: '',
-                product: '',
-                titles: []
+                product: ''
             },
             checkArr: [
-                {label: '服务器编号', checked: true},
-                {label: 'IP', checked: true},
-                {label: 'SN', checked: true},
-                {label: '类型', checked: true},
-                {label: '型号', checked: true},
-                {label: '操作系统', checked: true},
-                {label: '状态', checked: true},
-                {label: '设备状态', checked: true},
-                {label: '所在机房', checked: true},
-                {label: '所在机架', checked: true},
-                {label: '所在机位', checked: true}
+                {label: 'IP', value: 'ip', checked: true},
+                {label: 'SN', value: 'sn', checked: true},
+                {label: '类型', value: 'serverType', checked: true},
+                {label: '操作系统', value: 'system', checked: true},
+                {label: '状态', value: 'status', checked: true},
+                {label: '所在机房', value: 'room', checked: true},
+                {label: '所在机架', value: 'frame', checked: true},
+                {label: '所在机位', value: 'seat', checked: true}
             ],
+            valueArr: [],
             show1: false,
             show2: false,
             show3: false,
@@ -319,24 +301,33 @@ export default {
 
         // 刷新数据
         refresh () {
+            this.checkedIds = []
             this.$broadcast('refresh')
         },
 
         // 筛选
         fliter (index) {
-            console.log(index)
-
             this.checkArr[index].checked ? this.checkArr[index].checked = false : this.checkArr[index].checked = true
 
-            console.log(this.checkArr[index].checked)
+            this.originFilter()
+        },
 
-            this.param.titles = []
+        // 初始化筛选
+        originFilter () {
+            let _this = this
+
+            this.titles = []
+            this.valueArr = []
 
             this.checkArr.forEach((e) => {
-                e.checked ? this.param.titles.push(e.label) : ''
+                if (e.checked) {
+                    _this.titles.push(e.label)
+                    _this.valueArr.push(e.value)
+                }
             })
 
-            console.log(this.param.titles)
+            this.titles.unshift('服务器编号')
+            this.valueArr.unshift('serverNum')
         },
 
         // 批量修改
@@ -378,7 +369,7 @@ export default {
             setTimeout(function() {
                 document.addEventListener('click', bindHide, false);
             }, 500);
-        },
+        }
     },
     components: {
         bootPage,
@@ -388,6 +379,29 @@ export default {
         vSelect,
         calendar,
         dropdown
+    },
+    vuex: {
+        actions: {
+            getServerSearch,
+            getFramesSeats,
+            getOrigins
+        },
+        getters: {
+            rooms: idcs,
+            frames,
+            products,
+            serverTypes,
+            departments,
+            systems,
+            origins1,
+            origins2,
+            statusArr: serverStatus,
+            firms
+        }
+    },
+    ready () {
+        this.getServerSearch()
+        this.originFilter()
     },
     watch: {
         'checkedAll' (newVal) {
@@ -412,6 +426,16 @@ export default {
             } else {
                 this.checkedAll = false
             }
+        },
+        'param.room' (newVal) {
+            this.param.frame = ''
+
+            this.getFramesSeats(newVal, 'room')
+        },
+        'param.origin1' (newVal) {
+            this.param.origin2 = ''
+
+            this.getOrigins(newVal)
         }
     },
     events: {

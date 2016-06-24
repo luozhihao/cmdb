@@ -10,7 +10,7 @@
                 <div class="form-group input-box">
                     <label class="col-sm-4 control-label">机房：</label>
                     <div class="col-sm-8">
-                        <v-select :value.sync="param.idc" :options="idcs" placeholder="请选择">
+                        <v-select :value.sync="param.idc" :options="idcs" placeholder="请选择" :search="true">
                         </v-select>
                     </div>
                 </div>
