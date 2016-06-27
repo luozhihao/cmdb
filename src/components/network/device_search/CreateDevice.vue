@@ -173,7 +173,8 @@
 </template>
 
 <script>
-import { modal, datepicker } from 'vue-strap'
+import { modal } from 'vue-strap'
+import datepicker from '../../global/Datepicker.vue'
 import vSelect from '../../global/Select.vue'
 import { getFramesSeats, getOrigins } from '../../../vuex/action.js'
 import { idcs, firms, origins1, deviceStatus, frames, seats, origins2 } from '../../../vuex/getters.js'

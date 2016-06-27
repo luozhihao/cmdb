@@ -1742,13 +1742,21 @@ webpackJsonp([3],Array(32).concat([
 /* 161 */,
 /* 162 */,
 /* 163 */,
-/* 164 */
+/* 164 */,
+/* 165 */,
+/* 166 */,
+/* 167 */,
+/* 168 */,
+/* 169 */,
+/* 170 */,
+/* 171 */,
+/* 172 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(165)
-	__vue_script__ = __webpack_require__(167)
-	__vue_template__ = __webpack_require__(168)
+	__webpack_require__(173)
+	__vue_script__ = __webpack_require__(175)
+	__vue_template__ = __webpack_require__(176)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -1765,13 +1773,13 @@ webpackJsonp([3],Array(32).concat([
 	})()}
 
 /***/ },
-/* 165 */
+/* 173 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(166);
+	var content = __webpack_require__(174);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(30)(content, {});
@@ -1791,7 +1799,7 @@ webpackJsonp([3],Array(32).concat([
 	}
 
 /***/ },
-/* 166 */
+/* 174 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(29)();
@@ -1805,7 +1813,7 @@ webpackJsonp([3],Array(32).concat([
 
 
 /***/ },
-/* 167 */
+/* 175 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1818,6 +1826,8 @@ webpackJsonp([3],Array(32).concat([
 	
 	var _assign2 = _interopRequireDefault(_assign);
 	
+	var _vueStrap = __webpack_require__(69);
+	
 	var _BootPage = __webpack_require__(70);
 	
 	var _BootPage2 = _interopRequireDefault(_BootPage);
@@ -1826,9 +1836,28 @@ webpackJsonp([3],Array(32).concat([
 	
 	var _Select2 = _interopRequireDefault(_Select);
 	
+	var _action = __webpack_require__(110);
+	
+	var _getters = __webpack_require__(111);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	// <!-- IP查询 -->
+	var origin = {
+	    titles: ['IP地址', '网段', '掩码', '网关', 'IP状态', '网络类型', '运营商', '所在机房', '关联设备'],
+	    tableList: [],
+	    lenArr: [10, 50, 100],
+	    pageLen: 5,
+	    url: '/ip/ip_list/',
+	    param: {
+	        ip: '',
+	        operator: '',
+	        room: '',
+	        type: '',
+	        status: '',
+	        network: ''
+	    }
+	},
+	    init = (0, _assign2.default)({}, origin); // <!-- IP查询 -->
 	// <template>
 	//     <div>
 	//         <form class="form-horizontal clearfix form-search">
@@ -1851,14 +1880,14 @@ webpackJsonp([3],Array(32).concat([
 	//                 <div class="form-group input-box">
 	//                     <label class="control-label col-sm-4">机房：</label>
 	//                     <div class="col-sm-8">
-	//                         <v-select :value.sync="param.room" :options="rooms" placeholder="请选择">
+	//                         <v-select :value.sync="param.room" :options="rooms" placeholder="请选择" :search="true">
 	//                         </v-select>
 	//                     </div>
 	//                 </div>
 	//                 <div class="form-group input-box">
 	//                     <label class="control-label col-sm-4">类型：</label>
 	//                     <div class="col-sm-8">
-	//                         <v-select :value.sync="param.type" :options="types" placeholder="请选择">
+	//                         <v-select :value.sync="param.type" :options="netTypes" placeholder="请选择">
 	//                         </v-select>
 	//                     </div>
 	//                 </div>
@@ -1875,71 +1904,60 @@ webpackJsonp([3],Array(32).concat([
 	//                 <div class="form-group">
 	//                     <label class="control-label col-sm-4">状态：</label>
 	//                     <div class="col-sm-8">
-	//                         <v-select :value.sync="param.stauts" :options="stautsArr" placeholder="请选择">
+	//                         <v-select :value.sync="param.status" :options="statusArr" placeholder="请选择">
 	//                         </v-select>
 	//                     </div>
 	//                 </div>
 	//             </div>
 	//         </form>
 	//         <div class="text-center btn-operate">
-	//             <button type="button" class="btn btn-default">
+	//             <button type="button" class="btn btn-default" @click="refresh">
 	//                 查询
 	//             </button>
 	//         </div>
 	//         <div class="text-center table-title">
 	//             查询结果
 	//         </div>
-	//         <table class="table table-hover table-bordered">
-	//             <thead>
-	//                 <tr>
-	//                     <th v-for="title in titles" v-text="title"></th>
-	//                 </tr>
-	//             </thead>
-	//             <tbody>
-	//                 <tr v-for="list in tableList" v-if="tableList.length !== 0" v-show="tableList.length !== 0">
-	//                     <td :title="list.ipAddress" v-text="list.ipAddress" v-show="list.ipAddress"></td>
-	//                     <td :title="list.network" v-text="list.network" v-show="list.network"></td>
-	//                     <td :title="list.mask" v-text="list.mask" v-show="list.mask"></td>
-	//                     <td :title="list.gateway" v-text="list.gateway" v-show="list.gateway"></td>
-	//                     <td :title="list.ipStatus" v-text="list.ipStatus" v-show="list.ipStatus"></td>
-	//                     <td :title="list.netType" v-text="list.netType" v-show="list.netType"></td>
-	//                     <td :title="list.idcRoom" v-text="list.idcRoom" v-show="list.idcRoom"></td>
-	//                     <td v-show="list.device"><a class="pointer" v-text="list.device"></a></td>
-	//                 </tr>
-	//                 <tr class="text-center" v-show="tableList.length === 0">
-	//                     <td :colspan="titles.length">暂无数据</td>
-	//                 </tr>
-	//             </tbody>
-	//         </table>
-	//         <div class="clearfix mt30">
-	//             <boot-page :async="false" :lens="lenArr" :page-len="pageLen" :url="url" :param="param"></boot-page>
+	//         <div class="table-box">
+	//             <table class="table table-hover table-bordered">
+	//                 <thead>
+	//                     <tr>
+	//                         <th v-for="title in titles" v-text="title"></th>
+	//                     </tr>
+	//                 </thead>
+	//                 <tbody>
+	//                     <tr v-for="list in tableList" v-if="tableList.length !== 0" v-show="tableList.length !== 0">
+	//                         <td :title="list.ip" v-text="list.ip"></td>
+	//                         <td :title="list.network" v-text="list.network"></td>
+	//                         <td :title="list.mask" v-text="list.mask"></td>
+	//                         <td :title="list.gateway" v-text="list.gateway"></td>
+	//                         <td :title="list.status" v-text="list.status"></td>
+	//                         <td :title="list.netType" v-text="list.netType"></td>
+	//                         <td :title="list.operator" v-text="list.operator"></td>
+	//                         <td :title="list.idc" v-text="list.idc"></td>
+	//                         <td><a class="pointer" v-text="list.deviceNum"></a></td>
+	//                     </tr>
+	//                     <tr class="text-center" v-show="tableList.length === 0">
+	//                         <td :colspan="titles.length">暂无数据</td>
+	//                     </tr>
+	//                 </tbody>
+	//                 <tfoot>
+	//                     <tr>
+	//                         <td :colspan="titles.length">
+	//                             <boot-page :async="true" :lens="lenArr" :page-len="pageLen" :url="url" :param="param"></boot-page>
+	//                         </td>
+	//                     </tr>
+	//                 </tfoot>
+	//             </table>
+	//             <spinner id="spinner-box" :size="md" :fixed="false"
+	//                  text="数据加载中，请稍后..." v-ref:spinner>
+	//             </spinner>
 	//         </div>
 	//     </div>
 	// </template>
 	//
 	// <script>
 	
-	
-	var origin = {
-	    titles: ['IP地址', '网段', '掩码', '网关', 'IP状态', '网络类型', '所在机房', '关联设备'],
-	    tableList: [{ ipAddress: '58.215.168.225', network: '58.215.168.0/24', mask: '255.255.255.0', gateway: '58.215.168.96', ipStatus: '已分配', netType: '电信', idcRoom: '无锡国际机房', device: 'SGSW00012' }, { ipAddress: '58.215.168.225', network: '58.215.168.0/24', mask: '255.255.255.0', gateway: '58.215.168.96', ipStatus: '已分配', netType: '电信', idcRoom: '无锡国际机房', device: 'SGSW00012' }, { ipAddress: '58.215.168.225', network: '58.215.168.0/24', mask: '255.255.255.0', gateway: '58.215.168.96', ipStatus: '已分配', netType: '电信', idcRoom: '无锡国际机房', device: 'SGSW00012' }, { ipAddress: '58.215.168.225', network: '58.215.168.0/24', mask: '255.255.255.0', gateway: '58.215.168.96', ipStatus: '已分配', netType: '电信', idcRoom: '无锡国际机房', device: 'SGSW00012' }, { ipAddress: '58.215.168.225', network: '58.215.168.0/24', mask: '255.255.255.0', gateway: '58.215.168.96', ipStatus: '已分配', netType: '电信', idcRoom: '无锡国际机房', device: 'SGSW00012' }],
-	    lenArr: [10, 50, 100],
-	    pageLen: 5,
-	    url: '',
-	    operators: [],
-	    rooms: [],
-	    types: [],
-	    stautsArr: [],
-	    param: {
-	        ip: '',
-	        operator: '',
-	        room: '',
-	        type: '',
-	        status: '',
-	        network: ''
-	    }
-	},
-	    init = (0, _assign2.default)({}, origin);
 	
 	exports.default = {
 	    data: function data() {
@@ -1964,14 +1982,48 @@ webpackJsonp([3],Array(32).concat([
 	
 	        // 刷新数据
 	        refresh: function refresh() {
+	            this.$refs.spinner.show();
 	            this.$broadcast('refresh');
 	        }
 	    },
 	    components: {
 	        bootPage: _BootPage2.default,
-	        vSelect: _Select2.default
+	        vSelect: _Select2.default,
+	        spinner: _vueStrap.spinner
 	    },
+	    vuex: {
+	        actions: {
+	            getIpSearch: _action.getIpSearch
+	        },
+	        getters: {
+	            rooms: _getters.idcs,
+	            statusArr: _getters.statusArr,
+	            netTypes: _getters.netTypes,
+	            operators: _getters.operators
+	        }
+	    },
+	    ready: function ready() {
+	        this.getIpSearch();
+	        this.$refs.spinner.show();
+	    },
+	
 	    events: {
+	
+	        // 获取表格数据
+	
+	        'data': function data(param) {
+	            this.tableList = param.data;
+	            this.$refs.spinner.hide();
+	        },
+	
+	
+	        // 刷新表格
+	        'refresh': function refresh() {
+	            this.refresh();
+	        },
+	
+	
+	        // 获取输入框内容
 	        'getTxt': function getTxt(param) {
 	            var obj = param.name.split('.');
 	
@@ -1988,10 +2040,10 @@ webpackJsonp([3],Array(32).concat([
 	/* generated by vue-loader */
 
 /***/ },
-/* 168 */
+/* 176 */
 /***/ function(module, exports) {
 
-	module.exports = "\n    <div _v-69548b8e=\"\">\n        <form class=\"form-horizontal clearfix form-search\" _v-69548b8e=\"\">\n            <div class=\"col-sm-3\" _v-69548b8e=\"\">\n                <div class=\"form-group\" _v-69548b8e=\"\">\n                    <label class=\"control-label col-sm-4\" _v-69548b8e=\"\">IP：</label>\n                    <div class=\"col-sm-8\" _v-69548b8e=\"\">\n                        <input type=\"text\" class=\"form-control\" placeholder=\"多个，精确\" onfocus=\"this.blur()\" v-model=\"param.ip\" @click=\"showBroad('param.ip')\" _v-69548b8e=\"\">\n                    </div>\n                </div>\n                 <div class=\"form-group input-box\" _v-69548b8e=\"\">\n                    <label class=\"control-label col-sm-4\" _v-69548b8e=\"\">运营商：</label>\n                    <div class=\"col-sm-8\" _v-69548b8e=\"\">\n                        <v-select :value.sync=\"param.operator\" :options=\"operators\" placeholder=\"请选择\" _v-69548b8e=\"\">\n                        </v-select>\n                    </div>\n                </div>\n            </div>\n            <div class=\"col-sm-3 input-box\" _v-69548b8e=\"\">\n                <div class=\"form-group input-box\" _v-69548b8e=\"\">\n                    <label class=\"control-label col-sm-4\" _v-69548b8e=\"\">机房：</label>\n                    <div class=\"col-sm-8\" _v-69548b8e=\"\">\n                        <v-select :value.sync=\"param.room\" :options=\"rooms\" placeholder=\"请选择\" _v-69548b8e=\"\">\n                        </v-select>\n                    </div>\n                </div>\n                <div class=\"form-group input-box\" _v-69548b8e=\"\">\n                    <label class=\"control-label col-sm-4\" _v-69548b8e=\"\">类型：</label>\n                    <div class=\"col-sm-8\" _v-69548b8e=\"\">\n                        <v-select :value.sync=\"param.type\" :options=\"types\" placeholder=\"请选择\" _v-69548b8e=\"\">\n                        </v-select>\n                    </div>\n                </div>\n            </div>\n            <div class=\"col-sm-3\" _v-69548b8e=\"\">\n                <div class=\"form-group\" _v-69548b8e=\"\">\n                    <label class=\"control-label col-sm-4\" _v-69548b8e=\"\">网段：</label>\n                    <div class=\"col-sm-8\" _v-69548b8e=\"\">\n                        <input type=\"text\" class=\"form-control\" v-model=\"param.network\" _v-69548b8e=\"\">\n                    </div>\n                </div>\n            </div>\n            <div class=\"col-sm-3 input-box\" _v-69548b8e=\"\">\n                <div class=\"form-group\" _v-69548b8e=\"\">\n                    <label class=\"control-label col-sm-4\" _v-69548b8e=\"\">状态：</label>\n                    <div class=\"col-sm-8\" _v-69548b8e=\"\">\n                        <v-select :value.sync=\"param.stauts\" :options=\"stautsArr\" placeholder=\"请选择\" _v-69548b8e=\"\">\n                        </v-select>\n                    </div>\n                </div>\n            </div>\n        </form>\n        <div class=\"text-center btn-operate\" _v-69548b8e=\"\">\n            <button type=\"button\" class=\"btn btn-default\" _v-69548b8e=\"\">\n                查询\n            </button>\n        </div>\n        <div class=\"text-center table-title\" _v-69548b8e=\"\">\n            查询结果\n        </div>\n        <table class=\"table table-hover table-bordered\" _v-69548b8e=\"\">\n            <thead _v-69548b8e=\"\">\n                <tr _v-69548b8e=\"\">\n                    <th v-for=\"title in titles\" v-text=\"title\" _v-69548b8e=\"\"></th>\n                </tr>\n            </thead>\n            <tbody _v-69548b8e=\"\">\n                <tr v-for=\"list in tableList\" v-if=\"tableList.length !== 0\" v-show=\"tableList.length !== 0\" _v-69548b8e=\"\">\n                    <td :title=\"list.ipAddress\" v-text=\"list.ipAddress\" v-show=\"list.ipAddress\" _v-69548b8e=\"\"></td>\n                    <td :title=\"list.network\" v-text=\"list.network\" v-show=\"list.network\" _v-69548b8e=\"\"></td>\n                    <td :title=\"list.mask\" v-text=\"list.mask\" v-show=\"list.mask\" _v-69548b8e=\"\"></td>\n                    <td :title=\"list.gateway\" v-text=\"list.gateway\" v-show=\"list.gateway\" _v-69548b8e=\"\"></td>\n                    <td :title=\"list.ipStatus\" v-text=\"list.ipStatus\" v-show=\"list.ipStatus\" _v-69548b8e=\"\"></td>\n                    <td :title=\"list.netType\" v-text=\"list.netType\" v-show=\"list.netType\" _v-69548b8e=\"\"></td>\n                    <td :title=\"list.idcRoom\" v-text=\"list.idcRoom\" v-show=\"list.idcRoom\" _v-69548b8e=\"\"></td>\n                    <td v-show=\"list.device\" _v-69548b8e=\"\"><a class=\"pointer\" v-text=\"list.device\" _v-69548b8e=\"\"></a></td>\n                </tr>\n                <tr class=\"text-center\" v-show=\"tableList.length === 0\" _v-69548b8e=\"\">\n                    <td :colspan=\"titles.length\" _v-69548b8e=\"\">暂无数据</td>\n                </tr>\n            </tbody>\n        </table>\n        <div class=\"clearfix mt30\" _v-69548b8e=\"\">\n            <boot-page :async=\"false\" :lens=\"lenArr\" :page-len=\"pageLen\" :url=\"url\" :param=\"param\" _v-69548b8e=\"\"></boot-page>\n        </div>\n    </div>\n";
+	module.exports = "\n    <div _v-69548b8e=\"\">\n        <form class=\"form-horizontal clearfix form-search\" _v-69548b8e=\"\">\n            <div class=\"col-sm-3\" _v-69548b8e=\"\">\n                <div class=\"form-group\" _v-69548b8e=\"\">\n                    <label class=\"control-label col-sm-4\" _v-69548b8e=\"\">IP：</label>\n                    <div class=\"col-sm-8\" _v-69548b8e=\"\">\n                        <input type=\"text\" class=\"form-control\" placeholder=\"多个，精确\" onfocus=\"this.blur()\" v-model=\"param.ip\" @click=\"showBroad('param.ip')\" _v-69548b8e=\"\">\n                    </div>\n                </div>\n                 <div class=\"form-group input-box\" _v-69548b8e=\"\">\n                    <label class=\"control-label col-sm-4\" _v-69548b8e=\"\">运营商：</label>\n                    <div class=\"col-sm-8\" _v-69548b8e=\"\">\n                        <v-select :value.sync=\"param.operator\" :options=\"operators\" placeholder=\"请选择\" _v-69548b8e=\"\">\n                        </v-select>\n                    </div>\n                </div>\n            </div>\n            <div class=\"col-sm-3 input-box\" _v-69548b8e=\"\">\n                <div class=\"form-group input-box\" _v-69548b8e=\"\">\n                    <label class=\"control-label col-sm-4\" _v-69548b8e=\"\">机房：</label>\n                    <div class=\"col-sm-8\" _v-69548b8e=\"\">\n                        <v-select :value.sync=\"param.room\" :options=\"rooms\" placeholder=\"请选择\" :search=\"true\" _v-69548b8e=\"\">\n                        </v-select>\n                    </div>\n                </div>\n                <div class=\"form-group input-box\" _v-69548b8e=\"\">\n                    <label class=\"control-label col-sm-4\" _v-69548b8e=\"\">类型：</label>\n                    <div class=\"col-sm-8\" _v-69548b8e=\"\">\n                        <v-select :value.sync=\"param.type\" :options=\"netTypes\" placeholder=\"请选择\" _v-69548b8e=\"\">\n                        </v-select>\n                    </div>\n                </div>\n            </div>\n            <div class=\"col-sm-3\" _v-69548b8e=\"\">\n                <div class=\"form-group\" _v-69548b8e=\"\">\n                    <label class=\"control-label col-sm-4\" _v-69548b8e=\"\">网段：</label>\n                    <div class=\"col-sm-8\" _v-69548b8e=\"\">\n                        <input type=\"text\" class=\"form-control\" v-model=\"param.network\" _v-69548b8e=\"\">\n                    </div>\n                </div>\n            </div>\n            <div class=\"col-sm-3 input-box\" _v-69548b8e=\"\">\n                <div class=\"form-group\" _v-69548b8e=\"\">\n                    <label class=\"control-label col-sm-4\" _v-69548b8e=\"\">状态：</label>\n                    <div class=\"col-sm-8\" _v-69548b8e=\"\">\n                        <v-select :value.sync=\"param.status\" :options=\"statusArr\" placeholder=\"请选择\" _v-69548b8e=\"\">\n                        </v-select>\n                    </div>\n                </div>\n            </div>\n        </form>\n        <div class=\"text-center btn-operate\" _v-69548b8e=\"\">\n            <button type=\"button\" class=\"btn btn-default\" @click=\"refresh\" _v-69548b8e=\"\">\n                查询\n            </button>\n        </div>\n        <div class=\"text-center table-title\" _v-69548b8e=\"\">\n            查询结果\n        </div>\n        <div class=\"table-box\" _v-69548b8e=\"\">\n            <table class=\"table table-hover table-bordered\" _v-69548b8e=\"\">\n                <thead _v-69548b8e=\"\">\n                    <tr _v-69548b8e=\"\">\n                        <th v-for=\"title in titles\" v-text=\"title\" _v-69548b8e=\"\"></th>\n                    </tr>\n                </thead>\n                <tbody _v-69548b8e=\"\">\n                    <tr v-for=\"list in tableList\" v-if=\"tableList.length !== 0\" v-show=\"tableList.length !== 0\" _v-69548b8e=\"\">\n                        <td :title=\"list.ip\" v-text=\"list.ip\" _v-69548b8e=\"\"></td>\n                        <td :title=\"list.network\" v-text=\"list.network\" _v-69548b8e=\"\"></td>\n                        <td :title=\"list.mask\" v-text=\"list.mask\" _v-69548b8e=\"\"></td>\n                        <td :title=\"list.gateway\" v-text=\"list.gateway\" _v-69548b8e=\"\"></td>\n                        <td :title=\"list.status\" v-text=\"list.status\" _v-69548b8e=\"\"></td>\n                        <td :title=\"list.netType\" v-text=\"list.netType\" _v-69548b8e=\"\"></td>\n                        <td :title=\"list.operator\" v-text=\"list.operator\" _v-69548b8e=\"\"></td>\n                        <td :title=\"list.idc\" v-text=\"list.idc\" _v-69548b8e=\"\"></td>\n                        <td _v-69548b8e=\"\"><a class=\"pointer\" v-text=\"list.deviceNum\" _v-69548b8e=\"\"></a></td>\n                    </tr>\n                    <tr class=\"text-center\" v-show=\"tableList.length === 0\" _v-69548b8e=\"\">\n                        <td :colspan=\"titles.length\" _v-69548b8e=\"\">暂无数据</td>\n                    </tr>\n                </tbody>\n                <tfoot _v-69548b8e=\"\">\n                    <tr _v-69548b8e=\"\">\n                        <td :colspan=\"titles.length\" _v-69548b8e=\"\">\n                            <boot-page :async=\"true\" :lens=\"lenArr\" :page-len=\"pageLen\" :url=\"url\" :param=\"param\" _v-69548b8e=\"\"></boot-page>\n                        </td>\n                    </tr>\n                </tfoot>\n            </table>\n            <spinner id=\"spinner-box\" :size=\"md\" :fixed=\"false\" text=\"数据加载中，请稍后...\" v-ref:spinner=\"\" _v-69548b8e=\"\">\n            </spinner>\n        </div>\n    </div>\n";
 
 /***/ }
 ]));

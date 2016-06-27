@@ -135,7 +135,7 @@
                 </tr>
             </tbody>
         </table>
-        <div class="clearfix mt30">
+        <div class="clearfix">
             <boot-page :async="false" :lens="lenArr" :page-len="pageLen" :url="url" :param="param"></boot-page>
         </div>
 

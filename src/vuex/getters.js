@@ -67,7 +67,7 @@ export const seats = state => state.seats
 export const origins2 = state => state.origins2
 
 // 获取网络类型
-export const netTypes = state => state.networks
+export const netTypes = state => state.netTypes
 
 // 获取产品类型
 export const products = state => state.products

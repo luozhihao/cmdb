@@ -133,6 +133,7 @@ fieldset[disabled] .form-control {
     width: 100%;
     max-height: 300px;
     overflow-y: auto;
+    z-index: 9999;
 }
 
 .input-box .btn-group {
@@ -216,13 +217,14 @@ fieldset[disabled] .form-control {
 }
 
 .table-box {
+    position: relative;
     width: 100%;
-    min-height: 500px;
+    /*min-height: 500px;*/
     overflow-x: auto; 
 }
 
 .table-box .table {
-    width: 2000px;
+    width: 100%;
     max-width: none;
 }
 
@@ -282,4 +284,8 @@ fieldset[disabled] .form-control {
 
 .mh500 {
     min-height: 500px;
+}
+
+.spinner-gritcode {
+    z-index: 999 !important;
 }

@@ -21,14 +21,14 @@
                 <div class="form-group input-box">
                     <label class="control-label col-sm-4">机房：</label>
                     <div class="col-sm-8">
-                        <v-select :value.sync="param.room" :options="rooms" placeholder="请选择">
+                        <v-select :value.sync="param.room" :options="rooms" placeholder="请选择" :search="true">
                         </v-select>
                     </div>
                 </div>
                 <div class="form-group input-box">
                     <label class="control-label col-sm-4">类型：</label>
                     <div class="col-sm-8">
-                        <v-select :value.sync="param.type" :options="types" placeholder="请选择">
+                        <v-select :value.sync="param.type" :options="netTypes" placeholder="请选择">
                         </v-select>
                     </div>
                 </div>
@@ -45,68 +45,71 @@
                 <div class="form-group">
                     <label class="control-label col-sm-4">状态：</label>
                     <div class="col-sm-8">
-                        <v-select :value.sync="param.stauts" :options="stautsArr" placeholder="请选择">
+                        <v-select :value.sync="param.status" :options="statusArr" placeholder="请选择">
                         </v-select>
                     </div>
                 </div>
             </div>
         </form>
         <div class="text-center btn-operate">
-            <button type="button" class="btn btn-default">
+            <button type="button" class="btn btn-default" @click="refresh">
                 查询
             </button>
         </div>
         <div class="text-center table-title">
             查询结果
         </div>
-        <table class="table table-hover table-bordered">
-            <thead>
-                <tr>
-                    <th v-for="title in titles" v-text="title"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="list in tableList" v-if="tableList.length !== 0" v-show="tableList.length !== 0">
-                    <td :title="list.ipAddress" v-text="list.ipAddress" v-show="list.ipAddress"></td>
-                    <td :title="list.network" v-text="list.network" v-show="list.network"></td>
-                    <td :title="list.mask" v-text="list.mask" v-show="list.mask"></td>
-                    <td :title="list.gateway" v-text="list.gateway" v-show="list.gateway"></td>
-                    <td :title="list.ipStatus" v-text="list.ipStatus" v-show="list.ipStatus"></td>
-                    <td :title="list.netType" v-text="list.netType" v-show="list.netType"></td>
-                    <td :title="list.idcRoom" v-text="list.idcRoom" v-show="list.idcRoom"></td>
-                    <td v-show="list.device"><a class="pointer" v-text="list.device"></a></td>
-                </tr>
-                <tr class="text-center" v-show="tableList.length === 0">
-                    <td :colspan="titles.length">暂无数据</td>
-                </tr>
-            </tbody>
-        </table>
-        <div class="clearfix mt30">
-            <boot-page :async="false" :lens="lenArr" :page-len="pageLen" :url="url" :param="param"></boot-page>
+        <div class="table-box">
+            <table class="table table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th v-for="title in titles" v-text="title"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="list in tableList" v-if="tableList.length !== 0" v-show="tableList.length !== 0">
+                        <td :title="list.ip" v-text="list.ip"></td>
+                        <td :title="list.network" v-text="list.network"></td>
+                        <td :title="list.mask" v-text="list.mask"></td>
+                        <td :title="list.gateway" v-text="list.gateway"></td>
+                        <td :title="list.status" v-text="list.status"></td>
+                        <td :title="list.netType" v-text="list.netType"></td>
+                        <td :title="list.operator" v-text="list.operator"></td>
+                        <td :title="list.idc" v-text="list.idc"></td>
+                        <td><a class="pointer" v-text="list.deviceNum"></a></td>
+                    </tr>
+                    <tr class="text-center" v-show="tableList.length === 0">
+                        <td :colspan="titles.length">暂无数据</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td :colspan="titles.length">
+                            <boot-page :async="true" :lens="lenArr" :page-len="pageLen" :url="url" :param="param"></boot-page>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+            <spinner id="spinner-box" :size="md" :fixed="false" 
+                 text="数据加载中，请稍后..." v-ref:spinner>
+            </spinner>
         </div>
     </div>
 </template>
 
 <script>
+import { spinner } from 'vue-strap'
 import bootPage from '../../global/BootPage.vue'
 import vSelect from '../../global/Select.vue'
+import { getIpSearch } from '../../../vuex/action.js'
+import { idcs, statusArr, operators, netTypes } from '../../../vuex/getters.js'
 
 let origin = {
-        titles: ['IP地址', '网段', '掩码', '网关', 'IP状态', '网络类型', '所在机房', '关联设备'],
-        tableList: [
-            {ipAddress: '58.215.168.225', network: '58.215.168.0/24', mask: '255.255.255.0', gateway: '58.215.168.96', ipStatus: '已分配', netType: '电信', idcRoom: '无锡国际机房', device: 'SGSW00012'},
-            {ipAddress: '58.215.168.225', network: '58.215.168.0/24', mask: '255.255.255.0', gateway: '58.215.168.96', ipStatus: '已分配', netType: '电信', idcRoom: '无锡国际机房', device: 'SGSW00012'},
-            {ipAddress: '58.215.168.225', network: '58.215.168.0/24', mask: '255.255.255.0', gateway: '58.215.168.96', ipStatus: '已分配', netType: '电信', idcRoom: '无锡国际机房', device: 'SGSW00012'},
-            {ipAddress: '58.215.168.225', network: '58.215.168.0/24', mask: '255.255.255.0', gateway: '58.215.168.96', ipStatus: '已分配', netType: '电信', idcRoom: '无锡国际机房', device: 'SGSW00012'},
-            {ipAddress: '58.215.168.225', network: '58.215.168.0/24', mask: '255.255.255.0', gateway: '58.215.168.96', ipStatus: '已分配', netType: '电信', idcRoom: '无锡国际机房', device: 'SGSW00012'}
-        ],
+        titles: ['IP地址', '网段', '掩码', '网关', 'IP状态', '网络类型', '运营商', '所在机房', '关联设备'],
+        tableList: [],
         lenArr: [10, 50, 100],
         pageLen: 5,
-        url: '',
-        operators: [],
-        rooms: [],
-        types: [],
-        stautsArr: [],
+        url: '/ip/ip_list/',
         param: {
             ip: '',
             operator: '',
@@ -138,14 +141,44 @@ export default {
 
         // 刷新数据
         refresh () {
+            this.$refs.spinner.show()
             this.$broadcast('refresh')
         }
     },
     components: {
         bootPage,
-        vSelect
+        vSelect,
+        spinner
+    },
+    vuex: {
+        actions: {
+            getIpSearch
+        },
+        getters: {
+            rooms: idcs,
+            statusArr,
+            netTypes,
+            operators
+        }
+    },
+    ready () {
+        this.getIpSearch()
+        this.$refs.spinner.show()
     },
     events: {
+
+        // 获取表格数据
+        'data' (param) {
+            this.tableList = param.data
+            this.$refs.spinner.hide()
+        },
+
+        // 刷新表格
+        'refresh' () {
+            this.refresh()
+        },
+
+        // 获取输入框内容
         'getTxt' (param) {
             let obj = param.name.split('.')
 

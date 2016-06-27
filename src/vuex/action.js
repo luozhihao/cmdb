@@ -126,4 +126,17 @@ export function getServerSearch({ dispatch, state }) {
     })
 }
 
+// 获取IP查询页下拉框
+export function getIpSearch({ dispatch, state }) {
+    this.$http({
+        url: '/ip/ip_list/',
+        method: 'GET'
+    })
+    .then(response => {
+        if (response.data.code === 200) {
+           dispatch('GETIPSEARCH', response.data)
+        } 
+    })
+}
+
 

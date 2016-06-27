@@ -34,7 +34,7 @@ const state = {
     deviceStatus: [],
     frames: [],
     seats: [],
-    networks: [],
+    netTypes: [],
     products: [],
     serverTypes: [],
     serverStatus: []
@@ -99,7 +99,7 @@ const mutations = {
     // 获取网络类型、规划机房
     GETIPPLAN (state, data) {
         state.roomLocation = data.idcs
-        state.networks = data.types
+        state.netTypes = data.types
         state.operators = data.operators
     },
 
@@ -113,6 +113,14 @@ const mutations = {
         state.origins1 = data.origins1
         state.serverStatus = data.statusArr
         state.firms = data.firms
+    },
+
+    // 获取IP查询页下拉框
+    GETIPSEARCH (state, data) {
+        state.roomLocation = data.rooms
+        state.roomStatus = data.stautsArr
+        state.operators = data.operators
+        state.netTypes = data.types
     }
 }
 

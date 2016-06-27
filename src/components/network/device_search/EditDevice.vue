@@ -258,7 +258,8 @@
 </template>
 
 <script>
-import { modal, datepicker, tabset, tab } from 'vue-strap'
+import { modal, tabset, tab } from 'vue-strap'
+import datepicker from '../../global/Datepicker.vue'
 import vSelect from '../../global/Select.vue'
 import createVlanModal from './CreateVlan.vue'
 import createPortModal from './CreatePort.vue'
@@ -383,6 +384,7 @@ export default {
             } else {
                 this.frame = ''
                 this.seat = ''
+                this.getFramesSeats(newVal, 'room')
             }
         },
         'frame' (newVal, oldVal) {
@@ -394,6 +396,7 @@ export default {
                 this.getFramesSeats(newVal, 'shelf')
             } else {
                 this.seat = ''
+                this.getFramesSeats(newVal, 'shelf')
             }
         },
         'origin1' (newVal, oldVal) {
@@ -405,6 +408,7 @@ export default {
                 this.getOrigins(newVal)
             } else {
                 this.origin2 = ''
+                this.getOrigins(newVal)
             }
         },
         'editDeviceModal' (newVal) {

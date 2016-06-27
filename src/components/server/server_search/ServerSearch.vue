@@ -39,7 +39,7 @@
                 <div class="form-group">
                     <label class="control-label col-sm-4">运维负责人：</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" value="">
+                        <input type="text" class="form-control" v-model="param.maintainManager">
                     </div>
                 </div>
             </div>
@@ -120,7 +120,7 @@
                 <div class="form-group">
                     <label class="control-label col-sm-4">Set：</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" value="">
+                        <input type="text" class="form-control" v-model="param.set">
                     </div>
                 </div>
             </div>
@@ -141,7 +141,7 @@
                 <div class="form-group">
                     <label class="control-label col-sm-4">型号：</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" placeholder="模糊" v-model="">
+                        <input type="text" class="form-control" placeholder="模糊" v-model="param.model">
                     </div>
                 </div>
                 <div class="form-group input-box">
@@ -154,13 +154,13 @@
                 <div class="form-group">
                     <label class="control-label col-sm-4">Module：</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" value="">
+                        <input type="text" class="form-control" v-model="param.module">
                     </div>
                 </div>
             </div>
         </form>
         <div class="text-center btn-operate">
-            <button type="button" class="btn btn-default">
+            <button type="button" class="btn btn-default" @click="refresh">
                 查询
             </button>
             <button type="button" class="btn btn-default" @click="$broadcast('showCreateServer')">
@@ -218,13 +218,20 @@
                         </td>
                     </tr>
                     <tr class="text-center" v-show="tableList.length === 0">
-                        <td :colspan="titles.length">暂无数据</td>
+                        <td :colspan="titles.length + 1">暂无数据</td>
                     </tr>
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <td :colspan="titles.length + 1">
+                            <boot-page :async="true" :lens="lenArr" :page-len="pageLen" :url="url" :param="param"></boot-page>
+                        </td>
+                    </tr>
+                </tfoot>
             </table>
-        </div>
-        <div class="clearfix mt30">
-            <boot-page :async="false" :lens="lenArr" :page-len="pageLen" :url="url" :param="param"></boot-page>
+            <spinner id="spinner-box" :size="md" :fixed="false" 
+                 text="数据加载中，请稍后..." v-ref:spinner>
+            </spinner>
         </div>
 
         <create-server-modal></create-server-modal>
@@ -234,7 +241,7 @@
 </template>
 
 <script>
-import { dropdown } from 'vue-strap'
+import { dropdown, spinner } from 'vue-strap'
 import bootPage from '../../global/BootPage.vue'
 import createServerModal from './createServer.vue'
 import batchEditModal from './BatchEdit.vue'
@@ -255,10 +262,10 @@ export default {
             ],
             lenArr: [10, 50, 100],
             pageLen: 5,
-            url: '',
+            url: '/device/server/query/',
             param: {
-                serverNum: '',
                 sn: '',
+                serverNum: '',
                 assetNum: '',
                 financeNum: '',
                 invoiceNum: '',
@@ -268,6 +275,7 @@ export default {
                 firm: '',
                 serverType: '',
                 status: '',
+                model: '',
                 system: '',
                 origin1: '',
                 origin2: '',
@@ -275,11 +283,14 @@ export default {
                 factoryTime: '',
                 procureTime: '',
                 department: '',
-                product: ''
+                product: '',
+                maintainManager: '',
+                module: '',
+                set: ''
             },
             checkArr: [
-                {label: 'IP', value: 'ip', checked: true},
                 {label: 'SN', value: 'sn', checked: true},
+                {label: 'IP', value: 'ip', checked: true},
                 {label: '类型', value: 'serverType', checked: true},
                 {label: '操作系统', value: 'system', checked: true},
                 {label: '状态', value: 'status', checked: true},
@@ -301,6 +312,7 @@ export default {
 
         // 刷新数据
         refresh () {
+            this.$refs.spinner.show()
             this.checkedIds = []
             this.$broadcast('refresh')
         },
@@ -378,7 +390,8 @@ export default {
         editServerModal,
         vSelect,
         calendar,
-        dropdown
+        dropdown,
+        spinner
     },
     vuex: {
         actions: {
@@ -402,6 +415,7 @@ export default {
     ready () {
         this.getServerSearch()
         this.originFilter()
+        this.$refs.spinner.show()
     },
     watch: {
         'checkedAll' (newVal) {
@@ -439,6 +453,19 @@ export default {
         }
     },
     events: {
+        // 获取表格数据
+        'data' (param) {
+            this.tableList = param.data
+            this.checkedIds = []
+            this.$refs.spinner.hide()
+        },
+
+        // 刷新表格
+        'refresh' () {
+            this.refresh()
+        },
+
+        // 获取输入框内容
         'getTxt' (param) {
             let obj = param.name.split('.')
 

@@ -98,10 +98,17 @@
                         <td :colspan="titles.length + 1">暂无数据</td>
                     </tr>
                 </tbody>
+                <tfoot> 
+                    <tr>
+                        <td :colspan="titles.length + 1">
+                            <boot-page :async="true" :lens="lenArr" :page-len="pageLen" :url="url" :param="param"></boot-page>
+                        </td>
+                    </tr>
+                </tfoot>
             </table>
-        </div>
-        <div class="clearfix mt30">
-            <boot-page :async="true" :lens="lenArr" :page-len="pageLen" :url="url" :param="param"></boot-page>
+            <spinner id="spinner-box" :size="md" :fixed="false" 
+                 text="数据加载中，请稍后..." v-ref:spinner>
+            </spinner>
         </div>
 
         <create-modal></create-modal> 
@@ -112,7 +119,7 @@
 </template>
 
 <script>
-import { dropdown } from 'vue-strap'
+import { dropdown, spinner } from 'vue-strap'
 import bootPage from '../../global/BootPage.vue'
 import createModal from './CreateRoom.vue'
 import editRoomModal from './EditRoom.vue'
@@ -162,6 +169,7 @@ export default {
 
         // 刷新数据
         refresh () {
+            this.$refs.spinner.show()
             this.checkedIds = []
             this.$broadcast('refresh')
         },
@@ -243,7 +251,8 @@ export default {
         editRoomModal,
         editFrameModal,
         editSeatsModal,
-        dropdown
+        dropdown,
+        spinner
     },
     vuex: {
         actions: {
@@ -256,8 +265,8 @@ export default {
     },
     ready () {
         this.getRoomSearch()
-
         this.originFilter()
+        this.$refs.spinner.show()
     },
     watch: {
         'checkedAll' (newVal) {
@@ -295,6 +304,7 @@ export default {
         'data' (param) {
             this.tableList = param.data
             this.checkedIds = []
+            this.$refs.spinner.hide()
         },
 
         // 刷新表格

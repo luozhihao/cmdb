@@ -4,7 +4,7 @@
         <form class="form-horizontal clearfix form-search">
         <div class="col-sm-3">
                 <div class="form-group input-box">
-                    <label class="col-sm-4 control-label">类型：</label>
+                    <label class="col-sm-4 control-label">类型：<span class="text-danger">*</span></label>
                     <div class="col-sm-8">
                         <v-select :value.sync="netType" :options="netTypes" placeholder="请选择">
                         </v-select>
@@ -13,7 +13,7 @@
                 <div class="form-group">
                     <label class="col-sm-4 control-label">IP地址：</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" v-model="ips">
+                        <input type="text" class="form-control" placeholder="多个，精确" onfocus="this.blur()" v-model="ips" @click="showBroad('ips')">
                     </div>
                 </div>
             </div>
@@ -26,7 +26,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">规划机房：</label>
+                    <label class="col-sm-4 control-label">规划机房：<span class="text-danger">*</span></label>
                     <div class="col-sm-8">
                         <v-select :value.sync="idc" :options="idcs" placeholder="请选择" :search="true" multiple>
                         </v-select>
@@ -43,7 +43,7 @@
             </div>
             <div class="col-sm-3">
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">网关：</label>
+                    <label class="col-sm-4 control-label">网关：<span class="text-danger">*</span></label>
                     <div class="col-sm-8">
                         <input type="text" class="form-control" v-model="gateway">
                     </div>
@@ -51,7 +51,7 @@
             </div>
         </form>
         <div class="text-center btn-operate">
-            <button type="button" class="btn btn-default">
+            <button type="button" class="btn btn-default" @click="saveFn" :disabled="netType && idc && gateway.trim() ? false : true">
                 保存
             </button>
         </div>
@@ -70,7 +70,8 @@ let origin = {
         gateway: '',
         ips: '',
         operator: ''
-    }
+    },
+    init = Object.assign({}, origin);
 
 export default {
     data () {
@@ -78,6 +79,35 @@ export default {
     },
     methods: {
 
+        // 输入面板
+        showBroad (target) {
+            let obj = target.split('.')
+
+            let param = {
+                value: this[obj[0]][obj[1]],
+                name: target
+            }
+
+            this.$dispatch('showBroad', param)
+        },
+
+        // 保存IP
+        saveFn () {
+            this.$http({
+                url: '/ip/ip_add/',
+                method: 'POST',
+                data: this.$data
+            })
+            .then(response => {
+                if (response.data.code === 200) {
+                    this.$data = Object.assign({}, init)
+
+                    this.$dispatch('show-success')
+                } else {
+                    this.$dispatch('show-error')
+                }
+            })
+        }
     },
     components: {
         vSelect
@@ -94,6 +124,13 @@ export default {
     },
     ready () {
         this.getIpPlan()
+    },
+    events: {
+        'getTxt' (param) {
+            let obj = param.name.split('.')
+
+            this[obj[0]] = param.val
+        }
     }
 }
 </script>

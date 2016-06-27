@@ -148,8 +148,6 @@ export default {
 
             this.frameId = param
             this.editSeatsModal = true
-
-            console.log(this.frameId)
         }
     }
 }

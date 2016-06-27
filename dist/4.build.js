@@ -1,4 +1,26 @@
-webpackJsonp([4],Array(35).concat([
+webpackJsonp([4],Array(32).concat([
+/* 32 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(33), __esModule: true };
+
+/***/ },
+/* 33 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(34);
+	module.exports = __webpack_require__(37).Object.assign;
+
+/***/ },
+/* 34 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 19.1.3.1 Object.assign(target, source)
+	var $export = __webpack_require__(35);
+	
+	$export($export.S + $export.F, 'Object', {assign: __webpack_require__(50)});
+
+/***/ },
 /* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -238,7 +260,44 @@ webpackJsonp([4],Array(35).concat([
 	};
 
 /***/ },
-/* 50 */,
+/* 50 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	// 19.1.2.1 Object.assign(target, source, ...)
+	var getKeys  = __webpack_require__(51)
+	  , gOPS     = __webpack_require__(66)
+	  , pIE      = __webpack_require__(67)
+	  , toObject = __webpack_require__(68)
+	  , IObject  = __webpack_require__(55)
+	  , $assign  = Object.assign;
+	
+	// should work with symbols and should have deterministic property order (V8 bug)
+	module.exports = !$assign || __webpack_require__(46)(function(){
+	  var A = {}
+	    , B = {}
+	    , S = Symbol()
+	    , K = 'abcdefghijklmnopqrst';
+	  A[S] = 7;
+	  K.split('').forEach(function(k){ B[k] = k; });
+	  return $assign({}, A)[S] != 7 || Object.keys($assign({}, B)).join('') != K;
+	}) ? function assign(target, source){ // eslint-disable-line no-unused-vars
+	  var T     = toObject(target)
+	    , aLen  = arguments.length
+	    , index = 1
+	    , getSymbols = gOPS.f
+	    , isEnum     = pIE.f;
+	  while(aLen > index){
+	    var S      = IObject(arguments[index++])
+	      , keys   = getSymbols ? getKeys(S).concat(getSymbols(S)) : getKeys(S)
+	      , length = keys.length
+	      , j      = 0
+	      , key;
+	    while(length > j)if(isEnum.call(S, key = keys[j++]))T[key] = S[key];
+	  } return T;
+	} : $assign;
+
+/***/ },
 /* 51 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -423,8 +482,18 @@ webpackJsonp([4],Array(35).concat([
 	).split(',');
 
 /***/ },
-/* 66 */,
-/* 67 */,
+/* 66 */
+/***/ function(module, exports) {
+
+	exports.f = Object.getOwnPropertySymbols;
+
+/***/ },
+/* 67 */
+/***/ function(module, exports) {
+
+	exports.f = {}.propertyIsEnumerable;
+
+/***/ },
 /* 68 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -1313,13 +1382,21 @@ webpackJsonp([4],Array(35).concat([
 /* 166 */,
 /* 167 */,
 /* 168 */,
-/* 169 */
+/* 169 */,
+/* 170 */,
+/* 171 */,
+/* 172 */,
+/* 173 */,
+/* 174 */,
+/* 175 */,
+/* 176 */,
+/* 177 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(170)
-	__vue_script__ = __webpack_require__(172)
-	__vue_template__ = __webpack_require__(173)
+	__webpack_require__(178)
+	__vue_script__ = __webpack_require__(180)
+	__vue_template__ = __webpack_require__(181)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -1336,13 +1413,13 @@ webpackJsonp([4],Array(35).concat([
 	})()}
 
 /***/ },
-/* 170 */
+/* 178 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(171);
+	var content = __webpack_require__(179);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(30)(content, {});
@@ -1362,7 +1439,7 @@ webpackJsonp([4],Array(35).concat([
 	}
 
 /***/ },
-/* 171 */
+/* 179 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(29)();
@@ -1376,7 +1453,7 @@ webpackJsonp([4],Array(35).concat([
 
 
 /***/ },
-/* 172 */
+/* 180 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1384,6 +1461,10 @@ webpackJsonp([4],Array(35).concat([
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
+	
+	var _assign = __webpack_require__(32);
+	
+	var _assign2 = _interopRequireDefault(_assign);
 	
 	var _Select = __webpack_require__(79);
 	
@@ -1402,13 +1483,14 @@ webpackJsonp([4],Array(35).concat([
 	    gateway: '',
 	    ips: '',
 	    operator: ''
-	}; // <!-- IP规划 -->
+	},
+	    init = (0, _assign2.default)({}, origin); // <!-- IP规划 -->
 	// <template>
 	//     <div>
 	//         <form class="form-horizontal clearfix form-search">
 	//         <div class="col-sm-3">
 	//                 <div class="form-group input-box">
-	//                     <label class="col-sm-4 control-label">类型：</label>
+	//                     <label class="col-sm-4 control-label">类型：<span class="text-danger">*</span></label>
 	//                     <div class="col-sm-8">
 	//                         <v-select :value.sync="netType" :options="netTypes" placeholder="请选择">
 	//                         </v-select>
@@ -1417,7 +1499,7 @@ webpackJsonp([4],Array(35).concat([
 	//                 <div class="form-group">
 	//                     <label class="col-sm-4 control-label">IP地址：</label>
 	//                     <div class="col-sm-8">
-	//                         <input type="text" class="form-control" v-model="ips">
+	//                         <input type="text" class="form-control" placeholder="多个，精确" onfocus="this.blur()" v-model="ips" @click="showBroad('ips')">
 	//                     </div>
 	//                 </div>
 	//             </div>
@@ -1430,7 +1512,7 @@ webpackJsonp([4],Array(35).concat([
 	//                     </div>
 	//                 </div>
 	//                 <div class="form-group">
-	//                     <label class="col-sm-4 control-label">规划机房：</label>
+	//                     <label class="col-sm-4 control-label">规划机房：<span class="text-danger">*</span></label>
 	//                     <div class="col-sm-8">
 	//                         <v-select :value.sync="idc" :options="idcs" placeholder="请选择" :search="true" multiple>
 	//                         </v-select>
@@ -1447,7 +1529,7 @@ webpackJsonp([4],Array(35).concat([
 	//             </div>
 	//             <div class="col-sm-3">
 	//                 <div class="form-group">
-	//                     <label class="col-sm-4 control-label">网关：</label>
+	//                     <label class="col-sm-4 control-label">网关：<span class="text-danger">*</span></label>
 	//                     <div class="col-sm-8">
 	//                         <input type="text" class="form-control" v-model="gateway">
 	//                     </div>
@@ -1455,7 +1537,7 @@ webpackJsonp([4],Array(35).concat([
 	//             </div>
 	//         </form>
 	//         <div class="text-center btn-operate">
-	//             <button type="button" class="btn btn-default">
+	//             <button type="button" class="btn btn-default" @click="saveFn" :disabled="netType && idc && gateway.trim() ? false : true">
 	//                 保存
 	//             </button>
 	//         </div>
@@ -1470,7 +1552,41 @@ webpackJsonp([4],Array(35).concat([
 	        return origin;
 	    },
 	
-	    methods: {},
+	    methods: {
+	
+	        // 输入面板
+	
+	        showBroad: function showBroad(target) {
+	            var obj = target.split('.');
+	
+	            var param = {
+	                value: this[obj[0]][obj[1]],
+	                name: target
+	            };
+	
+	            this.$dispatch('showBroad', param);
+	        },
+	
+	
+	        // 保存IP
+	        saveFn: function saveFn() {
+	            var _this = this;
+	
+	            this.$http({
+	                url: '/ip/ip_add/',
+	                method: 'POST',
+	                data: this.$data
+	            }).then(function (response) {
+	                if (response.data.code === 200) {
+	                    _this.$data = (0, _assign2.default)({}, init);
+	
+	                    _this.$dispatch('show-success');
+	                } else {
+	                    _this.$dispatch('show-error');
+	                }
+	            });
+	        }
+	    },
 	    components: {
 	        vSelect: _Select2.default
 	    },
@@ -1486,6 +1602,14 @@ webpackJsonp([4],Array(35).concat([
 	    },
 	    ready: function ready() {
 	        this.getIpPlan();
+	    },
+	
+	    events: {
+	        'getTxt': function getTxt(param) {
+	            var obj = param.name.split('.');
+	
+	            this[obj[0]] = param.val;
+	        }
 	    }
 	};
 	// </script>
@@ -1497,10 +1621,10 @@ webpackJsonp([4],Array(35).concat([
 	/* generated by vue-loader */
 
 /***/ },
-/* 173 */
+/* 181 */
 /***/ function(module, exports) {
 
-	module.exports = "\n    <div _v-709264ae=\"\">\n        <form class=\"form-horizontal clearfix form-search\" _v-709264ae=\"\">\n        <div class=\"col-sm-3\" _v-709264ae=\"\">\n                <div class=\"form-group input-box\" _v-709264ae=\"\">\n                    <label class=\"col-sm-4 control-label\" _v-709264ae=\"\">类型：</label>\n                    <div class=\"col-sm-8\" _v-709264ae=\"\">\n                        <v-select :value.sync=\"netType\" :options=\"netTypes\" placeholder=\"请选择\" _v-709264ae=\"\">\n                        </v-select>\n                    </div>\n                </div>\n                <div class=\"form-group\" _v-709264ae=\"\">\n                    <label class=\"col-sm-4 control-label\" _v-709264ae=\"\">IP地址：</label>\n                    <div class=\"col-sm-8\" _v-709264ae=\"\">\n                        <input type=\"text\" class=\"form-control\" v-model=\"ips\" _v-709264ae=\"\">\n                    </div>\n                </div>\n            </div>\n            <div class=\"col-sm-3 input-box\" _v-709264ae=\"\">\n                <div class=\"form-group\" v-show=\"netType === '3'\" _v-709264ae=\"\">\n                    <label class=\"col-sm-4 control-label\" _v-709264ae=\"\">运营商：</label>\n                    <div class=\"col-sm-8\" _v-709264ae=\"\">\n                        <v-select :value.sync=\"operator\" :options=\"operators\" placeholder=\"请选择\" _v-709264ae=\"\">\n                        </v-select>\n                    </div>\n                </div>\n                <div class=\"form-group\" _v-709264ae=\"\">\n                    <label class=\"col-sm-4 control-label\" _v-709264ae=\"\">规划机房：</label>\n                    <div class=\"col-sm-8\" _v-709264ae=\"\">\n                        <v-select :value.sync=\"idc\" :options=\"idcs\" placeholder=\"请选择\" :search=\"true\" multiple=\"\" _v-709264ae=\"\">\n                        </v-select>\n                    </div>\n                </div>\n            </div>\n            <div class=\"col-sm-3\" _v-709264ae=\"\">\n                <div class=\"form-group\" _v-709264ae=\"\">\n                    <label class=\"col-sm-4 control-label\" _v-709264ae=\"\">网段：</label>\n                    <div class=\"col-sm-8\" _v-709264ae=\"\">\n                        <input type=\"text\" class=\"form-control\" v-model=\"network\" _v-709264ae=\"\">\n                    </div>\n                </div>\n            </div>\n            <div class=\"col-sm-3\" _v-709264ae=\"\">\n                <div class=\"form-group\" _v-709264ae=\"\">\n                    <label class=\"col-sm-4 control-label\" _v-709264ae=\"\">网关：</label>\n                    <div class=\"col-sm-8\" _v-709264ae=\"\">\n                        <input type=\"text\" class=\"form-control\" v-model=\"gateway\" _v-709264ae=\"\">\n                    </div>\n                </div>\n            </div>\n        </form>\n        <div class=\"text-center btn-operate\" _v-709264ae=\"\">\n            <button type=\"button\" class=\"btn btn-default\" _v-709264ae=\"\">\n                保存\n            </button>\n        </div>\n    </div>\n";
+	module.exports = "\n    <div _v-709264ae=\"\">\n        <form class=\"form-horizontal clearfix form-search\" _v-709264ae=\"\">\n        <div class=\"col-sm-3\" _v-709264ae=\"\">\n                <div class=\"form-group input-box\" _v-709264ae=\"\">\n                    <label class=\"col-sm-4 control-label\" _v-709264ae=\"\">类型：<span class=\"text-danger\" _v-709264ae=\"\">*</span></label>\n                    <div class=\"col-sm-8\" _v-709264ae=\"\">\n                        <v-select :value.sync=\"netType\" :options=\"netTypes\" placeholder=\"请选择\" _v-709264ae=\"\">\n                        </v-select>\n                    </div>\n                </div>\n                <div class=\"form-group\" _v-709264ae=\"\">\n                    <label class=\"col-sm-4 control-label\" _v-709264ae=\"\">IP地址：</label>\n                    <div class=\"col-sm-8\" _v-709264ae=\"\">\n                        <input type=\"text\" class=\"form-control\" placeholder=\"多个，精确\" onfocus=\"this.blur()\" v-model=\"ips\" @click=\"showBroad('ips')\" _v-709264ae=\"\">\n                    </div>\n                </div>\n            </div>\n            <div class=\"col-sm-3 input-box\" _v-709264ae=\"\">\n                <div class=\"form-group\" v-show=\"netType === '3'\" _v-709264ae=\"\">\n                    <label class=\"col-sm-4 control-label\" _v-709264ae=\"\">运营商：</label>\n                    <div class=\"col-sm-8\" _v-709264ae=\"\">\n                        <v-select :value.sync=\"operator\" :options=\"operators\" placeholder=\"请选择\" _v-709264ae=\"\">\n                        </v-select>\n                    </div>\n                </div>\n                <div class=\"form-group\" _v-709264ae=\"\">\n                    <label class=\"col-sm-4 control-label\" _v-709264ae=\"\">规划机房：<span class=\"text-danger\" _v-709264ae=\"\">*</span></label>\n                    <div class=\"col-sm-8\" _v-709264ae=\"\">\n                        <v-select :value.sync=\"idc\" :options=\"idcs\" placeholder=\"请选择\" :search=\"true\" multiple=\"\" _v-709264ae=\"\">\n                        </v-select>\n                    </div>\n                </div>\n            </div>\n            <div class=\"col-sm-3\" _v-709264ae=\"\">\n                <div class=\"form-group\" _v-709264ae=\"\">\n                    <label class=\"col-sm-4 control-label\" _v-709264ae=\"\">网段：</label>\n                    <div class=\"col-sm-8\" _v-709264ae=\"\">\n                        <input type=\"text\" class=\"form-control\" v-model=\"network\" _v-709264ae=\"\">\n                    </div>\n                </div>\n            </div>\n            <div class=\"col-sm-3\" _v-709264ae=\"\">\n                <div class=\"form-group\" _v-709264ae=\"\">\n                    <label class=\"col-sm-4 control-label\" _v-709264ae=\"\">网关：<span class=\"text-danger\" _v-709264ae=\"\">*</span></label>\n                    <div class=\"col-sm-8\" _v-709264ae=\"\">\n                        <input type=\"text\" class=\"form-control\" v-model=\"gateway\" _v-709264ae=\"\">\n                    </div>\n                </div>\n            </div>\n        </form>\n        <div class=\"text-center btn-operate\" _v-709264ae=\"\">\n            <button type=\"button\" class=\"btn btn-default\" @click=\"saveFn\" :disabled=\"netType &amp;&amp; idc &amp;&amp; gateway.trim() ? false : true\" _v-709264ae=\"\">\n                保存\n            </button>\n        </div>\n    </div>\n";
 
 /***/ }
 ]));
