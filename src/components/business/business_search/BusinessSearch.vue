@@ -97,9 +97,16 @@
             <button type="button" class="btn btn-default" @click="$broadcast('showCreateProduct')">
                 新增产品
             </button>
-            <button type="button" class="btn btn-default">
-                批量删除
-            </button>
+            <dropdown v-el:confirm>
+                <button type="button" class="btn btn-default" data-toggle="dropdown">
+                    批量删除
+                    <span class="caret"></span>
+                </button>
+                <div slot="dropdown-menu" class="dropdown-menu pd20">
+                    <button type="button" class="btn btn-danger btn-block" @click="deleteFn">确定</button>
+                    <button type="button" class="btn btn-default btn-block" @click="cancelFn">取消</button>
+                </div>
+            </dropdown>
             <button type="button" class="btn btn-default">
                 同步游戏信息
             </button>
@@ -117,7 +124,9 @@
             <tbody>
                 <tr v-for="list in tableList" v-if="tableList.length !== 0" v-show="tableList.length !== 0">
                     <td><input type="checkbox" :id="list.id" :value="list.id" v-model="checkedIds"></td>
-                    <td :title="list.productName"><a class="pointer" v-text="list.productName" @click="$broadcast('showEditProduct', list.id)"></td>
+                    <td :title="list.productName">
+                        <a class="pointer" v-text="list.productName" @click="$broadcast('showEditProduct', list.id)">
+                    </td>
                     <td :title="list.businessType" v-text="list.businessType"></td>
                     <td :title="list.productLevel" v-text="list.productLevel"></td>
                     <td :title="list.platformType" v-text="list.platformType"></td>
@@ -145,6 +154,7 @@
 </template>
 
 <script>
+import { dropdown, spinner } from 'vue-strap'
 import bootPage from '../../global/BootPage.vue'
 import createProductModal from './CreateProduct.vue'
 import editProductModal from './EditProduct.vue'
@@ -161,7 +171,7 @@ let origin = {
         ],
         lenArr: [10, 50, 100],
         pageLen: 5,
-        url: '',
+        url: '/product/query/',
         param: {
             productName: '',
             department: '',
@@ -188,13 +198,47 @@ export default {
         // 刷新数据
         refresh () {
             this.$broadcast('refresh')
+        },
+
+        // 批量删除
+        deleteFn () {
+            if (this.checkedIds.length) {
+                this.$http({
+                    url: '/product/remove/',
+                    method: 'POST',
+                    data: {
+                        checkedIds: this.checkedIds
+                    }
+                })
+                .then((response) => {
+                    if (response.data.code === 200) {
+                        this.checkedIds = []
+                        this.refresh()
+
+                        this.$dispatch('show-success', '删除成功')
+                    } else {
+                        this.$dispatch('show-error', '删除失败了')
+                    }
+                })
+            } else {
+                this.$dispatch('show-notify', '请选择删除项')
+            }
+
+            this.$els.confirm.classList.toggle('open')
+        },
+
+        // 取消删除
+        cancelFn () {
+            this.$els.confirm.classList.toggle('open')
         }
     },
     components: {
         bootPage,
         createProductModal,
         editProductModal,
-        vSelect
+        vSelect,
+        dropdown,
+        spinner
     },
     vuex: {
         actions: {
@@ -242,5 +286,7 @@ export default {
 </script>
 
 <style scoped>
-
+.pd20 {
+    padding: 20px;
+}
 </style>

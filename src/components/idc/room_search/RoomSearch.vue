@@ -226,6 +226,7 @@ export default {
                     if (response.data.code === 200) {
                         this.checkedIds = []
                         this.refresh()
+                        this.getRoomSearch()
 
                         this.$dispatch('show-success', '删除成功')
                     } else {

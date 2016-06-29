@@ -81,7 +81,7 @@
                            <div class="form-group">
                                 <label class="control-label col-sm-4">设备编号：</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" v-model="netNum">
+                                    <input type="text" class="form-control" v-model="serverNum" :readonly="true">
                                 </div>
                             </div>
                              <div class="form-group">
@@ -219,7 +219,7 @@
                         <button type="button" class="btn btn-default" @click="saveFn"
                             :disabled="sn.trim() && origin1 && origin2 && room && frame && seat && model && status && serverType && firm ? false : true"
                         >保存</button>
-                        <button type="button" class="btn btn-default">更新</button>
+                        <!-- <button type="button" class="btn btn-default">更新</button> -->
                         <button type="button" class="btn btn-default" @click='editServerModal = false'>取消</button>
                     </div>
                 </tab>
@@ -267,7 +267,7 @@
 import { modal, tabset, tab } from 'vue-strap'
 import datepicker from '../../global/Datepicker.vue'
 import vSelect from '../../global/Select.vue'
-import { getFramesSeats, getOrigins } from '../../../vuex/action.js'
+import { getServerSearch, getFramesSeats, getOrigins } from '../../../vuex/action.js'
 import { idcs, frames, seats, serverTypes, serverStatus, firms, origins1, origins2 } from '../../../vuex/getters.js'
 
 let origin = {
@@ -276,7 +276,7 @@ let origin = {
             {portNum: '111', ip: '', mac: '', speed: '', status: '', use: '', device: '', deviceVlan: '', devicePort: ''}
         ],
         id: null,
-        netNum: '',
+        serverNum: '',
         sn: '',
         room: '',
         frame: '',
@@ -344,7 +344,8 @@ export default {
     vuex: {
         actions: {
             getFramesSeats,
-            getOrigins
+            getOrigins,
+            getServerSearch
         },
         getters: {
             rooms: idcs,
@@ -356,6 +357,9 @@ export default {
             statusArr: serverStatus,
             firms
         }
+    },
+    ready () {
+        this.getServerSearch()
     },
     events: {
         'showEditServer' (param) {

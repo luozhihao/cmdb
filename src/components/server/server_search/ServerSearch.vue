@@ -166,7 +166,7 @@
             <button type="button" class="btn btn-default" @click="$broadcast('showCreateServer')">
                 新增服务器
             </button>
-            <button type="button" class="btn btn-default">
+            <button type="button" class="btn btn-default" @click="dispatchFn">
                 分配到产品
             </button>
             <button type="button" class="btn btn-default"  @click="batchEdit">
@@ -237,6 +237,7 @@
         <create-server-modal></create-server-modal>
         <batch-edit-modal></batch-edit-modal>
         <edit-server-modal></edit-server-modal>
+        <dispatch-modal></dispatch-modal>
     </div>
 </template>
 
@@ -246,6 +247,7 @@ import bootPage from '../../global/BootPage.vue'
 import createServerModal from './createServer.vue'
 import batchEditModal from './BatchEdit.vue'
 import editServerModal from './EditServer.vue'
+import dispatchModal from './Dispatch.vue'
 import vSelect from '../../global/Select.vue'
 import calendar from '../../global/Calendar.vue'
 import { getServerSearch, getFramesSeats, getOrigins } from '../../../vuex/action.js'
@@ -348,6 +350,19 @@ export default {
 
             if (this.checkedIds.length) {
                 this.$broadcast('batchEdit', _this.checkedIds)
+            } else {
+                this.$dispatch('show-notify', '请选择修改项')
+            }
+        },
+
+        // 分配到产品
+        dispatchFn () {
+            let _this = this
+
+            if (this.checkedIds.length) {
+                this.$broadcast('showDispatchModal', _this.checkedIds)
+            } else {
+                this.$dispatch('show-notify', '请选择分配项')
             }
         },
 
@@ -391,7 +406,8 @@ export default {
         vSelect,
         calendar,
         dropdown,
-        spinner
+        spinner,
+        dispatchModal
     },
     vuex: {
         actions: {

@@ -263,7 +263,7 @@ import datepicker from '../../global/Datepicker.vue'
 import vSelect from '../../global/Select.vue'
 import createVlanModal from './CreateVlan.vue'
 import createPortModal from './CreatePort.vue'
-import { getFramesSeats, getOrigins } from '../../../vuex/action.js'
+import { getDeviceSearch, getFramesSeats, getOrigins } from '../../../vuex/action.js'
 import { idcs, firms, origins1, deviceStatus, frames, seats, origins2 } from '../../../vuex/getters.js'
 
 let origin = {
@@ -342,7 +342,8 @@ export default {
     vuex: {
         actions: {
             getFramesSeats,
-            getOrigins
+            getOrigins,
+            getDeviceSearch
         },
         getters: {
             rooms: idcs,
@@ -353,6 +354,9 @@ export default {
             frames,
             seats
         }
+    },
+    ready () {
+        this.getDeviceSearch()
     },
     events: {
         'showEditDevice' (param) {

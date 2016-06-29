@@ -1785,13 +1785,18 @@ webpackJsonp([7],Array(32).concat([
 /* 204 */,
 /* 205 */,
 /* 206 */,
-/* 207 */
+/* 207 */,
+/* 208 */,
+/* 209 */,
+/* 210 */,
+/* 211 */,
+/* 212 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(208)
-	__vue_script__ = __webpack_require__(210)
-	__vue_template__ = __webpack_require__(221)
+	__webpack_require__(213)
+	__vue_script__ = __webpack_require__(215)
+	__vue_template__ = __webpack_require__(226)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -1808,13 +1813,13 @@ webpackJsonp([7],Array(32).concat([
 	})()}
 
 /***/ },
-/* 208 */
+/* 213 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(209);
+	var content = __webpack_require__(214);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(30)(content, {});
@@ -1834,7 +1839,7 @@ webpackJsonp([7],Array(32).concat([
 	}
 
 /***/ },
-/* 209 */
+/* 214 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(29)();
@@ -1842,13 +1847,13 @@ webpackJsonp([7],Array(32).concat([
 	
 	
 	// module
-	exports.push([module.id, "\r\n\r\n", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"BusinessSearch.vue","sourceRoot":"webpack://"}]);
+	exports.push([module.id, "\r\n.pd20[_v-aac41df2] {\r\n    padding: 20px;\r\n}\r\n", "", {"version":3,"sources":["/./src/components/business/business_search/BusinessSearch.vue.style"],"names":[],"mappings":";AAgSA;IACA,cAAA;CACA","file":"BusinessSearch.vue","sourcesContent":["<!-- 业务查询 -->\r\n<template>\r\n    <div>\r\n        <form class=\"form-horizontal clearfix form-search\">\r\n            <div class=\"col-sm-3\">\r\n                <div class=\"form-group\">\r\n                    <label class=\"control-label col-sm-4\">产品名称：</label>\r\n                    <div class=\"col-sm-8\">\r\n                        <input type=\"text\" class=\"form-control\" v-model=\"param.productName\">\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group input-box\">\r\n                    <label class=\"control-label col-sm-4\">游戏类型：</label>\r\n                    <div class=\"col-sm-8\">\r\n                        <v-select :value.sync=\"param.gameType\" :options=\"gameTypes\" placeholder=\"请选择\">\r\n                        </v-select>\r\n                    </div>\r\n                </div>\r\n               <div class=\"form-group\">\r\n                    <label class=\"control-label col-sm-4\">运维负责人：</label>\r\n                    <div class=\"col-sm-8\">\r\n                        <input type=\"text\" class=\"form-control\" v-model=\"param.maintainManager\">\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"col-sm-3\">\r\n                <div class=\"form-group input-box\">\r\n                    <label class=\"control-label col-sm-4\">部门：</label>\r\n                    <div class=\"col-sm-8\">\r\n                        <v-select :value.sync=\"param.department\" :options=\"departments\" placeholder=\"请选择\">\r\n                        </v-select>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group input-box\">\r\n                    <label class=\"control-label col-sm-4\">平台类型：</label>\r\n                    <div class=\"col-sm-8\">\r\n                        <v-select :value.sync=\"param.platformType\" :options=\"platformTypes\" placeholder=\"请选择\">\r\n                        </v-select>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <label class=\"control-label col-sm-4\">运营负责人：</label>\r\n                    <div class=\"col-sm-8\">\r\n                        <input type=\"text\" class=\"form-control\" v-model=\"param.operationalManager\">\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"col-sm-3\">\r\n                <div class=\"form-group input-box\">\r\n                    <label class=\"control-label col-sm-4\">业务类型：</label>\r\n                    <div class=\"col-sm-8\">\r\n                        <v-select :value.sync=\"param.businessType\" :options=\"businessTypes\" placeholder=\"请选择\">\r\n                        </v-select>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group input-box\">\r\n                    <label class=\"control-label col-sm-4\">研发模式：</label>\r\n                    <div class=\"col-sm-8\">\r\n                        <v-select :value.sync=\"param.developModel\" :options=\"developModels\" placeholder=\"请选择\">\r\n                        </v-select>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <label class=\"control-label col-sm-4\">项目负责人：</label>\r\n                    <div class=\"col-sm-8\">\r\n                        <input type=\"text\" class=\"form-control\" v-model=\"param.projectManager\">\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"col-sm-3\">\r\n                <div class=\"form-group input-box\">\r\n                    <label class=\"control-label col-sm-4\">运营阶段：</label>\r\n                    <div class=\"col-sm-8\">\r\n                        <v-select :value.sync=\"param.phase\" :options=\"phases\" placeholder=\"请选择\">\r\n                        </v-select>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group input-box\">\r\n                    <label class=\"control-label col-sm-4\">产品级别：</label>\r\n                    <div class=\"col-sm-8\">\r\n                        <v-select :value.sync=\"productLevel\" :options=\"productLevels\" placeholder=\"请选择\">\r\n                        </v-select>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <label class=\"control-label col-sm-4\">市场负责人：</label>\r\n                    <div class=\"col-sm-8\">\r\n                        <input type=\"text\" class=\"form-control\" v-model=\"param.marketManager\">\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </form>\r\n        <div class=\"text-center btn-operate\">\r\n            <button type=\"button\" class=\"btn btn-default\">\r\n                查询\r\n            </button>\r\n            <button type=\"button\" class=\"btn btn-default\" @click=\"$broadcast('showCreateProduct')\">\r\n                新增产品\r\n            </button>\r\n            <dropdown v-el:confirm>\r\n                <button type=\"button\" class=\"btn btn-default\" data-toggle=\"dropdown\">\r\n                    批量删除\r\n                    <span class=\"caret\"></span>\r\n                </button>\r\n                <div slot=\"dropdown-menu\" class=\"dropdown-menu pd20\">\r\n                    <button type=\"button\" class=\"btn btn-danger btn-block\" @click=\"deleteFn\">确定</button>\r\n                    <button type=\"button\" class=\"btn btn-default btn-block\" @click=\"cancelFn\">取消</button>\r\n                </div>\r\n            </dropdown>\r\n            <button type=\"button\" class=\"btn btn-default\">\r\n                同步游戏信息\r\n            </button>\r\n        </div>\r\n        <div class=\"text-center table-title\">\r\n            查询结果\r\n        </div>\r\n        <table class=\"table table-hover table-bordered\">\r\n            <thead>\r\n                <tr>\r\n                    <th width=\"3%\"><input type=\"checkbox\" v-model=\"checkedAll\"></th>\r\n                    <th v-for=\"title in titles\" v-text=\"title\"></th>\r\n                </tr>\r\n            </thead>\r\n            <tbody>\r\n                <tr v-for=\"list in tableList\" v-if=\"tableList.length !== 0\" v-show=\"tableList.length !== 0\">\r\n                    <td><input type=\"checkbox\" :id=\"list.id\" :value=\"list.id\" v-model=\"checkedIds\"></td>\r\n                    <td :title=\"list.productName\">\r\n                        <a class=\"pointer\" v-text=\"list.productName\" @click=\"$broadcast('showEditProduct', list.id)\">\r\n                    </td>\r\n                    <td :title=\"list.businessType\" v-text=\"list.businessType\"></td>\r\n                    <td :title=\"list.productLevel\" v-text=\"list.productLevel\"></td>\r\n                    <td :title=\"list.platformType\" v-text=\"list.platformType\"></td>\r\n                    <td :title=\"list.gameType\" v-text=\"list.gameType\"></td>\r\n                    <td :title=\"list.developModel\" v-text=\"list.developModel\"></td>\r\n                    <td :title=\"list.department\" v-text=\"list.department\"></td>\r\n                    <td :title=\"list.phase\" v-text=\"list.phase\"></td>\r\n                    <td :title=\"list.projectManager\" v-text=\"list.projectManager\"></td>\r\n                    <td :title=\"list.operationalManager\" v-text=\"list.operationalManager\"></td>\r\n                    <td :title=\"list.maintainManager\" v-text=\"list.maintainManager\"></td>\r\n                    <td :title=\"list.marketManager\" v-text=\"list.marketManager\"></td>\r\n                </tr>\r\n                <tr class=\"text-center\" v-show=\"tableList.length === 0\">\r\n                    <td :colspan=\"titles.length\">暂无数据</td>\r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n        <div class=\"clearfix\">\r\n            <boot-page :async=\"false\" :lens=\"lenArr\" :page-len=\"pageLen\" :url=\"url\" :param=\"param\"></boot-page>\r\n        </div>\r\n\r\n        <create-product-modal></create-product-modal>\r\n        <edit-product-modal></edit-product-modal>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\nimport { dropdown, spinner } from 'vue-strap'\r\nimport bootPage from '../../global/BootPage.vue'\r\nimport createProductModal from './CreateProduct.vue'\r\nimport editProductModal from './EditProduct.vue'\r\nimport vSelect from '../../global/Select.vue'\r\nimport { getBusinessSearch } from '../../../vuex/action.js'\r\nimport { departments, productTypes, phases, gameTypes, platformTypes, developModels, productLevels } from '../../../vuex/getters.js'\r\n\r\nlet origin = {\r\n        checkedAll: false,\r\n        checkedIds: [],\r\n        titles: ['产品名称', '业务类别', '产品级别', '平台类型', '游戏类型', '研发模式', '所属部门', '运营阶段', '项目负责人', '运营负责人', '运维负责人', '市场负责人'],\r\n        tableList: [\r\n            {id: 1, productName: '航海世纪', businessType: '游戏', productLevel: '一级', platformType: '端游', gameType: 'MMORPG', developModel: '自研', department: '项目一部', phase: 'OB', projectManager: '娄佳', operationalManager: '乔研', maintainManager: '董勰,陈红伟', marketManager: ''}\r\n        ],\r\n        lenArr: [10, 50, 100],\r\n        pageLen: 5,\r\n        url: '/product/query/',\r\n        param: {\r\n            productName: '',\r\n            department: '',\r\n            businessType: '',\r\n            gameType: '',\r\n            platformType: '',\r\n            developModel: '',\r\n            phase: '',\r\n            productLevel: '',\r\n            maintainManager: '',\r\n            operationalManager: '',\r\n            projectManager: '',\r\n            marketManager: ''\r\n        }\r\n    },\r\n    init = Object.assign({}, origin);\r\n\r\nexport default {\r\n    data () {\r\n        return origin\r\n    },\r\n    methods: {\r\n\r\n        // 刷新数据\r\n        refresh () {\r\n            this.$broadcast('refresh')\r\n        },\r\n\r\n        // 批量删除\r\n        deleteFn () {\r\n            if (this.checkedIds.length) {\r\n                this.$http({\r\n                    url: '/product/remove/',\r\n                    method: 'POST',\r\n                    data: {\r\n                        checkedIds: this.checkedIds\r\n                    }\r\n                })\r\n                .then((response) => {\r\n                    if (response.data.code === 200) {\r\n                        this.checkedIds = []\r\n                        this.refresh()\r\n\r\n                        this.$dispatch('show-success', '删除成功')\r\n                    } else {\r\n                        this.$dispatch('show-error', '删除失败了')\r\n                    }\r\n                })\r\n            } else {\r\n                this.$dispatch('show-notify', '请选择删除项')\r\n            }\r\n\r\n            this.$els.confirm.classList.toggle('open')\r\n        },\r\n\r\n        // 取消删除\r\n        cancelFn () {\r\n            this.$els.confirm.classList.toggle('open')\r\n        }\r\n    },\r\n    components: {\r\n        bootPage,\r\n        createProductModal,\r\n        editProductModal,\r\n        vSelect,\r\n        dropdown,\r\n        spinner\r\n    },\r\n    vuex: {\r\n        actions: {\r\n            getBusinessSearch\r\n        },\r\n        getters: {\r\n            departments,\r\n            businessTypes: productTypes,\r\n            phases,\r\n            gameTypes,\r\n            platformTypes,\r\n            developModels,\r\n            productLevels\r\n        }\r\n    },\r\n    ready () {\r\n        this.getBusinessSearch()\r\n    },\r\n    watch: {\r\n        'checkedAll' (newVal) {\r\n            if (newVal) {\r\n                if (this.checkedIds.length !== this.tableList.length) {\r\n                    let _this = this\r\n\r\n                    _this.checkedIds = []\r\n                    _this.tableList.forEach(function(e) {\r\n                        _this.checkedIds.push(e.id)\r\n                    })\r\n                }\r\n            } else {\r\n                if (this.checkedIds.length === this.tableList.length) {\r\n                    this.checkedIds = []\r\n                }\r\n            }\r\n        },\r\n        'checkedIds' (newVal) {\r\n            if (newVal.length === this.tableList.length && this.tableList.length !== 0) {\r\n                this.checkedAll = true\r\n            } else {\r\n                this.checkedAll = false\r\n            }\r\n        }\r\n    }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.pd20 {\r\n    padding: 20px;\r\n}\r\n</style>\r\n"],"sourceRoot":"webpack://"}]);
 	
 	// exports
 
 
 /***/ },
-/* 210 */
+/* 215 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1861,15 +1866,17 @@ webpackJsonp([7],Array(32).concat([
 	
 	var _assign2 = _interopRequireDefault(_assign);
 	
+	var _vueStrap = __webpack_require__(69);
+	
 	var _BootPage = __webpack_require__(70);
 	
 	var _BootPage2 = _interopRequireDefault(_BootPage);
 	
-	var _CreateProduct = __webpack_require__(211);
+	var _CreateProduct = __webpack_require__(216);
 	
 	var _CreateProduct2 = _interopRequireDefault(_CreateProduct);
 	
-	var _EditProduct = __webpack_require__(216);
+	var _EditProduct = __webpack_require__(221);
 	
 	var _EditProduct2 = _interopRequireDefault(_EditProduct);
 	
@@ -1883,7 +1890,30 @@ webpackJsonp([7],Array(32).concat([
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	// <!-- 业务查询 -->
+	var origin = {
+	    checkedAll: false,
+	    checkedIds: [],
+	    titles: ['产品名称', '业务类别', '产品级别', '平台类型', '游戏类型', '研发模式', '所属部门', '运营阶段', '项目负责人', '运营负责人', '运维负责人', '市场负责人'],
+	    tableList: [{ id: 1, productName: '航海世纪', businessType: '游戏', productLevel: '一级', platformType: '端游', gameType: 'MMORPG', developModel: '自研', department: '项目一部', phase: 'OB', projectManager: '娄佳', operationalManager: '乔研', maintainManager: '董勰,陈红伟', marketManager: '' }],
+	    lenArr: [10, 50, 100],
+	    pageLen: 5,
+	    url: '/product/query/',
+	    param: {
+	        productName: '',
+	        department: '',
+	        businessType: '',
+	        gameType: '',
+	        platformType: '',
+	        developModel: '',
+	        phase: '',
+	        productLevel: '',
+	        maintainManager: '',
+	        operationalManager: '',
+	        projectManager: '',
+	        marketManager: ''
+	    }
+	},
+	    init = (0, _assign2.default)({}, origin); // <!-- 业务查询 -->
 	// <template>
 	//     <div>
 	//         <form class="form-horizontal clearfix form-search">
@@ -1982,9 +2012,16 @@ webpackJsonp([7],Array(32).concat([
 	//             <button type="button" class="btn btn-default" @click="$broadcast('showCreateProduct')">
 	//                 新增产品
 	//             </button>
-	//             <button type="button" class="btn btn-default">
-	//                 批量删除
-	//             </button>
+	//             <dropdown v-el:confirm>
+	//                 <button type="button" class="btn btn-default" data-toggle="dropdown">
+	//                     批量删除
+	//                     <span class="caret"></span>
+	//                 </button>
+	//                 <div slot="dropdown-menu" class="dropdown-menu pd20">
+	//                     <button type="button" class="btn btn-danger btn-block" @click="deleteFn">确定</button>
+	//                     <button type="button" class="btn btn-default btn-block" @click="cancelFn">取消</button>
+	//                 </div>
+	//             </dropdown>
 	//             <button type="button" class="btn btn-default">
 	//                 同步游戏信息
 	//             </button>
@@ -2002,7 +2039,9 @@ webpackJsonp([7],Array(32).concat([
 	//             <tbody>
 	//                 <tr v-for="list in tableList" v-if="tableList.length !== 0" v-show="tableList.length !== 0">
 	//                     <td><input type="checkbox" :id="list.id" :value="list.id" v-model="checkedIds"></td>
-	//                     <td :title="list.productName"><a class="pointer" v-text="list.productName" @click="$broadcast('showEditProduct', list.id)"></td>
+	//                     <td :title="list.productName">
+	//                         <a class="pointer" v-text="list.productName" @click="$broadcast('showEditProduct', list.id)">
+	//                     </td>
 	//                     <td :title="list.businessType" v-text="list.businessType"></td>
 	//                     <td :title="list.productLevel" v-text="list.productLevel"></td>
 	//                     <td :title="list.platformType" v-text="list.platformType"></td>
@@ -2032,31 +2071,6 @@ webpackJsonp([7],Array(32).concat([
 	// <script>
 	
 	
-	var origin = {
-	    checkedAll: false,
-	    checkedIds: [],
-	    titles: ['产品名称', '业务类别', '产品级别', '平台类型', '游戏类型', '研发模式', '所属部门', '运营阶段', '项目负责人', '运营负责人', '运维负责人', '市场负责人'],
-	    tableList: [{ id: 1, productName: '航海世纪', businessType: '游戏', productLevel: '一级', platformType: '端游', gameType: 'MMORPG', developModel: '自研', department: '项目一部', phase: 'OB', projectManager: '娄佳', operationalManager: '乔研', maintainManager: '董勰,陈红伟', marketManager: '' }],
-	    lenArr: [10, 50, 100],
-	    pageLen: 5,
-	    url: '',
-	    param: {
-	        productName: '',
-	        department: '',
-	        businessType: '',
-	        gameType: '',
-	        platformType: '',
-	        developModel: '',
-	        phase: '',
-	        productLevel: '',
-	        maintainManager: '',
-	        operationalManager: '',
-	        projectManager: '',
-	        marketManager: ''
-	    }
-	},
-	    init = (0, _assign2.default)({}, origin);
-	
 	exports.default = {
 	    data: function data() {
 	        return origin;
@@ -2068,13 +2082,50 @@ webpackJsonp([7],Array(32).concat([
 	
 	        refresh: function refresh() {
 	            this.$broadcast('refresh');
+	        },
+	
+	
+	        // 批量删除
+	        deleteFn: function deleteFn() {
+	            var _this2 = this;
+	
+	            if (this.checkedIds.length) {
+	                this.$http({
+	                    url: '/product/remove/',
+	                    method: 'POST',
+	                    data: {
+	                        checkedIds: this.checkedIds
+	                    }
+	                }).then(function (response) {
+	                    if (response.data.code === 200) {
+	                        _this2.checkedIds = [];
+	                        _this2.refresh();
+	
+	                        _this2.$dispatch('show-success', '删除成功');
+	                    } else {
+	                        _this2.$dispatch('show-error', '删除失败了');
+	                    }
+	                });
+	            } else {
+	                this.$dispatch('show-notify', '请选择删除项');
+	            }
+	
+	            this.$els.confirm.classList.toggle('open');
+	        },
+	
+	
+	        // 取消删除
+	        cancelFn: function cancelFn() {
+	            this.$els.confirm.classList.toggle('open');
 	        }
 	    },
 	    components: {
 	        bootPage: _BootPage2.default,
 	        createProductModal: _CreateProduct2.default,
 	        editProductModal: _EditProduct2.default,
-	        vSelect: _Select2.default
+	        vSelect: _Select2.default,
+	        dropdown: _vueStrap.dropdown,
+	        spinner: _vueStrap.spinner
 	    },
 	    vuex: {
 	        actions: {
@@ -2096,12 +2147,12 @@ webpackJsonp([7],Array(32).concat([
 	
 	    watch: {
 	        'checkedAll': function checkedAll(newVal) {
-	            var _this2 = this;
+	            var _this3 = this;
 	
 	            if (newVal) {
 	                if (this.checkedIds.length !== this.tableList.length) {
 	                    (function () {
-	                        var _this = _this2;
+	                        var _this = _this3;
 	
 	                        _this.checkedIds = [];
 	                        _this.tableList.forEach(function (e) {
@@ -2127,19 +2178,21 @@ webpackJsonp([7],Array(32).concat([
 	// </script>
 	//
 	// <style scoped>
-	//
+	// .pd20 {
+	//     padding: 20px;
+	// }
 	// </style>
 	//
 	/* generated by vue-loader */
 
 /***/ },
-/* 211 */
+/* 216 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(212)
-	__vue_script__ = __webpack_require__(214)
-	__vue_template__ = __webpack_require__(215)
+	__webpack_require__(217)
+	__vue_script__ = __webpack_require__(219)
+	__vue_template__ = __webpack_require__(220)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -2156,13 +2209,13 @@ webpackJsonp([7],Array(32).concat([
 	})()}
 
 /***/ },
-/* 212 */
+/* 217 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(213);
+	var content = __webpack_require__(218);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(30)(content, {});
@@ -2182,7 +2235,7 @@ webpackJsonp([7],Array(32).concat([
 	}
 
 /***/ },
-/* 213 */
+/* 218 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(29)();
@@ -2190,13 +2243,13 @@ webpackJsonp([7],Array(32).concat([
 	
 	
 	// module
-	exports.push([module.id, "\r\n.selected-tag[_v-d25ff0b8] {\r\n    border: 1px solid #ccc;\r\n    border-radius: 4px;\r\n    height: 26px;\r\n    margin: 4px 1px 0 3px;\r\n    padding: 0 .25em;\r\n    float: left;\r\n    line-height: 1.7em;\r\n    color: #147688;\r\n    background-color: #d7f3f9;\r\n    border-color: #91ddec;\r\n}\r\n\r\n.selected-tag .close[_v-d25ff0b8] {\r\n    float: none;\r\n    margin-right: 0;\r\n    font-size: 20px;\r\n    -webkit-appearance: none;\r\n    padding: 0;\r\n    cursor: pointer;\r\n    background: 0 0;\r\n    border: 0;\r\n    font-weight: 700;\r\n    line-height: 1;\r\n    color: #000;\r\n    text-shadow: 0 1px 0 #fff;\r\n    filter: alpha(opacity=20);\r\n    opacity: .2;\r\n}\r\n\r\n.selected-tag .close[_v-d25ff0b8]:hover {\r\n    color: #000;\r\n    filter: alpha(opacity=50);\r\n    opacity: .5;\r\n}\r\n", "", {"version":3,"sources":["/./src/components/business/business_search/CreateProduct.vue.style"],"names":[],"mappings":";AA0TA;IACA,uBAAA;IACA,mBAAA;IACA,aAAA;IACA,sBAAA;IACA,iBAAA;IACA,YAAA;IACA,mBAAA;IACA,eAAA;IACA,0BAAA;IACA,sBAAA;CACA;;AAEA;IACA,YAAA;IACA,gBAAA;IACA,gBAAA;IACA,yBAAA;IACA,WAAA;IACA,gBAAA;IACA,gBAAA;IACA,UAAA;IACA,iBAAA;IACA,eAAA;IACA,YAAA;IACA,0BAAA;IACA,0BAAA;IACA,YAAA;CACA;;AAEA;IACA,YAAA;IACA,0BAAA;IACA,YAAA;CACA","file":"CreateProduct.vue","sourcesContent":["<!-- 新增产品 -->\r\n<template>\r\n    <modal :show.sync=\"creatProductModal\" effect=\"fade\" width=\"850px\">\r\n        <div slot=\"modal-header\" class=\"modal-header\">\r\n            <h4 class=\"modal-title\">新增产品</h4>\r\n        </div>\r\n        <div slot=\"modal-body\" class=\"modal-body mh500\">\r\n            <form class=\"form-horizontal clearfix\">\r\n                <div class=\"col-sm-12\">\r\n                    <div class=\"form-group input-box\">\r\n                        <label class=\"control-label col-sm-2\">业务类型：<span class=\"text-danger\">*</span></label>\r\n                        <div class=\"col-sm-9\">\r\n                            <v-select :value.sync=\"businessType\" :options=\"businessTypes\" placeholder=\"请选择\">\r\n                            </v-select>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-sm-12\" v-show=\"businessType === '1'\">\r\n                    <div class=\"col-sm-6\" >\r\n                        <div class=\"form-group input-box\">\r\n                            <label class=\"control-label col-sm-4\">游戏列表：<span class=\"text-danger\">*</span></label>\r\n                            <div class=\"col-sm-6\">\r\n                                <v-select :value.sync=\"gameList\" :options=\"gameLists\" placeholder=\"请选择\">\r\n                                </v-select>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label class=\"control-label col-sm-4\">区域名称：<span class=\"text-danger\">*</span></label>\r\n                            <div class=\"col-sm-6\">\r\n                                <input type=\"text\" class=\"form-control\" v-model=\"childType\">\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-sm-12\" v-show=\"businessType === '2'\">\r\n                    <div class=\"form-group\">\r\n                        <label class=\"control-label col-sm-2\">产品名称：<span class=\"text-danger\">*</span></label>\r\n                        <div class=\"col-sm-9\">\r\n                            <input type=\"text\" class=\"form-control\" v-model=\"productName\">\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-sm-12\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group input-box\">\r\n                            <label class=\"control-label col-sm-4\">部门：<span class=\"text-danger\">*</span></label>\r\n                            <div class=\"col-sm-6\">\r\n                                <v-select :value.sync=\"department\" :options=\"departments\" placeholder=\"请选择\">\r\n                                </v-select>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group input-box\">\r\n                            <label class=\"control-label col-sm-4\">产品级别：<span class=\"text-danger\">*</span></label>\r\n                            <div class=\"col-sm-6\">\r\n                                <v-select :value.sync=\"productLevel\" :options=\"productLevels\" placeholder=\"请选择\">\r\n                                </v-select>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-sm-12\" v-show=\"businessType === '1'\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group input-box\">\r\n                            <label class=\"control-label col-sm-4\">游戏类型：<span class=\"text-danger\">*</span></label>\r\n                            <div class=\"col-sm-6\">\r\n                                <v-select :value.sync=\"gameType\" :options=\"gameTypes\" placeholder=\"请选择\">\r\n                                </v-select>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group input-box\">\r\n                            <label class=\"control-label col-sm-4\">平台类型：<span class=\"text-danger\">*</span></label>\r\n                            <div class=\"col-sm-6\">\r\n                                <v-select :value.sync=\"platformType\" :options=\"platformTypes\" placeholder=\"请选择\">\r\n                                </v-select>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-sm-12\" v-show=\"businessType === '1'\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group input-box\">\r\n                            <label class=\"control-label col-sm-4\">研发模式：<span class=\"text-danger\">*</span></label>\r\n                            <div class=\"col-sm-6\">\r\n                                <v-select :value.sync=\"developModel\" :options=\"developModels\" placeholder=\"请选择\">\r\n                                </v-select>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group input-box\">\r\n                            <label class=\"control-label col-sm-4\">运营阶段：<span class=\"text-danger\">*</span></label>\r\n                            <div class=\"col-sm-6\">\r\n                                <v-select :value.sync=\"phase\" :options=\"phases\" placeholder=\"请选择\">\r\n                                </v-select>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-sm-12\">\r\n                    <div class=\"form-group mb0\">\r\n                        <label class=\"control-label col-sm-2\">项目负责人：</label>\r\n                        <div class=\"col-sm-9\">\r\n                            <typeahead\r\n                                :on-hit=\"addProjectManager\"\r\n                                :async=\"'/instance_ips/?name='\"\r\n                                :key=\"'name'\"\r\n                                placeholder=\"按回车键添加\"\r\n                            >\r\n                            </typeahead>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-sm-12\">\r\n                    <div class=\"form-group mb20\">\r\n                        <div class=\"col-sm-9 col-sm-offset-2\">\r\n                            <span class=\"selected-tag\" v-for=\"projectManager in projectManagers\" track-by=\"$index\">\r\n                                <span v-text=\"projectManager\"></span>\r\n                                <button type=\"button\" class=\"close\" @click=\"deleteUser($index, 'projectManagers')\">\r\n                                    <span aria-hidden=\"true\">×</span>\r\n                                </button>\r\n                            </span>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-sm-12\">\r\n                    <div class=\"form-group mb0\">\r\n                        <label class=\"control-label col-sm-2\">运营负责人：</label>\r\n                        <div class=\"col-sm-9\">\r\n                            <typeahead\r\n                                :on-hit=\"addOperationalManager\"\r\n                                :async=\"'/instance_ips/?name='\"\r\n                                :key=\"'name'\"\r\n                                placeholder=\"按回车键添加\"\r\n                            >\r\n                            </typeahead>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-sm-12\">\r\n                    <div class=\"form-group mb20\">\r\n                        <div class=\"col-sm-9 col-sm-offset-2\">\r\n                            <span class=\"selected-tag\" v-for=\"operationalManager in operationalManagers\" track-by=\"$index\">\r\n                                <span v-text=\"operationalManager\"></span>\r\n                                <button type=\"button\" class=\"close\" @click=\"deleteUser($index, 'operationalManagers')\">\r\n                                    <span aria-hidden=\"true\">×</span>\r\n                                </button>\r\n                            </span>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-sm-12\">\r\n                    <div class=\"form-group mb0\">\r\n                        <label class=\"control-label col-sm-2\">运维负责人：<span class=\"text-danger\">*</span></label>\r\n                        <div class=\"col-sm-9\">\r\n                            <typeahead\r\n                                :on-hit=\"addMaintainManager\"\r\n                                :async=\"'/instance_ips/?name='\"\r\n                                :key=\"'name'\"\r\n                                placeholder=\"按回车键添加\"\r\n                            >\r\n                            </typeahead>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-sm-12\">\r\n                    <div class=\"form-group mb20\">\r\n                        <div class=\"col-sm-9 col-sm-offset-2\">\r\n                            <span class=\"selected-tag\" v-for=\"maintainManager in maintainManagers\" track-by=\"$index\">\r\n                                <span v-text=\"maintainManager\"></span>\r\n                                <button type=\"button\" class=\"close\" @click=\"deleteUser($index, 'maintainManagers')\">\r\n                                    <span aria-hidden=\"true\">×</span>\r\n                                </button>\r\n                            </span>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-sm-12\">\r\n                    <div class=\"form-group mb0\">\r\n                        <label class=\"control-label col-sm-2\">市场负责人：</label>\r\n                        <div class=\"col-sm-9\">\r\n                            <typeahead\r\n                                :on-hit=\"addMarketManager\"\r\n                                :async=\"'/instance_ips/?name='\"\r\n                                :key=\"'name'\"\r\n                                placeholder=\"按回车键添加\"\r\n                            >\r\n                            </typeahead>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-sm-12\">\r\n                    <div class=\"form-group mb20\">\r\n                        <div class=\"col-sm-9 col-sm-offset-2\">\r\n                            <span class=\"selected-tag\" v-for=\"marketManager in marketManagers\" track-by=\"$index\">\r\n                                <span v-text=\"marketManager\"></span>\r\n                                <button type=\"button\" class=\"close\" @click=\"deleteUser($index, 'marketManagers')\">\r\n                                    <span aria-hidden=\"true\">×</span>\r\n                                </button>\r\n                            </span>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </form>\r\n        </div>\r\n        <div slot=\"modal-footer\" class=\"modal-footer\">\r\n            <button type=\"button\" class=\"btn btn-default\">保存</button>\r\n            <button type=\"button\" class=\"btn btn-default\" @click='creatProductModal = false'>取消</button>\r\n        </div>\r\n    </modal>\r\n</template>\r\n\r\n<script>\r\nimport { modal, typeahead } from 'vue-strap'\r\nimport vSelect from '../../global/Select.vue'\r\nimport { departments, productTypes, phases, gameTypes, platformTypes, developModels, gameLists, productLevels } from '../../../vuex/getters.js'\r\n\r\nlet origin = {\r\n        creatProductModal: false,\r\n        businessType: '1',\r\n        gameList: '',\r\n        childType: '',\r\n        department: '',\r\n        productName: '',\r\n        productLevel: '',\r\n        gameType: '',\r\n        platformType: '',\r\n        developModel: '',\r\n        phase: '',\r\n        projectManagers: ['王毅', '罗之浩', '王鑫', '沈建华'],\r\n        maintainManagers: ['王毅', '沈建华'],\r\n        operationalManagers: ['沈建华'],\r\n        marketManagers: ['王鑫', '罗之浩'],\r\n    },\r\n    init = Object.assign({}, origin);\r\n\r\nexport default {\r\n    data () {\r\n        return origin\r\n    },\r\n    methods: {\r\n\r\n        // 模糊搜索项目负责人\r\n        addProjectManager (items, targetVM) {\r\n            if ($.inArray(items, this.projectManagers) === -1 && items) {\r\n                this.projectManagers.push(items) \r\n            }\r\n            \r\n            targetVM.reset()\r\n        },\r\n\r\n        // 模糊搜索运营负责人\r\n        addOperationalManager (items, targetVM) {\r\n            if ($.inArray(items, this.operationalManagers) === -1 && items) {\r\n                this.operationalManagers.push(items) \r\n            }\r\n            \r\n            targetVM.reset()\r\n        },\r\n\r\n        // 模糊搜索运维负责人\r\n        addMaintainManager (items, targetVM) {\r\n            if ($.inArray(items, this.maintainManagers) === -1 && items) {\r\n                this.maintainManagers.push(items) \r\n            }\r\n            \r\n            targetVM.reset()\r\n        },\r\n\r\n        // 模糊搜索市场负责人\r\n        addMarketManager (items, targetVM) {\r\n            if ($.inArray(items, this.marketManagers) === -1 && items) {\r\n                this.marketManagers.push(items) \r\n            }\r\n            \r\n            targetVM.reset()\r\n        },\r\n\r\n        // 删除负责人\r\n        deleteUser (index, name) {\r\n            this[name].splice(index, 1)\r\n        }\r\n    },\r\n    components: {\r\n        modal,\r\n        vSelect,\r\n        typeahead\r\n    },\r\n    vuex: {\r\n        getters: {\r\n            departments,\r\n            businessTypes: productTypes,\r\n            phases,\r\n            gameTypes,\r\n            platformTypes,\r\n            developModels,\r\n            gameLists,\r\n            productLevels\r\n        }\r\n    },\r\n    events: {\r\n        'showCreateProduct' () {\r\n            this.creatProductModal = true\r\n        }\r\n    }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.selected-tag {\r\n    border: 1px solid #ccc;\r\n    border-radius: 4px;\r\n    height: 26px;\r\n    margin: 4px 1px 0 3px;\r\n    padding: 0 .25em;\r\n    float: left;\r\n    line-height: 1.7em;\r\n    color: #147688;\r\n    background-color: #d7f3f9;\r\n    border-color: #91ddec;\r\n}\r\n\r\n.selected-tag .close {\r\n    float: none;\r\n    margin-right: 0;\r\n    font-size: 20px;\r\n    -webkit-appearance: none;\r\n    padding: 0;\r\n    cursor: pointer;\r\n    background: 0 0;\r\n    border: 0;\r\n    font-weight: 700;\r\n    line-height: 1;\r\n    color: #000;\r\n    text-shadow: 0 1px 0 #fff;\r\n    filter: alpha(opacity=20);\r\n    opacity: .2;\r\n}\r\n\r\n.selected-tag .close:hover {\r\n    color: #000;\r\n    filter: alpha(opacity=50);\r\n    opacity: .5;\r\n}\r\n</style>"],"sourceRoot":"webpack://"}]);
+	exports.push([module.id, "\r\n.selected-tag[_v-d25ff0b8] {\r\n    border: 1px solid #ccc;\r\n    border-radius: 4px;\r\n    height: 26px;\r\n    margin: 4px 1px 0 3px;\r\n    padding: 0 .25em;\r\n    float: left;\r\n    line-height: 1.7em;\r\n    color: #147688;\r\n    background-color: #d7f3f9;\r\n    border-color: #91ddec;\r\n}\r\n\r\n.selected-tag .close[_v-d25ff0b8] {\r\n    float: none;\r\n    margin-right: 0;\r\n    font-size: 20px;\r\n    -webkit-appearance: none;\r\n    padding: 0;\r\n    cursor: pointer;\r\n    background: 0 0;\r\n    border: 0;\r\n    font-weight: 700;\r\n    line-height: 1;\r\n    color: #000;\r\n    text-shadow: 0 1px 0 #fff;\r\n    filter: alpha(opacity=20);\r\n    opacity: .2;\r\n}\r\n\r\n.selected-tag .close[_v-d25ff0b8]:hover {\r\n    color: #000;\r\n    filter: alpha(opacity=50);\r\n    opacity: .5;\r\n}\r\n", "", {"version":3,"sources":["/./src/components/business/business_search/CreateProduct.vue.style"],"names":[],"mappings":";AA6VA;IACA,uBAAA;IACA,mBAAA;IACA,aAAA;IACA,sBAAA;IACA,iBAAA;IACA,YAAA;IACA,mBAAA;IACA,eAAA;IACA,0BAAA;IACA,sBAAA;CACA;;AAEA;IACA,YAAA;IACA,gBAAA;IACA,gBAAA;IACA,yBAAA;IACA,WAAA;IACA,gBAAA;IACA,gBAAA;IACA,UAAA;IACA,iBAAA;IACA,eAAA;IACA,YAAA;IACA,0BAAA;IACA,0BAAA;IACA,YAAA;CACA;;AAEA;IACA,YAAA;IACA,0BAAA;IACA,YAAA;CACA","file":"CreateProduct.vue","sourcesContent":["<!-- 新增产品 -->\r\n<template>\r\n    <modal :show.sync=\"creatProductModal\" effect=\"fade\" width=\"850px\">\r\n        <div slot=\"modal-header\" class=\"modal-header\">\r\n            <h4 class=\"modal-title\">新增产品</h4>\r\n        </div>\r\n        <div slot=\"modal-body\" class=\"modal-body mh500\">\r\n            <form class=\"form-horizontal clearfix\">\r\n                <div class=\"col-sm-12\">\r\n                    <div class=\"form-group input-box\">\r\n                        <label class=\"control-label col-sm-2\">业务类型：<span class=\"text-danger\">*</span></label>\r\n                        <div class=\"col-sm-9\">\r\n                            <v-select :value.sync=\"businessType\" :options=\"businessTypes\" placeholder=\"请选择\">\r\n                            </v-select>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-sm-12\" v-show=\"businessType === '1'\">\r\n                    <div class=\"col-sm-6\" >\r\n                        <div class=\"form-group input-box\">\r\n                            <label class=\"control-label col-sm-4\">游戏列表：<span class=\"text-danger\">*</span></label>\r\n                            <div class=\"col-sm-6\">\r\n                                <v-select :value.sync=\"gameList\" :options=\"gameLists\" placeholder=\"请选择\">\r\n                                </v-select>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label class=\"control-label col-sm-4\">区域名称：<span class=\"text-danger\">*</span></label>\r\n                            <div class=\"col-sm-6\">\r\n                                <input type=\"text\" class=\"form-control\" v-model=\"childType\">\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-sm-12\" v-show=\"businessType === '2'\">\r\n                    <div class=\"form-group\">\r\n                        <label class=\"control-label col-sm-2\">产品名称：<span class=\"text-danger\">*</span></label>\r\n                        <div class=\"col-sm-9\">\r\n                            <input type=\"text\" class=\"form-control\" v-model=\"productName\">\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-sm-12\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group input-box\">\r\n                            <label class=\"control-label col-sm-4\">部门：<span class=\"text-danger\">*</span></label>\r\n                            <div class=\"col-sm-6\">\r\n                                <typeahead\r\n                                    :on-hit=\"addDepartment\"\r\n                                    :async=\"'/product/getDepartment/?name='\"\r\n                                    :key=\"'name'\"\r\n                                    placeholder=\"按回车键添加\"\r\n                                >\r\n                                </typeahead>\r\n                                <span class=\"selected-tag\" v-show=\"department !== ''\">\r\n                                    <span v-text=\"department\"></span>\r\n                                </span>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group input-box\">\r\n                            <label class=\"control-label col-sm-4\">产品级别：<span class=\"text-danger\">*</span></label>\r\n                            <div class=\"col-sm-6\">\r\n                                <v-select :value.sync=\"productLevel\" :options=\"productLevels\" placeholder=\"请选择\">\r\n                                </v-select>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-sm-12\" v-show=\"businessType === '1'\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group input-box\">\r\n                            <label class=\"control-label col-sm-4\">游戏类型：<span class=\"text-danger\">*</span></label>\r\n                            <div class=\"col-sm-6\">\r\n                                <v-select :value.sync=\"gameType\" :options=\"gameTypes\" placeholder=\"请选择\">\r\n                                </v-select>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group input-box\">\r\n                            <label class=\"control-label col-sm-4\">平台类型：<span class=\"text-danger\">*</span></label>\r\n                            <div class=\"col-sm-6\">\r\n                                <v-select :value.sync=\"platformType\" :options=\"platformTypes\" placeholder=\"请选择\">\r\n                                </v-select>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-sm-12\" v-show=\"businessType === '1'\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group input-box\">\r\n                            <label class=\"control-label col-sm-4\">研发模式：<span class=\"text-danger\">*</span></label>\r\n                            <div class=\"col-sm-6\">\r\n                                <v-select :value.sync=\"developModel\" :options=\"developModels\" placeholder=\"请选择\">\r\n                                </v-select>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group input-box\">\r\n                            <label class=\"control-label col-sm-4\">运营阶段：<span class=\"text-danger\">*</span></label>\r\n                            <div class=\"col-sm-6\">\r\n                                <v-select :value.sync=\"phase\" :options=\"phases\" placeholder=\"请选择\">\r\n                                </v-select>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-sm-12\">\r\n                    <div class=\"form-group mb0\">\r\n                        <label class=\"control-label col-sm-2\">项目负责人：</label>\r\n                        <div class=\"col-sm-9\">\r\n                            <typeahead\r\n                                :on-hit=\"addProjectManager\"\r\n                                :async=\"'/product/getUser/?name='\"\r\n                                :key=\"'name'\"\r\n                                placeholder=\"按回车键添加\"\r\n                            >\r\n                            </typeahead>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-sm-12\">\r\n                    <div class=\"form-group mb20\">\r\n                        <div class=\"col-sm-9 col-sm-offset-2\">\r\n                            <span class=\"selected-tag\" v-for=\"projectManager in projectManagers\" track-by=\"$index\">\r\n                                <span v-text=\"projectManager\"></span>\r\n                                <button type=\"button\" class=\"close\" @click=\"deleteUser($index, 'projectManagers')\">\r\n                                    <span aria-hidden=\"true\">×</span>\r\n                                </button>\r\n                            </span>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-sm-12\">\r\n                    <div class=\"form-group mb0\">\r\n                        <label class=\"control-label col-sm-2\">运营负责人：</label>\r\n                        <div class=\"col-sm-9\">\r\n                            <typeahead\r\n                                :on-hit=\"addOperationalManager\"\r\n                                :async=\"'/product/getUser/?name='\"\r\n                                :key=\"'name'\"\r\n                                placeholder=\"按回车键添加\"\r\n                            >\r\n                            </typeahead>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-sm-12\">\r\n                    <div class=\"form-group mb20\">\r\n                        <div class=\"col-sm-9 col-sm-offset-2\">\r\n                            <span class=\"selected-tag\" v-for=\"operationalManager in operationalManagers\" track-by=\"$index\">\r\n                                <span v-text=\"operationalManager\"></span>\r\n                                <button type=\"button\" class=\"close\" @click=\"deleteUser($index, 'operationalManagers')\">\r\n                                    <span aria-hidden=\"true\">×</span>\r\n                                </button>\r\n                            </span>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-sm-12\">\r\n                    <div class=\"form-group mb0\">\r\n                        <label class=\"control-label col-sm-2\">运维负责人：<span class=\"text-danger\">*</span></label>\r\n                        <div class=\"col-sm-9\">\r\n                            <typeahead\r\n                                :on-hit=\"addMaintainManager\"\r\n                                :async=\"'/product/getUser/?name='\"\r\n                                :key=\"'name'\"\r\n                                placeholder=\"按回车键添加\"\r\n                            >\r\n                            </typeahead>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-sm-12\">\r\n                    <div class=\"form-group mb20\">\r\n                        <div class=\"col-sm-9 col-sm-offset-2\">\r\n                            <span class=\"selected-tag\" v-for=\"maintainManager in maintainManagers\" track-by=\"$index\">\r\n                                <span v-text=\"maintainManager\"></span>\r\n                                <button type=\"button\" class=\"close\" @click=\"deleteUser($index, 'maintainManagers')\">\r\n                                    <span aria-hidden=\"true\">×</span>\r\n                                </button>\r\n                            </span>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-sm-12\">\r\n                    <div class=\"form-group mb0\">\r\n                        <label class=\"control-label col-sm-2\">市场负责人：</label>\r\n                        <div class=\"col-sm-9\">\r\n                            <typeahead\r\n                                :on-hit=\"addMarketManager\"\r\n                                :async=\"'/product/getUser/?name='\"\r\n                                :key=\"'name'\"\r\n                                placeholder=\"按回车键添加\"\r\n                            >\r\n                            </typeahead>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-sm-12\">\r\n                    <div class=\"form-group mb20\">\r\n                        <div class=\"col-sm-9 col-sm-offset-2\">\r\n                            <span class=\"selected-tag\" v-for=\"marketManager in marketManagers\" track-by=\"$index\">\r\n                                <span v-text=\"marketManager\"></span>\r\n                                <button type=\"button\" class=\"close\" @click=\"deleteUser($index, 'marketManagers')\">\r\n                                    <span aria-hidden=\"true\">×</span>\r\n                                </button>\r\n                            </span>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </form>\r\n        </div>\r\n        <div slot=\"modal-footer\" class=\"modal-footer\">\r\n            <button type=\"button\" class=\"btn btn-default\" @click=\"saveFn\">保存</button>\r\n            <button type=\"button\" class=\"btn btn-default\" @click='creatProductModal = false'>取消</button>\r\n        </div>\r\n    </modal>\r\n</template>\r\n\r\n<script>\r\nimport { modal, typeahead } from 'vue-strap'\r\nimport vSelect from '../../global/Select.vue'\r\nimport { departments, productTypes, phases, gameTypes, platformTypes, developModels, gameLists, productLevels } from '../../../vuex/getters.js'\r\n\r\nlet origin = {\r\n        creatProductModal: false,\r\n        businessType: '1',\r\n        gameList: '',\r\n        childType: '',\r\n        department: '',\r\n        productName: '',\r\n        productLevel: '',\r\n        gameType: '',\r\n        platformType: '',\r\n        developModel: '',\r\n        phase: '',\r\n        projectManagers: [],\r\n        maintainManagers: [],\r\n        operationalManagers: [],\r\n        marketManagers: [],\r\n    },\r\n    init = Object.assign({}, origin);\r\n\r\nexport default {\r\n    data () {\r\n        return origin\r\n    },\r\n    methods: {\r\n\r\n        // 模糊搜索部门\r\n        addDepartment (items, targetVM) {\r\n            this.department = items\r\n            \r\n            targetVM.reset()\r\n        },\r\n\r\n        // 模糊搜索项目负责人\r\n        addProjectManager (items, targetVM) {\r\n            if ($.inArray(items, this.projectManagers) === -1 && items) {\r\n                this.projectManagers.push(items) \r\n            }\r\n            \r\n            targetVM.reset()\r\n        },\r\n\r\n        // 模糊搜索运营负责人\r\n        addOperationalManager (items, targetVM) {\r\n            if ($.inArray(items, this.operationalManagers) === -1 && items) {\r\n                this.operationalManagers.push(items) \r\n            }\r\n            \r\n            targetVM.reset()\r\n        },\r\n\r\n        // 模糊搜索运维负责人\r\n        addMaintainManager (items, targetVM) {\r\n            if ($.inArray(items, this.maintainManagers) === -1 && items) {\r\n                this.maintainManagers.push(items) \r\n            }\r\n            \r\n            targetVM.reset()\r\n        },\r\n\r\n        // 模糊搜索市场负责人\r\n        addMarketManager (items, targetVM) {\r\n            if ($.inArray(items, this.marketManagers) === -1 && items) {\r\n                this.marketManagers.push(items) \r\n            }\r\n            \r\n            targetVM.reset()\r\n        },\r\n\r\n        // 删除负责人\r\n        deleteUser (index, name) {\r\n            this[name].splice(index, 1)\r\n        },\r\n\r\n        // 新增产品\r\n        saveFn () {\r\n            this.$http({\r\n                url: '/product/operate/',\r\n                method: 'POST',\r\n                data: this.$data\r\n            })\r\n            .then(response => {\r\n                if (response.data.code === 200) {\r\n                    this.creatProductModal = false\r\n                    this.$data = Object.assign({}, init)\r\n\r\n                    this.$dispatch('refresh')\r\n                    this.$dispatch('show-success')\r\n                } else {\r\n                    this.$dispatch('show-error', response.data.msg)\r\n                }\r\n            })\r\n        }\r\n    },\r\n    components: {\r\n        modal,\r\n        vSelect,\r\n        typeahead\r\n    },\r\n    vuex: {\r\n        getters: {\r\n            departments,\r\n            businessTypes: productTypes,\r\n            phases,\r\n            gameTypes,\r\n            platformTypes,\r\n            developModels,\r\n            gameLists,\r\n            productLevels\r\n        }\r\n    },\r\n    events: {\r\n        'showCreateProduct' () {\r\n            this.creatProductModal = true\r\n        }\r\n    }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.selected-tag {\r\n    border: 1px solid #ccc;\r\n    border-radius: 4px;\r\n    height: 26px;\r\n    margin: 4px 1px 0 3px;\r\n    padding: 0 .25em;\r\n    float: left;\r\n    line-height: 1.7em;\r\n    color: #147688;\r\n    background-color: #d7f3f9;\r\n    border-color: #91ddec;\r\n}\r\n\r\n.selected-tag .close {\r\n    float: none;\r\n    margin-right: 0;\r\n    font-size: 20px;\r\n    -webkit-appearance: none;\r\n    padding: 0;\r\n    cursor: pointer;\r\n    background: 0 0;\r\n    border: 0;\r\n    font-weight: 700;\r\n    line-height: 1;\r\n    color: #000;\r\n    text-shadow: 0 1px 0 #fff;\r\n    filter: alpha(opacity=20);\r\n    opacity: .2;\r\n}\r\n\r\n.selected-tag .close:hover {\r\n    color: #000;\r\n    filter: alpha(opacity=50);\r\n    opacity: .5;\r\n}\r\n</style>"],"sourceRoot":"webpack://"}]);
 	
 	// exports
 
 
 /***/ },
-/* 214 */
+/* 219 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
@@ -2231,10 +2284,10 @@ webpackJsonp([7],Array(32).concat([
 	    platformType: '',
 	    developModel: '',
 	    phase: '',
-	    projectManagers: ['王毅', '罗之浩', '王鑫', '沈建华'],
-	    maintainManagers: ['王毅', '沈建华'],
-	    operationalManagers: ['沈建华'],
-	    marketManagers: ['王鑫', '罗之浩']
+	    projectManagers: [],
+	    maintainManagers: [],
+	    operationalManagers: [],
+	    marketManagers: []
 	},
 	    init = (0, _assign2.default)({}, origin); // <!-- 新增产品 -->
 	// <template>
@@ -2285,8 +2338,16 @@ webpackJsonp([7],Array(32).concat([
 	//                         <div class="form-group input-box">
 	//                             <label class="control-label col-sm-4">部门：<span class="text-danger">*</span></label>
 	//                             <div class="col-sm-6">
-	//                                 <v-select :value.sync="department" :options="departments" placeholder="请选择">
-	//                                 </v-select>
+	//                                 <typeahead
+	//                                     :on-hit="addDepartment"
+	//                                     :async="'/product/getDepartment/?name='"
+	//                                     :key="'name'"
+	//                                     placeholder="按回车键添加"
+	//                                 >
+	//                                 </typeahead>
+	//                                 <span class="selected-tag" v-show="department !== ''">
+	//                                     <span v-text="department"></span>
+	//                                 </span>
 	//                             </div>
 	//                         </div>
 	//                     </div>
@@ -2346,7 +2407,7 @@ webpackJsonp([7],Array(32).concat([
 	//                         <div class="col-sm-9">
 	//                             <typeahead
 	//                                 :on-hit="addProjectManager"
-	//                                 :async="'/instance_ips/?name='"
+	//                                 :async="'/product/getUser/?name='"
 	//                                 :key="'name'"
 	//                                 placeholder="按回车键添加"
 	//                             >
@@ -2372,7 +2433,7 @@ webpackJsonp([7],Array(32).concat([
 	//                         <div class="col-sm-9">
 	//                             <typeahead
 	//                                 :on-hit="addOperationalManager"
-	//                                 :async="'/instance_ips/?name='"
+	//                                 :async="'/product/getUser/?name='"
 	//                                 :key="'name'"
 	//                                 placeholder="按回车键添加"
 	//                             >
@@ -2398,7 +2459,7 @@ webpackJsonp([7],Array(32).concat([
 	//                         <div class="col-sm-9">
 	//                             <typeahead
 	//                                 :on-hit="addMaintainManager"
-	//                                 :async="'/instance_ips/?name='"
+	//                                 :async="'/product/getUser/?name='"
 	//                                 :key="'name'"
 	//                                 placeholder="按回车键添加"
 	//                             >
@@ -2424,7 +2485,7 @@ webpackJsonp([7],Array(32).concat([
 	//                         <div class="col-sm-9">
 	//                             <typeahead
 	//                                 :on-hit="addMarketManager"
-	//                                 :async="'/instance_ips/?name='"
+	//                                 :async="'/product/getUser/?name='"
 	//                                 :key="'name'"
 	//                                 placeholder="按回车键添加"
 	//                             >
@@ -2447,7 +2508,7 @@ webpackJsonp([7],Array(32).concat([
 	//             </form>
 	//         </div>
 	//         <div slot="modal-footer" class="modal-footer">
-	//             <button type="button" class="btn btn-default">保存</button>
+	//             <button type="button" class="btn btn-default" @click="saveFn">保存</button>
 	//             <button type="button" class="btn btn-default" @click='creatProductModal = false'>取消</button>
 	//         </div>
 	//     </modal>
@@ -2463,8 +2524,16 @@ webpackJsonp([7],Array(32).concat([
 	
 	    methods: {
 	
-	        // 模糊搜索项目负责人
+	        // 模糊搜索部门
 	
+	        addDepartment: function addDepartment(items, targetVM) {
+	            this.department = items;
+	
+	            targetVM.reset();
+	        },
+	
+	
+	        // 模糊搜索项目负责人
 	        addProjectManager: function addProjectManager(items, targetVM) {
 	            if ($.inArray(items, this.projectManagers) === -1 && items) {
 	                this.projectManagers.push(items);
@@ -2507,6 +2576,28 @@ webpackJsonp([7],Array(32).concat([
 	        // 删除负责人
 	        deleteUser: function deleteUser(index, name) {
 	            this[name].splice(index, 1);
+	        },
+	
+	
+	        // 新增产品
+	        saveFn: function saveFn() {
+	            var _this = this;
+	
+	            this.$http({
+	                url: '/product/operate/',
+	                method: 'POST',
+	                data: this.$data
+	            }).then(function (response) {
+	                if (response.data.code === 200) {
+	                    _this.creatProductModal = false;
+	                    _this.$data = (0, _assign2.default)({}, init);
+	
+	                    _this.$dispatch('refresh');
+	                    _this.$dispatch('show-success');
+	                } else {
+	                    _this.$dispatch('show-error', response.data.msg);
+	                }
+	            });
 	        }
 	    },
 	    components: {
@@ -2575,19 +2666,19 @@ webpackJsonp([7],Array(32).concat([
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 215 */
+/* 220 */
 /***/ function(module, exports) {
 
-	module.exports = "\n    <modal :show.sync=\"creatProductModal\" effect=\"fade\" width=\"850px\" _v-d25ff0b8=\"\">\n        <div slot=\"modal-header\" class=\"modal-header\" _v-d25ff0b8=\"\">\n            <h4 class=\"modal-title\" _v-d25ff0b8=\"\">新增产品</h4>\n        </div>\n        <div slot=\"modal-body\" class=\"modal-body mh500\" _v-d25ff0b8=\"\">\n            <form class=\"form-horizontal clearfix\" _v-d25ff0b8=\"\">\n                <div class=\"col-sm-12\" _v-d25ff0b8=\"\">\n                    <div class=\"form-group input-box\" _v-d25ff0b8=\"\">\n                        <label class=\"control-label col-sm-2\" _v-d25ff0b8=\"\">业务类型：<span class=\"text-danger\" _v-d25ff0b8=\"\">*</span></label>\n                        <div class=\"col-sm-9\" _v-d25ff0b8=\"\">\n                            <v-select :value.sync=\"businessType\" :options=\"businessTypes\" placeholder=\"请选择\" _v-d25ff0b8=\"\">\n                            </v-select>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-sm-12\" v-show=\"businessType === '1'\" _v-d25ff0b8=\"\">\n                    <div class=\"col-sm-6\" _v-d25ff0b8=\"\">\n                        <div class=\"form-group input-box\" _v-d25ff0b8=\"\">\n                            <label class=\"control-label col-sm-4\" _v-d25ff0b8=\"\">游戏列表：<span class=\"text-danger\" _v-d25ff0b8=\"\">*</span></label>\n                            <div class=\"col-sm-6\" _v-d25ff0b8=\"\">\n                                <v-select :value.sync=\"gameList\" :options=\"gameLists\" placeholder=\"请选择\" _v-d25ff0b8=\"\">\n                                </v-select>\n                            </div>\n                        </div>\n                    </div>\n                    <div class=\"col-sm-6\" _v-d25ff0b8=\"\">\n                        <div class=\"form-group\" _v-d25ff0b8=\"\">\n                            <label class=\"control-label col-sm-4\" _v-d25ff0b8=\"\">区域名称：<span class=\"text-danger\" _v-d25ff0b8=\"\">*</span></label>\n                            <div class=\"col-sm-6\" _v-d25ff0b8=\"\">\n                                <input type=\"text\" class=\"form-control\" v-model=\"childType\" _v-d25ff0b8=\"\">\n                            </div>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-sm-12\" v-show=\"businessType === '2'\" _v-d25ff0b8=\"\">\n                    <div class=\"form-group\" _v-d25ff0b8=\"\">\n                        <label class=\"control-label col-sm-2\" _v-d25ff0b8=\"\">产品名称：<span class=\"text-danger\" _v-d25ff0b8=\"\">*</span></label>\n                        <div class=\"col-sm-9\" _v-d25ff0b8=\"\">\n                            <input type=\"text\" class=\"form-control\" v-model=\"productName\" _v-d25ff0b8=\"\">\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-sm-12\" _v-d25ff0b8=\"\">\n                    <div class=\"col-sm-6\" _v-d25ff0b8=\"\">\n                        <div class=\"form-group input-box\" _v-d25ff0b8=\"\">\n                            <label class=\"control-label col-sm-4\" _v-d25ff0b8=\"\">部门：<span class=\"text-danger\" _v-d25ff0b8=\"\">*</span></label>\n                            <div class=\"col-sm-6\" _v-d25ff0b8=\"\">\n                                <v-select :value.sync=\"department\" :options=\"departments\" placeholder=\"请选择\" _v-d25ff0b8=\"\">\n                                </v-select>\n                            </div>\n                        </div>\n                    </div>\n                    <div class=\"col-sm-6\" _v-d25ff0b8=\"\">\n                        <div class=\"form-group input-box\" _v-d25ff0b8=\"\">\n                            <label class=\"control-label col-sm-4\" _v-d25ff0b8=\"\">产品级别：<span class=\"text-danger\" _v-d25ff0b8=\"\">*</span></label>\n                            <div class=\"col-sm-6\" _v-d25ff0b8=\"\">\n                                <v-select :value.sync=\"productLevel\" :options=\"productLevels\" placeholder=\"请选择\" _v-d25ff0b8=\"\">\n                                </v-select>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-sm-12\" v-show=\"businessType === '1'\" _v-d25ff0b8=\"\">\n                    <div class=\"col-sm-6\" _v-d25ff0b8=\"\">\n                        <div class=\"form-group input-box\" _v-d25ff0b8=\"\">\n                            <label class=\"control-label col-sm-4\" _v-d25ff0b8=\"\">游戏类型：<span class=\"text-danger\" _v-d25ff0b8=\"\">*</span></label>\n                            <div class=\"col-sm-6\" _v-d25ff0b8=\"\">\n                                <v-select :value.sync=\"gameType\" :options=\"gameTypes\" placeholder=\"请选择\" _v-d25ff0b8=\"\">\n                                </v-select>\n                            </div>\n                        </div>\n                    </div>\n                    <div class=\"col-sm-6\" _v-d25ff0b8=\"\">\n                        <div class=\"form-group input-box\" _v-d25ff0b8=\"\">\n                            <label class=\"control-label col-sm-4\" _v-d25ff0b8=\"\">平台类型：<span class=\"text-danger\" _v-d25ff0b8=\"\">*</span></label>\n                            <div class=\"col-sm-6\" _v-d25ff0b8=\"\">\n                                <v-select :value.sync=\"platformType\" :options=\"platformTypes\" placeholder=\"请选择\" _v-d25ff0b8=\"\">\n                                </v-select>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-sm-12\" v-show=\"businessType === '1'\" _v-d25ff0b8=\"\">\n                    <div class=\"col-sm-6\" _v-d25ff0b8=\"\">\n                        <div class=\"form-group input-box\" _v-d25ff0b8=\"\">\n                            <label class=\"control-label col-sm-4\" _v-d25ff0b8=\"\">研发模式：<span class=\"text-danger\" _v-d25ff0b8=\"\">*</span></label>\n                            <div class=\"col-sm-6\" _v-d25ff0b8=\"\">\n                                <v-select :value.sync=\"developModel\" :options=\"developModels\" placeholder=\"请选择\" _v-d25ff0b8=\"\">\n                                </v-select>\n                            </div>\n                        </div>\n                    </div>\n                    <div class=\"col-sm-6\" _v-d25ff0b8=\"\">\n                        <div class=\"form-group input-box\" _v-d25ff0b8=\"\">\n                            <label class=\"control-label col-sm-4\" _v-d25ff0b8=\"\">运营阶段：<span class=\"text-danger\" _v-d25ff0b8=\"\">*</span></label>\n                            <div class=\"col-sm-6\" _v-d25ff0b8=\"\">\n                                <v-select :value.sync=\"phase\" :options=\"phases\" placeholder=\"请选择\" _v-d25ff0b8=\"\">\n                                </v-select>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-sm-12\" _v-d25ff0b8=\"\">\n                    <div class=\"form-group mb0\" _v-d25ff0b8=\"\">\n                        <label class=\"control-label col-sm-2\" _v-d25ff0b8=\"\">项目负责人：</label>\n                        <div class=\"col-sm-9\" _v-d25ff0b8=\"\">\n                            <typeahead :on-hit=\"addProjectManager\" :async=\"'/instance_ips/?name='\" :key=\"'name'\" placeholder=\"按回车键添加\" _v-d25ff0b8=\"\">\n                            </typeahead>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-sm-12\" _v-d25ff0b8=\"\">\n                    <div class=\"form-group mb20\" _v-d25ff0b8=\"\">\n                        <div class=\"col-sm-9 col-sm-offset-2\" _v-d25ff0b8=\"\">\n                            <span class=\"selected-tag\" v-for=\"projectManager in projectManagers\" track-by=\"$index\" _v-d25ff0b8=\"\">\n                                <span v-text=\"projectManager\" _v-d25ff0b8=\"\"></span>\n                                <button type=\"button\" class=\"close\" @click=\"deleteUser($index, 'projectManagers')\" _v-d25ff0b8=\"\">\n                                    <span aria-hidden=\"true\" _v-d25ff0b8=\"\">×</span>\n                                </button>\n                            </span>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-sm-12\" _v-d25ff0b8=\"\">\n                    <div class=\"form-group mb0\" _v-d25ff0b8=\"\">\n                        <label class=\"control-label col-sm-2\" _v-d25ff0b8=\"\">运营负责人：</label>\n                        <div class=\"col-sm-9\" _v-d25ff0b8=\"\">\n                            <typeahead :on-hit=\"addOperationalManager\" :async=\"'/instance_ips/?name='\" :key=\"'name'\" placeholder=\"按回车键添加\" _v-d25ff0b8=\"\">\n                            </typeahead>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-sm-12\" _v-d25ff0b8=\"\">\n                    <div class=\"form-group mb20\" _v-d25ff0b8=\"\">\n                        <div class=\"col-sm-9 col-sm-offset-2\" _v-d25ff0b8=\"\">\n                            <span class=\"selected-tag\" v-for=\"operationalManager in operationalManagers\" track-by=\"$index\" _v-d25ff0b8=\"\">\n                                <span v-text=\"operationalManager\" _v-d25ff0b8=\"\"></span>\n                                <button type=\"button\" class=\"close\" @click=\"deleteUser($index, 'operationalManagers')\" _v-d25ff0b8=\"\">\n                                    <span aria-hidden=\"true\" _v-d25ff0b8=\"\">×</span>\n                                </button>\n                            </span>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-sm-12\" _v-d25ff0b8=\"\">\n                    <div class=\"form-group mb0\" _v-d25ff0b8=\"\">\n                        <label class=\"control-label col-sm-2\" _v-d25ff0b8=\"\">运维负责人：<span class=\"text-danger\" _v-d25ff0b8=\"\">*</span></label>\n                        <div class=\"col-sm-9\" _v-d25ff0b8=\"\">\n                            <typeahead :on-hit=\"addMaintainManager\" :async=\"'/instance_ips/?name='\" :key=\"'name'\" placeholder=\"按回车键添加\" _v-d25ff0b8=\"\">\n                            </typeahead>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-sm-12\" _v-d25ff0b8=\"\">\n                    <div class=\"form-group mb20\" _v-d25ff0b8=\"\">\n                        <div class=\"col-sm-9 col-sm-offset-2\" _v-d25ff0b8=\"\">\n                            <span class=\"selected-tag\" v-for=\"maintainManager in maintainManagers\" track-by=\"$index\" _v-d25ff0b8=\"\">\n                                <span v-text=\"maintainManager\" _v-d25ff0b8=\"\"></span>\n                                <button type=\"button\" class=\"close\" @click=\"deleteUser($index, 'maintainManagers')\" _v-d25ff0b8=\"\">\n                                    <span aria-hidden=\"true\" _v-d25ff0b8=\"\">×</span>\n                                </button>\n                            </span>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-sm-12\" _v-d25ff0b8=\"\">\n                    <div class=\"form-group mb0\" _v-d25ff0b8=\"\">\n                        <label class=\"control-label col-sm-2\" _v-d25ff0b8=\"\">市场负责人：</label>\n                        <div class=\"col-sm-9\" _v-d25ff0b8=\"\">\n                            <typeahead :on-hit=\"addMarketManager\" :async=\"'/instance_ips/?name='\" :key=\"'name'\" placeholder=\"按回车键添加\" _v-d25ff0b8=\"\">\n                            </typeahead>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-sm-12\" _v-d25ff0b8=\"\">\n                    <div class=\"form-group mb20\" _v-d25ff0b8=\"\">\n                        <div class=\"col-sm-9 col-sm-offset-2\" _v-d25ff0b8=\"\">\n                            <span class=\"selected-tag\" v-for=\"marketManager in marketManagers\" track-by=\"$index\" _v-d25ff0b8=\"\">\n                                <span v-text=\"marketManager\" _v-d25ff0b8=\"\"></span>\n                                <button type=\"button\" class=\"close\" @click=\"deleteUser($index, 'marketManagers')\" _v-d25ff0b8=\"\">\n                                    <span aria-hidden=\"true\" _v-d25ff0b8=\"\">×</span>\n                                </button>\n                            </span>\n                        </div>\n                    </div>\n                </div>\n            </form>\n        </div>\n        <div slot=\"modal-footer\" class=\"modal-footer\" _v-d25ff0b8=\"\">\n            <button type=\"button\" class=\"btn btn-default\" _v-d25ff0b8=\"\">保存</button>\n            <button type=\"button\" class=\"btn btn-default\" @click=\"creatProductModal = false\" _v-d25ff0b8=\"\">取消</button>\n        </div>\n    </modal>\n";
+	module.exports = "\n    <modal :show.sync=\"creatProductModal\" effect=\"fade\" width=\"850px\" _v-d25ff0b8=\"\">\n        <div slot=\"modal-header\" class=\"modal-header\" _v-d25ff0b8=\"\">\n            <h4 class=\"modal-title\" _v-d25ff0b8=\"\">新增产品</h4>\n        </div>\n        <div slot=\"modal-body\" class=\"modal-body mh500\" _v-d25ff0b8=\"\">\n            <form class=\"form-horizontal clearfix\" _v-d25ff0b8=\"\">\n                <div class=\"col-sm-12\" _v-d25ff0b8=\"\">\n                    <div class=\"form-group input-box\" _v-d25ff0b8=\"\">\n                        <label class=\"control-label col-sm-2\" _v-d25ff0b8=\"\">业务类型：<span class=\"text-danger\" _v-d25ff0b8=\"\">*</span></label>\n                        <div class=\"col-sm-9\" _v-d25ff0b8=\"\">\n                            <v-select :value.sync=\"businessType\" :options=\"businessTypes\" placeholder=\"请选择\" _v-d25ff0b8=\"\">\n                            </v-select>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-sm-12\" v-show=\"businessType === '1'\" _v-d25ff0b8=\"\">\n                    <div class=\"col-sm-6\" _v-d25ff0b8=\"\">\n                        <div class=\"form-group input-box\" _v-d25ff0b8=\"\">\n                            <label class=\"control-label col-sm-4\" _v-d25ff0b8=\"\">游戏列表：<span class=\"text-danger\" _v-d25ff0b8=\"\">*</span></label>\n                            <div class=\"col-sm-6\" _v-d25ff0b8=\"\">\n                                <v-select :value.sync=\"gameList\" :options=\"gameLists\" placeholder=\"请选择\" _v-d25ff0b8=\"\">\n                                </v-select>\n                            </div>\n                        </div>\n                    </div>\n                    <div class=\"col-sm-6\" _v-d25ff0b8=\"\">\n                        <div class=\"form-group\" _v-d25ff0b8=\"\">\n                            <label class=\"control-label col-sm-4\" _v-d25ff0b8=\"\">区域名称：<span class=\"text-danger\" _v-d25ff0b8=\"\">*</span></label>\n                            <div class=\"col-sm-6\" _v-d25ff0b8=\"\">\n                                <input type=\"text\" class=\"form-control\" v-model=\"childType\" _v-d25ff0b8=\"\">\n                            </div>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-sm-12\" v-show=\"businessType === '2'\" _v-d25ff0b8=\"\">\n                    <div class=\"form-group\" _v-d25ff0b8=\"\">\n                        <label class=\"control-label col-sm-2\" _v-d25ff0b8=\"\">产品名称：<span class=\"text-danger\" _v-d25ff0b8=\"\">*</span></label>\n                        <div class=\"col-sm-9\" _v-d25ff0b8=\"\">\n                            <input type=\"text\" class=\"form-control\" v-model=\"productName\" _v-d25ff0b8=\"\">\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-sm-12\" _v-d25ff0b8=\"\">\n                    <div class=\"col-sm-6\" _v-d25ff0b8=\"\">\n                        <div class=\"form-group input-box\" _v-d25ff0b8=\"\">\n                            <label class=\"control-label col-sm-4\" _v-d25ff0b8=\"\">部门：<span class=\"text-danger\" _v-d25ff0b8=\"\">*</span></label>\n                            <div class=\"col-sm-6\" _v-d25ff0b8=\"\">\n                                <typeahead :on-hit=\"addDepartment\" :async=\"'/product/getDepartment/?name='\" :key=\"'name'\" placeholder=\"按回车键添加\" _v-d25ff0b8=\"\">\n                                </typeahead>\n                                <span class=\"selected-tag\" v-show=\"department !== ''\" _v-d25ff0b8=\"\">\n                                    <span v-text=\"department\" _v-d25ff0b8=\"\"></span>\n                                </span>\n                            </div>\n                        </div>\n                    </div>\n                    <div class=\"col-sm-6\" _v-d25ff0b8=\"\">\n                        <div class=\"form-group input-box\" _v-d25ff0b8=\"\">\n                            <label class=\"control-label col-sm-4\" _v-d25ff0b8=\"\">产品级别：<span class=\"text-danger\" _v-d25ff0b8=\"\">*</span></label>\n                            <div class=\"col-sm-6\" _v-d25ff0b8=\"\">\n                                <v-select :value.sync=\"productLevel\" :options=\"productLevels\" placeholder=\"请选择\" _v-d25ff0b8=\"\">\n                                </v-select>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-sm-12\" v-show=\"businessType === '1'\" _v-d25ff0b8=\"\">\n                    <div class=\"col-sm-6\" _v-d25ff0b8=\"\">\n                        <div class=\"form-group input-box\" _v-d25ff0b8=\"\">\n                            <label class=\"control-label col-sm-4\" _v-d25ff0b8=\"\">游戏类型：<span class=\"text-danger\" _v-d25ff0b8=\"\">*</span></label>\n                            <div class=\"col-sm-6\" _v-d25ff0b8=\"\">\n                                <v-select :value.sync=\"gameType\" :options=\"gameTypes\" placeholder=\"请选择\" _v-d25ff0b8=\"\">\n                                </v-select>\n                            </div>\n                        </div>\n                    </div>\n                    <div class=\"col-sm-6\" _v-d25ff0b8=\"\">\n                        <div class=\"form-group input-box\" _v-d25ff0b8=\"\">\n                            <label class=\"control-label col-sm-4\" _v-d25ff0b8=\"\">平台类型：<span class=\"text-danger\" _v-d25ff0b8=\"\">*</span></label>\n                            <div class=\"col-sm-6\" _v-d25ff0b8=\"\">\n                                <v-select :value.sync=\"platformType\" :options=\"platformTypes\" placeholder=\"请选择\" _v-d25ff0b8=\"\">\n                                </v-select>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-sm-12\" v-show=\"businessType === '1'\" _v-d25ff0b8=\"\">\n                    <div class=\"col-sm-6\" _v-d25ff0b8=\"\">\n                        <div class=\"form-group input-box\" _v-d25ff0b8=\"\">\n                            <label class=\"control-label col-sm-4\" _v-d25ff0b8=\"\">研发模式：<span class=\"text-danger\" _v-d25ff0b8=\"\">*</span></label>\n                            <div class=\"col-sm-6\" _v-d25ff0b8=\"\">\n                                <v-select :value.sync=\"developModel\" :options=\"developModels\" placeholder=\"请选择\" _v-d25ff0b8=\"\">\n                                </v-select>\n                            </div>\n                        </div>\n                    </div>\n                    <div class=\"col-sm-6\" _v-d25ff0b8=\"\">\n                        <div class=\"form-group input-box\" _v-d25ff0b8=\"\">\n                            <label class=\"control-label col-sm-4\" _v-d25ff0b8=\"\">运营阶段：<span class=\"text-danger\" _v-d25ff0b8=\"\">*</span></label>\n                            <div class=\"col-sm-6\" _v-d25ff0b8=\"\">\n                                <v-select :value.sync=\"phase\" :options=\"phases\" placeholder=\"请选择\" _v-d25ff0b8=\"\">\n                                </v-select>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-sm-12\" _v-d25ff0b8=\"\">\n                    <div class=\"form-group mb0\" _v-d25ff0b8=\"\">\n                        <label class=\"control-label col-sm-2\" _v-d25ff0b8=\"\">项目负责人：</label>\n                        <div class=\"col-sm-9\" _v-d25ff0b8=\"\">\n                            <typeahead :on-hit=\"addProjectManager\" :async=\"'/product/getUser/?name='\" :key=\"'name'\" placeholder=\"按回车键添加\" _v-d25ff0b8=\"\">\n                            </typeahead>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-sm-12\" _v-d25ff0b8=\"\">\n                    <div class=\"form-group mb20\" _v-d25ff0b8=\"\">\n                        <div class=\"col-sm-9 col-sm-offset-2\" _v-d25ff0b8=\"\">\n                            <span class=\"selected-tag\" v-for=\"projectManager in projectManagers\" track-by=\"$index\" _v-d25ff0b8=\"\">\n                                <span v-text=\"projectManager\" _v-d25ff0b8=\"\"></span>\n                                <button type=\"button\" class=\"close\" @click=\"deleteUser($index, 'projectManagers')\" _v-d25ff0b8=\"\">\n                                    <span aria-hidden=\"true\" _v-d25ff0b8=\"\">×</span>\n                                </button>\n                            </span>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-sm-12\" _v-d25ff0b8=\"\">\n                    <div class=\"form-group mb0\" _v-d25ff0b8=\"\">\n                        <label class=\"control-label col-sm-2\" _v-d25ff0b8=\"\">运营负责人：</label>\n                        <div class=\"col-sm-9\" _v-d25ff0b8=\"\">\n                            <typeahead :on-hit=\"addOperationalManager\" :async=\"'/product/getUser/?name='\" :key=\"'name'\" placeholder=\"按回车键添加\" _v-d25ff0b8=\"\">\n                            </typeahead>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-sm-12\" _v-d25ff0b8=\"\">\n                    <div class=\"form-group mb20\" _v-d25ff0b8=\"\">\n                        <div class=\"col-sm-9 col-sm-offset-2\" _v-d25ff0b8=\"\">\n                            <span class=\"selected-tag\" v-for=\"operationalManager in operationalManagers\" track-by=\"$index\" _v-d25ff0b8=\"\">\n                                <span v-text=\"operationalManager\" _v-d25ff0b8=\"\"></span>\n                                <button type=\"button\" class=\"close\" @click=\"deleteUser($index, 'operationalManagers')\" _v-d25ff0b8=\"\">\n                                    <span aria-hidden=\"true\" _v-d25ff0b8=\"\">×</span>\n                                </button>\n                            </span>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-sm-12\" _v-d25ff0b8=\"\">\n                    <div class=\"form-group mb0\" _v-d25ff0b8=\"\">\n                        <label class=\"control-label col-sm-2\" _v-d25ff0b8=\"\">运维负责人：<span class=\"text-danger\" _v-d25ff0b8=\"\">*</span></label>\n                        <div class=\"col-sm-9\" _v-d25ff0b8=\"\">\n                            <typeahead :on-hit=\"addMaintainManager\" :async=\"'/product/getUser/?name='\" :key=\"'name'\" placeholder=\"按回车键添加\" _v-d25ff0b8=\"\">\n                            </typeahead>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-sm-12\" _v-d25ff0b8=\"\">\n                    <div class=\"form-group mb20\" _v-d25ff0b8=\"\">\n                        <div class=\"col-sm-9 col-sm-offset-2\" _v-d25ff0b8=\"\">\n                            <span class=\"selected-tag\" v-for=\"maintainManager in maintainManagers\" track-by=\"$index\" _v-d25ff0b8=\"\">\n                                <span v-text=\"maintainManager\" _v-d25ff0b8=\"\"></span>\n                                <button type=\"button\" class=\"close\" @click=\"deleteUser($index, 'maintainManagers')\" _v-d25ff0b8=\"\">\n                                    <span aria-hidden=\"true\" _v-d25ff0b8=\"\">×</span>\n                                </button>\n                            </span>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-sm-12\" _v-d25ff0b8=\"\">\n                    <div class=\"form-group mb0\" _v-d25ff0b8=\"\">\n                        <label class=\"control-label col-sm-2\" _v-d25ff0b8=\"\">市场负责人：</label>\n                        <div class=\"col-sm-9\" _v-d25ff0b8=\"\">\n                            <typeahead :on-hit=\"addMarketManager\" :async=\"'/product/getUser/?name='\" :key=\"'name'\" placeholder=\"按回车键添加\" _v-d25ff0b8=\"\">\n                            </typeahead>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-sm-12\" _v-d25ff0b8=\"\">\n                    <div class=\"form-group mb20\" _v-d25ff0b8=\"\">\n                        <div class=\"col-sm-9 col-sm-offset-2\" _v-d25ff0b8=\"\">\n                            <span class=\"selected-tag\" v-for=\"marketManager in marketManagers\" track-by=\"$index\" _v-d25ff0b8=\"\">\n                                <span v-text=\"marketManager\" _v-d25ff0b8=\"\"></span>\n                                <button type=\"button\" class=\"close\" @click=\"deleteUser($index, 'marketManagers')\" _v-d25ff0b8=\"\">\n                                    <span aria-hidden=\"true\" _v-d25ff0b8=\"\">×</span>\n                                </button>\n                            </span>\n                        </div>\n                    </div>\n                </div>\n            </form>\n        </div>\n        <div slot=\"modal-footer\" class=\"modal-footer\" _v-d25ff0b8=\"\">\n            <button type=\"button\" class=\"btn btn-default\" @click=\"saveFn\" _v-d25ff0b8=\"\">保存</button>\n            <button type=\"button\" class=\"btn btn-default\" @click=\"creatProductModal = false\" _v-d25ff0b8=\"\">取消</button>\n        </div>\n    </modal>\n";
 
 /***/ },
-/* 216 */
+/* 221 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(217)
-	__vue_script__ = __webpack_require__(219)
-	__vue_template__ = __webpack_require__(220)
+	__webpack_require__(222)
+	__vue_script__ = __webpack_require__(224)
+	__vue_template__ = __webpack_require__(225)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -2604,13 +2695,13 @@ webpackJsonp([7],Array(32).concat([
 	})()}
 
 /***/ },
-/* 217 */
+/* 222 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(218);
+	var content = __webpack_require__(223);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(30)(content, {});
@@ -2630,7 +2721,7 @@ webpackJsonp([7],Array(32).concat([
 	}
 
 /***/ },
-/* 218 */
+/* 223 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(29)();
@@ -2638,16 +2729,16 @@ webpackJsonp([7],Array(32).concat([
 	
 	
 	// module
-	exports.push([module.id, "\r\n", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"EditProduct.vue","sourceRoot":"webpack://"}]);
+	exports.push([module.id, "\r\n.selected-tag[_v-61c96016] {\r\n    border: 1px solid #ccc;\r\n    border-radius: 4px;\r\n    height: 26px;\r\n    margin: 4px 1px 0 3px;\r\n    padding: 0 .25em;\r\n    float: left;\r\n    line-height: 1.7em;\r\n    color: #147688;\r\n    background-color: #d7f3f9;\r\n    border-color: #91ddec;\r\n}\r\n\r\n.selected-tag .close[_v-61c96016] {\r\n    float: none;\r\n    margin-right: 0;\r\n    font-size: 20px;\r\n    -webkit-appearance: none;\r\n    padding: 0;\r\n    cursor: pointer;\r\n    background: 0 0;\r\n    border: 0;\r\n    font-weight: 700;\r\n    line-height: 1;\r\n    color: #000;\r\n    text-shadow: 0 1px 0 #fff;\r\n    filter: alpha(opacity=20);\r\n    opacity: .2;\r\n}\r\n\r\n.selected-tag .close[_v-61c96016]:hover {\r\n    color: #000;\r\n    filter: alpha(opacity=50);\r\n    opacity: .5;\r\n}\r\n", "", {"version":3,"sources":["/./src/components/business/business_search/EditProduct.vue.style"],"names":[],"mappings":";AA2WA;IACA,uBAAA;IACA,mBAAA;IACA,aAAA;IACA,sBAAA;IACA,iBAAA;IACA,YAAA;IACA,mBAAA;IACA,eAAA;IACA,0BAAA;IACA,sBAAA;CACA;;AAEA;IACA,YAAA;IACA,gBAAA;IACA,gBAAA;IACA,yBAAA;IACA,WAAA;IACA,gBAAA;IACA,gBAAA;IACA,UAAA;IACA,iBAAA;IACA,eAAA;IACA,YAAA;IACA,0BAAA;IACA,0BAAA;IACA,YAAA;CACA;;AAEA;IACA,YAAA;IACA,0BAAA;IACA,YAAA;CACA","file":"EditProduct.vue","sourcesContent":["<!-- 修改产品 -->\r\n<template>\r\n    <modal :show.sync=\"editProductModal\" effect=\"fade\" width=\"850px\">\r\n        <div slot=\"modal-header\" class=\"modal-header\">\r\n            <h4 class=\"modal-title\">修改产品</h4>\r\n        </div>\r\n        <div slot=\"modal-body\" class=\"modal-body mh500\">\r\n            <form class=\"form-horizontal clearfix\">\r\n                <div class=\"col-sm-12\">\r\n                    <div class=\"form-group input-box\">\r\n                        <label class=\"control-label col-sm-2\">业务类型：<span class=\"text-danger\">*</span></label>\r\n                        <div class=\"col-sm-9\">\r\n                            <v-select :value.sync=\"businessType\" :options=\"businessTypes\" placeholder=\"请选择\">\r\n                            </v-select>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-sm-12\" v-show=\"businessType === '1'\">\r\n                    <div class=\"col-sm-6\" >\r\n                        <div class=\"form-group input-box\">\r\n                            <label class=\"control-label col-sm-4\">游戏列表：<span class=\"text-danger\">*</span></label>\r\n                            <div class=\"col-sm-6\">\r\n                                <v-select :value.sync=\"gameList\" :options=\"gameLists\" placeholder=\"请选择\">\r\n                                </v-select>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group\">\r\n                            <label class=\"control-label col-sm-4\">区域名称：<span class=\"text-danger\">*</span></label>\r\n                            <div class=\"col-sm-6\">\r\n                                <input type=\"text\" class=\"form-control\" v-model=\"childType\">\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-sm-12\" v-show=\"businessType === '2'\">\r\n                    <div class=\"form-group\">\r\n                        <label class=\"control-label col-sm-2\">产品名称：<span class=\"text-danger\">*</span></label>\r\n                        <div class=\"col-sm-9\">\r\n                            <input type=\"text\" class=\"form-control\" v-model=\"productName\">\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-sm-12\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group input-box\">\r\n                            <label class=\"control-label col-sm-4\">部门：<span class=\"text-danger\">*</span></label>\r\n                            <div class=\"col-sm-6\">\r\n                                <typeahead\r\n                                    :on-hit=\"addDepartment\"\r\n                                    :async=\"'/product/getDepartment/?name='\"\r\n                                    :key=\"'name'\"\r\n                                    placeholder=\"按回车键添加\"\r\n                                >\r\n                                </typeahead>\r\n                                <span class=\"selected-tag\" v-show=\"department !== ''\">\r\n                                    <span v-text=\"department\"></span>\r\n                                </span>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group input-box\">\r\n                            <label class=\"control-label col-sm-4\">产品级别：<span class=\"text-danger\">*</span></label>\r\n                            <div class=\"col-sm-6\">\r\n                                <v-select :value.sync=\"productLevel\" :options=\"productLevels\" placeholder=\"请选择\">\r\n                                </v-select>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-sm-12\" v-show=\"businessType === '1'\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group input-box\">\r\n                            <label class=\"control-label col-sm-4\">游戏类型：<span class=\"text-danger\">*</span></label>\r\n                            <div class=\"col-sm-6\">\r\n                                <v-select :value.sync=\"gameType\" :options=\"gameTypes\" placeholder=\"请选择\">\r\n                                </v-select>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group input-box\">\r\n                            <label class=\"control-label col-sm-4\">平台类型：<span class=\"text-danger\">*</span></label>\r\n                            <div class=\"col-sm-6\">\r\n                                <v-select :value.sync=\"platformType\" :options=\"platformTypes\" placeholder=\"请选择\">\r\n                                </v-select>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-sm-12\" v-show=\"businessType === '1'\">\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group input-box\">\r\n                            <label class=\"control-label col-sm-4\">研发模式：<span class=\"text-danger\">*</span></label>\r\n                            <div class=\"col-sm-6\">\r\n                                <v-select :value.sync=\"developModel\" :options=\"developModels\" placeholder=\"请选择\">\r\n                                </v-select>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <div class=\"form-group input-box\">\r\n                            <label class=\"control-label col-sm-4\">运营阶段：<span class=\"text-danger\">*</span></label>\r\n                            <div class=\"col-sm-6\">\r\n                                <v-select :value.sync=\"phase\" :options=\"phases\" placeholder=\"请选择\">\r\n                                </v-select>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-sm-12\">\r\n                    <div class=\"form-group mb0\">\r\n                        <label class=\"control-label col-sm-2\">项目负责人：</label>\r\n                        <div class=\"col-sm-9\">\r\n                            <typeahead\r\n                                :on-hit=\"addProjectManager\"\r\n                                :async=\"'/product/getUser/?name='\"\r\n                                :key=\"'name'\"\r\n                                placeholder=\"按回车键添加\"\r\n                            >\r\n                            </typeahead>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-sm-12\">\r\n                    <div class=\"form-group mb20\">\r\n                        <div class=\"col-sm-9 col-sm-offset-2\">\r\n                            <span class=\"selected-tag\" v-for=\"projectManager in projectManagers\" track-by=\"$index\">\r\n                                <span v-text=\"projectManager\"></span>\r\n                                <button type=\"button\" class=\"close\" @click=\"deleteUser($index, 'projectManagers')\">\r\n                                    <span aria-hidden=\"true\">×</span>\r\n                                </button>\r\n                            </span>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-sm-12\">\r\n                    <div class=\"form-group mb0\">\r\n                        <label class=\"control-label col-sm-2\">运营负责人：</label>\r\n                        <div class=\"col-sm-9\">\r\n                            <typeahead\r\n                                :on-hit=\"addOperationalManager\"\r\n                                :async=\"'/product/getUser/?name='\"\r\n                                :key=\"'name'\"\r\n                                placeholder=\"按回车键添加\"\r\n                            >\r\n                            </typeahead>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-sm-12\">\r\n                    <div class=\"form-group mb20\">\r\n                        <div class=\"col-sm-9 col-sm-offset-2\">\r\n                            <span class=\"selected-tag\" v-for=\"operationalManager in operationalManagers\" track-by=\"$index\">\r\n                                <span v-text=\"operationalManager\"></span>\r\n                                <button type=\"button\" class=\"close\" @click=\"deleteUser($index, 'operationalManagers')\">\r\n                                    <span aria-hidden=\"true\">×</span>\r\n                                </button>\r\n                            </span>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-sm-12\">\r\n                    <div class=\"form-group mb0\">\r\n                        <label class=\"control-label col-sm-2\">运维负责人：<span class=\"text-danger\">*</span></label>\r\n                        <div class=\"col-sm-9\">\r\n                            <typeahead\r\n                                :on-hit=\"addMaintainManager\"\r\n                                :async=\"'/product/getUser/?name='\"\r\n                                :key=\"'name'\"\r\n                                placeholder=\"按回车键添加\"\r\n                            >\r\n                            </typeahead>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-sm-12\">\r\n                    <div class=\"form-group mb20\">\r\n                        <div class=\"col-sm-9 col-sm-offset-2\">\r\n                            <span class=\"selected-tag\" v-for=\"maintainManager in maintainManagers\" track-by=\"$index\">\r\n                                <span v-text=\"maintainManager\"></span>\r\n                                <button type=\"button\" class=\"close\" @click=\"deleteUser($index, 'maintainManagers')\">\r\n                                    <span aria-hidden=\"true\">×</span>\r\n                                </button>\r\n                            </span>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-sm-12\">\r\n                    <div class=\"form-group mb0\">\r\n                        <label class=\"control-label col-sm-2\">市场负责人：</label>\r\n                        <div class=\"col-sm-9\">\r\n                            <typeahead\r\n                                :on-hit=\"addMarketManager\"\r\n                                :async=\"'/product/getUser/?name='\"\r\n                                :key=\"'name'\"\r\n                                placeholder=\"按回车键添加\"\r\n                            >\r\n                            </typeahead>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-sm-12\">\r\n                    <div class=\"form-group mb20\">\r\n                        <div class=\"col-sm-9 col-sm-offset-2\">\r\n                            <span class=\"selected-tag\" v-for=\"marketManager in marketManagers\" track-by=\"$index\">\r\n                                <span v-text=\"marketManager\"></span>\r\n                                <button type=\"button\" class=\"close\" @click=\"deleteUser($index, 'marketManagers')\">\r\n                                    <span aria-hidden=\"true\">×</span>\r\n                                </button>\r\n                            </span>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </form>\r\n        </div>\r\n        <div slot=\"modal-footer\" class=\"modal-footer\">\r\n            <button type=\"button\" class=\"btn btn-default\" @click=\"saveFn\" @click=\"saveFn\">保存</button>\r\n            <button type=\"button\" class=\"btn btn-default\" @click='editProductModal = false'>取消</button>\r\n        </div>\r\n    </modal>\r\n</template>\r\n\r\n<script>\r\nimport { modal, typeahead } from 'vue-strap'\r\nimport vSelect from '../../global/Select.vue'\r\nimport { departments, productTypes, phases, gameTypes, platformTypes, developModels, gameLists, productLevels } from '../../../vuex/getters.js'\r\n\r\nlet origin = {\r\n        editProductModal: false,\r\n        id: null,\r\n        businessType: '',\r\n        gameList: '',\r\n        childType: '',\r\n        department: '',\r\n        productName: '',\r\n        productLevel: '',\r\n        gameType: '',\r\n        platformType: '',\r\n        developModel: '',\r\n        phase: '',\r\n        projectManagers: [],\r\n        maintainManagers: [],\r\n        operationalManagers: [],\r\n        marketManagers: [],\r\n    },\r\n    init = Object.assign({}, origin);\r\n\r\nexport default {\r\n    data () {\r\n        return origin\r\n    },\r\n    methods: {\r\n\r\n        // 模糊搜索部门\r\n        addDepartment (items, targetVM) {\r\n            this.department = items\r\n            \r\n            targetVM.reset()\r\n        },\r\n\r\n        // 模糊搜索项目负责人\r\n        addProjectManager (items, targetVM) {\r\n            if ($.inArray(items, this.projectManagers) === -1 && items) {\r\n                this.projectManagers.push(items) \r\n            }\r\n            \r\n            targetVM.reset()\r\n        },\r\n\r\n        // 模糊搜索运营负责人\r\n        addOperationalManager (items, targetVM) {\r\n            if ($.inArray(items, this.operationalManagers) === -1 && items) {\r\n                this.operationalManagers.push(items) \r\n            }\r\n            \r\n            targetVM.reset()\r\n        },\r\n\r\n        // 模糊搜索运维负责人\r\n        addMaintainManager (items, targetVM) {\r\n            if ($.inArray(items, this.maintainManagers) === -1 && items) {\r\n                this.maintainManagers.push(items) \r\n            }\r\n            \r\n            targetVM.reset()\r\n        },\r\n\r\n        // 模糊搜索市场负责人\r\n        addMarketManager (items, targetVM) {\r\n            if ($.inArray(items, this.marketManagers) === -1 && items) {\r\n                this.marketManagers.push(items) \r\n            }\r\n            \r\n            targetVM.reset()\r\n        },\r\n\r\n        // 删除负责人\r\n        deleteUser (index, name) {\r\n            this[name].splice(index, 1)\r\n        },\r\n\r\n        // 修改产品\r\n        saveFn () {\r\n            this.$http({\r\n                url: '/product/operate/',\r\n                method: 'POST',\r\n                data: this.$data\r\n            })\r\n            .then(response => {\r\n                if (response.data.code === 200) {\r\n                    this.editProductModal = false\r\n                    this.$data = Object.assign({}, init)\r\n\r\n                    this.$dispatch('refresh')\r\n                    this.$dispatch('show-success')\r\n                } else {\r\n                    this.$dispatch('show-error', response.data.msg)\r\n                }\r\n            })\r\n        }\r\n    },\r\n    components: {\r\n        modal,\r\n        vSelect,\r\n        typeahead\r\n    },\r\n    vuex: {\r\n        getters: {\r\n            departments,\r\n            businessTypes: productTypes,\r\n            phases,\r\n            gameTypes,\r\n            platformTypes,\r\n            developModels,\r\n            gameLists,\r\n            productLevels\r\n        }\r\n    },\r\n    events: {\r\n        'showEditProduct' (param) {\r\n            this.$http({\r\n                url: '/product/queryById/?id=' + param,\r\n                method: 'GET'\r\n            })\r\n            .then(response => {\r\n                if (response.data.code === 200) {\r\n                    this.$data = Object.assign({}, origin, response.data)\r\n\r\n                    this.id = param\r\n                    this.editProductModal = true\r\n                } else {\r\n                    this.$dispatch('show-error')\r\n                }\r\n            })                \r\n        }\r\n    }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.selected-tag {\r\n    border: 1px solid #ccc;\r\n    border-radius: 4px;\r\n    height: 26px;\r\n    margin: 4px 1px 0 3px;\r\n    padding: 0 .25em;\r\n    float: left;\r\n    line-height: 1.7em;\r\n    color: #147688;\r\n    background-color: #d7f3f9;\r\n    border-color: #91ddec;\r\n}\r\n\r\n.selected-tag .close {\r\n    float: none;\r\n    margin-right: 0;\r\n    font-size: 20px;\r\n    -webkit-appearance: none;\r\n    padding: 0;\r\n    cursor: pointer;\r\n    background: 0 0;\r\n    border: 0;\r\n    font-weight: 700;\r\n    line-height: 1;\r\n    color: #000;\r\n    text-shadow: 0 1px 0 #fff;\r\n    filter: alpha(opacity=20);\r\n    opacity: .2;\r\n}\r\n\r\n.selected-tag .close:hover {\r\n    color: #000;\r\n    filter: alpha(opacity=50);\r\n    opacity: .5;\r\n}\r\n</style>"],"sourceRoot":"webpack://"}]);
 	
 	// exports
 
 
 /***/ },
-/* 219 */
+/* 224 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	/* WEBPACK VAR INJECTION */(function($) {'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -2663,103 +2754,248 @@ webpackJsonp([7],Array(32).concat([
 	
 	var _Select2 = _interopRequireDefault(_Select);
 	
+	var _getters = __webpack_require__(111);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	// <!-- 编辑产品 -->
+	var origin = {
+	    editProductModal: false,
+	    id: null,
+	    businessType: '',
+	    gameList: '',
+	    childType: '',
+	    department: '',
+	    productName: '',
+	    productLevel: '',
+	    gameType: '',
+	    platformType: '',
+	    developModel: '',
+	    phase: '',
+	    projectManagers: [],
+	    maintainManagers: [],
+	    operationalManagers: [],
+	    marketManagers: []
+	},
+	    init = (0, _assign2.default)({}, origin); // <!-- 修改产品 -->
 	// <template>
 	//     <modal :show.sync="editProductModal" effect="fade" width="850px">
 	//         <div slot="modal-header" class="modal-header">
-	//             <h4 class="modal-title">编辑产品</h4>
+	//             <h4 class="modal-title">修改产品</h4>
 	//         </div>
-	//         <div slot="modal-body" class="modal-body">
+	//         <div slot="modal-body" class="modal-body mh500">
 	//             <form class="form-horizontal clearfix">
-	//                 <div class="col-sm-6">
-	//                     <div class="form-group">
-	//                         <label class="control-label col-sm-4">产品名称：</label>
-	//                         <div class="col-sm-8">
-	//                             <input type="text" class="form-control" value="">
-	//                         </div>
-	//                     </div>
+	//                 <div class="col-sm-12">
 	//                     <div class="form-group input-box">
-	//                         <label class="control-label col-sm-4">业务类型：</label>
-	//                         <div class="col-sm-8">
+	//                         <label class="control-label col-sm-2">业务类型：<span class="text-danger">*</span></label>
+	//                         <div class="col-sm-9">
 	//                             <v-select :value.sync="businessType" :options="businessTypes" placeholder="请选择">
 	//                             </v-select>
 	//                         </div>
 	//                     </div>
-	//                     <div class="form-group input-box">
-	//                         <label class="control-label col-sm-4">游戏类型：</label>
-	//                         <div class="col-sm-8">
-	//                             <v-select :value.sync="gameType" :options="gameTypes" placeholder="请选择">
-	//                             </v-select>
+	//                 </div>
+	//                 <div class="col-sm-12" v-show="businessType === '1'">
+	//                     <div class="col-sm-6" >
+	//                         <div class="form-group input-box">
+	//                             <label class="control-label col-sm-4">游戏列表：<span class="text-danger">*</span></label>
+	//                             <div class="col-sm-6">
+	//                                 <v-select :value.sync="gameList" :options="gameLists" placeholder="请选择">
+	//                                 </v-select>
+	//                             </div>
 	//                         </div>
 	//                     </div>
-	//                     <div class="form-group input-box">
-	//                         <label class="control-label col-sm-4">平台类型：</label>
-	//                         <div class="col-sm-8">
-	//                             <v-select :value.sync="platformType" :options="platformTypes" placeholder="请选择">
-	//                             </v-select>
-	//                         </div>
-	//                     </div>
-	//                     <div class="form-group input-box">
-	//                         <label class="control-label col-sm-4">研发模式：</label>
-	//                         <div class="col-sm-8">
-	//                             <v-select :value.sync="developModel" :options="developModels" placeholder="请选择">
-	//                             </v-select>
-	//                         </div>
-	//                     </div>
-	//                     <div class="form-group input-box">
-	//                         <label class="control-label col-sm-4">运营阶段：</label>
-	//                         <div class="col-sm-8">
-	//                             <v-select :value.sync="phase" :options="phases" placeholder="请选择">
-	//                             </v-select>
+	//                     <div class="col-sm-6">
+	//                         <div class="form-group">
+	//                             <label class="control-label col-sm-4">区域名称：<span class="text-danger">*</span></label>
+	//                             <div class="col-sm-6">
+	//                                 <input type="text" class="form-control" v-model="childType">
+	//                             </div>
 	//                         </div>
 	//                     </div>
 	//                 </div>
-	//                 <div class="col-sm-6">
-	//                     <div class="form-group input-box">
-	//                         <label class="control-label col-sm-4">部门：</label>
-	//                         <div class="col-sm-8">
-	//                             <v-select :value.sync="department" :options="departments" placeholder="请选择">
-	//                             </v-select>
-	//                         </div>
-	//                     </div>
+	//                 <div class="col-sm-12" v-show="businessType === '2'">
 	//                     <div class="form-group">
-	//                         <label class="control-label col-sm-4">项目负责人：</label>
-	//                         <div class="col-sm-8">
-	//                             <input type="text" class="form-control" value="">
+	//                         <label class="control-label col-sm-2">产品名称：<span class="text-danger">*</span></label>
+	//                         <div class="col-sm-9">
+	//                             <input type="text" class="form-control" v-model="productName">
 	//                         </div>
 	//                     </div>
-	//                     <div class="form-group">
-	//                         <label class="control-label col-sm-4">运营负责人：</label>
-	//                         <div class="col-sm-8">
-	//                             <input type="text" class="form-control" value="">
+	//                 </div>
+	//                 <div class="col-sm-12">
+	//                     <div class="col-sm-6">
+	//                         <div class="form-group input-box">
+	//                             <label class="control-label col-sm-4">部门：<span class="text-danger">*</span></label>
+	//                             <div class="col-sm-6">
+	//                                 <typeahead
+	//                                     :on-hit="addDepartment"
+	//                                     :async="'/product/getDepartment/?name='"
+	//                                     :key="'name'"
+	//                                     placeholder="按回车键添加"
+	//                                 >
+	//                                 </typeahead>
+	//                                 <span class="selected-tag" v-show="department !== ''">
+	//                                     <span v-text="department"></span>
+	//                                 </span>
+	//                             </div>
 	//                         </div>
 	//                     </div>
-	//                     <div class="form-group">
-	//                         <label class="control-label col-sm-4">运维负责人：</label>
-	//                         <div class="col-sm-8">
-	//                             <input type="text" class="form-control" value="">
+	//                     <div class="col-sm-6">
+	//                         <div class="form-group input-box">
+	//                             <label class="control-label col-sm-4">产品级别：<span class="text-danger">*</span></label>
+	//                             <div class="col-sm-6">
+	//                                 <v-select :value.sync="productLevel" :options="productLevels" placeholder="请选择">
+	//                                 </v-select>
+	//                             </div>
 	//                         </div>
 	//                     </div>
-	//                     <div class="form-group">
-	//                         <label class="control-label col-sm-4">市场负责人：</label>
-	//                         <div class="col-sm-8">
-	//                             <input type="text" class="form-control" value="">
+	//                 </div>
+	//                 <div class="col-sm-12" v-show="businessType === '1'">
+	//                     <div class="col-sm-6">
+	//                         <div class="form-group input-box">
+	//                             <label class="control-label col-sm-4">游戏类型：<span class="text-danger">*</span></label>
+	//                             <div class="col-sm-6">
+	//                                 <v-select :value.sync="gameType" :options="gameTypes" placeholder="请选择">
+	//                                 </v-select>
+	//                             </div>
 	//                         </div>
 	//                     </div>
-	//                     <div class="form-group input-box">
-	//                         <label class="control-label col-sm-4">产品级别：</label>
-	//                         <div class="col-sm-8">
-	//                             <v-select :value.sync="productLevel" :options="productLevels" placeholder="请选择">
-	//                             </v-select>
+	//                     <div class="col-sm-6">
+	//                         <div class="form-group input-box">
+	//                             <label class="control-label col-sm-4">平台类型：<span class="text-danger">*</span></label>
+	//                             <div class="col-sm-6">
+	//                                 <v-select :value.sync="platformType" :options="platformTypes" placeholder="请选择">
+	//                                 </v-select>
+	//                             </div>
+	//                         </div>
+	//                     </div>
+	//                 </div>
+	//                 <div class="col-sm-12" v-show="businessType === '1'">
+	//                     <div class="col-sm-6">
+	//                         <div class="form-group input-box">
+	//                             <label class="control-label col-sm-4">研发模式：<span class="text-danger">*</span></label>
+	//                             <div class="col-sm-6">
+	//                                 <v-select :value.sync="developModel" :options="developModels" placeholder="请选择">
+	//                                 </v-select>
+	//                             </div>
+	//                         </div>
+	//                     </div>
+	//                     <div class="col-sm-6">
+	//                         <div class="form-group input-box">
+	//                             <label class="control-label col-sm-4">运营阶段：<span class="text-danger">*</span></label>
+	//                             <div class="col-sm-6">
+	//                                 <v-select :value.sync="phase" :options="phases" placeholder="请选择">
+	//                                 </v-select>
+	//                             </div>
+	//                         </div>
+	//                     </div>
+	//                 </div>
+	//                 <div class="col-sm-12">
+	//                     <div class="form-group mb0">
+	//                         <label class="control-label col-sm-2">项目负责人：</label>
+	//                         <div class="col-sm-9">
+	//                             <typeahead
+	//                                 :on-hit="addProjectManager"
+	//                                 :async="'/product/getUser/?name='"
+	//                                 :key="'name'"
+	//                                 placeholder="按回车键添加"
+	//                             >
+	//                             </typeahead>
+	//                         </div>
+	//                     </div>
+	//                 </div>
+	//                 <div class="col-sm-12">
+	//                     <div class="form-group mb20">
+	//                         <div class="col-sm-9 col-sm-offset-2">
+	//                             <span class="selected-tag" v-for="projectManager in projectManagers" track-by="$index">
+	//                                 <span v-text="projectManager"></span>
+	//                                 <button type="button" class="close" @click="deleteUser($index, 'projectManagers')">
+	//                                     <span aria-hidden="true">×</span>
+	//                                 </button>
+	//                             </span>
+	//                         </div>
+	//                     </div>
+	//                 </div>
+	//                 <div class="col-sm-12">
+	//                     <div class="form-group mb0">
+	//                         <label class="control-label col-sm-2">运营负责人：</label>
+	//                         <div class="col-sm-9">
+	//                             <typeahead
+	//                                 :on-hit="addOperationalManager"
+	//                                 :async="'/product/getUser/?name='"
+	//                                 :key="'name'"
+	//                                 placeholder="按回车键添加"
+	//                             >
+	//                             </typeahead>
+	//                         </div>
+	//                     </div>
+	//                 </div>
+	//                 <div class="col-sm-12">
+	//                     <div class="form-group mb20">
+	//                         <div class="col-sm-9 col-sm-offset-2">
+	//                             <span class="selected-tag" v-for="operationalManager in operationalManagers" track-by="$index">
+	//                                 <span v-text="operationalManager"></span>
+	//                                 <button type="button" class="close" @click="deleteUser($index, 'operationalManagers')">
+	//                                     <span aria-hidden="true">×</span>
+	//                                 </button>
+	//                             </span>
+	//                         </div>
+	//                     </div>
+	//                 </div>
+	//                 <div class="col-sm-12">
+	//                     <div class="form-group mb0">
+	//                         <label class="control-label col-sm-2">运维负责人：<span class="text-danger">*</span></label>
+	//                         <div class="col-sm-9">
+	//                             <typeahead
+	//                                 :on-hit="addMaintainManager"
+	//                                 :async="'/product/getUser/?name='"
+	//                                 :key="'name'"
+	//                                 placeholder="按回车键添加"
+	//                             >
+	//                             </typeahead>
+	//                         </div>
+	//                     </div>
+	//                 </div>
+	//                 <div class="col-sm-12">
+	//                     <div class="form-group mb20">
+	//                         <div class="col-sm-9 col-sm-offset-2">
+	//                             <span class="selected-tag" v-for="maintainManager in maintainManagers" track-by="$index">
+	//                                 <span v-text="maintainManager"></span>
+	//                                 <button type="button" class="close" @click="deleteUser($index, 'maintainManagers')">
+	//                                     <span aria-hidden="true">×</span>
+	//                                 </button>
+	//                             </span>
+	//                         </div>
+	//                     </div>
+	//                 </div>
+	//                 <div class="col-sm-12">
+	//                     <div class="form-group mb0">
+	//                         <label class="control-label col-sm-2">市场负责人：</label>
+	//                         <div class="col-sm-9">
+	//                             <typeahead
+	//                                 :on-hit="addMarketManager"
+	//                                 :async="'/product/getUser/?name='"
+	//                                 :key="'name'"
+	//                                 placeholder="按回车键添加"
+	//                             >
+	//                             </typeahead>
+	//                         </div>
+	//                     </div>
+	//                 </div>
+	//                 <div class="col-sm-12">
+	//                     <div class="form-group mb20">
+	//                         <div class="col-sm-9 col-sm-offset-2">
+	//                             <span class="selected-tag" v-for="marketManager in marketManagers" track-by="$index">
+	//                                 <span v-text="marketManager"></span>
+	//                                 <button type="button" class="close" @click="deleteUser($index, 'marketManagers')">
+	//                                     <span aria-hidden="true">×</span>
+	//                                 </button>
+	//                             </span>
 	//                         </div>
 	//                     </div>
 	//                 </div>
 	//             </form>
 	//         </div>
 	//         <div slot="modal-footer" class="modal-footer">
-	//             <button type="button" class="btn btn-default">保存</button>
+	//             <button type="button" class="btn btn-default" @click="saveFn" @click="saveFn">保存</button>
 	//             <button type="button" class="btn btn-default" @click='editProductModal = false'>取消</button>
 	//         </div>
 	//     </modal>
@@ -2768,58 +3004,179 @@ webpackJsonp([7],Array(32).concat([
 	// <script>
 	
 	
-	var origin = {
-	    editProductModal: false,
-	    departments: [],
-	    businessTypes: [],
-	    gameTypes: [],
-	    platformTypes: [],
-	    developModels: [],
-	    phases: [],
-	    productLevels: [],
-	    department: '',
-	    businessType: '',
-	    gameType: '',
-	    platformType: '',
-	    developModel: '',
-	    phase: '',
-	    productLevel: ''
-	},
-	    init = (0, _assign2.default)({}, origin);
-	
 	exports.default = {
 	    data: function data() {
 	        return origin;
 	    },
 	
-	    methods: {},
+	    methods: {
+	
+	        // 模糊搜索部门
+	
+	        addDepartment: function addDepartment(items, targetVM) {
+	            this.department = items;
+	
+	            targetVM.reset();
+	        },
+	
+	
+	        // 模糊搜索项目负责人
+	        addProjectManager: function addProjectManager(items, targetVM) {
+	            if ($.inArray(items, this.projectManagers) === -1 && items) {
+	                this.projectManagers.push(items);
+	            }
+	
+	            targetVM.reset();
+	        },
+	
+	
+	        // 模糊搜索运营负责人
+	        addOperationalManager: function addOperationalManager(items, targetVM) {
+	            if ($.inArray(items, this.operationalManagers) === -1 && items) {
+	                this.operationalManagers.push(items);
+	            }
+	
+	            targetVM.reset();
+	        },
+	
+	
+	        // 模糊搜索运维负责人
+	        addMaintainManager: function addMaintainManager(items, targetVM) {
+	            if ($.inArray(items, this.maintainManagers) === -1 && items) {
+	                this.maintainManagers.push(items);
+	            }
+	
+	            targetVM.reset();
+	        },
+	
+	
+	        // 模糊搜索市场负责人
+	        addMarketManager: function addMarketManager(items, targetVM) {
+	            if ($.inArray(items, this.marketManagers) === -1 && items) {
+	                this.marketManagers.push(items);
+	            }
+	
+	            targetVM.reset();
+	        },
+	
+	
+	        // 删除负责人
+	        deleteUser: function deleteUser(index, name) {
+	            this[name].splice(index, 1);
+	        },
+	
+	
+	        // 修改产品
+	        saveFn: function saveFn() {
+	            var _this = this;
+	
+	            this.$http({
+	                url: '/product/operate/',
+	                method: 'POST',
+	                data: this.$data
+	            }).then(function (response) {
+	                if (response.data.code === 200) {
+	                    _this.editProductModal = false;
+	                    _this.$data = (0, _assign2.default)({}, init);
+	
+	                    _this.$dispatch('refresh');
+	                    _this.$dispatch('show-success');
+	                } else {
+	                    _this.$dispatch('show-error', response.data.msg);
+	                }
+	            });
+	        }
+	    },
 	    components: {
 	        modal: _vueStrap.modal,
-	        vSelect: _Select2.default
+	        vSelect: _Select2.default,
+	        typeahead: _vueStrap.typeahead
+	    },
+	    vuex: {
+	        getters: {
+	            departments: _getters.departments,
+	            businessTypes: _getters.productTypes,
+	            phases: _getters.phases,
+	            gameTypes: _getters.gameTypes,
+	            platformTypes: _getters.platformTypes,
+	            developModels: _getters.developModels,
+	            gameLists: _getters.gameLists,
+	            productLevels: _getters.productLevels
+	        }
 	    },
 	    events: {
-	        'showEditProduct': function showEditProduct() {
-	            this.editProductModal = true;
+	        'showEditProduct': function showEditProduct(param) {
+	            var _this2 = this;
+	
+	            this.$http({
+	                url: '/product/queryById/?id=' + param,
+	                method: 'GET'
+	            }).then(function (response) {
+	                if (response.data.code === 200) {
+	                    _this2.$data = (0, _assign2.default)({}, origin, response.data);
+	
+	                    _this2.id = param;
+	                    _this2.editProductModal = true;
+	                } else {
+	                    _this2.$dispatch('show-error');
+	                }
+	            });
 	        }
 	    }
 	};
 	// </script>
 	//
 	// <style scoped>
+	// .selected-tag {
+	//     border: 1px solid #ccc;
+	//     border-radius: 4px;
+	//     height: 26px;
+	//     margin: 4px 1px 0 3px;
+	//     padding: 0 .25em;
+	//     float: left;
+	//     line-height: 1.7em;
+	//     color: #147688;
+	//     background-color: #d7f3f9;
+	//     border-color: #91ddec;
+	// }
+	//
+	// .selected-tag .close {
+	//     float: none;
+	//     margin-right: 0;
+	//     font-size: 20px;
+	//     -webkit-appearance: none;
+	//     padding: 0;
+	//     cursor: pointer;
+	//     background: 0 0;
+	//     border: 0;
+	//     font-weight: 700;
+	//     line-height: 1;
+	//     color: #000;
+	//     text-shadow: 0 1px 0 #fff;
+	//     filter: alpha(opacity=20);
+	//     opacity: .2;
+	// }
+	//
+	// .selected-tag .close:hover {
+	//     color: #000;
+	//     filter: alpha(opacity=50);
+	//     opacity: .5;
+	// }
 	// </style>
 	/* generated by vue-loader */
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 220 */
+/* 225 */
 /***/ function(module, exports) {
 
-	module.exports = "\n    <modal :show.sync=\"editProductModal\" effect=\"fade\" width=\"850px\" _v-61c96016=\"\">\n        <div slot=\"modal-header\" class=\"modal-header\" _v-61c96016=\"\">\n            <h4 class=\"modal-title\" _v-61c96016=\"\">编辑产品</h4>\n        </div>\n        <div slot=\"modal-body\" class=\"modal-body\" _v-61c96016=\"\">\n            <form class=\"form-horizontal clearfix\" _v-61c96016=\"\">\n                <div class=\"col-sm-6\" _v-61c96016=\"\">\n                    <div class=\"form-group\" _v-61c96016=\"\">\n                        <label class=\"control-label col-sm-4\" _v-61c96016=\"\">产品名称：</label>\n                        <div class=\"col-sm-8\" _v-61c96016=\"\">\n                            <input type=\"text\" class=\"form-control\" value=\"\" _v-61c96016=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group input-box\" _v-61c96016=\"\">\n                        <label class=\"control-label col-sm-4\" _v-61c96016=\"\">业务类型：</label>\n                        <div class=\"col-sm-8\" _v-61c96016=\"\">\n                            <v-select :value.sync=\"businessType\" :options=\"businessTypes\" placeholder=\"请选择\" _v-61c96016=\"\">\n                            </v-select>\n                        </div>\n                    </div>\n                    <div class=\"form-group input-box\" _v-61c96016=\"\">\n                        <label class=\"control-label col-sm-4\" _v-61c96016=\"\">游戏类型：</label>\n                        <div class=\"col-sm-8\" _v-61c96016=\"\">\n                            <v-select :value.sync=\"gameType\" :options=\"gameTypes\" placeholder=\"请选择\" _v-61c96016=\"\">\n                            </v-select>\n                        </div>\n                    </div>\n                    <div class=\"form-group input-box\" _v-61c96016=\"\">\n                        <label class=\"control-label col-sm-4\" _v-61c96016=\"\">平台类型：</label>\n                        <div class=\"col-sm-8\" _v-61c96016=\"\">\n                            <v-select :value.sync=\"platformType\" :options=\"platformTypes\" placeholder=\"请选择\" _v-61c96016=\"\">\n                            </v-select>\n                        </div>\n                    </div>\n                    <div class=\"form-group input-box\" _v-61c96016=\"\">\n                        <label class=\"control-label col-sm-4\" _v-61c96016=\"\">研发模式：</label>\n                        <div class=\"col-sm-8\" _v-61c96016=\"\">\n                            <v-select :value.sync=\"developModel\" :options=\"developModels\" placeholder=\"请选择\" _v-61c96016=\"\">\n                            </v-select>\n                        </div>\n                    </div>\n                    <div class=\"form-group input-box\" _v-61c96016=\"\">\n                        <label class=\"control-label col-sm-4\" _v-61c96016=\"\">运营阶段：</label>\n                        <div class=\"col-sm-8\" _v-61c96016=\"\">\n                            <v-select :value.sync=\"phase\" :options=\"phases\" placeholder=\"请选择\" _v-61c96016=\"\">\n                            </v-select>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-sm-6\" _v-61c96016=\"\">\n                    <div class=\"form-group input-box\" _v-61c96016=\"\">\n                        <label class=\"control-label col-sm-4\" _v-61c96016=\"\">部门：</label>\n                        <div class=\"col-sm-8\" _v-61c96016=\"\">\n                            <v-select :value.sync=\"department\" :options=\"departments\" placeholder=\"请选择\" _v-61c96016=\"\">\n                            </v-select>\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-61c96016=\"\">\n                        <label class=\"control-label col-sm-4\" _v-61c96016=\"\">项目负责人：</label>\n                        <div class=\"col-sm-8\" _v-61c96016=\"\">\n                            <input type=\"text\" class=\"form-control\" value=\"\" _v-61c96016=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-61c96016=\"\">\n                        <label class=\"control-label col-sm-4\" _v-61c96016=\"\">运营负责人：</label>\n                        <div class=\"col-sm-8\" _v-61c96016=\"\">\n                            <input type=\"text\" class=\"form-control\" value=\"\" _v-61c96016=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-61c96016=\"\">\n                        <label class=\"control-label col-sm-4\" _v-61c96016=\"\">运维负责人：</label>\n                        <div class=\"col-sm-8\" _v-61c96016=\"\">\n                            <input type=\"text\" class=\"form-control\" value=\"\" _v-61c96016=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\" _v-61c96016=\"\">\n                        <label class=\"control-label col-sm-4\" _v-61c96016=\"\">市场负责人：</label>\n                        <div class=\"col-sm-8\" _v-61c96016=\"\">\n                            <input type=\"text\" class=\"form-control\" value=\"\" _v-61c96016=\"\">\n                        </div>\n                    </div>\n                    <div class=\"form-group input-box\" _v-61c96016=\"\">\n                        <label class=\"control-label col-sm-4\" _v-61c96016=\"\">产品级别：</label>\n                        <div class=\"col-sm-8\" _v-61c96016=\"\">\n                            <v-select :value.sync=\"productLevel\" :options=\"productLevels\" placeholder=\"请选择\" _v-61c96016=\"\">\n                            </v-select>\n                        </div>\n                    </div>\n                </div>\n            </form>\n        </div>\n        <div slot=\"modal-footer\" class=\"modal-footer\" _v-61c96016=\"\">\n            <button type=\"button\" class=\"btn btn-default\" _v-61c96016=\"\">保存</button>\n            <button type=\"button\" class=\"btn btn-default\" @click=\"editProductModal = false\" _v-61c96016=\"\">取消</button>\n        </div>\n    </modal>\n";
+	module.exports = "\n    <modal :show.sync=\"editProductModal\" effect=\"fade\" width=\"850px\" _v-61c96016=\"\">\n        <div slot=\"modal-header\" class=\"modal-header\" _v-61c96016=\"\">\n            <h4 class=\"modal-title\" _v-61c96016=\"\">修改产品</h4>\n        </div>\n        <div slot=\"modal-body\" class=\"modal-body mh500\" _v-61c96016=\"\">\n            <form class=\"form-horizontal clearfix\" _v-61c96016=\"\">\n                <div class=\"col-sm-12\" _v-61c96016=\"\">\n                    <div class=\"form-group input-box\" _v-61c96016=\"\">\n                        <label class=\"control-label col-sm-2\" _v-61c96016=\"\">业务类型：<span class=\"text-danger\" _v-61c96016=\"\">*</span></label>\n                        <div class=\"col-sm-9\" _v-61c96016=\"\">\n                            <v-select :value.sync=\"businessType\" :options=\"businessTypes\" placeholder=\"请选择\" _v-61c96016=\"\">\n                            </v-select>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-sm-12\" v-show=\"businessType === '1'\" _v-61c96016=\"\">\n                    <div class=\"col-sm-6\" _v-61c96016=\"\">\n                        <div class=\"form-group input-box\" _v-61c96016=\"\">\n                            <label class=\"control-label col-sm-4\" _v-61c96016=\"\">游戏列表：<span class=\"text-danger\" _v-61c96016=\"\">*</span></label>\n                            <div class=\"col-sm-6\" _v-61c96016=\"\">\n                                <v-select :value.sync=\"gameList\" :options=\"gameLists\" placeholder=\"请选择\" _v-61c96016=\"\">\n                                </v-select>\n                            </div>\n                        </div>\n                    </div>\n                    <div class=\"col-sm-6\" _v-61c96016=\"\">\n                        <div class=\"form-group\" _v-61c96016=\"\">\n                            <label class=\"control-label col-sm-4\" _v-61c96016=\"\">区域名称：<span class=\"text-danger\" _v-61c96016=\"\">*</span></label>\n                            <div class=\"col-sm-6\" _v-61c96016=\"\">\n                                <input type=\"text\" class=\"form-control\" v-model=\"childType\" _v-61c96016=\"\">\n                            </div>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-sm-12\" v-show=\"businessType === '2'\" _v-61c96016=\"\">\n                    <div class=\"form-group\" _v-61c96016=\"\">\n                        <label class=\"control-label col-sm-2\" _v-61c96016=\"\">产品名称：<span class=\"text-danger\" _v-61c96016=\"\">*</span></label>\n                        <div class=\"col-sm-9\" _v-61c96016=\"\">\n                            <input type=\"text\" class=\"form-control\" v-model=\"productName\" _v-61c96016=\"\">\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-sm-12\" _v-61c96016=\"\">\n                    <div class=\"col-sm-6\" _v-61c96016=\"\">\n                        <div class=\"form-group input-box\" _v-61c96016=\"\">\n                            <label class=\"control-label col-sm-4\" _v-61c96016=\"\">部门：<span class=\"text-danger\" _v-61c96016=\"\">*</span></label>\n                            <div class=\"col-sm-6\" _v-61c96016=\"\">\n                                <typeahead :on-hit=\"addDepartment\" :async=\"'/product/getDepartment/?name='\" :key=\"'name'\" placeholder=\"按回车键添加\" _v-61c96016=\"\">\n                                </typeahead>\n                                <span class=\"selected-tag\" v-show=\"department !== ''\" _v-61c96016=\"\">\n                                    <span v-text=\"department\" _v-61c96016=\"\"></span>\n                                </span>\n                            </div>\n                        </div>\n                    </div>\n                    <div class=\"col-sm-6\" _v-61c96016=\"\">\n                        <div class=\"form-group input-box\" _v-61c96016=\"\">\n                            <label class=\"control-label col-sm-4\" _v-61c96016=\"\">产品级别：<span class=\"text-danger\" _v-61c96016=\"\">*</span></label>\n                            <div class=\"col-sm-6\" _v-61c96016=\"\">\n                                <v-select :value.sync=\"productLevel\" :options=\"productLevels\" placeholder=\"请选择\" _v-61c96016=\"\">\n                                </v-select>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-sm-12\" v-show=\"businessType === '1'\" _v-61c96016=\"\">\n                    <div class=\"col-sm-6\" _v-61c96016=\"\">\n                        <div class=\"form-group input-box\" _v-61c96016=\"\">\n                            <label class=\"control-label col-sm-4\" _v-61c96016=\"\">游戏类型：<span class=\"text-danger\" _v-61c96016=\"\">*</span></label>\n                            <div class=\"col-sm-6\" _v-61c96016=\"\">\n                                <v-select :value.sync=\"gameType\" :options=\"gameTypes\" placeholder=\"请选择\" _v-61c96016=\"\">\n                                </v-select>\n                            </div>\n                        </div>\n                    </div>\n                    <div class=\"col-sm-6\" _v-61c96016=\"\">\n                        <div class=\"form-group input-box\" _v-61c96016=\"\">\n                            <label class=\"control-label col-sm-4\" _v-61c96016=\"\">平台类型：<span class=\"text-danger\" _v-61c96016=\"\">*</span></label>\n                            <div class=\"col-sm-6\" _v-61c96016=\"\">\n                                <v-select :value.sync=\"platformType\" :options=\"platformTypes\" placeholder=\"请选择\" _v-61c96016=\"\">\n                                </v-select>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-sm-12\" v-show=\"businessType === '1'\" _v-61c96016=\"\">\n                    <div class=\"col-sm-6\" _v-61c96016=\"\">\n                        <div class=\"form-group input-box\" _v-61c96016=\"\">\n                            <label class=\"control-label col-sm-4\" _v-61c96016=\"\">研发模式：<span class=\"text-danger\" _v-61c96016=\"\">*</span></label>\n                            <div class=\"col-sm-6\" _v-61c96016=\"\">\n                                <v-select :value.sync=\"developModel\" :options=\"developModels\" placeholder=\"请选择\" _v-61c96016=\"\">\n                                </v-select>\n                            </div>\n                        </div>\n                    </div>\n                    <div class=\"col-sm-6\" _v-61c96016=\"\">\n                        <div class=\"form-group input-box\" _v-61c96016=\"\">\n                            <label class=\"control-label col-sm-4\" _v-61c96016=\"\">运营阶段：<span class=\"text-danger\" _v-61c96016=\"\">*</span></label>\n                            <div class=\"col-sm-6\" _v-61c96016=\"\">\n                                <v-select :value.sync=\"phase\" :options=\"phases\" placeholder=\"请选择\" _v-61c96016=\"\">\n                                </v-select>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-sm-12\" _v-61c96016=\"\">\n                    <div class=\"form-group mb0\" _v-61c96016=\"\">\n                        <label class=\"control-label col-sm-2\" _v-61c96016=\"\">项目负责人：</label>\n                        <div class=\"col-sm-9\" _v-61c96016=\"\">\n                            <typeahead :on-hit=\"addProjectManager\" :async=\"'/product/getUser/?name='\" :key=\"'name'\" placeholder=\"按回车键添加\" _v-61c96016=\"\">\n                            </typeahead>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-sm-12\" _v-61c96016=\"\">\n                    <div class=\"form-group mb20\" _v-61c96016=\"\">\n                        <div class=\"col-sm-9 col-sm-offset-2\" _v-61c96016=\"\">\n                            <span class=\"selected-tag\" v-for=\"projectManager in projectManagers\" track-by=\"$index\" _v-61c96016=\"\">\n                                <span v-text=\"projectManager\" _v-61c96016=\"\"></span>\n                                <button type=\"button\" class=\"close\" @click=\"deleteUser($index, 'projectManagers')\" _v-61c96016=\"\">\n                                    <span aria-hidden=\"true\" _v-61c96016=\"\">×</span>\n                                </button>\n                            </span>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-sm-12\" _v-61c96016=\"\">\n                    <div class=\"form-group mb0\" _v-61c96016=\"\">\n                        <label class=\"control-label col-sm-2\" _v-61c96016=\"\">运营负责人：</label>\n                        <div class=\"col-sm-9\" _v-61c96016=\"\">\n                            <typeahead :on-hit=\"addOperationalManager\" :async=\"'/product/getUser/?name='\" :key=\"'name'\" placeholder=\"按回车键添加\" _v-61c96016=\"\">\n                            </typeahead>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-sm-12\" _v-61c96016=\"\">\n                    <div class=\"form-group mb20\" _v-61c96016=\"\">\n                        <div class=\"col-sm-9 col-sm-offset-2\" _v-61c96016=\"\">\n                            <span class=\"selected-tag\" v-for=\"operationalManager in operationalManagers\" track-by=\"$index\" _v-61c96016=\"\">\n                                <span v-text=\"operationalManager\" _v-61c96016=\"\"></span>\n                                <button type=\"button\" class=\"close\" @click=\"deleteUser($index, 'operationalManagers')\" _v-61c96016=\"\">\n                                    <span aria-hidden=\"true\" _v-61c96016=\"\">×</span>\n                                </button>\n                            </span>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-sm-12\" _v-61c96016=\"\">\n                    <div class=\"form-group mb0\" _v-61c96016=\"\">\n                        <label class=\"control-label col-sm-2\" _v-61c96016=\"\">运维负责人：<span class=\"text-danger\" _v-61c96016=\"\">*</span></label>\n                        <div class=\"col-sm-9\" _v-61c96016=\"\">\n                            <typeahead :on-hit=\"addMaintainManager\" :async=\"'/product/getUser/?name='\" :key=\"'name'\" placeholder=\"按回车键添加\" _v-61c96016=\"\">\n                            </typeahead>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-sm-12\" _v-61c96016=\"\">\n                    <div class=\"form-group mb20\" _v-61c96016=\"\">\n                        <div class=\"col-sm-9 col-sm-offset-2\" _v-61c96016=\"\">\n                            <span class=\"selected-tag\" v-for=\"maintainManager in maintainManagers\" track-by=\"$index\" _v-61c96016=\"\">\n                                <span v-text=\"maintainManager\" _v-61c96016=\"\"></span>\n                                <button type=\"button\" class=\"close\" @click=\"deleteUser($index, 'maintainManagers')\" _v-61c96016=\"\">\n                                    <span aria-hidden=\"true\" _v-61c96016=\"\">×</span>\n                                </button>\n                            </span>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-sm-12\" _v-61c96016=\"\">\n                    <div class=\"form-group mb0\" _v-61c96016=\"\">\n                        <label class=\"control-label col-sm-2\" _v-61c96016=\"\">市场负责人：</label>\n                        <div class=\"col-sm-9\" _v-61c96016=\"\">\n                            <typeahead :on-hit=\"addMarketManager\" :async=\"'/product/getUser/?name='\" :key=\"'name'\" placeholder=\"按回车键添加\" _v-61c96016=\"\">\n                            </typeahead>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-sm-12\" _v-61c96016=\"\">\n                    <div class=\"form-group mb20\" _v-61c96016=\"\">\n                        <div class=\"col-sm-9 col-sm-offset-2\" _v-61c96016=\"\">\n                            <span class=\"selected-tag\" v-for=\"marketManager in marketManagers\" track-by=\"$index\" _v-61c96016=\"\">\n                                <span v-text=\"marketManager\" _v-61c96016=\"\"></span>\n                                <button type=\"button\" class=\"close\" @click=\"deleteUser($index, 'marketManagers')\" _v-61c96016=\"\">\n                                    <span aria-hidden=\"true\" _v-61c96016=\"\">×</span>\n                                </button>\n                            </span>\n                        </div>\n                    </div>\n                </div>\n            </form>\n        </div>\n        <div slot=\"modal-footer\" class=\"modal-footer\" _v-61c96016=\"\">\n            <button type=\"button\" class=\"btn btn-default\" @click=\"saveFn\" _v-61c96016=\"\">保存</button>\n            <button type=\"button\" class=\"btn btn-default\" @click=\"editProductModal = false\" _v-61c96016=\"\">取消</button>\n        </div>\n    </modal>\n";
 
 /***/ },
-/* 221 */
+/* 226 */
 /***/ function(module, exports) {
 
-	module.exports = "\n    <div _v-aac41df2=\"\">\n        <form class=\"form-horizontal clearfix form-search\" _v-aac41df2=\"\">\n            <div class=\"col-sm-3\" _v-aac41df2=\"\">\n                <div class=\"form-group\" _v-aac41df2=\"\">\n                    <label class=\"control-label col-sm-4\" _v-aac41df2=\"\">产品名称：</label>\n                    <div class=\"col-sm-8\" _v-aac41df2=\"\">\n                        <input type=\"text\" class=\"form-control\" v-model=\"param.productName\" _v-aac41df2=\"\">\n                    </div>\n                </div>\n                <div class=\"form-group input-box\" _v-aac41df2=\"\">\n                    <label class=\"control-label col-sm-4\" _v-aac41df2=\"\">游戏类型：</label>\n                    <div class=\"col-sm-8\" _v-aac41df2=\"\">\n                        <v-select :value.sync=\"param.gameType\" :options=\"gameTypes\" placeholder=\"请选择\" _v-aac41df2=\"\">\n                        </v-select>\n                    </div>\n                </div>\n               <div class=\"form-group\" _v-aac41df2=\"\">\n                    <label class=\"control-label col-sm-4\" _v-aac41df2=\"\">运维负责人：</label>\n                    <div class=\"col-sm-8\" _v-aac41df2=\"\">\n                        <input type=\"text\" class=\"form-control\" v-model=\"param.maintainManager\" _v-aac41df2=\"\">\n                    </div>\n                </div>\n            </div>\n            <div class=\"col-sm-3\" _v-aac41df2=\"\">\n                <div class=\"form-group input-box\" _v-aac41df2=\"\">\n                    <label class=\"control-label col-sm-4\" _v-aac41df2=\"\">部门：</label>\n                    <div class=\"col-sm-8\" _v-aac41df2=\"\">\n                        <v-select :value.sync=\"param.department\" :options=\"departments\" placeholder=\"请选择\" _v-aac41df2=\"\">\n                        </v-select>\n                    </div>\n                </div>\n                <div class=\"form-group input-box\" _v-aac41df2=\"\">\n                    <label class=\"control-label col-sm-4\" _v-aac41df2=\"\">平台类型：</label>\n                    <div class=\"col-sm-8\" _v-aac41df2=\"\">\n                        <v-select :value.sync=\"param.platformType\" :options=\"platformTypes\" placeholder=\"请选择\" _v-aac41df2=\"\">\n                        </v-select>\n                    </div>\n                </div>\n                <div class=\"form-group\" _v-aac41df2=\"\">\n                    <label class=\"control-label col-sm-4\" _v-aac41df2=\"\">运营负责人：</label>\n                    <div class=\"col-sm-8\" _v-aac41df2=\"\">\n                        <input type=\"text\" class=\"form-control\" v-model=\"param.operationalManager\" _v-aac41df2=\"\">\n                    </div>\n                </div>\n            </div>\n            <div class=\"col-sm-3\" _v-aac41df2=\"\">\n                <div class=\"form-group input-box\" _v-aac41df2=\"\">\n                    <label class=\"control-label col-sm-4\" _v-aac41df2=\"\">业务类型：</label>\n                    <div class=\"col-sm-8\" _v-aac41df2=\"\">\n                        <v-select :value.sync=\"param.businessType\" :options=\"businessTypes\" placeholder=\"请选择\" _v-aac41df2=\"\">\n                        </v-select>\n                    </div>\n                </div>\n                <div class=\"form-group input-box\" _v-aac41df2=\"\">\n                    <label class=\"control-label col-sm-4\" _v-aac41df2=\"\">研发模式：</label>\n                    <div class=\"col-sm-8\" _v-aac41df2=\"\">\n                        <v-select :value.sync=\"param.developModel\" :options=\"developModels\" placeholder=\"请选择\" _v-aac41df2=\"\">\n                        </v-select>\n                    </div>\n                </div>\n                <div class=\"form-group\" _v-aac41df2=\"\">\n                    <label class=\"control-label col-sm-4\" _v-aac41df2=\"\">项目负责人：</label>\n                    <div class=\"col-sm-8\" _v-aac41df2=\"\">\n                        <input type=\"text\" class=\"form-control\" v-model=\"param.projectManager\" _v-aac41df2=\"\">\n                    </div>\n                </div>\n            </div>\n            <div class=\"col-sm-3\" _v-aac41df2=\"\">\n                <div class=\"form-group input-box\" _v-aac41df2=\"\">\n                    <label class=\"control-label col-sm-4\" _v-aac41df2=\"\">运营阶段：</label>\n                    <div class=\"col-sm-8\" _v-aac41df2=\"\">\n                        <v-select :value.sync=\"param.phase\" :options=\"phases\" placeholder=\"请选择\" _v-aac41df2=\"\">\n                        </v-select>\n                    </div>\n                </div>\n                <div class=\"form-group input-box\" _v-aac41df2=\"\">\n                    <label class=\"control-label col-sm-4\" _v-aac41df2=\"\">产品级别：</label>\n                    <div class=\"col-sm-8\" _v-aac41df2=\"\">\n                        <v-select :value.sync=\"productLevel\" :options=\"productLevels\" placeholder=\"请选择\" _v-aac41df2=\"\">\n                        </v-select>\n                    </div>\n                </div>\n                <div class=\"form-group\" _v-aac41df2=\"\">\n                    <label class=\"control-label col-sm-4\" _v-aac41df2=\"\">市场负责人：</label>\n                    <div class=\"col-sm-8\" _v-aac41df2=\"\">\n                        <input type=\"text\" class=\"form-control\" v-model=\"param.marketManager\" _v-aac41df2=\"\">\n                    </div>\n                </div>\n            </div>\n        </form>\n        <div class=\"text-center btn-operate\" _v-aac41df2=\"\">\n            <button type=\"button\" class=\"btn btn-default\" _v-aac41df2=\"\">\n                查询\n            </button>\n            <button type=\"button\" class=\"btn btn-default\" @click=\"$broadcast('showCreateProduct')\" _v-aac41df2=\"\">\n                新增产品\n            </button>\n            <button type=\"button\" class=\"btn btn-default\" _v-aac41df2=\"\">\n                批量删除\n            </button>\n            <button type=\"button\" class=\"btn btn-default\" _v-aac41df2=\"\">\n                同步游戏信息\n            </button>\n        </div>\n        <div class=\"text-center table-title\" _v-aac41df2=\"\">\n            查询结果\n        </div>\n        <table class=\"table table-hover table-bordered\" _v-aac41df2=\"\">\n            <thead _v-aac41df2=\"\">\n                <tr _v-aac41df2=\"\">\n                    <th width=\"3%\" _v-aac41df2=\"\"><input type=\"checkbox\" v-model=\"checkedAll\" _v-aac41df2=\"\"></th>\n                    <th v-for=\"title in titles\" v-text=\"title\" _v-aac41df2=\"\"></th>\n                </tr>\n            </thead>\n            <tbody _v-aac41df2=\"\">\n                <tr v-for=\"list in tableList\" v-if=\"tableList.length !== 0\" v-show=\"tableList.length !== 0\" _v-aac41df2=\"\">\n                    <td _v-aac41df2=\"\"><input type=\"checkbox\" :id=\"list.id\" :value=\"list.id\" v-model=\"checkedIds\" _v-aac41df2=\"\"></td>\n                    <td :title=\"list.productName\" _v-aac41df2=\"\"><a class=\"pointer\" v-text=\"list.productName\" @click=\"$broadcast('showEditProduct', list.id)\" _v-aac41df2=\"\"></a></td>\n                    <td :title=\"list.businessType\" v-text=\"list.businessType\" _v-aac41df2=\"\"></td>\n                    <td :title=\"list.productLevel\" v-text=\"list.productLevel\" _v-aac41df2=\"\"></td>\n                    <td :title=\"list.platformType\" v-text=\"list.platformType\" _v-aac41df2=\"\"></td>\n                    <td :title=\"list.gameType\" v-text=\"list.gameType\" _v-aac41df2=\"\"></td>\n                    <td :title=\"list.developModel\" v-text=\"list.developModel\" _v-aac41df2=\"\"></td>\n                    <td :title=\"list.department\" v-text=\"list.department\" _v-aac41df2=\"\"></td>\n                    <td :title=\"list.phase\" v-text=\"list.phase\" _v-aac41df2=\"\"></td>\n                    <td :title=\"list.projectManager\" v-text=\"list.projectManager\" _v-aac41df2=\"\"></td>\n                    <td :title=\"list.operationalManager\" v-text=\"list.operationalManager\" _v-aac41df2=\"\"></td>\n                    <td :title=\"list.maintainManager\" v-text=\"list.maintainManager\" _v-aac41df2=\"\"></td>\n                    <td :title=\"list.marketManager\" v-text=\"list.marketManager\" _v-aac41df2=\"\"></td>\n                </tr>\n                <tr class=\"text-center\" v-show=\"tableList.length === 0\" _v-aac41df2=\"\">\n                    <td :colspan=\"titles.length\" _v-aac41df2=\"\">暂无数据</td>\n                </tr>\n            </tbody>\n        </table>\n        <div class=\"clearfix\" _v-aac41df2=\"\">\n            <boot-page :async=\"false\" :lens=\"lenArr\" :page-len=\"pageLen\" :url=\"url\" :param=\"param\" _v-aac41df2=\"\"></boot-page>\n        </div>\n\n        <create-product-modal _v-aac41df2=\"\"></create-product-modal>\n        <edit-product-modal _v-aac41df2=\"\"></edit-product-modal>\n    </div>\n";
+	module.exports = "\n    <div _v-aac41df2=\"\">\n        <form class=\"form-horizontal clearfix form-search\" _v-aac41df2=\"\">\n            <div class=\"col-sm-3\" _v-aac41df2=\"\">\n                <div class=\"form-group\" _v-aac41df2=\"\">\n                    <label class=\"control-label col-sm-4\" _v-aac41df2=\"\">产品名称：</label>\n                    <div class=\"col-sm-8\" _v-aac41df2=\"\">\n                        <input type=\"text\" class=\"form-control\" v-model=\"param.productName\" _v-aac41df2=\"\">\n                    </div>\n                </div>\n                <div class=\"form-group input-box\" _v-aac41df2=\"\">\n                    <label class=\"control-label col-sm-4\" _v-aac41df2=\"\">游戏类型：</label>\n                    <div class=\"col-sm-8\" _v-aac41df2=\"\">\n                        <v-select :value.sync=\"param.gameType\" :options=\"gameTypes\" placeholder=\"请选择\" _v-aac41df2=\"\">\n                        </v-select>\n                    </div>\n                </div>\n               <div class=\"form-group\" _v-aac41df2=\"\">\n                    <label class=\"control-label col-sm-4\" _v-aac41df2=\"\">运维负责人：</label>\n                    <div class=\"col-sm-8\" _v-aac41df2=\"\">\n                        <input type=\"text\" class=\"form-control\" v-model=\"param.maintainManager\" _v-aac41df2=\"\">\n                    </div>\n                </div>\n            </div>\n            <div class=\"col-sm-3\" _v-aac41df2=\"\">\n                <div class=\"form-group input-box\" _v-aac41df2=\"\">\n                    <label class=\"control-label col-sm-4\" _v-aac41df2=\"\">部门：</label>\n                    <div class=\"col-sm-8\" _v-aac41df2=\"\">\n                        <v-select :value.sync=\"param.department\" :options=\"departments\" placeholder=\"请选择\" _v-aac41df2=\"\">\n                        </v-select>\n                    </div>\n                </div>\n                <div class=\"form-group input-box\" _v-aac41df2=\"\">\n                    <label class=\"control-label col-sm-4\" _v-aac41df2=\"\">平台类型：</label>\n                    <div class=\"col-sm-8\" _v-aac41df2=\"\">\n                        <v-select :value.sync=\"param.platformType\" :options=\"platformTypes\" placeholder=\"请选择\" _v-aac41df2=\"\">\n                        </v-select>\n                    </div>\n                </div>\n                <div class=\"form-group\" _v-aac41df2=\"\">\n                    <label class=\"control-label col-sm-4\" _v-aac41df2=\"\">运营负责人：</label>\n                    <div class=\"col-sm-8\" _v-aac41df2=\"\">\n                        <input type=\"text\" class=\"form-control\" v-model=\"param.operationalManager\" _v-aac41df2=\"\">\n                    </div>\n                </div>\n            </div>\n            <div class=\"col-sm-3\" _v-aac41df2=\"\">\n                <div class=\"form-group input-box\" _v-aac41df2=\"\">\n                    <label class=\"control-label col-sm-4\" _v-aac41df2=\"\">业务类型：</label>\n                    <div class=\"col-sm-8\" _v-aac41df2=\"\">\n                        <v-select :value.sync=\"param.businessType\" :options=\"businessTypes\" placeholder=\"请选择\" _v-aac41df2=\"\">\n                        </v-select>\n                    </div>\n                </div>\n                <div class=\"form-group input-box\" _v-aac41df2=\"\">\n                    <label class=\"control-label col-sm-4\" _v-aac41df2=\"\">研发模式：</label>\n                    <div class=\"col-sm-8\" _v-aac41df2=\"\">\n                        <v-select :value.sync=\"param.developModel\" :options=\"developModels\" placeholder=\"请选择\" _v-aac41df2=\"\">\n                        </v-select>\n                    </div>\n                </div>\n                <div class=\"form-group\" _v-aac41df2=\"\">\n                    <label class=\"control-label col-sm-4\" _v-aac41df2=\"\">项目负责人：</label>\n                    <div class=\"col-sm-8\" _v-aac41df2=\"\">\n                        <input type=\"text\" class=\"form-control\" v-model=\"param.projectManager\" _v-aac41df2=\"\">\n                    </div>\n                </div>\n            </div>\n            <div class=\"col-sm-3\" _v-aac41df2=\"\">\n                <div class=\"form-group input-box\" _v-aac41df2=\"\">\n                    <label class=\"control-label col-sm-4\" _v-aac41df2=\"\">运营阶段：</label>\n                    <div class=\"col-sm-8\" _v-aac41df2=\"\">\n                        <v-select :value.sync=\"param.phase\" :options=\"phases\" placeholder=\"请选择\" _v-aac41df2=\"\">\n                        </v-select>\n                    </div>\n                </div>\n                <div class=\"form-group input-box\" _v-aac41df2=\"\">\n                    <label class=\"control-label col-sm-4\" _v-aac41df2=\"\">产品级别：</label>\n                    <div class=\"col-sm-8\" _v-aac41df2=\"\">\n                        <v-select :value.sync=\"productLevel\" :options=\"productLevels\" placeholder=\"请选择\" _v-aac41df2=\"\">\n                        </v-select>\n                    </div>\n                </div>\n                <div class=\"form-group\" _v-aac41df2=\"\">\n                    <label class=\"control-label col-sm-4\" _v-aac41df2=\"\">市场负责人：</label>\n                    <div class=\"col-sm-8\" _v-aac41df2=\"\">\n                        <input type=\"text\" class=\"form-control\" v-model=\"param.marketManager\" _v-aac41df2=\"\">\n                    </div>\n                </div>\n            </div>\n        </form>\n        <div class=\"text-center btn-operate\" _v-aac41df2=\"\">\n            <button type=\"button\" class=\"btn btn-default\" _v-aac41df2=\"\">\n                查询\n            </button>\n            <button type=\"button\" class=\"btn btn-default\" @click=\"$broadcast('showCreateProduct')\" _v-aac41df2=\"\">\n                新增产品\n            </button>\n            <dropdown v-el:confirm=\"\" _v-aac41df2=\"\">\n                <button type=\"button\" class=\"btn btn-default\" data-toggle=\"dropdown\" _v-aac41df2=\"\">\n                    批量删除\n                    <span class=\"caret\" _v-aac41df2=\"\"></span>\n                </button>\n                <div slot=\"dropdown-menu\" class=\"dropdown-menu pd20\" _v-aac41df2=\"\">\n                    <button type=\"button\" class=\"btn btn-danger btn-block\" @click=\"deleteFn\" _v-aac41df2=\"\">确定</button>\n                    <button type=\"button\" class=\"btn btn-default btn-block\" @click=\"cancelFn\" _v-aac41df2=\"\">取消</button>\n                </div>\n            </dropdown>\n            <button type=\"button\" class=\"btn btn-default\" _v-aac41df2=\"\">\n                同步游戏信息\n            </button>\n        </div>\n        <div class=\"text-center table-title\" _v-aac41df2=\"\">\n            查询结果\n        </div>\n        <table class=\"table table-hover table-bordered\" _v-aac41df2=\"\">\n            <thead _v-aac41df2=\"\">\n                <tr _v-aac41df2=\"\">\n                    <th width=\"3%\" _v-aac41df2=\"\"><input type=\"checkbox\" v-model=\"checkedAll\" _v-aac41df2=\"\"></th>\n                    <th v-for=\"title in titles\" v-text=\"title\" _v-aac41df2=\"\"></th>\n                </tr>\n            </thead>\n            <tbody _v-aac41df2=\"\">\n                <tr v-for=\"list in tableList\" v-if=\"tableList.length !== 0\" v-show=\"tableList.length !== 0\" _v-aac41df2=\"\">\n                    <td _v-aac41df2=\"\"><input type=\"checkbox\" :id=\"list.id\" :value=\"list.id\" v-model=\"checkedIds\" _v-aac41df2=\"\"></td>\n                    <td :title=\"list.productName\" _v-aac41df2=\"\">\n                        <a class=\"pointer\" v-text=\"list.productName\" @click=\"$broadcast('showEditProduct', list.id)\" _v-aac41df2=\"\">\n                    </a></td>\n                    <td :title=\"list.businessType\" v-text=\"list.businessType\" _v-aac41df2=\"\"></td>\n                    <td :title=\"list.productLevel\" v-text=\"list.productLevel\" _v-aac41df2=\"\"></td>\n                    <td :title=\"list.platformType\" v-text=\"list.platformType\" _v-aac41df2=\"\"></td>\n                    <td :title=\"list.gameType\" v-text=\"list.gameType\" _v-aac41df2=\"\"></td>\n                    <td :title=\"list.developModel\" v-text=\"list.developModel\" _v-aac41df2=\"\"></td>\n                    <td :title=\"list.department\" v-text=\"list.department\" _v-aac41df2=\"\"></td>\n                    <td :title=\"list.phase\" v-text=\"list.phase\" _v-aac41df2=\"\"></td>\n                    <td :title=\"list.projectManager\" v-text=\"list.projectManager\" _v-aac41df2=\"\"></td>\n                    <td :title=\"list.operationalManager\" v-text=\"list.operationalManager\" _v-aac41df2=\"\"></td>\n                    <td :title=\"list.maintainManager\" v-text=\"list.maintainManager\" _v-aac41df2=\"\"></td>\n                    <td :title=\"list.marketManager\" v-text=\"list.marketManager\" _v-aac41df2=\"\"></td>\n                </tr>\n                <tr class=\"text-center\" v-show=\"tableList.length === 0\" _v-aac41df2=\"\">\n                    <td :colspan=\"titles.length\" _v-aac41df2=\"\">暂无数据</td>\n                </tr>\n            </tbody>\n        </table>\n        <div class=\"clearfix\" _v-aac41df2=\"\">\n            <boot-page :async=\"false\" :lens=\"lenArr\" :page-len=\"pageLen\" :url=\"url\" :param=\"param\" _v-aac41df2=\"\"></boot-page>\n        </div>\n\n        <create-product-modal _v-aac41df2=\"\"></create-product-modal>\n        <edit-product-modal _v-aac41df2=\"\"></edit-product-modal>\n    </div>\n";
 
 /***/ }
 ]));

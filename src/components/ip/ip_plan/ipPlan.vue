@@ -81,10 +81,8 @@ export default {
 
         // 输入面板
         showBroad (target) {
-            let obj = target.split('.')
-
             let param = {
-                value: this[obj[0]][obj[1]],
+                value: this[target],
                 name: target
             }
 

@@ -47,8 +47,16 @@
                         <div class="form-group input-box">
                             <label class="control-label col-sm-4">部门：<span class="text-danger">*</span></label>
                             <div class="col-sm-6">
-                                <v-select :value.sync="department" :options="departments" placeholder="请选择">
-                                </v-select>
+                                <typeahead
+                                    :on-hit="addDepartment"
+                                    :async="'/product/getDepartment/?name='"
+                                    :key="'name'"
+                                    placeholder="按回车键添加"
+                                >
+                                </typeahead>
+                                <span class="selected-tag" v-show="department !== ''">
+                                    <span v-text="department"></span>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -108,7 +116,7 @@
                         <div class="col-sm-9">
                             <typeahead
                                 :on-hit="addProjectManager"
-                                :async="'/instance_ips/?name='"
+                                :async="'/product/getUser/?name='"
                                 :key="'name'"
                                 placeholder="按回车键添加"
                             >
@@ -134,7 +142,7 @@
                         <div class="col-sm-9">
                             <typeahead
                                 :on-hit="addOperationalManager"
-                                :async="'/instance_ips/?name='"
+                                :async="'/product/getUser/?name='"
                                 :key="'name'"
                                 placeholder="按回车键添加"
                             >
@@ -160,7 +168,7 @@
                         <div class="col-sm-9">
                             <typeahead
                                 :on-hit="addMaintainManager"
-                                :async="'/instance_ips/?name='"
+                                :async="'/product/getUser/?name='"
                                 :key="'name'"
                                 placeholder="按回车键添加"
                             >
@@ -186,7 +194,7 @@
                         <div class="col-sm-9">
                             <typeahead
                                 :on-hit="addMarketManager"
-                                :async="'/instance_ips/?name='"
+                                :async="'/product/getUser/?name='"
                                 :key="'name'"
                                 placeholder="按回车键添加"
                             >
@@ -209,7 +217,7 @@
             </form>
         </div>
         <div slot="modal-footer" class="modal-footer">
-            <button type="button" class="btn btn-default">保存</button>
+            <button type="button" class="btn btn-default" @click="saveFn">保存</button>
             <button type="button" class="btn btn-default" @click='creatProductModal = false'>取消</button>
         </div>
     </modal>
@@ -232,10 +240,10 @@ let origin = {
         platformType: '',
         developModel: '',
         phase: '',
-        projectManagers: ['王毅', '罗之浩', '王鑫', '沈建华'],
-        maintainManagers: ['王毅', '沈建华'],
-        operationalManagers: ['沈建华'],
-        marketManagers: ['王鑫', '罗之浩'],
+        projectManagers: [],
+        maintainManagers: [],
+        operationalManagers: [],
+        marketManagers: [],
     },
     init = Object.assign({}, origin);
 
@@ -244,6 +252,13 @@ export default {
         return origin
     },
     methods: {
+
+        // 模糊搜索部门
+        addDepartment (items, targetVM) {
+            this.department = items
+            
+            targetVM.reset()
+        },
 
         // 模糊搜索项目负责人
         addProjectManager (items, targetVM) {
@@ -284,6 +299,26 @@ export default {
         // 删除负责人
         deleteUser (index, name) {
             this[name].splice(index, 1)
+        },
+
+        // 新增产品
+        saveFn () {
+            this.$http({
+                url: '/product/operate/',
+                method: 'POST',
+                data: this.$data
+            })
+            .then(response => {
+                if (response.data.code === 200) {
+                    this.creatProductModal = false
+                    this.$data = Object.assign({}, init)
+
+                    this.$dispatch('refresh')
+                    this.$dispatch('show-success')
+                } else {
+                    this.$dispatch('show-error', response.data.msg)
+                }
+            })
         }
     },
     components: {
@@ -323,6 +358,7 @@ export default {
     color: #147688;
     background-color: #d7f3f9;
     border-color: #91ddec;
+    white-space: nowrap;
 }
 
 .selected-tag .close {

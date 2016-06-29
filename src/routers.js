@@ -53,6 +53,11 @@ export default function (router) {
             component: function (resolve) {
                 require(['./components/other/import/import.vue'], resolve)
             }
+        },
+        '/businessTree': {
+            component: function (resolve) {
+                require(['./components/business/business_tree/BusinessTree.vue'], resolve)
+            }
         }
     })
 }

@@ -76,7 +76,7 @@
                         <td :title="list.netType" v-text="list.netType"></td>
                         <td :title="list.operator" v-text="list.operator"></td>
                         <td :title="list.idc" v-text="list.idc"></td>
-                        <td><a class="pointer" v-text="list.deviceNum"></a></td>
+                        <td><a class="pointer" v-text="list.deviceNum" @click="showView(list.deviceId, list.deviceType)"></a></td>
                     </tr>
                     <tr class="text-center" v-show="tableList.length === 0">
                         <td :colspan="titles.length">暂无数据</td>
@@ -94,6 +94,9 @@
                  text="数据加载中，请稍后..." v-ref:spinner>
             </spinner>
         </div>
+
+        <edit-server-modal></edit-server-modal>
+        <edit-device-modal></edit-device-modal>
     </div>
 </template>
 
@@ -101,6 +104,8 @@
 import { spinner } from 'vue-strap'
 import bootPage from '../../global/BootPage.vue'
 import vSelect from '../../global/Select.vue'
+import editServerModal from '../../server/server_search/EditServer.vue'
+import editDeviceModal from '../../network/device_search/EditDevice.vue'
 import { getIpSearch } from '../../../vuex/action.js'
 import { idcs, statusArr, operators, netTypes } from '../../../vuex/getters.js'
 
@@ -143,12 +148,26 @@ export default {
         refresh () {
             this.$refs.spinner.show()
             this.$broadcast('refresh')
+        },
+
+        // 显示弹框
+        showView (id, type) {
+            switch (type) {
+                case 1:
+                    this.$broadcast('showEditServer', id)
+                    break;
+                case 2:
+                    this.$broadcast('showEditDevice', id)
+                    break;
+            }
         }
     },
     components: {
         bootPage,
         vSelect,
-        spinner
+        spinner,
+        editServerModal,
+        editDeviceModal
     },
     vuex: {
         actions: {

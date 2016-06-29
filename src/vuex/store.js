@@ -37,7 +37,8 @@ const state = {
     netTypes: [],
     products: [],
     serverTypes: [],
-    serverStatus: []
+    serverStatus: [],
+    systems: []
 }   
 
 // 创建一个 object 存储 mutation 函数

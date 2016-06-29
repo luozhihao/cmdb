@@ -274,6 +274,8 @@ export default {
 
             if (this.checkedIds.length) {
                 this.$broadcast('batchEdit', _this.checkedIds)
+            } else {
+                this.$dispatch('show-notify', '请选择修改项')
             }
         },
 

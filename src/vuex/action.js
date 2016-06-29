@@ -51,7 +51,7 @@ export function getRoomCreate({ dispatch, state }) {
 // 获取业务管理下拉框内容
 export function getBusinessSearch({ dispatch, state }) {
     this.$http({
-        url: '/product/home/',
+        url: '/product/condition/',
         method: 'GET'
     })
     .then(response => {

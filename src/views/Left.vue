@@ -59,7 +59,7 @@
                 <li v-link="{ path: '/businessSearch' }">
                     <span>业务管理</span>
                 </li>
-                <li>
+                <li v-link="{ path: '/businessTree' }">
                     <span>业务树</span>
                 </li>
             </ul>
