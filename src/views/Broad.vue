@@ -23,7 +23,8 @@ export default {
         return {
             broadModal: false,
             txt: '',
-            name: ''
+            name: '',
+            types: 0
         }
     },
     methods: {
@@ -43,14 +44,14 @@ export default {
                     name: this.name
                 }
 
-                this.$dispatch('getTxt', param)
+                this.types === 0 ? this.$dispatch('getTxt', param) : this.$dispatch('getTxt2', param)
             } else {
                 let param = {
                     val: '',
                     name: this.name
                 }
 
-                this.$dispatch('getTxt', param)
+                this.types === 0 ? this.$dispatch('getTxt', param) : this.$dispatch('getTxt2', param)
             }
 
             this.broadModal = false
@@ -68,6 +69,8 @@ export default {
             }
 
             this.name = param.name
+
+            param.types ? this.types = 1 : this.types = 0
             
             this.broadModal = true
         }

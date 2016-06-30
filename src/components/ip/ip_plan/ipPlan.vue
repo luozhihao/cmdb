@@ -2,7 +2,7 @@
 <template>
     <div>
         <form class="form-horizontal clearfix form-search">
-        <div class="col-sm-3">
+            <div class="col-sm-3">
                 <div class="form-group input-box">
                     <label class="col-sm-4 control-label">类型：<span class="text-danger">*</span></label>
                     <div class="col-sm-8">
@@ -28,7 +28,7 @@
                 <div class="form-group">
                     <label class="col-sm-4 control-label">规划机房：<span class="text-danger">*</span></label>
                     <div class="col-sm-8">
-                        <v-select :value.sync="idc" :options="idcs" placeholder="请选择" :search="true" multiple>
+                        <v-select :value.sync="idc" :options="idcs" placeholder="请选择" :search="true">
                         </v-select>
                     </div>
                 </div>
@@ -63,19 +63,16 @@ import vSelect from '../../global/Select.vue'
 import { getIpPlan } from '../../../vuex/action.js'
 import { idcs, netTypes, operators } from '../../../vuex/getters.js'
 
-let origin = {
-        netType: '',
-        idc: [],
-        network: '',
-        gateway: '',
-        ips: '',
-        operator: ''
-    },
-    init = Object.assign({}, origin);
-
 export default {
     data () {
-        return origin
+        return {
+            netType: '',
+            idc: '',
+            network: '',
+            gateway: '',
+            ips: '',
+            operator: ''
+        }
     },
     methods: {
 
@@ -91,20 +88,77 @@ export default {
 
         // 保存IP
         saveFn () {
-            this.$http({
-                url: '/ip/ip_add/',
-                method: 'POST',
-                data: this.$data
-            })
-            .then(response => {
-                if (response.data.code === 200) {
-                    this.$data = Object.assign({}, init)
+            let regIp = /^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$/,
+                regNetwork = /^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.0\/24$/
 
-                    this.$dispatch('show-success')
+            if (!regNetwork.test(this.network.trim()) && this.network.trim()) {
+                this.$dispatch('show-notify', '网段格式错误，请检查')
+
+                return false
+            }
+
+            if (!regIp.test(this.gateway.trim())) {
+                this.$dispatch('show-notify', '网关格式错误，请检查')
+
+                return false
+            }
+
+            let ipArr = this.ips.split(','),
+                newArr = [],
+                vaild = true
+
+            ipArr.forEach(e => {
+                if (e.includes('-') && e.split('-').length === 2) {
+                    let first = e.split('-')[0].trim(),
+                        second = e.split('-')[1].trim()
+
+                    if (regIp.test(first) && regIp.test(second)) {
+                        newArr.push(first + '-' + second)
+                    } else {
+                        this.$dispatch('show-notify', 'ip段格式错误，请检查')
+
+                        vaild = false
+                    }
                 } else {
-                    this.$dispatch('show-error')
+                    if (regIp.test(e.trim())) {
+                        newArr.push(e.trim())
+
+                    } else {
+                        this.$dispatch('show-notify', 'ip格式错误，请检查')
+
+                        vaild = false
+                    }
                 }
             })
+
+            if (vaild) {
+                this.$http({
+                    url: '/ip/ip_add/',
+                    method: 'POST',
+                    data: {
+                        netType: this.netType,
+                        idc: this.idc,
+                        network: this.network,
+                        gateway: this.gateway,
+                        ips: newArr,
+                        operator: this.operator
+                    }
+                })
+                .then(response => {
+                    if (response.data.code === 200) {
+                        this.netType = '',
+                        this.idc = '',
+                        this.network = '',
+                        this.gateway = '',
+                        this.ips = '',
+                        this.operator = ''
+
+                        this.$dispatch('show-success')
+                    } else {
+                        this.$dispatch('show-error')
+                    }
+                })
+            }
         }
     },
     components: {

@@ -109,26 +109,23 @@ import editDeviceModal from '../../network/device_search/EditDevice.vue'
 import { getIpSearch } from '../../../vuex/action.js'
 import { idcs, statusArr, operators, netTypes } from '../../../vuex/getters.js'
 
-let origin = {
-        titles: ['IP地址', '网段', '掩码', '网关', 'IP状态', '网络类型', '运营商', '所在机房', '关联设备'],
-        tableList: [],
-        lenArr: [10, 50, 100],
-        pageLen: 5,
-        url: '/ip/ip_list/',
-        param: {
-            ip: '',
-            operator: '',
-            room: '',
-            type: '',
-            status: '',
-            network: ''
-        }
-    },
-    init = Object.assign({}, origin);
-
 export default {
     data () {
-        return origin
+        return {
+            titles: ['IP地址', '网段', '掩码', '网关', 'IP状态', '网络类型', '运营商', '所在机房', '关联设备'],
+            tableList: [],
+            lenArr: [10, 50, 100],
+            pageLen: 5,
+            url: '/ip/ip_list/',
+            param: {
+                ip: '',
+                operator: '',
+                room: '',
+                type: '',
+                status: '',
+                network: ''
+            }
+        }
     },
     methods: {
 

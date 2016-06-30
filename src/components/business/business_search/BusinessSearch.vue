@@ -16,10 +16,10 @@
                         </v-select>
                     </div>
                 </div>
-               <div class="form-group">
-                    <label class="control-label col-sm-4">运维负责人：</label>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">项目负责人：</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" v-model="param.maintainManager">
+                        <input type="text" class="form-control" v-model="param.projectManager">
                     </div>
                 </div>
             </div>
@@ -61,9 +61,9 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-sm-4">项目负责人：</label>
+                    <label class="control-label col-sm-4">运维负责人：</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" v-model="param.projectManager">
+                        <input type="text" class="form-control" v-model="param.maintainManager">
                     </div>
                 </div>
             </div>
@@ -91,7 +91,7 @@
             </div>
         </form>
         <div class="text-center btn-operate">
-            <button type="button" class="btn btn-default">
+            <button type="button" class="btn btn-default" @click="refresh">
                 查询
             </button>
             <button type="button" class="btn btn-default" @click="$broadcast('showCreateProduct')">
@@ -107,45 +107,51 @@
                     <button type="button" class="btn btn-default btn-block" @click="cancelFn">取消</button>
                 </div>
             </dropdown>
-            <button type="button" class="btn btn-default">
-                同步游戏信息
-            </button>
         </div>
         <div class="text-center table-title">
             查询结果
         </div>
-        <table class="table table-hover table-bordered">
-            <thead>
-                <tr>
-                    <th width="3%"><input type="checkbox" v-model="checkedAll"></th>
-                    <th v-for="title in titles" v-text="title"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="list in tableList" v-if="tableList.length !== 0" v-show="tableList.length !== 0">
-                    <td><input type="checkbox" :id="list.id" :value="list.id" v-model="checkedIds"></td>
-                    <td :title="list.productName">
-                        <a class="pointer" v-text="list.productName" @click="$broadcast('showEditProduct', list.id)">
-                    </td>
-                    <td :title="list.businessType" v-text="list.businessType"></td>
-                    <td :title="list.productLevel" v-text="list.productLevel"></td>
-                    <td :title="list.platformType" v-text="list.platformType"></td>
-                    <td :title="list.gameType" v-text="list.gameType"></td>
-                    <td :title="list.developModel" v-text="list.developModel"></td>
-                    <td :title="list.department" v-text="list.department"></td>
-                    <td :title="list.phase" v-text="list.phase"></td>
-                    <td :title="list.projectManager" v-text="list.projectManager"></td>
-                    <td :title="list.operationalManager" v-text="list.operationalManager"></td>
-                    <td :title="list.maintainManager" v-text="list.maintainManager"></td>
-                    <td :title="list.marketManager" v-text="list.marketManager"></td>
-                </tr>
-                <tr class="text-center" v-show="tableList.length === 0">
-                    <td :colspan="titles.length">暂无数据</td>
-                </tr>
-            </tbody>
-        </table>
-        <div class="clearfix">
-            <boot-page :async="false" :lens="lenArr" :page-len="pageLen" :url="url" :param="param"></boot-page>
+        <div class="table-box">
+            <table class="table table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th width="3%"><input type="checkbox" v-model="checkedAll"></th>
+                        <th v-for="title in titles" v-text="title"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="list in tableList" v-if="tableList.length !== 0" v-show="tableList.length !== 0">
+                        <td><input type="checkbox" :id="list.id" :value="list.id" v-model="checkedIds"></td>
+                        <td :title="list.productName">
+                            <a class="pointer" v-text="list.productName" @click="$broadcast('showEditProduct', list.id)">
+                        </td>
+                        <td :title="list.businessType" v-text="list.businessType"></td>
+                        <td :title="list.productLevel" v-text="list.productLevel"></td>
+                        <td :title="list.platformType" v-text="list.platformType"></td>
+                        <td :title="list.gameType" v-text="list.gameType"></td>
+                        <td :title="list.developModel" v-text="list.developModel"></td>
+                        <td :title="list.department" v-text="list.department"></td>
+                        <td :title="list.phase" v-text="list.phase"></td>
+                        <td :title="list.projectManager" v-text="list.projectManager"></td>
+                        <td :title="list.operationalManager" v-text="list.operationalManager"></td>
+                        <td :title="list.maintainManager" v-text="list.maintainManager"></td>
+                        <td :title="list.marketManager" v-text="list.marketManager"></td>
+                    </tr>
+                    <tr class="text-center" v-show="tableList.length === 0">
+                        <td :colspan="titles.length + 1">暂无数据</td>
+                    </tr>
+                </tbody>
+                <tfoot> 
+                    <tr>
+                        <td :colspan="titles.length + 1">
+                            <boot-page :async="true" :lens="lenArr" :page-len="pageLen" :url="url" :param="param"></boot-page>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+            <spinner id="spinner-box" :size="md" :fixed="false" 
+                 text="数据加载中，请稍后..." v-ref:spinner>
+            </spinner>
         </div>
 
         <create-product-modal></create-product-modal>
@@ -162,41 +168,38 @@ import vSelect from '../../global/Select.vue'
 import { getBusinessSearch } from '../../../vuex/action.js'
 import { departments, productTypes, phases, gameTypes, platformTypes, developModels, productLevels } from '../../../vuex/getters.js'
 
-let origin = {
-        checkedAll: false,
-        checkedIds: [],
-        titles: ['产品名称', '业务类别', '产品级别', '平台类型', '游戏类型', '研发模式', '所属部门', '运营阶段', '项目负责人', '运营负责人', '运维负责人', '市场负责人'],
-        tableList: [
-            {id: 1, productName: '航海世纪', businessType: '游戏', productLevel: '一级', platformType: '端游', gameType: 'MMORPG', developModel: '自研', department: '项目一部', phase: 'OB', projectManager: '娄佳', operationalManager: '乔研', maintainManager: '董勰,陈红伟', marketManager: ''}
-        ],
-        lenArr: [10, 50, 100],
-        pageLen: 5,
-        url: '/product/query/',
-        param: {
-            productName: '',
-            department: '',
-            businessType: '',
-            gameType: '',
-            platformType: '',
-            developModel: '',
-            phase: '',
-            productLevel: '',
-            maintainManager: '',
-            operationalManager: '',
-            projectManager: '',
-            marketManager: ''
-        }
-    },
-    init = Object.assign({}, origin);
-
 export default {
     data () {
-        return origin
+        return {
+            checkedAll: false,
+            checkedIds: [],
+            titles: ['产品名称', '业务类别', '产品级别', '平台类型', '游戏类型', '研发模式', '所属部门', '运营阶段', '项目负责人', '运营负责人', '运维负责人', '市场负责人'],
+            tableList: [],
+            lenArr: [10, 50, 100],
+            pageLen: 5,
+            url: '/product/query/',
+            param: {
+                productName: '',
+                department: '',
+                businessType: '',
+                gameType: '',
+                platformType: '',
+                developModel: '',
+                phase: '',
+                productLevel: '',
+                maintainManager: '',
+                operationalManager: '',
+                projectManager: '',
+                marketManager: ''
+            }
+        }
     },
     methods: {
 
         // 刷新数据
         refresh () {
+            this.$refs.spinner.show()
+            this.checkedIds = []
             this.$broadcast('refresh')
         },
 
@@ -229,6 +232,7 @@ export default {
 
         // 取消删除
         cancelFn () {
+
             this.$els.confirm.classList.toggle('open')
         }
     },
@@ -256,6 +260,7 @@ export default {
     },
     ready () {
         this.getBusinessSearch()
+        this.$refs.spinner.show()
     },
     watch: {
         'checkedAll' (newVal) {
@@ -280,6 +285,20 @@ export default {
             } else {
                 this.checkedAll = false
             }
+        }
+    },
+    events: {
+
+        // 获取表格数据
+        'data' (param) {
+            this.tableList = param.data
+            this.checkedIds = []
+            this.$refs.spinner.hide()
+        },
+
+        // 刷新表格
+        'refresh' () {
+            this.refresh()
         }
     }
 }

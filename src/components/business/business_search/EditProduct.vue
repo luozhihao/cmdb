@@ -10,7 +10,7 @@
                     <div class="form-group input-box">
                         <label class="control-label col-sm-2">业务类型：<span class="text-danger">*</span></label>
                         <div class="col-sm-9">
-                            <v-select :value.sync="businessType" :options="businessTypes" placeholder="请选择">
+                            <v-select :value.sync="businessType" :options="businessTypes" placeholder="请选择" :disabled="true">
                             </v-select>
                         </div>
                     </div>
@@ -20,7 +20,7 @@
                         <div class="form-group input-box">
                             <label class="control-label col-sm-4">游戏列表：<span class="text-danger">*</span></label>
                             <div class="col-sm-6">
-                                <v-select :value.sync="gameList" :options="gameLists" placeholder="请选择">
+                                <v-select :value.sync="gameList" :options="gameLists" placeholder="请选择" :disabled="true">
                                 </v-select>
                             </div>
                         </div>
@@ -38,7 +38,7 @@
                     <div class="form-group">
                         <label class="control-label col-sm-2">产品名称：<span class="text-danger">*</span></label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" v-model="productName">
+                            <input type="text" class="form-control" v-model="productName" :disabled="true">
                         </div>
                     </div>
                 </div>
@@ -302,8 +302,36 @@ export default {
             this[name].splice(index, 1)
         },
 
-        // 修改产品
+        // 新增产品
         saveFn () {
+            if (this.businessType === '1') {
+
+                if (this.gameList && this.childType.trim() && 
+                    this.department && this.productLevel && this.gameType && this.platformType
+                    && this.developModel && this.phase && this.maintainManagers.length) {
+
+                    this.saveVaild()
+                    
+                } else {
+                    this.$dispatch('show-notify', '存在未填写的必填项，请检查')
+                }
+
+            } else if (this.businessType === '2') {
+
+                if (this.department && this.productLevel && this.maintainManagers.length) {
+
+                    this.saveVaild()
+                    
+                } else {
+                    this.$dispatch('show-notify', '存在未填写的必填项，请检查')
+                }
+            } else {
+                this.$dispatch('show-notify', '请选择业务类型')
+            }
+        },
+
+        // 执行保存
+        saveVaild () {
             this.$http({
                 url: '/product/operate/',
                 method: 'POST',
@@ -311,7 +339,7 @@ export default {
             })
             .then(response => {
                 if (response.data.code === 200) {
-                    this.editProductModal = false
+                    this.creatProductModal = false
                     this.$data = Object.assign({}, init)
 
                     this.$dispatch('refresh')
@@ -337,6 +365,23 @@ export default {
             developModels,
             gameLists,
             productLevels
+        }
+    },
+    watch: {
+        'businessType' (newVal) {
+            switch (newVal) {
+                case '1':
+                    this.productName = ''
+                    break
+                case '2':
+                    this.gameList = ''
+                    this.childType = ''
+                    this.gameType = ''
+                    this.platformType = ''
+                    this.developModel = ''
+                    this.phase = ''
+                    break
+            }
         }
     },
     events: {
@@ -372,6 +417,7 @@ export default {
     color: #147688;
     background-color: #d7f3f9;
     border-color: #91ddec;
+    white-space: nowrap;
 }
 
 .selected-tag .close {

@@ -1,33 +1,11 @@
-webpackJsonp([4],Array(32).concat([
-/* 32 */
+webpackJsonp([4],Array(45).concat([
+/* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(33), __esModule: true };
-
-/***/ },
-/* 33 */
-/***/ function(module, exports, __webpack_require__) {
-
-	__webpack_require__(34);
-	module.exports = __webpack_require__(37).Object.assign;
-
-/***/ },
-/* 34 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// 19.1.3.1 Object.assign(target, source)
-	var $export = __webpack_require__(35);
-	
-	$export($export.S + $export.F, 'Object', {assign: __webpack_require__(50)});
-
-/***/ },
-/* 35 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var global    = __webpack_require__(36)
-	  , core      = __webpack_require__(37)
-	  , ctx       = __webpack_require__(38)
-	  , hide      = __webpack_require__(40)
+	var global    = __webpack_require__(46)
+	  , core      = __webpack_require__(47)
+	  , ctx       = __webpack_require__(48)
+	  , hide      = __webpack_require__(50)
 	  , PROTOTYPE = 'prototype';
 	
 	var $export = function(type, name, source){
@@ -87,7 +65,7 @@ webpackJsonp([4],Array(32).concat([
 	module.exports = $export;
 
 /***/ },
-/* 36 */
+/* 46 */
 /***/ function(module, exports) {
 
 	// https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
@@ -96,18 +74,18 @@ webpackJsonp([4],Array(32).concat([
 	if(typeof __g == 'number')__g = global; // eslint-disable-line no-undef
 
 /***/ },
-/* 37 */
+/* 47 */
 /***/ function(module, exports) {
 
 	var core = module.exports = {version: '2.4.0'};
 	if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
 
 /***/ },
-/* 38 */
+/* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// optional / simple context binding
-	var aFunction = __webpack_require__(39);
+	var aFunction = __webpack_require__(49);
 	module.exports = function(fn, that, length){
 	  aFunction(fn);
 	  if(that === undefined)return fn;
@@ -128,7 +106,7 @@ webpackJsonp([4],Array(32).concat([
 	};
 
 /***/ },
-/* 39 */
+/* 49 */
 /***/ function(module, exports) {
 
 	module.exports = function(it){
@@ -137,12 +115,12 @@ webpackJsonp([4],Array(32).concat([
 	};
 
 /***/ },
-/* 40 */
+/* 50 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var dP         = __webpack_require__(41)
-	  , createDesc = __webpack_require__(49);
-	module.exports = __webpack_require__(45) ? function(object, key, value){
+	var dP         = __webpack_require__(51)
+	  , createDesc = __webpack_require__(59);
+	module.exports = __webpack_require__(55) ? function(object, key, value){
 	  return dP.f(object, key, createDesc(1, value));
 	} : function(object, key, value){
 	  object[key] = value;
@@ -150,15 +128,15 @@ webpackJsonp([4],Array(32).concat([
 	};
 
 /***/ },
-/* 41 */
+/* 51 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var anObject       = __webpack_require__(42)
-	  , IE8_DOM_DEFINE = __webpack_require__(44)
-	  , toPrimitive    = __webpack_require__(48)
+	var anObject       = __webpack_require__(52)
+	  , IE8_DOM_DEFINE = __webpack_require__(54)
+	  , toPrimitive    = __webpack_require__(58)
 	  , dP             = Object.defineProperty;
 	
-	exports.f = __webpack_require__(45) ? Object.defineProperty : function defineProperty(O, P, Attributes){
+	exports.f = __webpack_require__(55) ? Object.defineProperty : function defineProperty(O, P, Attributes){
 	  anObject(O);
 	  P = toPrimitive(P, true);
 	  anObject(Attributes);
@@ -171,17 +149,17 @@ webpackJsonp([4],Array(32).concat([
 	};
 
 /***/ },
-/* 42 */
+/* 52 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(43);
+	var isObject = __webpack_require__(53);
 	module.exports = function(it){
 	  if(!isObject(it))throw TypeError(it + ' is not an object!');
 	  return it;
 	};
 
 /***/ },
-/* 43 */
+/* 53 */
 /***/ function(module, exports) {
 
 	module.exports = function(it){
@@ -189,24 +167,24 @@ webpackJsonp([4],Array(32).concat([
 	};
 
 /***/ },
-/* 44 */
+/* 54 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = !__webpack_require__(45) && !__webpack_require__(46)(function(){
-	  return Object.defineProperty(__webpack_require__(47)('div'), 'a', {get: function(){ return 7; }}).a != 7;
+	module.exports = !__webpack_require__(55) && !__webpack_require__(56)(function(){
+	  return Object.defineProperty(__webpack_require__(57)('div'), 'a', {get: function(){ return 7; }}).a != 7;
 	});
 
 /***/ },
-/* 45 */
+/* 55 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Thank's IE8 for his funny defineProperty
-	module.exports = !__webpack_require__(46)(function(){
+	module.exports = !__webpack_require__(56)(function(){
 	  return Object.defineProperty({}, 'a', {get: function(){ return 7; }}).a != 7;
 	});
 
 /***/ },
-/* 46 */
+/* 56 */
 /***/ function(module, exports) {
 
 	module.exports = function(exec){
@@ -218,11 +196,11 @@ webpackJsonp([4],Array(32).concat([
 	};
 
 /***/ },
-/* 47 */
+/* 57 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(43)
-	  , document = __webpack_require__(36).document
+	var isObject = __webpack_require__(53)
+	  , document = __webpack_require__(46).document
 	  // in old IE typeof document.createElement is 'object'
 	  , is = isObject(document) && isObject(document.createElement);
 	module.exports = function(it){
@@ -230,11 +208,11 @@ webpackJsonp([4],Array(32).concat([
 	};
 
 /***/ },
-/* 48 */
+/* 58 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 7.1.1 ToPrimitive(input [, PreferredType])
-	var isObject = __webpack_require__(43);
+	var isObject = __webpack_require__(53);
 	// instead of the ES6 spec version, we didn't implement @@toPrimitive case
 	// and the second argument - flag - preferred type is a string
 	module.exports = function(it, S){
@@ -247,7 +225,7 @@ webpackJsonp([4],Array(32).concat([
 	};
 
 /***/ },
-/* 49 */
+/* 59 */
 /***/ function(module, exports) {
 
 	module.exports = function(bitmap, value){
@@ -260,63 +238,26 @@ webpackJsonp([4],Array(32).concat([
 	};
 
 /***/ },
-/* 50 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	// 19.1.2.1 Object.assign(target, source, ...)
-	var getKeys  = __webpack_require__(51)
-	  , gOPS     = __webpack_require__(66)
-	  , pIE      = __webpack_require__(67)
-	  , toObject = __webpack_require__(68)
-	  , IObject  = __webpack_require__(55)
-	  , $assign  = Object.assign;
-	
-	// should work with symbols and should have deterministic property order (V8 bug)
-	module.exports = !$assign || __webpack_require__(46)(function(){
-	  var A = {}
-	    , B = {}
-	    , S = Symbol()
-	    , K = 'abcdefghijklmnopqrst';
-	  A[S] = 7;
-	  K.split('').forEach(function(k){ B[k] = k; });
-	  return $assign({}, A)[S] != 7 || Object.keys($assign({}, B)).join('') != K;
-	}) ? function assign(target, source){ // eslint-disable-line no-unused-vars
-	  var T     = toObject(target)
-	    , aLen  = arguments.length
-	    , index = 1
-	    , getSymbols = gOPS.f
-	    , isEnum     = pIE.f;
-	  while(aLen > index){
-	    var S      = IObject(arguments[index++])
-	      , keys   = getSymbols ? getKeys(S).concat(getSymbols(S)) : getKeys(S)
-	      , length = keys.length
-	      , j      = 0
-	      , key;
-	    while(length > j)if(isEnum.call(S, key = keys[j++]))T[key] = S[key];
-	  } return T;
-	} : $assign;
-
-/***/ },
-/* 51 */
+/* 60 */,
+/* 61 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 19.1.2.14 / 15.2.3.14 Object.keys(O)
-	var $keys       = __webpack_require__(52)
-	  , enumBugKeys = __webpack_require__(65);
+	var $keys       = __webpack_require__(62)
+	  , enumBugKeys = __webpack_require__(75);
 	
 	module.exports = Object.keys || function keys(O){
 	  return $keys(O, enumBugKeys);
 	};
 
 /***/ },
-/* 52 */
+/* 62 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var has          = __webpack_require__(53)
-	  , toIObject    = __webpack_require__(54)
-	  , arrayIndexOf = __webpack_require__(58)(false)
-	  , IE_PROTO     = __webpack_require__(62)('IE_PROTO');
+	var has          = __webpack_require__(63)
+	  , toIObject    = __webpack_require__(64)
+	  , arrayIndexOf = __webpack_require__(68)(false)
+	  , IE_PROTO     = __webpack_require__(72)('IE_PROTO');
 	
 	module.exports = function(object, names){
 	  var O      = toIObject(object)
@@ -332,7 +273,7 @@ webpackJsonp([4],Array(32).concat([
 	};
 
 /***/ },
-/* 53 */
+/* 63 */
 /***/ function(module, exports) {
 
 	var hasOwnProperty = {}.hasOwnProperty;
@@ -341,28 +282,28 @@ webpackJsonp([4],Array(32).concat([
 	};
 
 /***/ },
-/* 54 */
+/* 64 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// to indexed object, toObject with fallback for non-array-like ES3 strings
-	var IObject = __webpack_require__(55)
-	  , defined = __webpack_require__(57);
+	var IObject = __webpack_require__(65)
+	  , defined = __webpack_require__(67);
 	module.exports = function(it){
 	  return IObject(defined(it));
 	};
 
 /***/ },
-/* 55 */
+/* 65 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// fallback for non-array-like ES3 and non-enumerable old V8 strings
-	var cof = __webpack_require__(56);
+	var cof = __webpack_require__(66);
 	module.exports = Object('z').propertyIsEnumerable(0) ? Object : function(it){
 	  return cof(it) == 'String' ? it.split('') : Object(it);
 	};
 
 /***/ },
-/* 56 */
+/* 66 */
 /***/ function(module, exports) {
 
 	var toString = {}.toString;
@@ -372,7 +313,7 @@ webpackJsonp([4],Array(32).concat([
 	};
 
 /***/ },
-/* 57 */
+/* 67 */
 /***/ function(module, exports) {
 
 	// 7.2.1 RequireObjectCoercible(argument)
@@ -382,14 +323,14 @@ webpackJsonp([4],Array(32).concat([
 	};
 
 /***/ },
-/* 58 */
+/* 68 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// false -> Array#indexOf
 	// true  -> Array#includes
-	var toIObject = __webpack_require__(54)
-	  , toLength  = __webpack_require__(59)
-	  , toIndex   = __webpack_require__(61);
+	var toIObject = __webpack_require__(64)
+	  , toLength  = __webpack_require__(69)
+	  , toIndex   = __webpack_require__(71);
 	module.exports = function(IS_INCLUDES){
 	  return function($this, el, fromIndex){
 	    var O      = toIObject($this)
@@ -408,18 +349,18 @@ webpackJsonp([4],Array(32).concat([
 	};
 
 /***/ },
-/* 59 */
+/* 69 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 7.1.15 ToLength
-	var toInteger = __webpack_require__(60)
+	var toInteger = __webpack_require__(70)
 	  , min       = Math.min;
 	module.exports = function(it){
 	  return it > 0 ? min(toInteger(it), 0x1fffffffffffff) : 0; // pow(2, 53) - 1 == 9007199254740991
 	};
 
 /***/ },
-/* 60 */
+/* 70 */
 /***/ function(module, exports) {
 
 	// 7.1.4 ToInteger
@@ -430,10 +371,10 @@ webpackJsonp([4],Array(32).concat([
 	};
 
 /***/ },
-/* 61 */
+/* 71 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var toInteger = __webpack_require__(60)
+	var toInteger = __webpack_require__(70)
 	  , max       = Math.max
 	  , min       = Math.min;
 	module.exports = function(index, length){
@@ -442,20 +383,20 @@ webpackJsonp([4],Array(32).concat([
 	};
 
 /***/ },
-/* 62 */
+/* 72 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var shared = __webpack_require__(63)('keys')
-	  , uid    = __webpack_require__(64);
+	var shared = __webpack_require__(73)('keys')
+	  , uid    = __webpack_require__(74);
 	module.exports = function(key){
 	  return shared[key] || (shared[key] = uid(key));
 	};
 
 /***/ },
-/* 63 */
+/* 73 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var global = __webpack_require__(36)
+	var global = __webpack_require__(46)
 	  , SHARED = '__core-js_shared__'
 	  , store  = global[SHARED] || (global[SHARED] = {});
 	module.exports = function(key){
@@ -463,7 +404,7 @@ webpackJsonp([4],Array(32).concat([
 	};
 
 /***/ },
-/* 64 */
+/* 74 */
 /***/ function(module, exports) {
 
 	var id = 0
@@ -473,7 +414,7 @@ webpackJsonp([4],Array(32).concat([
 	};
 
 /***/ },
-/* 65 */
+/* 75 */
 /***/ function(module, exports) {
 
 	// IE 8- don't enum bug keys
@@ -482,38 +423,18 @@ webpackJsonp([4],Array(32).concat([
 	).split(',');
 
 /***/ },
-/* 66 */
-/***/ function(module, exports) {
-
-	exports.f = Object.getOwnPropertySymbols;
-
-/***/ },
-/* 67 */
-/***/ function(module, exports) {
-
-	exports.f = {}.propertyIsEnumerable;
-
-/***/ },
-/* 68 */
+/* 76 */,
+/* 77 */,
+/* 78 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 7.1.13 ToObject(argument)
-	var defined = __webpack_require__(57);
+	var defined = __webpack_require__(67);
 	module.exports = function(it){
 	  return Object(defined(it));
 	};
 
 /***/ },
-/* 69 */,
-/* 70 */,
-/* 71 */,
-/* 72 */,
-/* 73 */,
-/* 74 */,
-/* 75 */,
-/* 76 */,
-/* 77 */,
-/* 78 */,
 /* 79 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -571,7 +492,7 @@ webpackJsonp([4],Array(32).concat([
 	
 	
 	// module
-	exports.push([module.id, "\n.bs_searchbox {\n  padding: 4px 8px;\n}\n.btn-group .dropdown-menu .notify {\n  position: absolute;\n  bottom: 5px;\n  width: 96%;\n  margin: 0 2%;\n  min-height: 26px;\n  padding: 3px 5px;\n  background: #f5f5f5;\n  border: 1px solid #e3e3e3;\n  box-shadow: inset 0 1px 1px rgba(0,0,0,.05);\n   pointer-events: none;\n  opacity: .9;\n}\n", "", {"version":3,"sources":["/./src/components/global/Select.vue.style"],"names":[],"mappings":";AA6KA;EACA,iBAAA;CACA;AACA;EACA,mBAAA;EACA,YAAA;EACA,WAAA;EACA,aAAA;EACA,iBAAA;EACA,iBAAA;EACA,oBAAA;EACA,0BAAA;EACA,4CAAA;GACA,qBAAA;EACA,YAAA;CACA","file":"Select.vue","sourcesContent":["<template>\n  <div class=\"btn-group\" v-bind:class=\"{open:show}\">\n    <button v-el:btn type=\"button\" class=\"btn btn-default dropdown-toggle\" \n      @click=\"toggleDropdown\"\n      @blur=\"show = (search ? show:false)\"\n    >\n      <span class=\"placeholder\" v-show=\"showPlaceholder\">{{placeholder}}</span>\n      <span class=\"content\">{{ selectedItems }}</span>\n      <span class=\"caret\"></span>\n    </button>\n    <ul class=\"dropdown-menu\">\n      <template v-if=\"options.length\">\n        <li v-if=\"search\" class=\"bs-searchbox\">\n          <input type=\"text\" placeholder=\"Search\" v-model=\"searchText\" class=\"form-control\" autocomplete=\"off\">\n        </li>\n        <li v-for=\"option in options | filterBy searchText \" v-bind:id=\"option.value\" style=\"position:relative\">\n          <a @mousedown.prevent=\"select(option.value)\" style=\"cursor:pointer\">\n            {{ option.label }}\n            <span class=\"glyphicon glyphicon-ok check-mark\" v-show=\"multiple ? value.indexOf(option.value) !== -1 : value === option.value\"></span>\n          </a>\n        </li>\n      </template>\n      <slot v-else></slot>\n      <div class=\"notify\" v-show=\"showNotify\" transition=\"fadein\">最多选择 ({{limit}} 个)</div>\n    </ul>\n  </div>\n</template>\n\n<script>\nexport default {\n    props: {\n        options: {\n            type: Array,\n            default() { return [] },\n        },\n        value: {\n            twoWay: true\n        },\n        placeholder: {\n            type: String,\n            default: 'Nothing Selected'\n        },\n        multiple: {\n            type: Boolean,\n            default: false\n        },\n        search: { // Allow searching (only works when options are provided)\n      \t    type: Boolean,\n      \t    default: false\n        },\n        limit: {\n            type: Number,\n            default: 1024\n        },\n        closeOnSelect: { // only works when multiple==false\n            type: Boolean,\n            default: true\n        }\n    },\n    ready() {\n        if (this.multiple) {\n            this.value=[]\n        }\n    },\n    data() {\n        return {\n            searchText: null,\n            show: false,\n            showNotify: false\n        }\n    },\n    computed: {\n        selectedItems() {\n            if (!this.multiple) {\n                if (!this.options.length) {\n                    for (var c of this.$children) {\n                        if (c.value == this.value) {\n                            return c.$els.v.innerText\n                        }\n                    }\n                } else {\n                    for(var i = 0; i<this.options.length; i++) {\n                        if (this.options[i].value === this.value) {\n                            return this.options[i].label;\n                        }\n                    }\n                }\n\n                return \"\"\n            } else {\n                if (!this.options.length){\n        \t\t\tvar r = []\n                    for(var c of this.$children){\n                        if(this.value.indexOf(c.value)!==-1){\n                            r.push(c.$els.v.innerText)\n                        }\n                    }\n                    \n                    return r.join(',');\n\n                } else {\n\n    \t\t\t    // we were given bunch of options, so pluck them out to display\n          \t\t\tvar foundItems = [];\n\n                    for (var item of this.options){\n                  \t    if (this.value.indexOf(item.value) !== -1)\n                      \tfoundItems.push(item.label);\n      \t\t\t    }\n\n                    return foundItems.join(', ');\n                }\n            }\n        },\n        showPlaceholder() {\n          \treturn this.multiple ? this.value.length <= 0 : (typeof this.value==='undefined' || this.value=='');\n        }\n    },\n    watch: {\n        value(val) {\n            let timeout\n            if (timeout) clearTimeout(timeout)\n                if (val.length > this.limit) {\n                    this.showNotify = true\n                    this.value.pop()\n                    timeout = setTimeout(()=> this.showNotify = false, 1000)\n                }\n        }\n    },\n    methods: {\n        select(v) {\n            if(this.multiple != false){\n                var index = this.value.indexOf(v);\n                if (index === -1) {\n                    this.value.push(v);\n                }\n                else {\n                    this.value.$remove(v)\n                }\n            } else {\n                if (this.value === v) {\n                    this.value = ''\n                } else {\n                    this.value = v\n                }\n\n                if (this.closeOnSelect) {\n                    this.toggleDropdown();\n                }\n            }\n        },\n        toggleDropdown() {\n            this.show = !this.show\n\n            return false\n        }\n    },\n\n    ready () {\n        let _this = this\n        $(document).click(function(e){\n            var target = $(e.target);\n\n            if (target.closest(\".btn-group\").length === 0) {\n                if ($('.btn-group').hasClass('open')) {\n                    _this.show = false\n                }\n            }\n        });\n    }\n}\n</script>\n<style>\n.bs_searchbox {\n  padding: 4px 8px;\n}\n.btn-group .dropdown-menu .notify {\n  position: absolute;\n  bottom: 5px;\n  width: 96%;\n  margin: 0 2%;\n  min-height: 26px;\n  padding: 3px 5px;\n  background: #f5f5f5;\n  border: 1px solid #e3e3e3;\n  box-shadow: inset 0 1px 1px rgba(0,0,0,.05);\n   pointer-events: none;\n  opacity: .9;\n}\n</style>"],"sourceRoot":"webpack://"}]);
+	exports.push([module.id, "\n.bs_searchbox {\n  padding: 4px 8px;\n}\n.btn-group .dropdown-menu .notify {\n  position: absolute;\n  bottom: 5px;\n  width: 96%;\n  margin: 0 2%;\n  min-height: 26px;\n  padding: 3px 5px;\n  background: #f5f5f5;\n  border: 1px solid #e3e3e3;\n  box-shadow: inset 0 1px 1px rgba(0,0,0,.05);\n   pointer-events: none;\n  opacity: .9;\n}\n", "", {"version":3,"sources":["/./src/components/global/Select.vue.style"],"names":[],"mappings":";AAkLA;EACA,iBAAA;CACA;AACA;EACA,mBAAA;EACA,YAAA;EACA,WAAA;EACA,aAAA;EACA,iBAAA;EACA,iBAAA;EACA,oBAAA;EACA,0BAAA;EACA,4CAAA;GACA,qBAAA;EACA,YAAA;CACA","file":"Select.vue","sourcesContent":["<template>\n  <div class=\"btn-group\" v-bind:class=\"{open:show}\">\n    <button v-el:btn type=\"button\" class=\"btn btn-default dropdown-toggle\" \n      @click=\"toggleDropdown\"\n      @blur=\"show = (search ? show:false)\"\n      :disabled=\"disabled\"\n    >\n      <span class=\"placeholder\" v-show=\"showPlaceholder\">{{placeholder}}</span>\n      <span class=\"content\">{{ selectedItems }}</span>\n      <span class=\"caret\"></span>\n    </button>\n    <ul class=\"dropdown-menu\">\n      <template v-if=\"options.length\">\n        <li v-if=\"search\" class=\"bs-searchbox\">\n          <input type=\"text\" placeholder=\"Search\" v-model=\"searchText\" class=\"form-control\" autocomplete=\"off\">\n        </li>\n        <li v-for=\"option in options | filterBy searchText \" v-bind:id=\"option.value\" style=\"position:relative\">\n          <a @mousedown.prevent=\"select(option.value)\" style=\"cursor:pointer\">\n            {{ option.label }}\n            <span class=\"glyphicon glyphicon-ok check-mark\" v-show=\"multiple ? value.indexOf(option.value) !== -1 : value === option.value\"></span>\n          </a>\n        </li>\n      </template>\n      <slot v-else></slot>\n      <div class=\"notify\" v-show=\"showNotify\" transition=\"fadein\">最多选择 ({{limit}} 个)</div>\n    </ul>\n  </div>\n</template>\n\n<script>\nexport default {\n    props: {\n        options: {\n            type: Array,\n            default() { return [] },\n        },\n        value: {\n            twoWay: true\n        },\n        placeholder: {\n            type: String,\n            default: 'Nothing Selected'\n        },\n        multiple: {\n            type: Boolean,\n            default: false\n        },\n        search: { // Allow searching (only works when options are provided)\n      \t    type: Boolean,\n      \t    default: false\n        },\n        limit: {\n            type: Number,\n            default: 1024\n        },\n        closeOnSelect: { // only works when multiple==false\n            type: Boolean,\n            default: true\n        },\n        disabled: {\n            type: Boolean,\n            default: false\n        }\n    },\n    ready() {\n        if (this.multiple) {\n            this.value=[]\n        }\n    },\n    data() {\n        return {\n            searchText: null,\n            show: false,\n            showNotify: false\n        }\n    },\n    computed: {\n        selectedItems() {\n            if (!this.multiple) {\n                if (!this.options.length) {\n                    for (var c of this.$children) {\n                        if (c.value == this.value) {\n                            return c.$els.v.innerText\n                        }\n                    }\n                } else {\n                    for(var i = 0; i<this.options.length; i++) {\n                        if (this.options[i].value === this.value) {\n                            return this.options[i].label;\n                        }\n                    }\n                }\n\n                return \"\"\n            } else {\n                if (!this.options.length){\n        \t\t\tvar r = []\n                    for(var c of this.$children){\n                        if(this.value.indexOf(c.value)!==-1){\n                            r.push(c.$els.v.innerText)\n                        }\n                    }\n                    \n                    return r.join(',');\n\n                } else {\n\n    \t\t\t    // we were given bunch of options, so pluck them out to display\n          \t\t\tvar foundItems = [];\n\n                    for (var item of this.options){\n                  \t    if (this.value.indexOf(item.value) !== -1)\n                      \tfoundItems.push(item.label);\n      \t\t\t    }\n\n                    return foundItems.join(', ');\n                }\n            }\n        },\n        showPlaceholder() {\n          \treturn this.multiple ? this.value.length <= 0 : (typeof this.value==='undefined' || this.value=='');\n        }\n    },\n    watch: {\n        value(val) {\n            let timeout\n            if (timeout) clearTimeout(timeout)\n                if (val.length > this.limit) {\n                    this.showNotify = true\n                    this.value.pop()\n                    timeout = setTimeout(()=> this.showNotify = false, 1000)\n                }\n        }\n    },\n    methods: {\n        select(v) {\n            if(this.multiple != false){\n                var index = this.value.indexOf(v);\n                if (index === -1) {\n                    this.value.push(v);\n                }\n                else {\n                    this.value.$remove(v)\n                }\n            } else {\n                if (this.value === v) {\n                    this.value = ''\n                } else {\n                    this.value = v\n                }\n\n                if (this.closeOnSelect) {\n                    this.toggleDropdown();\n                }\n            }\n        },\n        toggleDropdown() {\n            this.show = !this.show\n\n            return false\n        }\n    },\n\n    ready () {\n        let _this = this\n        $(document).click(function(e){\n            var target = $(e.target);\n\n            if (target.closest(\".btn-group\").length === 0) {\n                if ($('.btn-group').hasClass('open')) {\n                    _this.show = false\n                }\n            }\n        });\n    }\n}\n</script>\n<style>\n.bs_searchbox {\n  padding: 4px 8px;\n}\n.btn-group .dropdown-menu .notify {\n  position: absolute;\n  bottom: 5px;\n  width: 96%;\n  margin: 0 2%;\n  min-height: 26px;\n  padding: 3px 5px;\n  background: #f5f5f5;\n  border: 1px solid #e3e3e3;\n  box-shadow: inset 0 1px 1px rgba(0,0,0,.05);\n   pointer-events: none;\n  opacity: .9;\n}\n</style>"],"sourceRoot":"webpack://"}]);
 	
 	// exports
 
@@ -601,6 +522,7 @@ webpackJsonp([4],Array(32).concat([
 	//     <button v-el:btn type="button" class="btn btn-default dropdown-toggle"
 	//       @click="toggleDropdown"
 	//       @blur="show = (search ? show:false)"
+	//       :disabled="disabled"
 	//     >
 	//       <span class="placeholder" v-show="showPlaceholder">{{placeholder}}</span>
 	//       <span class="content">{{ selectedItems }}</span>
@@ -655,6 +577,10 @@ webpackJsonp([4],Array(32).concat([
 	        closeOnSelect: { // only works when multiple==false
 	            type: Boolean,
 	            default: true
+	        },
+	        disabled: {
+	            type: Boolean,
+	            default: false
 	        }
 	    },
 	    ready: function ready() {
@@ -895,7 +821,7 @@ webpackJsonp([4],Array(32).concat([
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(86);
-	var $Object = __webpack_require__(37).Object;
+	var $Object = __webpack_require__(47).Object;
 	module.exports = function defineProperty(it, key, desc){
 	  return $Object.defineProperty(it, key, desc);
 	};
@@ -904,9 +830,9 @@ webpackJsonp([4],Array(32).concat([
 /* 86 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var $export = __webpack_require__(35);
+	var $export = __webpack_require__(45);
 	// 19.1.2.4 / 15.2.3.6 Object.defineProperty(O, P, Attributes)
-	$export($export.S + $export.F * !__webpack_require__(45), 'Object', {defineProperty: __webpack_require__(41).f});
+	$export($export.S + $export.F * !__webpack_require__(55), 'Object', {defineProperty: __webpack_require__(51).f});
 
 /***/ },
 /* 87 */
@@ -927,8 +853,8 @@ webpackJsonp([4],Array(32).concat([
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(90);
-	var global        = __webpack_require__(36)
-	  , hide          = __webpack_require__(40)
+	var global        = __webpack_require__(46)
+	  , hide          = __webpack_require__(50)
 	  , Iterators     = __webpack_require__(93)
 	  , TO_STRING_TAG = __webpack_require__(102)('toStringTag');
 	
@@ -948,7 +874,7 @@ webpackJsonp([4],Array(32).concat([
 	var addToUnscopables = __webpack_require__(91)
 	  , step             = __webpack_require__(92)
 	  , Iterators        = __webpack_require__(93)
-	  , toIObject        = __webpack_require__(54);
+	  , toIObject        = __webpack_require__(64);
 	
 	// 22.1.3.4 Array.prototype.entries()
 	// 22.1.3.13 Array.prototype.keys()
@@ -1005,10 +931,10 @@ webpackJsonp([4],Array(32).concat([
 
 	'use strict';
 	var LIBRARY        = __webpack_require__(95)
-	  , $export        = __webpack_require__(35)
+	  , $export        = __webpack_require__(45)
 	  , redefine       = __webpack_require__(96)
-	  , hide           = __webpack_require__(40)
-	  , has            = __webpack_require__(53)
+	  , hide           = __webpack_require__(50)
+	  , has            = __webpack_require__(63)
 	  , Iterators      = __webpack_require__(93)
 	  , $iterCreate    = __webpack_require__(97)
 	  , setToStringTag = __webpack_require__(101)
@@ -1084,7 +1010,7 @@ webpackJsonp([4],Array(32).concat([
 /* 96 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(40);
+	module.exports = __webpack_require__(50);
 
 /***/ },
 /* 97 */
@@ -1092,12 +1018,12 @@ webpackJsonp([4],Array(32).concat([
 
 	'use strict';
 	var create         = __webpack_require__(98)
-	  , descriptor     = __webpack_require__(49)
+	  , descriptor     = __webpack_require__(59)
 	  , setToStringTag = __webpack_require__(101)
 	  , IteratorPrototype = {};
 	
 	// 25.1.2.1.1 %IteratorPrototype%[@@iterator]()
-	__webpack_require__(40)(IteratorPrototype, __webpack_require__(102)('iterator'), function(){ return this; });
+	__webpack_require__(50)(IteratorPrototype, __webpack_require__(102)('iterator'), function(){ return this; });
 	
 	module.exports = function(Constructor, NAME, next){
 	  Constructor.prototype = create(IteratorPrototype, {next: descriptor(1, next)});
@@ -1109,17 +1035,17 @@ webpackJsonp([4],Array(32).concat([
 /***/ function(module, exports, __webpack_require__) {
 
 	// 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
-	var anObject    = __webpack_require__(42)
+	var anObject    = __webpack_require__(52)
 	  , dPs         = __webpack_require__(99)
-	  , enumBugKeys = __webpack_require__(65)
-	  , IE_PROTO    = __webpack_require__(62)('IE_PROTO')
+	  , enumBugKeys = __webpack_require__(75)
+	  , IE_PROTO    = __webpack_require__(72)('IE_PROTO')
 	  , Empty       = function(){ /* empty */ }
 	  , PROTOTYPE   = 'prototype';
 	
 	// Create object with fake `null` prototype: use iframe Object with cleared prototype
 	var createDict = function(){
 	  // Thrash, waste and sodomy: IE GC bug
-	  var iframe = __webpack_require__(47)('iframe')
+	  var iframe = __webpack_require__(57)('iframe')
 	    , i      = enumBugKeys.length
 	    , gt     = '>'
 	    , iframeDocument;
@@ -1153,11 +1079,11 @@ webpackJsonp([4],Array(32).concat([
 /* 99 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var dP       = __webpack_require__(41)
-	  , anObject = __webpack_require__(42)
-	  , getKeys  = __webpack_require__(51);
+	var dP       = __webpack_require__(51)
+	  , anObject = __webpack_require__(52)
+	  , getKeys  = __webpack_require__(61);
 	
-	module.exports = __webpack_require__(45) ? Object.defineProperties : function defineProperties(O, Properties){
+	module.exports = __webpack_require__(55) ? Object.defineProperties : function defineProperties(O, Properties){
 	  anObject(O);
 	  var keys   = getKeys(Properties)
 	    , length = keys.length
@@ -1171,14 +1097,14 @@ webpackJsonp([4],Array(32).concat([
 /* 100 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(36).document && document.documentElement;
+	module.exports = __webpack_require__(46).document && document.documentElement;
 
 /***/ },
 /* 101 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var def = __webpack_require__(41).f
-	  , has = __webpack_require__(53)
+	var def = __webpack_require__(51).f
+	  , has = __webpack_require__(63)
 	  , TAG = __webpack_require__(102)('toStringTag');
 	
 	module.exports = function(it, tag, stat){
@@ -1189,9 +1115,9 @@ webpackJsonp([4],Array(32).concat([
 /* 102 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var store      = __webpack_require__(63)('wks')
-	  , uid        = __webpack_require__(64)
-	  , Symbol     = __webpack_require__(36).Symbol
+	var store      = __webpack_require__(73)('wks')
+	  , uid        = __webpack_require__(74)
+	  , Symbol     = __webpack_require__(46).Symbol
 	  , USE_SYMBOL = typeof Symbol == 'function';
 	
 	var $exports = module.exports = function(name){
@@ -1206,9 +1132,9 @@ webpackJsonp([4],Array(32).concat([
 /***/ function(module, exports, __webpack_require__) {
 
 	// 19.1.2.9 / 15.2.3.2 Object.getPrototypeOf(O)
-	var has         = __webpack_require__(53)
-	  , toObject    = __webpack_require__(68)
-	  , IE_PROTO    = __webpack_require__(62)('IE_PROTO')
+	var has         = __webpack_require__(63)
+	  , toObject    = __webpack_require__(78)
+	  , IE_PROTO    = __webpack_require__(72)('IE_PROTO')
 	  , ObjectProto = Object.prototype;
 	
 	module.exports = Object.getPrototypeOf || function(O){
@@ -1245,8 +1171,8 @@ webpackJsonp([4],Array(32).concat([
 /* 105 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var toInteger = __webpack_require__(60)
-	  , defined   = __webpack_require__(57);
+	var toInteger = __webpack_require__(70)
+	  , defined   = __webpack_require__(67);
 	// true  -> String#at
 	// false -> String#codePointAt
 	module.exports = function(TO_STRING){
@@ -1267,9 +1193,9 @@ webpackJsonp([4],Array(32).concat([
 /* 106 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var anObject = __webpack_require__(42)
+	var anObject = __webpack_require__(52)
 	  , get      = __webpack_require__(107);
-	module.exports = __webpack_require__(37).getIterator = function(it){
+	module.exports = __webpack_require__(47).getIterator = function(it){
 	  var iterFn = get(it);
 	  if(typeof iterFn != 'function')throw TypeError(it + ' is not iterable!');
 	  return anObject(iterFn.call(it));
@@ -1282,7 +1208,7 @@ webpackJsonp([4],Array(32).concat([
 	var classof   = __webpack_require__(108)
 	  , ITERATOR  = __webpack_require__(102)('iterator')
 	  , Iterators = __webpack_require__(93);
-	module.exports = __webpack_require__(37).getIteratorMethod = function(it){
+	module.exports = __webpack_require__(47).getIteratorMethod = function(it){
 	  if(it != undefined)return it[ITERATOR]
 	    || it['@@iterator']
 	    || Iterators[classof(it)];
@@ -1293,7 +1219,7 @@ webpackJsonp([4],Array(32).concat([
 /***/ function(module, exports, __webpack_require__) {
 
 	// getting tag from 19.1.3.6 Object.prototype.toString()
-	var cof = __webpack_require__(56)
+	var cof = __webpack_require__(66)
 	  , TAG = __webpack_require__(102)('toStringTag')
 	  // ES3 wrong here
 	  , ARG = cof(function(){ return arguments; }()) == 'Arguments';
@@ -1320,7 +1246,7 @@ webpackJsonp([4],Array(32).concat([
 /* 109 */
 /***/ function(module, exports) {
 
-	module.exports = "\n  <div class=\"btn-group\" v-bind:class=\"{open:show}\">\n    <button v-el:btn type=\"button\" class=\"btn btn-default dropdown-toggle\" \n      @click=\"toggleDropdown\"\n      @blur=\"show = (search ? show:false)\"\n    >\n      <span class=\"placeholder\" v-show=\"showPlaceholder\">{{placeholder}}</span>\n      <span class=\"content\">{{ selectedItems }}</span>\n      <span class=\"caret\"></span>\n    </button>\n    <ul class=\"dropdown-menu\">\n      <template v-if=\"options.length\">\n        <li v-if=\"search\" class=\"bs-searchbox\">\n          <input type=\"text\" placeholder=\"Search\" v-model=\"searchText\" class=\"form-control\" autocomplete=\"off\">\n        </li>\n        <li v-for=\"option in options | filterBy searchText \" v-bind:id=\"option.value\" style=\"position:relative\">\n          <a @mousedown.prevent=\"select(option.value)\" style=\"cursor:pointer\">\n            {{ option.label }}\n            <span class=\"glyphicon glyphicon-ok check-mark\" v-show=\"multiple ? value.indexOf(option.value) !== -1 : value === option.value\"></span>\n          </a>\n        </li>\n      </template>\n      <slot v-else></slot>\n      <div class=\"notify\" v-show=\"showNotify\" transition=\"fadein\">最多选择 ({{limit}} 个)</div>\n    </ul>\n  </div>\n";
+	module.exports = "\n  <div class=\"btn-group\" v-bind:class=\"{open:show}\">\n    <button v-el:btn type=\"button\" class=\"btn btn-default dropdown-toggle\" \n      @click=\"toggleDropdown\"\n      @blur=\"show = (search ? show:false)\"\n      :disabled=\"disabled\"\n    >\n      <span class=\"placeholder\" v-show=\"showPlaceholder\">{{placeholder}}</span>\n      <span class=\"content\">{{ selectedItems }}</span>\n      <span class=\"caret\"></span>\n    </button>\n    <ul class=\"dropdown-menu\">\n      <template v-if=\"options.length\">\n        <li v-if=\"search\" class=\"bs-searchbox\">\n          <input type=\"text\" placeholder=\"Search\" v-model=\"searchText\" class=\"form-control\" autocomplete=\"off\">\n        </li>\n        <li v-for=\"option in options | filterBy searchText \" v-bind:id=\"option.value\" style=\"position:relative\">\n          <a @mousedown.prevent=\"select(option.value)\" style=\"cursor:pointer\">\n            {{ option.label }}\n            <span class=\"glyphicon glyphicon-ok check-mark\" v-show=\"multiple ? value.indexOf(option.value) !== -1 : value === option.value\"></span>\n          </a>\n        </li>\n      </template>\n      <slot v-else></slot>\n      <div class=\"notify\" v-show=\"showNotify\" transition=\"fadein\">最多选择 ({{limit}} 个)</div>\n    </ul>\n  </div>\n";
 
 /***/ },
 /* 110 */,
@@ -1467,10 +1393,6 @@ webpackJsonp([4],Array(32).concat([
 	    value: true
 	});
 	
-	var _assign = __webpack_require__(32);
-	
-	var _assign2 = _interopRequireDefault(_assign);
-	
 	var _Select = __webpack_require__(79);
 	
 	var _Select2 = _interopRequireDefault(_Select);
@@ -1481,80 +1403,16 @@ webpackJsonp([4],Array(32).concat([
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var origin = {
-	    netType: '',
-	    idc: [],
-	    network: '',
-	    gateway: '',
-	    ips: '',
-	    operator: ''
-	},
-	    init = (0, _assign2.default)({}, origin); // <!-- IP规划 -->
-	// <template>
-	//     <div>
-	//         <form class="form-horizontal clearfix form-search">
-	//         <div class="col-sm-3">
-	//                 <div class="form-group input-box">
-	//                     <label class="col-sm-4 control-label">类型：<span class="text-danger">*</span></label>
-	//                     <div class="col-sm-8">
-	//                         <v-select :value.sync="netType" :options="netTypes" placeholder="请选择">
-	//                         </v-select>
-	//                     </div>
-	//                 </div>
-	//                 <div class="form-group">
-	//                     <label class="col-sm-4 control-label">IP地址：</label>
-	//                     <div class="col-sm-8">
-	//                         <input type="text" class="form-control" placeholder="多个，精确" onfocus="this.blur()" v-model="ips" @click="showBroad('ips')">
-	//                     </div>
-	//                 </div>
-	//             </div>
-	//             <div class="col-sm-3 input-box">
-	//                 <div class="form-group" v-show="netType === '3'">
-	//                     <label class="col-sm-4 control-label">运营商：</label>
-	//                     <div class="col-sm-8">
-	//                         <v-select :value.sync="operator" :options="operators" placeholder="请选择">
-	//                         </v-select>
-	//                     </div>
-	//                 </div>
-	//                 <div class="form-group">
-	//                     <label class="col-sm-4 control-label">规划机房：<span class="text-danger">*</span></label>
-	//                     <div class="col-sm-8">
-	//                         <v-select :value.sync="idc" :options="idcs" placeholder="请选择" :search="true" multiple>
-	//                         </v-select>
-	//                     </div>
-	//                 </div>
-	//             </div>
-	//             <div class="col-sm-3">
-	//                 <div class="form-group">
-	//                     <label class="col-sm-4 control-label">网段：</label>
-	//                     <div class="col-sm-8">
-	//                         <input type="text" class="form-control" v-model="network">
-	//                     </div>
-	//                 </div>
-	//             </div>
-	//             <div class="col-sm-3">
-	//                 <div class="form-group">
-	//                     <label class="col-sm-4 control-label">网关：<span class="text-danger">*</span></label>
-	//                     <div class="col-sm-8">
-	//                         <input type="text" class="form-control" v-model="gateway">
-	//                     </div>
-	//                 </div>
-	//             </div>
-	//         </form>
-	//         <div class="text-center btn-operate">
-	//             <button type="button" class="btn btn-default" @click="saveFn" :disabled="netType && idc && gateway.trim() ? false : true">
-	//                 保存
-	//             </button>
-	//         </div>
-	//     </div>
-	// </template>
-	//
-	// <script>
-	
-	
 	exports.default = {
 	    data: function data() {
-	        return origin;
+	        return {
+	            netType: '',
+	            idc: '',
+	            network: '',
+	            gateway: '',
+	            ips: '',
+	            operator: ''
+	        };
 	    },
 	
 	    methods: {
@@ -1575,19 +1433,70 @@ webpackJsonp([4],Array(32).concat([
 	        saveFn: function saveFn() {
 	            var _this = this;
 	
-	            this.$http({
-	                url: '/ip/ip_add/',
-	                method: 'POST',
-	                data: this.$data
-	            }).then(function (response) {
-	                if (response.data.code === 200) {
-	                    _this.$data = (0, _assign2.default)({}, init);
+	            var regIp = /^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$/,
+	                regNetwork = /^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.0\/24$/;
 	
-	                    _this.$dispatch('show-success');
+	            if (!regNetwork.test(this.network.trim()) && this.network.trim()) {
+	                this.$dispatch('show-notify', '网段格式错误，请检查');
+	
+	                return false;
+	            }
+	
+	            if (!regIp.test(this.gateway.trim())) {
+	                this.$dispatch('show-notify', '网关格式错误，请检查');
+	
+	                return false;
+	            }
+	
+	            var ipArr = this.ips.split(','),
+	                newArr = [],
+	                vaild = true;
+	
+	            ipArr.forEach(function (e) {
+	                if (e.includes('-') && e.split('-').length === 2) {
+	                    var first = e.split('-')[0].trim(),
+	                        second = e.split('-')[1].trim();
+	
+	                    if (regIp.test(first) && regIp.test(second)) {
+	                        newArr.push(first + '-' + second);
+	                    } else {
+	                        _this.$dispatch('show-notify', 'ip段格式错误，请检查');
+	
+	                        vaild = false;
+	                    }
 	                } else {
-	                    _this.$dispatch('show-error');
+	                    if (regIp.test(e.trim())) {
+	                        newArr.push(e.trim());
+	                    } else {
+	                        _this.$dispatch('show-notify', 'ip格式错误，请检查');
+	
+	                        vaild = false;
+	                    }
 	                }
 	            });
+	
+	            if (vaild) {
+	                this.$http({
+	                    url: '/ip/ip_add/',
+	                    method: 'POST',
+	                    data: {
+	                        netType: this.netType,
+	                        idc: this.idc,
+	                        network: this.network,
+	                        gateway: this.gateway,
+	                        ips: newArr,
+	                        operator: this.operator
+	                    }
+	                }).then(function (response) {
+	                    if (response.data.code === 200) {
+	                        _this.netType = '', _this.idc = '', _this.network = '', _this.gateway = '', _this.ips = '', _this.operator = '';
+	
+	                        _this.$dispatch('show-success');
+	                    } else {
+	                        _this.$dispatch('show-error');
+	                    }
+	                });
+	            }
 	        }
 	    },
 	    components: {
@@ -1622,12 +1531,73 @@ webpackJsonp([4],Array(32).concat([
 	// </style>
 	//
 	/* generated by vue-loader */
+	// <!-- IP规划 -->
+	// <template>
+	//     <div>
+	//         <form class="form-horizontal clearfix form-search">
+	//             <div class="col-sm-3">
+	//                 <div class="form-group input-box">
+	//                     <label class="col-sm-4 control-label">类型：<span class="text-danger">*</span></label>
+	//                     <div class="col-sm-8">
+	//                         <v-select :value.sync="netType" :options="netTypes" placeholder="请选择">
+	//                         </v-select>
+	//                     </div>
+	//                 </div>
+	//                 <div class="form-group">
+	//                     <label class="col-sm-4 control-label">IP地址：</label>
+	//                     <div class="col-sm-8">
+	//                         <input type="text" class="form-control" placeholder="多个，精确" onfocus="this.blur()" v-model="ips" @click="showBroad('ips')">
+	//                     </div>
+	//                 </div>
+	//             </div>
+	//             <div class="col-sm-3 input-box">
+	//                 <div class="form-group" v-show="netType === '3'">
+	//                     <label class="col-sm-4 control-label">运营商：</label>
+	//                     <div class="col-sm-8">
+	//                         <v-select :value.sync="operator" :options="operators" placeholder="请选择">
+	//                         </v-select>
+	//                     </div>
+	//                 </div>
+	//                 <div class="form-group">
+	//                     <label class="col-sm-4 control-label">规划机房：<span class="text-danger">*</span></label>
+	//                     <div class="col-sm-8">
+	//                         <v-select :value.sync="idc" :options="idcs" placeholder="请选择" :search="true">
+	//                         </v-select>
+	//                     </div>
+	//                 </div>
+	//             </div>
+	//             <div class="col-sm-3">
+	//                 <div class="form-group">
+	//                     <label class="col-sm-4 control-label">网段：</label>
+	//                     <div class="col-sm-8">
+	//                         <input type="text" class="form-control" v-model="network">
+	//                     </div>
+	//                 </div>
+	//             </div>
+	//             <div class="col-sm-3">
+	//                 <div class="form-group">
+	//                     <label class="col-sm-4 control-label">网关：<span class="text-danger">*</span></label>
+	//                     <div class="col-sm-8">
+	//                         <input type="text" class="form-control" v-model="gateway">
+	//                     </div>
+	//                 </div>
+	//             </div>
+	//         </form>
+	//         <div class="text-center btn-operate">
+	//             <button type="button" class="btn btn-default" @click="saveFn" :disabled="netType && idc && gateway.trim() ? false : true">
+	//                 保存
+	//             </button>
+	//         </div>
+	//     </div>
+	// </template>
+	//
+	// <script>
 
 /***/ },
 /* 186 */
 /***/ function(module, exports) {
 
-	module.exports = "\n    <div _v-709264ae=\"\">\n        <form class=\"form-horizontal clearfix form-search\" _v-709264ae=\"\">\n        <div class=\"col-sm-3\" _v-709264ae=\"\">\n                <div class=\"form-group input-box\" _v-709264ae=\"\">\n                    <label class=\"col-sm-4 control-label\" _v-709264ae=\"\">类型：<span class=\"text-danger\" _v-709264ae=\"\">*</span></label>\n                    <div class=\"col-sm-8\" _v-709264ae=\"\">\n                        <v-select :value.sync=\"netType\" :options=\"netTypes\" placeholder=\"请选择\" _v-709264ae=\"\">\n                        </v-select>\n                    </div>\n                </div>\n                <div class=\"form-group\" _v-709264ae=\"\">\n                    <label class=\"col-sm-4 control-label\" _v-709264ae=\"\">IP地址：</label>\n                    <div class=\"col-sm-8\" _v-709264ae=\"\">\n                        <input type=\"text\" class=\"form-control\" placeholder=\"多个，精确\" onfocus=\"this.blur()\" v-model=\"ips\" @click=\"showBroad('ips')\" _v-709264ae=\"\">\n                    </div>\n                </div>\n            </div>\n            <div class=\"col-sm-3 input-box\" _v-709264ae=\"\">\n                <div class=\"form-group\" v-show=\"netType === '3'\" _v-709264ae=\"\">\n                    <label class=\"col-sm-4 control-label\" _v-709264ae=\"\">运营商：</label>\n                    <div class=\"col-sm-8\" _v-709264ae=\"\">\n                        <v-select :value.sync=\"operator\" :options=\"operators\" placeholder=\"请选择\" _v-709264ae=\"\">\n                        </v-select>\n                    </div>\n                </div>\n                <div class=\"form-group\" _v-709264ae=\"\">\n                    <label class=\"col-sm-4 control-label\" _v-709264ae=\"\">规划机房：<span class=\"text-danger\" _v-709264ae=\"\">*</span></label>\n                    <div class=\"col-sm-8\" _v-709264ae=\"\">\n                        <v-select :value.sync=\"idc\" :options=\"idcs\" placeholder=\"请选择\" :search=\"true\" multiple=\"\" _v-709264ae=\"\">\n                        </v-select>\n                    </div>\n                </div>\n            </div>\n            <div class=\"col-sm-3\" _v-709264ae=\"\">\n                <div class=\"form-group\" _v-709264ae=\"\">\n                    <label class=\"col-sm-4 control-label\" _v-709264ae=\"\">网段：</label>\n                    <div class=\"col-sm-8\" _v-709264ae=\"\">\n                        <input type=\"text\" class=\"form-control\" v-model=\"network\" _v-709264ae=\"\">\n                    </div>\n                </div>\n            </div>\n            <div class=\"col-sm-3\" _v-709264ae=\"\">\n                <div class=\"form-group\" _v-709264ae=\"\">\n                    <label class=\"col-sm-4 control-label\" _v-709264ae=\"\">网关：<span class=\"text-danger\" _v-709264ae=\"\">*</span></label>\n                    <div class=\"col-sm-8\" _v-709264ae=\"\">\n                        <input type=\"text\" class=\"form-control\" v-model=\"gateway\" _v-709264ae=\"\">\n                    </div>\n                </div>\n            </div>\n        </form>\n        <div class=\"text-center btn-operate\" _v-709264ae=\"\">\n            <button type=\"button\" class=\"btn btn-default\" @click=\"saveFn\" :disabled=\"netType &amp;&amp; idc &amp;&amp; gateway.trim() ? false : true\" _v-709264ae=\"\">\n                保存\n            </button>\n        </div>\n    </div>\n";
+	module.exports = "\n    <div _v-709264ae=\"\">\n        <form class=\"form-horizontal clearfix form-search\" _v-709264ae=\"\">\n            <div class=\"col-sm-3\" _v-709264ae=\"\">\n                <div class=\"form-group input-box\" _v-709264ae=\"\">\n                    <label class=\"col-sm-4 control-label\" _v-709264ae=\"\">类型：<span class=\"text-danger\" _v-709264ae=\"\">*</span></label>\n                    <div class=\"col-sm-8\" _v-709264ae=\"\">\n                        <v-select :value.sync=\"netType\" :options=\"netTypes\" placeholder=\"请选择\" _v-709264ae=\"\">\n                        </v-select>\n                    </div>\n                </div>\n                <div class=\"form-group\" _v-709264ae=\"\">\n                    <label class=\"col-sm-4 control-label\" _v-709264ae=\"\">IP地址：</label>\n                    <div class=\"col-sm-8\" _v-709264ae=\"\">\n                        <input type=\"text\" class=\"form-control\" placeholder=\"多个，精确\" onfocus=\"this.blur()\" v-model=\"ips\" @click=\"showBroad('ips')\" _v-709264ae=\"\">\n                    </div>\n                </div>\n            </div>\n            <div class=\"col-sm-3 input-box\" _v-709264ae=\"\">\n                <div class=\"form-group\" v-show=\"netType === '3'\" _v-709264ae=\"\">\n                    <label class=\"col-sm-4 control-label\" _v-709264ae=\"\">运营商：</label>\n                    <div class=\"col-sm-8\" _v-709264ae=\"\">\n                        <v-select :value.sync=\"operator\" :options=\"operators\" placeholder=\"请选择\" _v-709264ae=\"\">\n                        </v-select>\n                    </div>\n                </div>\n                <div class=\"form-group\" _v-709264ae=\"\">\n                    <label class=\"col-sm-4 control-label\" _v-709264ae=\"\">规划机房：<span class=\"text-danger\" _v-709264ae=\"\">*</span></label>\n                    <div class=\"col-sm-8\" _v-709264ae=\"\">\n                        <v-select :value.sync=\"idc\" :options=\"idcs\" placeholder=\"请选择\" :search=\"true\" _v-709264ae=\"\">\n                        </v-select>\n                    </div>\n                </div>\n            </div>\n            <div class=\"col-sm-3\" _v-709264ae=\"\">\n                <div class=\"form-group\" _v-709264ae=\"\">\n                    <label class=\"col-sm-4 control-label\" _v-709264ae=\"\">网段：</label>\n                    <div class=\"col-sm-8\" _v-709264ae=\"\">\n                        <input type=\"text\" class=\"form-control\" v-model=\"network\" _v-709264ae=\"\">\n                    </div>\n                </div>\n            </div>\n            <div class=\"col-sm-3\" _v-709264ae=\"\">\n                <div class=\"form-group\" _v-709264ae=\"\">\n                    <label class=\"col-sm-4 control-label\" _v-709264ae=\"\">网关：<span class=\"text-danger\" _v-709264ae=\"\">*</span></label>\n                    <div class=\"col-sm-8\" _v-709264ae=\"\">\n                        <input type=\"text\" class=\"form-control\" v-model=\"gateway\" _v-709264ae=\"\">\n                    </div>\n                </div>\n            </div>\n        </form>\n        <div class=\"text-center btn-operate\" _v-709264ae=\"\">\n            <button type=\"button\" class=\"btn btn-default\" @click=\"saveFn\" :disabled=\"netType &amp;&amp; idc &amp;&amp; gateway.trim() ? false : true\" _v-709264ae=\"\">\n                保存\n            </button>\n        </div>\n    </div>\n";
 
 /***/ }
 ]));

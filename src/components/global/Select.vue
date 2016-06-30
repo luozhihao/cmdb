@@ -3,6 +3,7 @@
     <button v-el:btn type="button" class="btn btn-default dropdown-toggle" 
       @click="toggleDropdown"
       @blur="show = (search ? show:false)"
+      :disabled="disabled"
     >
       <span class="placeholder" v-show="showPlaceholder">{{placeholder}}</span>
       <span class="content">{{ selectedItems }}</span>
@@ -55,6 +56,10 @@ export default {
         closeOnSelect: { // only works when multiple==false
             type: Boolean,
             default: true
+        },
+        disabled: {
+            type: Boolean,
+            default: false
         }
     },
     ready() {

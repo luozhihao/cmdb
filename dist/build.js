@@ -27328,44 +27328,7 @@
 
 /***/ },
 /* 31 */,
-/* 32 */,
-/* 33 */,
-/* 34 */,
-/* 35 */,
-/* 36 */,
-/* 37 */,
-/* 38 */,
-/* 39 */,
-/* 40 */,
-/* 41 */,
-/* 42 */,
-/* 43 */,
-/* 44 */,
-/* 45 */,
-/* 46 */,
-/* 47 */,
-/* 48 */,
-/* 49 */,
-/* 50 */,
-/* 51 */,
-/* 52 */,
-/* 53 */,
-/* 54 */,
-/* 55 */,
-/* 56 */,
-/* 57 */,
-/* 58 */,
-/* 59 */,
-/* 60 */,
-/* 61 */,
-/* 62 */,
-/* 63 */,
-/* 64 */,
-/* 65 */,
-/* 66 */,
-/* 67 */,
-/* 68 */,
-/* 69 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	(function webpackUniversalModuleDefinition(root, factory) {
@@ -33306,6 +33269,43 @@
 	//# sourceMappingURL=vue-strap.js.map
 
 /***/ },
+/* 33 */,
+/* 34 */,
+/* 35 */,
+/* 36 */,
+/* 37 */,
+/* 38 */,
+/* 39 */,
+/* 40 */,
+/* 41 */,
+/* 42 */,
+/* 43 */,
+/* 44 */,
+/* 45 */,
+/* 46 */,
+/* 47 */,
+/* 48 */,
+/* 49 */,
+/* 50 */,
+/* 51 */,
+/* 52 */,
+/* 53 */,
+/* 54 */,
+/* 55 */,
+/* 56 */,
+/* 57 */,
+/* 58 */,
+/* 59 */,
+/* 60 */,
+/* 61 */,
+/* 62 */,
+/* 63 */,
+/* 64 */,
+/* 65 */,
+/* 66 */,
+/* 67 */,
+/* 68 */,
+/* 69 */,
 /* 70 */,
 /* 71 */,
 /* 72 */,
@@ -34294,7 +34294,7 @@
 	
 	
 	// module
-	exports.push([module.id, "\r\n.right-view[_v-0ce25cca] {\r\n    width: auto;\r\n    position: absolute;\r\n    top: 0;\r\n    left: 200px;\r\n    bottom: 0;\r\n    right: 0;\r\n    overflow: hidden;\r\n    overflow-y: auto;\r\n    background-color: #f5f5f5;\r\n}\r\n\r\n.right-main[_v-0ce25cca] {\r\n    width: auto;\r\n    position: absolute;\r\n    top: 50px;\r\n    left: 0;\r\n    bottom: 0;\r\n    right: 0;\r\n    padding: 20px;\r\n    overflow: hidden;\r\n    overflow-y: auto;\r\n    background-color: #f5f5f5;\r\n}\r\n\r\n.fade-transition[_v-0ce25cca] {\r\n    -webkit-transition: opacity 0.1s ease;\r\n    transition: opacity 0.1s ease;\r\n}\r\n\r\n.fade-enter[_v-0ce25cca], .fade-leave[_v-0ce25cca] {\r\n    opacity: 0;\r\n}\r\n", "", {"version":3,"sources":["/./src/views/Main.vue.style"],"names":[],"mappings":";AAuGA;IACA,YAAA;IACA,mBAAA;IACA,OAAA;IACA,YAAA;IACA,UAAA;IACA,SAAA;IACA,iBAAA;IACA,iBAAA;IACA,0BAAA;CACA;;AAEA;IACA,YAAA;IACA,mBAAA;IACA,UAAA;IACA,QAAA;IACA,UAAA;IACA,SAAA;IACA,cAAA;IACA,iBAAA;IACA,iBAAA;IACA,0BAAA;CACA;;AAEA;IACA,sCAAA;IAAA,8BAAA;CACA;;AAEA;IACA,WAAA;CACA","file":"Main.vue","sourcesContent":["<template>\r\n    <div class=\"right-view\">\r\n        <Top></Top>\r\n        <div class=\"right-main\">\r\n            <router-view transition=\"fade\" transition-mode=\"out-in\"></router-view>\r\n        </div>\r\n\r\n        <alert\r\n          :show.sync=\"showSuccess\"\r\n          :duration=\"3000\"\r\n          type=\"success\"\r\n          width=\"250px\"\r\n          placement=\"top-right\"\r\n          dismissable\r\n        >\r\n          <span class=\"icon-ok-circled alert-icon-float-left\"></span>\r\n          <strong>操作成功 :)</strong>\r\n          <p>{{ success }}</p>\r\n        </alert>\r\n\r\n        <alert\r\n          :show.sync=\"showNotify\"\r\n          :duration=\"3000\"\r\n          type=\"info\"\r\n          width=\"250px\"\r\n          placement=\"top-right\"\r\n          dismissable\r\n        >\r\n          <span class=\"icon-info-circled alert-icon-float-left\"></span>\r\n          <strong>提示信息:</strong>\r\n          <p>{{ notify }}</p>\r\n        </alert>\r\n\r\n        <alert\r\n          :show.sync=\"showError\"\r\n          :duration=\"3000\"\r\n          type=\"danger\"\r\n          width=\"250px\"\r\n          placement=\"top-right\"\r\n          dismissable>\r\n          <span class=\"icon-info-circled alert-icon-float-left\"></span>\r\n          <strong>操作失败 :(</strong>\r\n          <p>{{ danger }}</p>\r\n        </alert>\r\n\r\n        <broad-modal></broad-modal>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\nimport Top from './Top.vue'\r\nimport { alert } from 'vue-strap'\r\nimport broadModal from './Broad.vue'\r\n\r\nexport default {\r\n    data () {\r\n        return {\r\n            showSuccess: false,\r\n            showNotify: false,\r\n            showError: false,\r\n            success: '',\r\n            notify: '',\r\n            danger: ''\r\n        }\r\n    },\r\n    components: {\r\n        Top,\r\n        alert,\r\n        broadModal\r\n    },\r\n    events: {\r\n        'show-success' (msg) {\r\n            this.showSuccess = true\r\n            this.showNotify = false\r\n            this.showError = false\r\n\r\n            msg === undefined ? this.success = '你的操作已经成功执行~' : this.success = msg\r\n        },\r\n        'show-notify' (msg) {\r\n            this.showNotify = true\r\n            this.showSuccess = false\r\n            this.showError = false\r\n\r\n            msg === undefined ? this.notify = '你的操作已经成功执行~' : this.notify = msg\r\n        },\r\n        'show-error' (msg) {\r\n            this.showError = true\r\n            this.showSuccess = false\r\n            this.showNotify = false\r\n\r\n            msg === undefined ? this.danger = '你的操作执行失败了~' : this.danger = msg\r\n        },\r\n        'showBroad' (param) {\r\n            this.$broadcast('showBroad', param)\r\n        },\r\n        'getTxt' (param) {\r\n            this.$broadcast('getTxt', param)\r\n        }\r\n    }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.right-view {\r\n    width: auto;\r\n    position: absolute;\r\n    top: 0;\r\n    left: 200px;\r\n    bottom: 0;\r\n    right: 0;\r\n    overflow: hidden;\r\n    overflow-y: auto;\r\n    background-color: #f5f5f5;\r\n}\r\n\r\n.right-main {\r\n    width: auto;\r\n    position: absolute;\r\n    top: 50px;\r\n    left: 0;\r\n    bottom: 0;\r\n    right: 0;\r\n    padding: 20px;\r\n    overflow: hidden;\r\n    overflow-y: auto;\r\n    background-color: #f5f5f5;\r\n}\r\n\r\n.fade-transition {\r\n    transition: opacity 0.1s ease;\r\n}\r\n\r\n.fade-enter, .fade-leave {\r\n    opacity: 0;\r\n}\r\n</style>"],"sourceRoot":"webpack://"}]);
+	exports.push([module.id, "\r\n.right-view[_v-0ce25cca] {\r\n    width: auto;\r\n    position: absolute;\r\n    top: 0;\r\n    left: 200px;\r\n    bottom: 0;\r\n    right: 0;\r\n    overflow: hidden;\r\n    overflow-y: auto;\r\n    background-color: #f5f5f5;\r\n}\r\n\r\n.right-main[_v-0ce25cca] {\r\n    width: auto;\r\n    position: absolute;\r\n    top: 50px;\r\n    left: 0;\r\n    bottom: 0;\r\n    right: 0;\r\n    padding: 20px;\r\n    overflow: hidden;\r\n    overflow-y: auto;\r\n    background-color: #f5f5f5;\r\n}\r\n\r\n.fade-transition[_v-0ce25cca] {\r\n    -webkit-transition: opacity 0.1s ease;\r\n    transition: opacity 0.1s ease;\r\n}\r\n\r\n.fade-enter[_v-0ce25cca], .fade-leave[_v-0ce25cca] {\r\n    opacity: 0;\r\n}\r\n", "", {"version":3,"sources":["/./src/views/Main.vue.style"],"names":[],"mappings":";AA0GA;IACA,YAAA;IACA,mBAAA;IACA,OAAA;IACA,YAAA;IACA,UAAA;IACA,SAAA;IACA,iBAAA;IACA,iBAAA;IACA,0BAAA;CACA;;AAEA;IACA,YAAA;IACA,mBAAA;IACA,UAAA;IACA,QAAA;IACA,UAAA;IACA,SAAA;IACA,cAAA;IACA,iBAAA;IACA,iBAAA;IACA,0BAAA;CACA;;AAEA;IACA,sCAAA;IAAA,8BAAA;CACA;;AAEA;IACA,WAAA;CACA","file":"Main.vue","sourcesContent":["<template>\r\n    <div class=\"right-view\">\r\n        <Top></Top>\r\n        <div class=\"right-main\">\r\n            <router-view transition=\"fade\" transition-mode=\"out-in\"></router-view>\r\n        </div>\r\n\r\n        <alert\r\n          :show.sync=\"showSuccess\"\r\n          :duration=\"3000\"\r\n          type=\"success\"\r\n          width=\"250px\"\r\n          placement=\"top-right\"\r\n          dismissable\r\n        >\r\n          <span class=\"icon-ok-circled alert-icon-float-left\"></span>\r\n          <strong>操作成功 :)</strong>\r\n          <p>{{ success }}</p>\r\n        </alert>\r\n\r\n        <alert\r\n          :show.sync=\"showNotify\"\r\n          :duration=\"3000\"\r\n          type=\"info\"\r\n          width=\"250px\"\r\n          placement=\"top-right\"\r\n          dismissable\r\n        >\r\n          <span class=\"icon-info-circled alert-icon-float-left\"></span>\r\n          <strong>提示信息:</strong>\r\n          <p>{{ notify }}</p>\r\n        </alert>\r\n\r\n        <alert\r\n          :show.sync=\"showError\"\r\n          :duration=\"3000\"\r\n          type=\"danger\"\r\n          width=\"250px\"\r\n          placement=\"top-right\"\r\n          dismissable>\r\n          <span class=\"icon-info-circled alert-icon-float-left\"></span>\r\n          <strong>操作失败 :(</strong>\r\n          <p>{{ danger }}</p>\r\n        </alert>\r\n\r\n        <broad-modal></broad-modal>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\nimport Top from './Top.vue'\r\nimport { alert } from 'vue-strap'\r\nimport broadModal from './Broad.vue'\r\n\r\nexport default {\r\n    data () {\r\n        return {\r\n            showSuccess: false,\r\n            showNotify: false,\r\n            showError: false,\r\n            success: '',\r\n            notify: '',\r\n            danger: ''\r\n        }\r\n    },\r\n    components: {\r\n        Top,\r\n        alert,\r\n        broadModal\r\n    },\r\n    events: {\r\n        'show-success' (msg) {\r\n            this.showSuccess = true\r\n            this.showNotify = false\r\n            this.showError = false\r\n\r\n            msg === undefined ? this.success = '你的操作已经成功执行~' : this.success = msg\r\n        },\r\n        'show-notify' (msg) {\r\n            this.showNotify = true\r\n            this.showSuccess = false\r\n            this.showError = false\r\n\r\n            msg === undefined ? this.notify = '你的操作已经成功执行~' : this.notify = msg\r\n        },\r\n        'show-error' (msg) {\r\n            this.showError = true\r\n            this.showSuccess = false\r\n            this.showNotify = false\r\n\r\n            msg === undefined ? this.danger = '你的操作执行失败了~' : this.danger = msg\r\n        },\r\n        'showBroad' (param) {\r\n            this.$broadcast('showBroad', param)\r\n        },\r\n        'getTxt' (param) {\r\n            this.$broadcast('getTxt', param)\r\n        },\r\n        'getTxt2' (param) {\r\n            this.$broadcast('getTxt2', param)\r\n        }\r\n    }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.right-view {\r\n    width: auto;\r\n    position: absolute;\r\n    top: 0;\r\n    left: 200px;\r\n    bottom: 0;\r\n    right: 0;\r\n    overflow: hidden;\r\n    overflow-y: auto;\r\n    background-color: #f5f5f5;\r\n}\r\n\r\n.right-main {\r\n    width: auto;\r\n    position: absolute;\r\n    top: 50px;\r\n    left: 0;\r\n    bottom: 0;\r\n    right: 0;\r\n    padding: 20px;\r\n    overflow: hidden;\r\n    overflow-y: auto;\r\n    background-color: #f5f5f5;\r\n}\r\n\r\n.fade-transition {\r\n    transition: opacity 0.1s ease;\r\n}\r\n\r\n.fade-enter, .fade-leave {\r\n    opacity: 0;\r\n}\r\n</style>"],"sourceRoot":"webpack://"}]);
 	
 	// exports
 
@@ -34313,7 +34313,7 @@
 	
 	var _Top2 = _interopRequireDefault(_Top);
 	
-	var _vueStrap = __webpack_require__(69);
+	var _vueStrap = __webpack_require__(32);
 	
 	var _Broad = __webpack_require__(271);
 	
@@ -34365,6 +34365,9 @@
 	        },
 	        'getTxt': function getTxt(param) {
 	            this.$broadcast('getTxt', param);
+	        },
+	        'getTxt2': function getTxt2(param) {
+	            this.$broadcast('getTxt2', param);
 	        }
 	    }
 	};
@@ -34535,7 +34538,7 @@
 	    value: true
 	});
 	
-	var _vueStrap = __webpack_require__(69);
+	var _vueStrap = __webpack_require__(32);
 	
 	var _getters = __webpack_require__(111);
 	
@@ -34702,14 +34705,15 @@
 	    value: true
 	});
 	
-	var _vueStrap = __webpack_require__(69);
+	var _vueStrap = __webpack_require__(32);
 	
 	exports.default = {
 	    data: function data() {
 	        return {
 	            broadModal: false,
 	            txt: '',
-	            name: ''
+	            name: '',
+	            types: 0
 	        };
 	    },
 	
@@ -34734,7 +34738,7 @@
 	                        name: _this.name
 	                    };
 	
-	                    _this.$dispatch('getTxt', param);
+	                    _this.types === 0 ? _this.$dispatch('getTxt', param) : _this.$dispatch('getTxt2', param);
 	                })();
 	            } else {
 	                var _param = {
@@ -34742,7 +34746,7 @@
 	                    name: this.name
 	                };
 	
-	                this.$dispatch('getTxt', _param);
+	                this.types === 0 ? this.$dispatch('getTxt', _param) : this.$dispatch('getTxt2', _param);
 	            }
 	
 	            this.broadModal = false;
@@ -34760,6 +34764,8 @@
 	            }
 	
 	            this.name = param.name;
+	
+	            param.types ? this.types = 1 : this.types = 0;
 	
 	            this.broadModal = true;
 	        }

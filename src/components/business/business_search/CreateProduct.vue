@@ -303,6 +303,34 @@ export default {
 
         // 新增产品
         saveFn () {
+            if (this.businessType === '1') {
+
+                if (this.gameList && this.childType.trim() && 
+                    this.department && this.productLevel && this.gameType && this.platformType
+                    && this.developModel && this.phase && this.maintainManagers.length) {
+
+                    this.saveVaild()
+                    
+                } else {
+                    this.$dispatch('show-notify', '存在未填写的必填项，请检查')
+                }
+
+            } else if (this.businessType === '2') {
+
+                if (this.department && this.productLevel && this.maintainManagers.length) {
+
+                    this.saveVaild()
+                    
+                } else {
+                    this.$dispatch('show-notify', '存在未填写的必填项，请检查')
+                }
+            } else {
+                this.$dispatch('show-notify', '请选择业务类型')
+            }
+        },
+
+        // 执行保存
+        saveVaild () {
             this.$http({
                 url: '/product/operate/',
                 method: 'POST',
@@ -336,6 +364,23 @@ export default {
             developModels,
             gameLists,
             productLevels
+        }
+    },
+    watch: {
+        'businessType' (newVal) {
+            switch (newVal) {
+                case '1':
+                    this.productName = ''
+                    break
+                case '2':
+                    this.gameList = ''
+                    this.childType = ''
+                    this.gameType = ''
+                    this.platformType = ''
+                    this.developModel = ''
+                    this.phase = ''
+                    break
+            }
         }
     },
     events: {

@@ -186,53 +186,50 @@ import calendar from '../../global/Calendar.vue'
 import { getDeviceSearch, getOrigins } from '../../../vuex/action.js'
 import { idcs, firms, origins1, origins2 } from '../../../vuex/getters.js'
 
-let origin = {
-        checkedAll: false,
-        checkedIds: [],
-        titles: [],
-        tableList: [],
-        lenArr: [10, 50, 100],
-        pageLen: 5,
-        url: '/device/switch/query/',
-        param: {
-            sn: '',
-            deviceNum: '',
-            assetNum: '',
-            financeNum: '',
-            invoiceNum:'',
-            room: '',
-            firm: '',
-            origin1: '',
-            origin2: '',
-            addTime: '',
-            procureTime: '',
-            factoryTime: '',
-            model: ''
-        },
-        checkArr: [
-            {label: 'SN', value: 'sn', checked: true},
-            {label: '型号', value: 'model', checked: true},
-            {label: '厂商', value: 'firm', checked: true},
-            {label: '设备状态', value: 'deviceStatus', checked: true},
-            {label: '所在机房', value: 'room', checked: true},
-            {label: '所在机架', value: 'frame', checked: true},
-            {label: '所在机位', value: 'seats', checked: true},
-            {label: '来源', value: 'origin', checked: true}
-        ],
-        valueArr: [],
-        show1: false,
-        show2: false,
-        show3: false,
-        type: 'date', 
-        x: 0,
-        y: 0,
-        range: true
-    },
-    init = Object.assign({}, origin);
-
 export default {
     data () {
-        return origin
+        return {
+            checkedAll: false,
+            checkedIds: [],
+            titles: [],
+            tableList: [],
+            lenArr: [10, 50, 100],
+            pageLen: 5,
+            url: '/device/switch/query/',
+            param: {
+                sn: '',
+                deviceNum: '',
+                assetNum: '',
+                financeNum: '',
+                invoiceNum:'',
+                room: '',
+                firm: '',
+                origin1: '',
+                origin2: '',
+                addTime: '',
+                procureTime: '',
+                factoryTime: '',
+                model: ''
+            },
+            checkArr: [
+                {label: 'SN', value: 'sn', checked: true},
+                {label: '型号', value: 'model', checked: true},
+                {label: '厂商', value: 'firm', checked: true},
+                {label: '设备状态', value: 'deviceStatus', checked: true},
+                {label: '所在机房', value: 'room', checked: true},
+                {label: '所在机架', value: 'frame', checked: true},
+                {label: '所在机位', value: 'seats', checked: true},
+                {label: '来源', value: 'origin', checked: true}
+            ],
+            valueArr: [],
+            show1: false,
+            show2: false,
+            show3: false,
+            type: 'date', 
+            x: 0,
+            y: 0,
+            range: true
+        }
     },
     methods: {
 

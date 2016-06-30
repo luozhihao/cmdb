@@ -129,41 +129,38 @@ import vSelect from '../../global/Select.vue'
 import { getRoomSearch } from '../../../vuex/action.js'
 import { idcs, statusArr } from '../../../vuex/getters.js'
 
-let origin = {
-        dimensions: [
-            {value: '1', label: '机房视角'},
-            {value: '2', label: '机架视角'},
-            {value: '3', label: '机位视角'}
-        ],
-        checkedAll: false,
-        checkedIds: [],
-        titles: [],
-        tableList: [],
-        lenArr: [10, 50, 100],
-        pageLen: 5,
-        url: '/idc/query/',
-        param: {
-            dimension: '1',
-            idc: '',
-            status: '',
-            number: ''
-        },
-        checkArr: [
-            {label: '机房地址', value: 'idcAddress', checked: true},
-            {label: '网络类型', value: 'network', checked: true},
-            {label: '业务类型', value: 'productType', checked: true},
-            {label: '所在城市', value: 'city', checked: true},
-            {label: '机房状态', value: 'status', checked: true},
-            {label: '业务经理名称', value: 'bossName', checked: true},
-            {label: '客服电话', value: 'phone', checked: true}
-        ],
-        valueArr: []
-    },
-    init = Object.assign({}, origin);
-
 export default {
     data () {
-        return origin
+        return {
+            dimensions: [
+                {value: '1', label: '机房视角'},
+                {value: '2', label: '机架视角'},
+                {value: '3', label: '机位视角'}
+            ],
+            checkedAll: false,
+            checkedIds: [],
+            titles: [],
+            tableList: [],
+            lenArr: [10, 50, 100],
+            pageLen: 5,
+            url: '/idc/query/',
+            param: {
+                dimension: '1',
+                idc: '',
+                status: '',
+                number: ''
+            },
+            checkArr: [
+                {label: '机房地址', value: 'idcAddress', checked: true},
+                {label: '网络类型', value: 'network', checked: true},
+                {label: '业务类型', value: 'productType', checked: true},
+                {label: '所在城市', value: 'city', checked: true},
+                {label: '机房状态', value: 'status', checked: true},
+                {label: '业务经理名称', value: 'bossName', checked: true},
+                {label: '客服电话', value: 'phone', checked: true}
+            ],
+            valueArr: []
+        }
     },
     methods: {
 

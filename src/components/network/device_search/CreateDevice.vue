@@ -82,6 +82,22 @@
                             <input type="text" class="form-control" v-model="invoiceNum">
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-4">质保期限：</label>
+                        <div class="col-sm-8">
+                            <datepicker
+                              :value.sync="shelfLife"
+                              :format="'yyyy-MM-dd'"
+                              :show-reset-button="true">
+                            </datepicker>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-4">传输速率：</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" v-model="speed">
+                        </div>
+                    </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
@@ -133,25 +149,27 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-4">质保期限：</label>
-                        <div class="col-sm-8">
-                            <datepicker
-                              :value.sync="shelfLife"
-                              :format="'yyyy-MM-dd'"
-                              :show-reset-button="true">
-                            </datepicker>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-4">传输速率：</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" v-model="speed">
-                        </div>
-                    </div>
-                    <div class="form-group">
                         <label class="control-label col-sm-4">接口总数：<span class="text-danger">*</span></label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" v-model="interfaceTotal">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-4">公司内网：</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" v-model="companyIntnet" onfocus="this.blur()" @click="showBroad('companyIntnet')">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-4">机房内网：</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" v-model="roomIntnet" onfocus="this.blur()" @click="showBroad('roomIntnet')">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-4">机房外网：</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" v-model="roomOutnet" onfocus="this.blur()" @click="showBroad('roomOutnet')">
                         </div>
                     </div>
                     <div class="form-group">
@@ -202,6 +220,9 @@ let origin = {
         shelfLife: '',
         speed: '',
         interfaceTotal: '',
+        companyIntnet: '',
+        roomIntnet: '',
+        roomOutnet: '',
         remark: ''
     },
     init = Object.assign({}, origin);
@@ -230,6 +251,17 @@ export default {
                     this.$dispatch('show-error')
                 }
             })
+        },
+
+        // 输入面板
+        showBroad (target) {
+            let param = {
+                value: this[target],
+                name: target,
+                types: 1
+            }
+
+            this.$dispatch('showBroad', param)
         }
     },
     components: {
@@ -255,6 +287,11 @@ export default {
     events: {
         'showCreate' () {
             this.createModal = true
+        },
+        'getTxt2' (param) {
+            let obj = param.name.split('.')
+
+            this[obj[0]] = param.val
         }
     },
     watch: {

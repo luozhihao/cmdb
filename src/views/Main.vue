@@ -95,6 +95,9 @@ export default {
         },
         'getTxt' (param) {
             this.$broadcast('getTxt', param)
+        },
+        'getTxt2' (param) {
+            this.$broadcast('getTxt2', param)
         }
     }
 }
