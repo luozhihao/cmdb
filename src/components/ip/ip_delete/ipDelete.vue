@@ -2,13 +2,13 @@
 <template>
     <div>
         <form class="form-horizontal clearfix form-search">
-        <div class="col-sm-3">
-            <div class="form-group">
-                <label class="col-sm-4 control-label">SN：</label>
-                <div class="col-sm-8">
-                    <input type="text" class="form-control" placeholder="多个，精确" onfocus="this.blur()" v-model="param.sn" @click="showBroad('param.sn')">
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">SN：</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" placeholder="多个，精确" onfocus="this.blur()" v-model="param.sn" @click="showBroad('param.sn')">
+                    </div>
                 </div>
-            </div>
             </div>
             <div class="col-sm-3">
                 <div class="form-group">

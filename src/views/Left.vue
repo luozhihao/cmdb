@@ -36,9 +36,9 @@
                 <li v-link="{ path: '/ipPlan' }">
                     <span>IP规划</span>
                 </li>
-                <li v-link="{ path: '/ipDelete' }">
+                <!-- <li v-link="{ path: '/ipDelete' }">
                     <span>IP回收</span>
-                </li>
+                </li> -->
             </ul>
             <div class="aside-header" @click="toggle('server')">
                 <span class="icon glyphicon glyphicon-hdd"></span>

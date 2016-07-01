@@ -1484,7 +1484,7 @@ webpackJsonp([4],Array(45).concat([
 	                        idc: this.idc,
 	                        network: this.network,
 	                        gateway: this.gateway,
-	                        ips: newArr,
+	                        ips: newArr.join(','),
 	                        operator: this.operator
 	                    }
 	                }).then(function (response) {
@@ -1493,7 +1493,7 @@ webpackJsonp([4],Array(45).concat([
 	
 	                        _this.$dispatch('show-success');
 	                    } else {
-	                        _this.$dispatch('show-error');
+	                        _this.$dispatch('show-error', response.data.msg);
 	                    }
 	                });
 	            }

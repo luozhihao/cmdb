@@ -140,7 +140,7 @@ export default {
                         idc: this.idc,
                         network: this.network,
                         gateway: this.gateway,
-                        ips: newArr,
+                        ips: newArr.join(','),
                         operator: this.operator
                     }
                 })
@@ -155,7 +155,7 @@ export default {
 
                         this.$dispatch('show-success')
                     } else {
-                        this.$dispatch('show-error')
+                        this.$dispatch('show-error', response.data.msg)
                     }
                 })
             }
