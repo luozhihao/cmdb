@@ -28,7 +28,7 @@ export default {
         return {
             confirmModal: false,
             tag: '',
-            msg: '确认要删除此配置？'
+            msg: '确认要执行此操作？'
         }
     },
     methods: {

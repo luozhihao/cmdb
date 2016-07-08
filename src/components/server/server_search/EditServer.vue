@@ -224,7 +224,7 @@
                     </div>
                 </tab>
                 <tab header="端口号">
-                    <table class="table table-hover table-small table-scroll">
+                    <table class="table table-hover table-scroll">
                         <thead>
                             <tr>
                                 <th>端口号</th>
@@ -240,15 +240,15 @@
                         </thead>
                         <tbody>
                             <tr v-for="port in ports" v-show="ports.length !== 0">
-                                <td v-text="port.portNum"></td>
-                                <td v-text="port.ip"></td>
-                                <td v-text="port.mac"></td>
-                                <td v-text="port.speed"></td>
-                                <td v-text="port.status"></td>
-                                <td v-text="port.use"></td>
-                                <td v-text="port.device"></td>
-                                <td v-text="port.deviceVlan"></td>
-                                <td v-text="port.devicePort"></td>
+                                <td v-text="port.portNum" :title="port.portNum"></td>
+                                <td v-text="port.ip" :title="port.ip"></td>
+                                <td v-text="port.mac" :title="port.mac"></td>
+                                <td v-text="port.speed" :title="port.speed"></td>
+                                <td v-text="port.status" :title="port.status"></td>
+                                <td v-text="port.use" :title="port.use"></td>
+                                <td v-text="port.device" :title="port.device"></td>
+                                <td v-text="port.deviceVlan" :title="port.deviceVlan"></td>
+                                <td v-text="port.devicePort" :title="port.devicePort"></td>
                             </tr>
                             <tr v-show="ports.length === 0" class="text-center">
                                 <td colspan="9">暂无数据</td>
@@ -272,9 +272,7 @@ import { idcs, frames, seats, serverTypes, serverStatus, firms, origins1, origin
 
 let origin = {
         editServerModal: false,
-        ports: [
-            {portNum: '111', ip: '', mac: '', speed: '', status: '', use: '', device: '', deviceVlan: '', devicePort: ''}
-        ],
+        ports: [],
         id: null,
         serverNum: '',
         sn: '',

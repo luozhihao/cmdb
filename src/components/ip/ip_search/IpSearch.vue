@@ -191,7 +191,7 @@ export default {
         deleteFn () {
             if (this.checkedIds.length) {
                 this.$http({
-                    url: '/device/switch/delete/',
+                    url: '/ip/ip_delete/',
                     method: 'POST',
                     data: {
                         checkedIds: this.checkedIds

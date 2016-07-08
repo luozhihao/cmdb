@@ -139,4 +139,17 @@ export function getIpSearch({ dispatch, state }) {
     })
 }
 
+// 获取机房连通性
+export function getRoomConnect({ dispatch, state }) {
+    this.$http({
+        url: '/idc/room_connect/',
+        method: 'GET'
+    })
+    .then(response => {
+        if (response.data.code === 200) {
+           dispatch('GETROOMCONNECT', response.data)
+        } 
+    })
+}
+
 

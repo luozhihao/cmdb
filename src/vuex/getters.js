@@ -80,3 +80,6 @@ export const serverStatus = state => state.serverStatus
 
 // 获取操作系统
 export const systems = state => state.systems
+
+// 获取机房连通类型
+export const connTypes = state => state.connTypes

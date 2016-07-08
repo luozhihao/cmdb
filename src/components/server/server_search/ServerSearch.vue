@@ -179,7 +179,7 @@
                 应用回收
             </button>
             <button type="button" class="btn btn-default">
-                退换IDC
+                退还IDC
             </button>
         </div>
         <div class="text-center table-title">

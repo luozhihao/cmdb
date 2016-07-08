@@ -1,5 +1,6 @@
 <style scoped>
 .left-tree {
+    position: relative;
     width: 30%;
 }
 
@@ -29,6 +30,13 @@
     min-height: 650px;
 }
 
+.dragicon {
+    position: absolute;
+    right: -8px;
+    top: 46%;
+    font-size: 16px;
+    color: #676767;
+}
 
 </style>
 
@@ -43,6 +51,7 @@
         <div class="clearfix tree-box">
             <div class="left-tree pull-left tlist">
                 <div id="tree1" class="ztree"></div>
+                <span class="dragicon glyphicon glyphicon-random"></span>
             </div>
             <div class="right-tree pull-left tlist">
                 <div id="tree2" class="ztree"></div>

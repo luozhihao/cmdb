@@ -13,6 +13,9 @@
                 <li v-link="{ path: '/roomSearch' }">
                     <span>机房查询</span>
                 </li>
+                <li v-link="{ path: '/roomConnect' }">
+                    <span>机房连通性</span>
+                </li>
             </ul>
             <div class="aside-header" @click="toggle('network')">
                 <span class="icon glyphicon glyphicon-inbox"></span>

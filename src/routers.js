@@ -19,6 +19,11 @@ export default function (router) {
                 require(['./components/idc/room_search/RoomSearch.vue'], resolve)
             }
         },
+        '/roomConnect': {
+            component: function (resolve) {
+                require(['./components/idc/room_connect/RoomConnect.vue'], resolve)
+            }
+        },
         '/deviceSearch': {
             component: function (resolve) {
                 require(['./components/network/device_search/DeviceSearch.vue'], resolve)
