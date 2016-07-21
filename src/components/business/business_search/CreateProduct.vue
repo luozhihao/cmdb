@@ -27,7 +27,7 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label class="control-label col-sm-4">区域名称：<span class="text-danger">*</span></label>
+                            <label class="control-label col-sm-4">区域名称：</label>
                             <div class="col-sm-6">
                                 <input type="text" class="form-control" v-model="childType">
                             </div>
@@ -226,6 +226,7 @@
 <script>
 import { modal, typeahead } from 'vue-strap'
 import vSelect from '../../global/Select.vue'
+import { getBusinessSearch } from '../../../vuex/action.js'
 import { departments, productTypes, phases, gameTypes, platformTypes, developModels, gameLists, productLevels } from '../../../vuex/getters.js'
 
 let origin = {
@@ -305,7 +306,7 @@ export default {
         saveFn () {
             if (this.businessType === '1') {
 
-                if (this.gameList && this.childType.trim() && 
+                if (this.gameList && 
                     this.department && this.productLevel && this.gameType && this.platformType
                     && this.developModel && this.phase && this.maintainManagers.length) {
 
@@ -340,6 +341,7 @@ export default {
                 if (response.data.code === 200) {
                     this.creatProductModal = false
                     this.$data = Object.assign({}, init)
+                    this.getBusinessSearch()
 
                     this.$dispatch('refresh')
                     this.$dispatch('show-success')
@@ -355,6 +357,9 @@ export default {
         typeahead
     },
     vuex: {
+        actions: {
+            getBusinessSearch
+        },
         getters: {
             departments,
             businessTypes: productTypes,

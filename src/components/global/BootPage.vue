@@ -250,7 +250,7 @@ export default {
         }
     },
     events: {
-        'refresh' () {
+        'refresh::page' () {
             this.refresh()
         }
     }

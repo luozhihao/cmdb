@@ -39,7 +39,8 @@ const state = {
     serverTypes: [],
     serverStatus: [],
     systems: [],
-    connTypes: []
+    connTypes: [],
+    treeProducts: []
 }   
 
 // 创建一个 object 存储 mutation 函数
@@ -129,6 +130,11 @@ const mutations = {
     GETROOMCONNECT (state, data) {
         state.roomLocation = data.rooms
         state.connTypes = data.connTypes
+    },
+
+    // 获取业务树产品数据
+    GETTREESELECT (state, data) {
+        state.treeProducts = data.products
     }
 }
 

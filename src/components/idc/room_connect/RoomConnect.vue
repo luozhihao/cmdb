@@ -57,7 +57,7 @@
                 <tfoot> 
                     <tr>
                         <td :colspan="titles.length">
-                            <boot-page :async="true" :lens="lenArr" :page-len="pageLen" :url="url" :param="param"></boot-page>
+                            <boot-page v-ref:page :async="true" :lens="lenArr" :page-len="pageLen" :url="url" :param="param"></boot-page>
                         </td>
                     </tr>
                 </tfoot>
@@ -99,7 +99,7 @@ export default {
         // 刷新数据
         refresh () {
             this.$refs.spinner.show()
-            this.$broadcast('refresh')
+            this.$refs.page.refresh()
         },
 
         // 切断

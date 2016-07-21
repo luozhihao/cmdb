@@ -108,7 +108,7 @@ fieldset[disabled] .form-control {
 }
 
 .modal-backdrop {
-    z-index: 0;
+    z-index: -1;
 }
 
 .main {
@@ -117,7 +117,7 @@ fieldset[disabled] .form-control {
     top: 0;
     bottom: 0;
     background-color: #000;
-    z-index: 100;
+    z-index: 0;
 }
 
 .pointer {
@@ -223,8 +223,9 @@ fieldset[disabled] .form-control {
     overflow-x: auto; 
 }
 
-.table-box .table {
-    width: 100%;
+.table-box .table-wrapper {
+    position: relative;
+    width: 2500px;
     max-width: none;
 }
 

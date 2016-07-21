@@ -152,4 +152,17 @@ export function getRoomConnect({ dispatch, state }) {
     })
 }
 
+// 获取业务树产品列表
+export function getTreeSelect({ dispatch, state }) {
+    this.$http({
+        url: '/node/getProduct/',
+        method: 'GET'
+    })
+    .then(response => {
+        if (response.data.code === 200) {
+           dispatch('GETTREESELECT', response.data)
+        } 
+    })
+}
+
 

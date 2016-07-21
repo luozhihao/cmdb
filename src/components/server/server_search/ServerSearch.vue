@@ -1,7 +1,7 @@
 <!-- 服务器查询 -->
 <template>
-    <div>
-        <form class="form-horizontal clearfix form-search">
+    <div class="clearfix">
+        <form :class="['form-horizontal', 'clearfix', 'form-search', {'form-min': isModal}]" name="serverForm" method="POST">
             <div class="col-sm-3">
                 <div class="form-group">
                     <label class="control-label col-sm-4">SN：</label>
@@ -10,7 +10,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-sm-4">设备编号：</label>
+                    <label class="control-label col-sm-4">服务器编号：</label>
                     <div class="col-sm-8">
                         <input type="text" class="form-control" placeholder="多个，精确" onfocus="this.blur()" v-model="param.serverNum" @click="showBroad('param.serverNum')">
                     </div>
@@ -32,7 +32,7 @@
                 <div class="form-group input-box">
                     <label class="control-label col-sm-4">所属产品：</label>
                     <div class="col-sm-8">
-                        <v-select :value.sync="param.product" :options="products" placeholder="请选择" :search="true">
+                        <v-select :value.sync="param.product" :options="products" placeholder="请选择" :search="true" :disabled="isModal">
                         </v-select>
                     </div>
                 </div>
@@ -163,24 +163,31 @@
             <button type="button" class="btn btn-default" @click="refresh">
                 查询
             </button>
-            <button type="button" class="btn btn-default" @click="$broadcast('showCreateServer')">
-                新增服务器
-            </button>
-            <button type="button" class="btn btn-default" @click="dispatchFn">
-                分配到产品
-            </button>
-            <button type="button" class="btn btn-default"  @click="batchEdit">
-                批量修改
-            </button>
-            <button type="button" class="btn btn-default">
-                导出
-            </button>
-            <button type="button" class="btn btn-default">
-                应用回收
-            </button>
-            <button type="button" class="btn btn-default">
-                退还IDC
-            </button>
+            <span v-if="!isModal">
+                <button type="button" class="btn btn-default" @click="$broadcast('showCreateServer')">
+                    新增服务器
+                </button>
+                <button type="button" class="btn btn-default" @click="dispatchFn">
+                    分配到产品
+                </button>
+                <button type="button" class="btn btn-default" @click="batchEdit">
+                    批量修改
+                </button>
+                <button type="button" class="btn btn-default" @click="exportFn">
+                    导出
+                </button>
+                <button type="button" class="btn btn-default">
+                    应用回收
+                </button>
+                <button type="button" class="btn btn-default">
+                    退还IDC
+                </button>
+            </span>
+            <span v-if="isModal">
+                <button type="button" class="btn btn-default" @click="getChecked">
+                    批量添加
+                </button>
+            </span>
         </div>
         <div class="text-center table-title">
             查询结果
@@ -201,37 +208,35 @@
             </div>
         </div>
         <div class="table-box">
-            <table class="table table-hover table-bordered">
-                <thead>
-                    <tr>
-                        <th width="3%"><input type="checkbox" v-model="checkedAll"></th>
-                        <th v-for="title in titles" v-text="title"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="list in tableList" v-if="tableList.length !== 0" v-show="tableList.length !== 0">
-                        <td><input type="checkbox" :id="list.id" :value="list.id" v-model="checkedIds"></td>
-                        <td v-for="value in valueArr" v-if="value === 'serverNum'">
-                            <a class="pointer" v-if="value === 'serverNum'" v-text="list[value]" @click="$broadcast('showEditServer', list.id)"></a>
-                        </td>
-                        <td v-for="value in valueArr" :title="list[value]" v-text="list[value]" v-if="value !== 'serverNum'">
-                        </td>
-                    </tr>
-                    <tr class="text-center" v-show="tableList.length === 0">
-                        <td :colspan="titles.length + 1">暂无数据</td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td :colspan="titles.length + 1">
-                            <boot-page :async="true" :lens="lenArr" :page-len="pageLen" :url="url" :param="param"></boot-page>
-                        </td>
-                    </tr>
-                </tfoot>
-            </table>
-            <spinner id="spinner-box" :size="md" :fixed="false" 
-                 text="数据加载中，请稍后..." v-ref:spinner>
-            </spinner>
+            <div class="table-wrapper">
+                <table :class="['table', 'table-hover', 'table-bordered', {'table-small': isModal}]">
+                    <thead>
+                        <tr>
+                            <th width="3%"><input type="checkbox" v-model="checkedAll"></th>
+                            <th v-for="title in titles" v-text="title"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="list in tableList" v-if="tableList.length !== 0" v-show="tableList.length !== 0">
+                            <td><input type="checkbox" :id="list.id" :value="list.id" v-model="checkedIds"></td>
+                            <td v-for="value in valueArr" v-if="value === 'serverNum'">
+                                <a class="pointer" v-if="value === 'serverNum'" v-text="list[value]" @click="$broadcast('showEditServer', list.id)"></a>
+                            </td>
+                            <td v-for="value in valueArr" :title="list[value]" v-text="list[value]" v-if="value !== 'serverNum'">
+                            </td>
+                        </tr>
+                        <tr class="text-center" v-show="tableList.length === 0">
+                            <td :colspan="titles.length + 1">暂无数据</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <spinner id="spinner-box" :size="md" :fixed="false" 
+                     text="数据加载中，请稍后..." v-ref:spinner>
+                </spinner>
+            </div>
+        </div>
+        <div class="pull-right mt30">
+            <boot-page v-ref:page :async="true" :lens="lenArr" :page-len="pageLen" :url="url" :param="param"></boot-page>
         </div>
 
         <create-server-modal></create-server-modal>
@@ -256,12 +261,11 @@ import { idcs, frames, products, serverTypes, departments, systems, serverStatus
 export default {
     data () {
         return {
+            isModal: false,
             checkedAll: false,
             checkedIds: [],
             titles: [],
-            tableList: [
-                {id: 1, serverNum: 'SGSW00001', ip: '117.121.13.56', sn: 'BRCBRW1906K01R', serverType: '物理机', system: 'windows 2003x64', status: '待运营', room: '北京亦庄联通机房', frame: 'L4M1-IDC-C003', seat: '46U'}
-            ],
+            tableList: [],
             lenArr: [10, 50, 100],
             pageLen: 5,
             url: '/device/server/query/',
@@ -292,13 +296,28 @@ export default {
             },
             checkArr: [
                 {label: 'SN', value: 'sn', checked: true},
+                {label: '来源', value: 'origin', checked: true},
                 {label: 'IP', value: 'ip', checked: true},
                 {label: '类型', value: 'serverType', checked: true},
                 {label: '操作系统', value: 'system', checked: true},
                 {label: '状态', value: 'status', checked: true},
                 {label: '所在机房', value: 'room', checked: true},
                 {label: '所在机架', value: 'frame', checked: true},
-                {label: '所在机位', value: 'seat', checked: true}
+                {label: '所在机位', value: 'seat', checked: true},
+                {label: '入库时间', value: 'addTime', checked: true},
+                {label: '出厂时间', value: 'factoryTime', checked: true},
+                {label: '采购时间', value: 'procureTime', checked: true},
+                {label: '型号', value: 'model', checked: true},
+                {label: '厂商', value: 'firm', checked: true},
+                {label: '物理主机编号', value: 'hostNum', checked: true},
+                {label: '资产编号', value: 'assetNum', checked: true},
+                {label: '财务编号', value: 'financeNum', checked: true},
+                {label: '发票编号', value: 'invoiceNum', checked: true},
+                {label: '质保期限', value: 'shelfLife', checked: true},
+                {label: '公司内网', value: 'companyIntnet', checked: true},
+                {label: '机房内网', value: 'roomIntnet', checked: true},
+                {label: '机房外网', value: 'roomOutnet', checked: true},
+                {label: '备注', value: 'remark', checked: true}
             ],
             valueArr: [],
             show1: false,
@@ -316,7 +335,7 @@ export default {
         refresh () {
             this.$refs.spinner.show()
             this.checkedIds = []
-            this.$broadcast('refresh')
+            this.$refs.page.refresh()
         },
 
         // 筛选
@@ -396,6 +415,33 @@ export default {
             setTimeout(function() {
                 document.addEventListener('click', bindHide, false);
             }, 500);
+        },
+
+        // 导出
+        exportFn () {
+            let form = document.serverForm,
+                arr = []
+
+            for (let key in this.$data.param) {
+                let obj = key + '=' + this.$data.param[key]
+
+                arr.push(obj)
+            }
+
+            form.action='/device/server/export/?' + arr.join('&')
+
+            form.submit()
+        },
+
+        // 发送选中列表至业务树
+        getChecked () {
+            let _this = this
+
+            if (this.checkedIds.length) {
+                this.$dispatch('getServerData', _this.checkedIds)
+            } else {
+                this.$dispatch('show-notify', '请选择分配项')
+            }
         }
     },
     components: {
@@ -469,6 +515,7 @@ export default {
         }
     },
     events: {
+
         // 获取表格数据
         'data' (param) {
             this.tableList = param.data
@@ -486,6 +533,13 @@ export default {
             let obj = param.name.split('.')
 
             this[obj[0]][obj[1]] = param.val
+        },
+
+        // 接收业务树数据
+        'showServerModal' (param) {
+            this.isModal = true
+            this.param.product = param
+            this.refresh()
         }
     }
 }

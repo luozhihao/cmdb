@@ -144,7 +144,7 @@
                 <tfoot> 
                     <tr>
                         <td :colspan="titles.length + 1">
-                            <boot-page :async="true" :lens="lenArr" :page-len="pageLen" :url="url" :param="param"></boot-page>
+                            <boot-page v-ref:page :async="true" :lens="lenArr" :page-len="pageLen" :url="url" :param="param"></boot-page>
                         </td>
                     </tr>
                 </tfoot>
@@ -200,7 +200,7 @@ export default {
         refresh () {
             this.$refs.spinner.show()
             this.checkedIds = []
-            this.$broadcast('refresh')
+            this.$refs.page.refresh()
         },
 
         // 批量删除
@@ -217,6 +217,7 @@ export default {
                     if (response.data.code === 200) {
                         this.checkedIds = []
                         this.refresh()
+                        this.getBusinessSearch()
 
                         this.$dispatch('show-success', '删除成功')
                     } else {

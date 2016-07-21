@@ -1439,7 +1439,7 @@ webpackJsonp([9],Array(45).concat([
 	
 	
 	// module
-	exports.push([module.id, "\r\n.import-msg[_v-4772bc84] {\r\n    width: 600px;\r\n    padding: 20px;\r\n    margin: 150px auto 0;\r\n    text-align: center;\r\n    border: 1px solid #ccc;\r\n}\r\n", "", {"version":3,"sources":["/./src/components/other/import/import.vue.style"],"names":[],"mappings":";AA0FA;IACA,aAAA;IACA,cAAA;IACA,qBAAA;IACA,mBAAA;IACA,uBAAA;CACA","file":"import.vue","sourcesContent":["<template>\r\n    <div>\r\n        <form id=\"file_form\" class=\"form-inline form-search text-center\">\r\n            <div class=\"form-group\">\r\n                <label>导入类型：</label>\r\n                <v-select :value.sync=\"type\" :options=\"types\" placeholder=\"请选择\">\r\n                </v-select>\r\n                <label>导入文件：</label>\r\n                <input type=\"text\" class=\"form-control\" onfocus=\"this.blur()\" v-model=\"road\">\r\n                <input id=\"file\" type=\"file\" name=\"file\" v-show=\"false\" @change=\"changeFn\">\r\n                <button type=\"button\" class=\"btn btn-default\" @click=\"findFile\">浏览</button>\r\n                <button type=\"button\" class=\"btn btn-default\" @click=\"uploadFile\">导入</button>\r\n                <a type=\"button\" class=\"btn btn-default\" href=\"/file/guifan.pdf\" target=\"_blank\">下载模板</a>\r\n            </div>\r\n        </form>\r\n        <div>\r\n            <div class=\"import-msg\">\r\n                <p>【操作说明】</p>\r\n                <p>1、先下载excel模板</p>\r\n                <p>2、红色为必填字段，黑色为非必填字段</p>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\nimport vSelect from '../../global/Select.vue'\r\n\r\nexport default {\r\n    data () {\r\n        return {\r\n            types: [\r\n                {value: '机房导入', label: '机房导入'},\r\n                {value: '机架位导入', label: '机架位导入'},\r\n                {value: '交换机导入', label: '交换机导入'},\r\n                {value: '服务器导入', label: '服务器导入'},\r\n                {value: '业务树导入', label: '业务树导入'},\r\n                {value: '模块服务器关系导入', label: '模块服务器关系导入'}\r\n            ],\r\n            type: '',\r\n            road: ''\r\n        }\r\n    },\r\n    methods: {\r\n\r\n        // 浏览文件\r\n        findFile () {\r\n            $('#file').trigger('click')\r\n        },\r\n\r\n        // 改变路径\r\n        changeFn () {\r\n            this.road = $('#file').val()\r\n        },\r\n\r\n        // 上传文件\r\n        uploadFile () {\r\n            if (this.road !== '') {\r\n                let _this = this,\r\n                    formData = new FormData($('#file_form')[0])\r\n\r\n                formData.append('type', _this.type)\r\n\r\n                $.ajax({\r\n                        url: '/package_file_upload/',\r\n                        type: 'POST',\r\n                        processData: false,\r\n                        contentType: false,\r\n                        dataType: 'JSON',\r\n                        data: formData\r\n                    })\r\n                    .then(function (data) {\r\n                        if (data.code === 1) {\r\n                            _this.road = ''\r\n\r\n                            _this.$dispatch('show-success')\r\n                        } else {\r\n                            _this.$dispatch('show-error')\r\n                        }\r\n                    })\r\n            }    \r\n        }\r\n    },\r\n    components: {\r\n        vSelect\r\n    }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.import-msg {\r\n    width: 600px;\r\n    padding: 20px;\r\n    margin: 150px auto 0;\r\n    text-align: center;\r\n    border: 1px solid #ccc;\r\n}\r\n</style>"],"sourceRoot":"webpack://"}]);
+	exports.push([module.id, "\r\n.import-msg[_v-4772bc84] {\r\n    width: 600px;\r\n    padding: 20px;\r\n    margin: 150px auto 0;\r\n    text-align: center;\r\n    border: 1px solid #ccc;\r\n}\r\n\r\n.import-msg > p[_v-4772bc84] {\r\n    color: #A04848;\r\n}\r\n", "", {"version":3,"sources":["/./src/components/other/import/import.vue.style"],"names":[],"mappings":";AAuGA;IACA,aAAA;IACA,cAAA;IACA,qBAAA;IACA,mBAAA;IACA,uBAAA;CACA;;AAEA;IACA,eAAA;CACA","file":"import.vue","sourcesContent":["<template>\r\n    <div>\r\n        <form id=\"file_form\" class=\"form-inline form-search text-center\">\r\n            <div class=\"form-group\">\r\n                <label>导入类型：</label>\r\n                <v-select :value.sync=\"type\" :options=\"types\" placeholder=\"请选择\">\r\n                </v-select>\r\n                <label>导入文件：</label>\r\n                <input type=\"text\" class=\"form-control\" onfocus=\"this.blur()\" v-model=\"road\">\r\n                <input id=\"file\" type=\"file\" name=\"file\" v-show=\"false\" @change=\"changeFn\">\r\n                <button type=\"button\" class=\"btn btn-default\" @click=\"findFile\">浏览</button>\r\n                <button type=\"button\" class=\"btn btn-default\" @click=\"uploadFile\">导入</button>\r\n                <a type=\"button\" class=\"btn btn-default\" href=\"/file/template_cmdb.xlsx\" target=\"_blank\">下载模板</a>\r\n            </div>\r\n        </form>\r\n        <div>\r\n            <div class=\"import-msg\">\r\n                <p v-for=\"msg in msgs\" v-text=\"msg\"></p>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\nimport vSelect from '../../global/Select.vue'\r\n\r\nexport default {\r\n    data () {\r\n        return {\r\n            types: [\r\n                {value: '1', label: '交换机导入'},\r\n                {value: '2', label: '服务器导入'},\r\n                {value: '3', label: '业务树导入'},\r\n                {value: '4', label: '模块服务器关系导入'}\r\n            ],\r\n            type: '',\r\n            road: '',\r\n            msgs: ['【操作说明】', '1、先下载excel模板', '2、红色为必填字段，黑色为非必填字段']\r\n        }\r\n    },\r\n    methods: {\r\n\r\n        // 浏览文件\r\n        findFile () {\r\n            $('#file').trigger('click')\r\n        },\r\n\r\n        // 改变路径\r\n        changeFn () {\r\n            this.road = $('#file').val()\r\n        },\r\n\r\n        // 上传文件\r\n        uploadFile () {\r\n            if (this.road !== '' && this.road.endsWith('.xlsx')) {\r\n                let _this = this,\r\n                    formData = new FormData($('#file_form')[0]),\r\n                    url = ''\r\n\r\n                // formData.append('type', _this.type)\r\n\r\n                switch(this.type) {\r\n                    case '1':\r\n                        url = '/device/switch/import/'\r\n                    case '2':\r\n                        url = '/device/server/import/'\r\n                        break\r\n                }\r\n\r\n                if (url) {\r\n                    $.ajax({\r\n                            url: url,\r\n                            type: 'POST',\r\n                            processData: false,\r\n                            contentType: false,\r\n                            dataType: 'JSON',\r\n                            data: formData\r\n                        })\r\n                        .then(function (data) {\r\n                            if (data.code === 200) {\r\n                                _this.road = ''\r\n\r\n                                _this.$dispatch('show-success', '导入成功')\r\n                            } else {\r\n                                _this.msgs = data.invalid\r\n\r\n                                _this.$dispatch('data.msg')\r\n                                _this.$dispatch('show-error', data.msg)\r\n                            }\r\n                        })\r\n                }\r\n            } else {\r\n                this.$dispatch('show-notify', '导入文件必须为.xlsx后缀的文件')\r\n            }\r\n        }\r\n    },\r\n    components: {\r\n        vSelect\r\n    }\r\n}\r\n</script>\r\n\r\n<style scoped>\r\n.import-msg {\r\n    width: 600px;\r\n    padding: 20px;\r\n    margin: 150px auto 0;\r\n    text-align: center;\r\n    border: 1px solid #ccc;\r\n}\r\n\r\n.import-msg > p {\r\n    color: #A04848;\r\n}\r\n</style>"],"sourceRoot":"webpack://"}]);
 	
 	// exports
 
@@ -1463,9 +1463,10 @@ webpackJsonp([9],Array(45).concat([
 	exports.default = {
 	    data: function data() {
 	        return {
-	            types: [{ value: '机房导入', label: '机房导入' }, { value: '机架位导入', label: '机架位导入' }, { value: '交换机导入', label: '交换机导入' }, { value: '服务器导入', label: '服务器导入' }, { value: '业务树导入', label: '业务树导入' }, { value: '模块服务器关系导入', label: '模块服务器关系导入' }],
+	            types: [{ value: '1', label: '交换机导入' }, { value: '2', label: '服务器导入' }, { value: '3', label: '业务树导入' }, { value: '4', label: '模块服务器关系导入' }],
 	            type: '',
-	            road: ''
+	            road: '',
+	            msgs: ['【操作说明】', '1、先下载excel模板', '2、红色为必填字段，黑色为非必填字段']
 	        };
 	    },
 	
@@ -1488,30 +1489,46 @@ webpackJsonp([9],Array(45).concat([
 	        uploadFile: function uploadFile() {
 	            var _this2 = this;
 	
-	            if (this.road !== '') {
+	            if (this.road !== '' && this.road.endsWith('.xlsx')) {
 	                (function () {
 	                    var _this = _this2,
-	                        formData = new FormData($('#file_form')[0]);
+	                        formData = new FormData($('#file_form')[0]),
+	                        url = '';
 	
-	                    formData.append('type', _this.type);
+	                    // formData.append('type', _this.type)
 	
-	                    $.ajax({
-	                        url: '/package_file_upload/',
-	                        type: 'POST',
-	                        processData: false,
-	                        contentType: false,
-	                        dataType: 'JSON',
-	                        data: formData
-	                    }).then(function (data) {
-	                        if (data.code === 1) {
-	                            _this.road = '';
+	                    switch (_this2.type) {
+	                        case '1':
+	                            url = '/device/switch/import/';
+	                        case '2':
+	                            url = '/device/server/import/';
+	                            break;
+	                    }
 	
-	                            _this.$dispatch('show-success');
-	                        } else {
-	                            _this.$dispatch('show-error');
-	                        }
-	                    });
+	                    if (url) {
+	                        $.ajax({
+	                            url: url,
+	                            type: 'POST',
+	                            processData: false,
+	                            contentType: false,
+	                            dataType: 'JSON',
+	                            data: formData
+	                        }).then(function (data) {
+	                            if (data.code === 200) {
+	                                _this.road = '';
+	
+	                                _this.$dispatch('show-success', '导入成功');
+	                            } else {
+	                                _this.msgs = data.invalid;
+	
+	                                _this.$dispatch('data.msg');
+	                                _this.$dispatch('show-error', data.msg);
+	                            }
+	                        });
+	                    }
 	                })();
+	            } else {
+	                this.$dispatch('show-notify', '导入文件必须为.xlsx后缀的文件');
 	            }
 	        }
 	    },
@@ -1529,6 +1546,10 @@ webpackJsonp([9],Array(45).concat([
 	//     text-align: center;
 	//     border: 1px solid #ccc;
 	// }
+	//
+	// .import-msg > p {
+	//     color: #A04848;
+	// }
 	// </style>
 	/* generated by vue-loader */
 	// <template>
@@ -1543,14 +1564,12 @@ webpackJsonp([9],Array(45).concat([
 	//                 <input id="file" type="file" name="file" v-show="false" @change="changeFn">
 	//                 <button type="button" class="btn btn-default" @click="findFile">浏览</button>
 	//                 <button type="button" class="btn btn-default" @click="uploadFile">导入</button>
-	//                 <a type="button" class="btn btn-default" href="/file/guifan.pdf" target="_blank">下载模板</a>
+	//                 <a type="button" class="btn btn-default" href="/file/template_cmdb.xlsx" target="_blank">下载模板</a>
 	//             </div>
 	//         </form>
 	//         <div>
 	//             <div class="import-msg">
-	//                 <p>【操作说明】</p>
-	//                 <p>1、先下载excel模板</p>
-	//                 <p>2、红色为必填字段，黑色为非必填字段</p>
+	//                 <p v-for="msg in msgs" v-text="msg"></p>
 	//             </div>
 	//         </div>
 	//     </div>
@@ -1563,7 +1582,7 @@ webpackJsonp([9],Array(45).concat([
 /* 247 */
 /***/ function(module, exports) {
 
-	module.exports = "\n    <div _v-4772bc84=\"\">\n        <form id=\"file_form\" class=\"form-inline form-search text-center\" _v-4772bc84=\"\">\n            <div class=\"form-group\" _v-4772bc84=\"\">\n                <label _v-4772bc84=\"\">导入类型：</label>\n                <v-select :value.sync=\"type\" :options=\"types\" placeholder=\"请选择\" _v-4772bc84=\"\">\n                </v-select>\n                <label _v-4772bc84=\"\">导入文件：</label>\n                <input type=\"text\" class=\"form-control\" onfocus=\"this.blur()\" v-model=\"road\" _v-4772bc84=\"\">\n                <input id=\"file\" type=\"file\" name=\"file\" v-show=\"false\" @change=\"changeFn\" _v-4772bc84=\"\">\n                <button type=\"button\" class=\"btn btn-default\" @click=\"findFile\" _v-4772bc84=\"\">浏览</button>\n                <button type=\"button\" class=\"btn btn-default\" @click=\"uploadFile\" _v-4772bc84=\"\">导入</button>\n                <a type=\"button\" class=\"btn btn-default\" href=\"/file/guifan.pdf\" target=\"_blank\" _v-4772bc84=\"\">下载模板</a>\n            </div>\n        </form>\n        <div _v-4772bc84=\"\">\n            <div class=\"import-msg\" _v-4772bc84=\"\">\n                <p _v-4772bc84=\"\">【操作说明】</p>\n                <p _v-4772bc84=\"\">1、先下载excel模板</p>\n                <p _v-4772bc84=\"\">2、红色为必填字段，黑色为非必填字段</p>\n            </div>\n        </div>\n    </div>\n";
+	module.exports = "\n    <div _v-4772bc84=\"\">\n        <form id=\"file_form\" class=\"form-inline form-search text-center\" _v-4772bc84=\"\">\n            <div class=\"form-group\" _v-4772bc84=\"\">\n                <label _v-4772bc84=\"\">导入类型：</label>\n                <v-select :value.sync=\"type\" :options=\"types\" placeholder=\"请选择\" _v-4772bc84=\"\">\n                </v-select>\n                <label _v-4772bc84=\"\">导入文件：</label>\n                <input type=\"text\" class=\"form-control\" onfocus=\"this.blur()\" v-model=\"road\" _v-4772bc84=\"\">\n                <input id=\"file\" type=\"file\" name=\"file\" v-show=\"false\" @change=\"changeFn\" _v-4772bc84=\"\">\n                <button type=\"button\" class=\"btn btn-default\" @click=\"findFile\" _v-4772bc84=\"\">浏览</button>\n                <button type=\"button\" class=\"btn btn-default\" @click=\"uploadFile\" _v-4772bc84=\"\">导入</button>\n                <a type=\"button\" class=\"btn btn-default\" href=\"/file/template_cmdb.xlsx\" target=\"_blank\" _v-4772bc84=\"\">下载模板</a>\n            </div>\n        </form>\n        <div _v-4772bc84=\"\">\n            <div class=\"import-msg\" _v-4772bc84=\"\">\n                <p v-for=\"msg in msgs\" v-text=\"msg\" _v-4772bc84=\"\"></p>\n            </div>\n        </div>\n    </div>\n";
 
 /***/ }
 ]));

@@ -83,3 +83,6 @@ export const systems = state => state.systems
 
 // 获取机房连通类型
 export const connTypes = state => state.connTypes
+
+// 获取机房连通类型
+export const treeProducts = state => state.treeProducts

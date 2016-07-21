@@ -10,14 +10,12 @@
                 <input id="file" type="file" name="file" v-show="false" @change="changeFn">
                 <button type="button" class="btn btn-default" @click="findFile">浏览</button>
                 <button type="button" class="btn btn-default" @click="uploadFile">导入</button>
-                <a type="button" class="btn btn-default" href="/file/guifan.pdf" target="_blank">下载模板</a>
+                <a type="button" class="btn btn-default" href="/file/template_cmdb.xlsx" target="_blank">下载模板</a>
             </div>
         </form>
         <div>
             <div class="import-msg">
-                <p>【操作说明】</p>
-                <p>1、先下载excel模板</p>
-                <p>2、红色为必填字段，黑色为非必填字段</p>
+                <p v-for="msg in msgs" v-text="msg"></p>
             </div>
         </div>
     </div>
@@ -30,15 +28,14 @@ export default {
     data () {
         return {
             types: [
-                {value: '机房导入', label: '机房导入'},
-                {value: '机架位导入', label: '机架位导入'},
-                {value: '交换机导入', label: '交换机导入'},
-                {value: '服务器导入', label: '服务器导入'},
-                {value: '业务树导入', label: '业务树导入'},
-                {value: '模块服务器关系导入', label: '模块服务器关系导入'}
+                {value: '1', label: '交换机导入'},
+                {value: '2', label: '服务器导入'},
+                {value: '3', label: '业务树导入'},
+                {value: '4', label: '模块服务器关系导入'}
             ],
             type: '',
-            road: ''
+            road: '',
+            msgs: ['【操作说明】', '1、先下载excel模板', '2、红色为必填字段，黑色为非必填字段']
         }
     },
     methods: {
@@ -55,30 +52,46 @@ export default {
 
         // 上传文件
         uploadFile () {
-            if (this.road !== '') {
+            if (this.road !== '' && this.road.endsWith('.xlsx')) {
                 let _this = this,
-                    formData = new FormData($('#file_form')[0])
+                    formData = new FormData($('#file_form')[0]),
+                    url = ''
 
-                formData.append('type', _this.type)
+                // formData.append('type', _this.type)
 
-                $.ajax({
-                        url: '/package_file_upload/',
-                        type: 'POST',
-                        processData: false,
-                        contentType: false,
-                        dataType: 'JSON',
-                        data: formData
-                    })
-                    .then(function (data) {
-                        if (data.code === 1) {
-                            _this.road = ''
+                switch(this.type) {
+                    case '1':
+                        url = '/device/switch/import/'
+                    case '2':
+                        url = '/device/server/import/'
+                        break
+                }
 
-                            _this.$dispatch('show-success')
-                        } else {
-                            _this.$dispatch('show-error')
-                        }
-                    })
-            }    
+                if (url) {
+                    $.ajax({
+                            url: url,
+                            type: 'POST',
+                            processData: false,
+                            contentType: false,
+                            dataType: 'JSON',
+                            data: formData
+                        })
+                        .then(function (data) {
+                            if (data.code === 200) {
+                                _this.road = ''
+
+                                _this.$dispatch('show-success', '导入成功')
+                            } else {
+                                _this.msgs = data.invalid
+
+                                _this.$dispatch('data.msg')
+                                _this.$dispatch('show-error', data.msg)
+                            }
+                        })
+                }
+            } else {
+                this.$dispatch('show-notify', '导入文件必须为.xlsx后缀的文件')
+            }
         }
     },
     components: {
@@ -94,5 +107,9 @@ export default {
     margin: 150px auto 0;
     text-align: center;
     border: 1px solid #ccc;
+}
+
+.import-msg > p {
+    color: #A04848;
 }
 </style>

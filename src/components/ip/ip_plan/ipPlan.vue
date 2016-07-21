@@ -37,7 +37,14 @@
                 <div class="form-group">
                     <label class="col-sm-4 control-label">网段：</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" v-model="network">
+                        <popover
+                            trigger="focus"
+                            effect="scale"
+                            placement="bottom"
+                            title="提示"
+                            content="网段格式只能为xxx.xxx.xxx.0/24">
+                            <input type="text" class="form-control" v-model="network">
+                        </popover>
                     </div>
                 </div>
             </div>
@@ -59,6 +66,7 @@
 </template>
 
 <script>
+import { popover } from 'vue-strap'
 import vSelect from '../../global/Select.vue'
 import { getIpPlan } from '../../../vuex/action.js'
 import { idcs, netTypes, operators } from '../../../vuex/getters.js'
@@ -88,7 +96,7 @@ export default {
 
         // 保存IP
         saveFn () {
-            let regIp = /^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$/,
+            let regIp = /^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.([1-9]|\d{2}|1\d\d|2[0-4]\d|25[0-4])$/,
                 regNetwork = /^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.0\/24$/
 
             if (!regNetwork.test(this.network.trim()) && this.network.trim()) {
@@ -103,33 +111,36 @@ export default {
                 return false
             }
 
-            let ipArr = this.ips.split(','),
-                newArr = [],
-                vaild = true
+            let vaild = true,
+                newArr = []
 
-            ipArr.forEach(e => {
-                if (e.includes('-') && e.split('-').length === 2) {
-                    let first = e.split('-')[0].trim(),
-                        second = e.split('-')[1].trim()
+            if (this.ips.trim()) {
+                let ipArr = this.ips.split(',')
+                    
+                ipArr.forEach(e => {
+                    if (e.indexOf('-') !== -1 && e.split('-').length === 2) {
+                        let first = e.split('-')[0].trim(),
+                            second = e.split('-')[1].trim()
 
-                    if (regIp.test(first) && regIp.test(second)) {
-                        newArr.push(first + '-' + second)
+                        if (regIp.test(first) && regIp.test(second)) {
+                            newArr.push(first + '-' + second)
+                        } else {
+                            this.$dispatch('show-notify', 'ip段格式错误，请检查')
+
+                            vaild = false
+                        }
                     } else {
-                        this.$dispatch('show-notify', 'ip段格式错误，请检查')
+                        if (regIp.test(e.trim())) {
+                            newArr.push(e.trim())
 
-                        vaild = false
+                        } else {
+                            this.$dispatch('show-notify', 'ip格式错误，请检查')
+
+                            vaild = false
+                        }
                     }
-                } else {
-                    if (regIp.test(e.trim())) {
-                        newArr.push(e.trim())
-
-                    } else {
-                        this.$dispatch('show-notify', 'ip格式错误，请检查')
-
-                        vaild = false
-                    }
-                }
-            })
+                })
+            }
 
             if (vaild) {
                 this.$http({
@@ -162,7 +173,8 @@ export default {
         }
     },
     components: {
-        vSelect
+        vSelect,
+        popover
     },
     vuex: {
         actions: {

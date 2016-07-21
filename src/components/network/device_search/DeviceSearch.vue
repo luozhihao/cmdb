@@ -1,7 +1,7 @@
 <!-- 交换机查询 -->
 <template>
     <div>
-        <form class="form-horizontal clearfix form-search">
+        <form class="form-horizontal clearfix form-search" name="deviceForm" method="POST">
             <div class="col-sm-3">
                 <div class="form-group">
                     <label class="col-sm-4 control-label">SN：</label>
@@ -113,7 +113,7 @@
                     <button type="button" class="btn btn-default btn-block" @click="cancelFn">取消</button>
                 </div>
             </dropdown>
-            <button type="button" class="btn btn-default">
+            <button type="button" class="btn btn-default" @click="exportFn">
                 导出
             </button>
         </div>
@@ -136,39 +136,36 @@
             </div>
         </div>
         <div class="table-box">
-            <table class="table table-hover table-bordered">
-                <thead>
-                    <tr>
-                        <th width="3%"><input type="checkbox" v-model="checkedAll"></th>
-                        <th v-for="title in titles" v-text="title"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="list in tableList" v-if="tableList.length !== 0" v-show="tableList.length !== 0">
-                        <td><input type="checkbox" :id="list.id" :value="list.id" v-model="checkedIds"></td>
-                        <td v-for="value in valueArr" v-if="value === 'deviceNum'">
-                            <a class="pointer" v-if="value === 'deviceNum'" v-text="list[value]" @click="$broadcast('showEditDevice', list.id)"></a>
-                        </td>
-                        <td v-for="value in valueArr" :title="list[value]" v-text="list[value]" v-if="value !== 'deviceNum'">
-                        </td>
-                    </tr>
-                    <tr class="text-center" v-show="tableList.length === 0">
-                        <td :colspan="titles.length + 1">暂无数据</td>
-                    </tr>
-                </tbody>
-                <tfoot> 
-                    <tr>
-                        <td :colspan="titles.length + 1">
-                            <boot-page :async="true" :lens="lenArr" :page-len="pageLen" :url="url" :param="param"></boot-page>
-                        </td>
-                    </tr>
-                </tfoot>
-            </table>
-            <spinner id="spinner-box" :size="md" :fixed="false" 
-                 text="数据加载中，请稍后..." v-ref:spinner>
-            </spinner>
+            <div class="table-wrapper">
+                <table class="table table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th width="3%"><input type="checkbox" v-model="checkedAll"></th>
+                            <th v-for="title in titles" v-text="title"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="list in tableList" v-if="tableList.length !== 0" v-show="tableList.length !== 0">
+                            <td><input type="checkbox" :id="list.id" :value="list.id" v-model="checkedIds"></td>
+                            <td v-for="value in valueArr" v-if="value === 'deviceNum'">
+                                <a class="pointer" v-if="value === 'deviceNum'" v-text="list[value]" @click="$broadcast('showEditDevice', list.id)"></a>
+                            </td>
+                            <td v-for="value in valueArr" :title="list[value]" v-text="list[value]" v-if="value !== 'deviceNum'">
+                            </td>
+                        </tr>
+                        <tr class="text-center" v-show="tableList.length === 0">
+                            <td :colspan="titles.length + 1">暂无数据</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <spinner id="spinner-box" :size="md" :fixed="false" 
+                     text="数据加载中，请稍后..." v-ref:spinner>
+                </spinner>
+            </div>
         </div>
-
+        <div class="pull-right mt30">
+            <boot-page v-ref:page :async="true" :lens="lenArr" :page-len="pageLen" :url="url" :param="param"></boot-page>
+        </div>
         <create-modal></create-modal>
         <batch-edit-modal></batch-edit-modal>
         <edit-device-modal></edit-device-modal>
@@ -219,7 +216,18 @@ export default {
                 {label: '所在机房', value: 'room', checked: true},
                 {label: '所在机架', value: 'frame', checked: true},
                 {label: '所在机位', value: 'seats', checked: true},
-                {label: '来源', value: 'origin', checked: true}
+                {label: '来源', value: 'origin', checked: true},
+                {label: '资产编号', value: 'assetNum', checked: true},
+                {label: '财务编号', value: 'financeNum', checked: true},
+                {label: '发票编号', value: 'invoiceNum', checked: true},
+                {label: '质保期限', value: 'shelfLife', checked: true},
+                {label: '入库时间', value: 'addTime', checked: true},
+                {label: '出厂时间', value: 'factoryTime', checked: true},
+                {label: '采购时间', value: 'procureTime', checked: true},
+                {label: '公司内网', value: 'companyIntnet', checked: true},
+                {label: '机房内网', value: 'roomIntnet', checked: true},
+                {label: '机房外网', value: 'roomOutnet', checked: true},
+                {label: '备注', value: 'remark', checked: true}
             ],
             valueArr: [],
             show1: false,
@@ -237,7 +245,7 @@ export default {
         refresh () {
             this.$refs.spinner.show()
             this.checkedIds = []
-            this.$broadcast('refresh')
+            this.$refs.page.refresh()
         },
 
         // 筛选
@@ -338,6 +346,22 @@ export default {
         // 取消删除
         cancelFn () {
             this.$els.confirm.classList.toggle('open')
+        },
+
+        // 导出
+        exportFn () {
+            let form = document.deviceForm,
+                arr = []
+
+            for (let key in this.$data.param) {
+                let obj = key + '=' + this.$data.param[key]
+
+                arr.push(obj)
+            }
+
+            form.action='/device/switch/export/?' + arr.join('&')
+
+            form.submit()
         }
     },
     components: {

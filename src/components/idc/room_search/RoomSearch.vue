@@ -86,9 +86,9 @@
                         <td><input type="checkbox" :id="list.id" :value="list.id" v-model="checkedIds"></td>
 
                         <td v-for="value in valueArr" v-if="value === 'idcName' || value === 'frameName' || value === 'seatsName'">
-                            <a class="pointer" v-if="value === 'idcName'" v-text="list[value]" @click="$broadcast('showEditRoom', list.id)"></a>
-                            <a class="pointer" v-if="value === 'frameName'" v-text="list[value]" @click="$broadcast('showEditFrame', list.id)"></a>
-                            <a class="pointer" v-if="value === 'seatsName'" v-text="list[value]" @click="$broadcast('showEditSeats', list.id)"></a>
+                            <a class="pointer" v-if="value === 'idcName'" v-text="list[value]" @click="$broadcast('showEditRoom', list.roomId)"></a>
+                            <a class="pointer" v-if="value === 'frameName'" v-text="list[value]" @click="$broadcast('showEditFrame', list.frameId)"></a>
+                            <a class="pointer" v-if="value === 'seatsName'" v-text="list[value]" @click="$broadcast('showEditSeats', list.seatId)"></a>
                         </td>
 
                         <td v-for="value in valueArr" :title="list[value]" v-text="list[value]" v-if="value !== 'idcName' && value !== 'frameName' && value !== 'seatsName'">
@@ -101,7 +101,7 @@
                 <tfoot> 
                     <tr>
                         <td :colspan="titles.length + 1">
-                            <boot-page :async="true" :lens="lenArr" :page-len="pageLen" :url="url" :param="param"></boot-page>
+                            <boot-page v-ref:page :async="true" :lens="lenArr" :page-len="pageLen" :url="url" :param="param"></boot-page>
                         </td>
                     </tr>
                 </tfoot>
@@ -168,7 +168,7 @@ export default {
         refresh () {
             this.$refs.spinner.show()
             this.checkedIds = []
-            this.$broadcast('refresh')
+            this.$refs.page.refresh()
         },
 
         // 筛选
