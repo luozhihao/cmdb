@@ -34,7 +34,7 @@
             </div>
         </form>
         <div class="text-center btn-operate">
-            <button type="button" class="btn btn-default" @click="refresh">
+            <button type="button" class="btn btn-default" @click="searchFn">
                 查询
             </button>
             <button type="button" class="btn btn-default" @click="$broadcast('showCreate')">
@@ -51,9 +51,6 @@
                     <button type="button" class="btn btn-default btn-block" @click="cancelFn">取消</button>
                 </div>
             </dropdown>
-            <button type="button" class="btn btn-default">
-                导出
-            </button>
         </div>
         <div class="text-center table-title">
             查询结果
@@ -169,6 +166,15 @@ export default {
             this.$refs.spinner.show()
             this.checkedIds = []
             this.$refs.page.refresh()
+        },
+
+        // 查询
+        searchFn () {
+            if (this.param.dimension) {
+                this.refresh()
+            } else {
+                this.$dispatch('show-notify', '请选择视角')
+            }
         },
 
         // 筛选

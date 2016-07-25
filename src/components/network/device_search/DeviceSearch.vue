@@ -140,7 +140,7 @@
                 <table class="table table-hover table-bordered">
                     <thead>
                         <tr>
-                            <th width="3%"><input type="checkbox" v-model="checkedAll"></th>
+                            <th width="2%"><input type="checkbox" v-model="checkedAll"></th>
                             <th v-for="title in titles" v-text="title"></th>
                         </tr>
                     </thead>
@@ -217,13 +217,13 @@ export default {
                 {label: '所在机架', value: 'frame', checked: true},
                 {label: '所在机位', value: 'seats', checked: true},
                 {label: '来源', value: 'origin', checked: true},
-                {label: '资产编号', value: 'assetNum', checked: true},
-                {label: '财务编号', value: 'financeNum', checked: true},
-                {label: '发票编号', value: 'invoiceNum', checked: true},
-                {label: '质保期限', value: 'shelfLife', checked: true},
-                {label: '入库时间', value: 'addTime', checked: true},
-                {label: '出厂时间', value: 'factoryTime', checked: true},
-                {label: '采购时间', value: 'procureTime', checked: true},
+                {label: '资产编号', value: 'assetNum', checked: false},
+                {label: '财务编号', value: 'financeNum', checked: false},
+                {label: '发票编号', value: 'invoiceNum', checked: false},
+                {label: '质保期限', value: 'shelfLife', checked: false},
+                {label: '入库时间', value: 'addTime', checked: false},
+                {label: '出厂时间', value: 'factoryTime', checked: false},
+                {label: '采购时间', value: 'procureTime', checked: false},
                 {label: '公司内网', value: 'companyIntnet', checked: true},
                 {label: '机房内网', value: 'roomIntnet', checked: true},
                 {label: '机房外网', value: 'roomOutnet', checked: true},

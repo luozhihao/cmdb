@@ -179,10 +179,10 @@ export default {
         showView (id, type) {
             switch (type) {
                 case 1:
-                    this.$broadcast('showEditServer', id)
+                    this.$broadcast('viewEditServer', id)
                     break;
                 case 2:
-                    this.$broadcast('showEditDevice', id)
+                    this.$broadcast('viewEditDevice', id)
                     break;
             }
         },

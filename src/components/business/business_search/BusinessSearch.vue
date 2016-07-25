@@ -221,7 +221,7 @@ export default {
 
                         this.$dispatch('show-success', '删除成功')
                     } else {
-                        this.$dispatch('show-error', '删除失败了')
+                        this.$dispatch('show-error', response.data.msg)
                     }
                 })
             } else {

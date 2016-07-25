@@ -216,10 +216,15 @@
                         </div>
                     </form>
                     <div class="text-center mt30 mb20">
-                        <button type="button" class="btn btn-default" @click="saveFn"
+                        <button
+                            v-if="canSave"
+                            type="button" 
+                            class="btn btn-default"
+                            @click="saveFn"
                             :disabled="sn.trim() && origin1 && origin2 && room && frame && seat && model && status && serverType && firm ? false : true"
-                        >保存</button>
-                        <!-- <button type="button" class="btn btn-default">更新</button> -->
+                        >
+                            保存
+                        </button>
                         <button type="button" class="btn btn-default" @click='editServerModal = false'>取消</button>
                     </div>
                 </tab>
@@ -272,6 +277,7 @@ import { idcs, frames, seats, serverTypes, serverStatus, firms, origins1, origin
 
 let origin = {
         editServerModal: false,
+        canSave: true,
         ports: [],
         id: null,
         serverNum: '',
@@ -330,6 +336,24 @@ export default {
                     this.$dispatch('show-error')
                 }
             })
+        },
+
+        // 加载数据
+        loadData (param) {
+            this.$http({
+                url: '/device/server/get/?id=' + param,
+                method: 'GET'
+            })
+            .then(repsonse => {
+                if (repsonse.data.code === 200) {
+                    this.$data = Object.assign({}, origin, repsonse.data)
+
+                    this.id = param
+                    this.editServerModal = true
+                } else {
+                    this.$dispatch('show-error')
+                }
+            })
         }
     },
     components: {
@@ -361,20 +385,12 @@ export default {
     },
     events: {
         'showEditServer' (param) {
-            this.$http({
-                url: '/device/server/get/?id=' + param,
-                method: 'GET'
-            })
-            .then(repsonse => {
-                if (repsonse.data.code === 200) {
-                    this.$data = Object.assign({}, origin, repsonse.data)
-
-                    this.id = param
-                    this.editServerModal = true
-                } else {
-                    this.$dispatch('show-error')
-                }
-            })
+            this.loadData(param)
+            this.canSave = true
+        },
+        'viewEditServer' (param) {
+            this.loadData(param)
+            this.canSave = false
         }
     },
     watch: {

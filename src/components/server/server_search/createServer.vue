@@ -1,6 +1,6 @@
 <!-- 新增服务器 -->
 <template>
-    <modal :show.sync="creatServerModal" effect="fade" width="850px">
+    <modal :show.sync="creatServerModal" effect="fade" width="1200px">
         <div slot="modal-header" class="modal-header">
             <h4 class="modal-title">新增服务器</h4>
         </div>
@@ -163,13 +163,13 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-4">公司内网：</label>
+                        <label class="control-label col-sm-4">公司内网：<span class="text-danger">(选一)</span></label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" v-model="companyIntnet" onfocus="this.blur()" @click="showBroad('companyIntnet')">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-4">机房内网：</label>
+                        <label class="control-label col-sm-4">机房内网：<span class="text-danger">(选一)</span></label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" v-model="roomIntnet" onfocus="this.blur()" @click="showBroad('roomIntnet')">
                         </div>
@@ -184,9 +184,14 @@
             </form>
         </div>
         <div slot="modal-footer" class="modal-footer">
-            <button type="button" class="btn btn-default" @click="saveFn"
-                :disabled="sn.trim() && origin1 && origin2 && room && frame && seat && model && status && serverType && firm ? false : true"
-            >保存</button>
+            <button 
+                type="button" 
+                class="btn btn-default" 
+                @click="saveFn"
+                :disabled="sn.trim() && origin1 && origin2 && room && frame && seat && model && status && serverType && firm && (companyIntnet.trim() || roomIntnet.trim()) ? false : true"
+            >
+                保存
+            </button>
             <button type="button" class="btn btn-default" @click='creatServerModal = false'>取消</button>
         </div>
     </modal>
@@ -250,7 +255,7 @@ export default {
                     this.$dispatch('refresh')
                     this.$dispatch('show-success')
                 } else {
-                    this.$dispatch('show-error')
+                    this.$dispatch('show-error', response.data.msg)
                 }
             })
         },

@@ -58,7 +58,13 @@
             </div>
         </form>
         <div class="text-center btn-operate">
-            <button type="button" class="btn btn-default" @click="saveFn" :disabled="netType && idc && gateway.trim() ? false : true">
+            <button 
+                type="button" 
+                class="btn btn-default" 
+                @click="saveFn" 
+                :disabled="netType && idc && gateway.trim() && !loading ? false : true"
+                v-text="loading ? '添加中，请稍后...' : '保存'"
+            >
                 保存
             </button>
         </div>
@@ -79,7 +85,8 @@ export default {
             network: '',
             gateway: '',
             ips: '',
-            operator: ''
+            operator: '',
+            loading: false
         }
     },
     methods: {
@@ -143,6 +150,8 @@ export default {
             }
 
             if (vaild) {
+                this.loading = true
+
                 this.$http({
                     url: '/ip/ip_add/',
                     method: 'POST',
@@ -162,12 +171,14 @@ export default {
                         this.network = '',
                         this.gateway = '',
                         this.ips = '',
-                        this.operator = ''
+                        this.operator = '',
 
                         this.$dispatch('show-success')
                     } else {
                         this.$dispatch('show-error', response.data.msg)
                     }
+
+                    this.loading = false
                 })
             }
         }

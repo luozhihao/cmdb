@@ -38,7 +38,7 @@
         </div>
         <div class="calendar-button" v-show="type=='datetime'||type=='time'||range">
             <button type="button" @click="ok">确定</button>
-            <button type="button" @click="cancel" class="cancel">取消</button>
+            <button type="button" @click="cancel" class="cancel">清空</button>
         </div>
     </div>
 </template>
@@ -306,14 +306,21 @@ module.exports = {
         },
         ok:function(){
             var that=this;
-            if(that.range){
-                that.value=that.output(that.rangeBegin)+" ~ "+that.output(that.rangeEnd);
-            }else{
-                that.value=that.output([that.year,that.month - 1,that.day,that.hour,that.minute,that.second]);
+
+            if ((typeof that.rangeBegin) === 'object' && (typeof that.rangeEnd) === 'object') {
+                if(that.range){
+                    that.value=that.output(that.rangeBegin)+" ~ "+that.output(that.rangeEnd);
+                }else{
+                    that.value=that.output([that.year,that.month - 1,that.day,that.hour,that.minute,that.second]);
+                }
+            } else {
+                that.value = ''
             }
             that.show=false;
         },
         cancel:function(){
+            this.value = ''
+
             this.show=false;
         },
         // 格式化输出

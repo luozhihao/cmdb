@@ -15,21 +15,21 @@
                     <div class="form-group input-box">
                         <label class="control-label col-sm-4">机房：<span class="text-danger">*</span></label>
                         <div class="col-sm-8">
-                            <v-select :value.sync="room" :options="rooms" placeholder="请选择" :search="true">
+                            <v-select :value.sync="room" :options="rooms" placeholder="请选择">
                             </v-select>
                         </div>
                     </div>
                     <div class="form-group input-box">
                         <label class="control-label col-sm-4">机架：<span class="text-danger">*</span></label>
                         <div class="col-sm-8">
-                            <v-select :value.sync="frame" :options="frames" placeholder="请选择" :search="true">
+                            <v-select :value.sync="frame" :options="frames" placeholder="请选择">
                             </v-select>
                         </div>
                     </div>
                     <div class="form-group input-box">
                         <label class="control-label col-sm-4">机位：<span class="text-danger">*</span></label>
                         <div class="col-sm-8">
-                            <v-select :value.sync="seat" :options="seats" placeholder="请选择" :search="true">
+                            <v-select :value.sync="seat" :options="seats" placeholder="请选择">
                             </v-select>
                         </div>
                     </div>
@@ -155,13 +155,13 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-4">公司内网：</label>
+                        <label class="control-label col-sm-4">公司内网：<span class="text-danger">(选一)</span></label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" v-model="companyIntnet" onfocus="this.blur()" @click="showBroad('companyIntnet')">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-4">机房内网：</label>
+                        <label class="control-label col-sm-4">机房内网：<span class="text-danger">(选一)</span></label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" v-model="roomIntnet" onfocus="this.blur()" @click="showBroad('roomIntnet')">
                         </div>
@@ -182,9 +182,14 @@
             </form>
         </div>
         <div slot="modal-footer" class="modal-footer">
-            <button type="button" class="btn btn-default" @click="saveFn"
-                :disabled="sn.trim() && room && frame && seat && origin1 && origin2 && model && firm && status && interfaceTotal.trim() ? false : true"
-            >保存</button>
+            <button 
+                type="button" 
+                class="btn btn-default" 
+                @click="saveFn"
+                :disabled="sn.trim() && room && frame && seat && origin1 && origin2 && model && firm && status && interfaceTotal.trim() && (companyIntnet.trim() || roomIntnet.trim()) ? false : true"
+            >
+                保存
+            </button>
             <button type="button" class="btn btn-default" @click='createModal = false'>取消</button>
         </div>
     </modal>
@@ -248,7 +253,7 @@ export default {
                     this.$dispatch('refresh')                  
                     this.$dispatch('show-success')
                 } else {
-                    this.$dispatch('show-error')
+                    this.$dispatch('show-error', response.data.msg)
                 }
             })
         },

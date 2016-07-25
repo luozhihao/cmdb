@@ -23,21 +23,21 @@
 .tlist {
     border-right: 1px solid #ccc;
     padding: 20px;
-    min-height: 750px;
+    height: 750px;
+    overflow: auto;
 }
 
 .h650 {
-    min-height: 650px;
+    max-height: 650px;
 }
 
 .dragicon {
     position: absolute;
-    right: -8px;
-    top: 46%;
+    left: 20.2%;
+    top: 400px;
     font-size: 16px;
     color: #676767;
 }
-
 </style>
 
 <template>
@@ -49,11 +49,13 @@
             </div>
         </form>
         <div class="clearfix tree-box">
+            <span class="dragicon glyphicon glyphicon-random"></span>
             <div class="left-tree pull-left tlist">
+                <div>业务模型</div>
                 <div id="tree1" class="ztree"></div>
-                <span class="dragicon glyphicon glyphicon-random"></span>
             </div>
             <div class="right-tree pull-left tlist">
+                <div>业务实例</div>
                 <div id="tree2" class="ztree"></div>
             </div>
             <div class="table-tree pull-left">
@@ -76,7 +78,9 @@
                         <tr v-for="list in tableList" v-if="tableList.length !== 0" v-show="tableList.length !== 0">
                             <td><input type="checkbox" :id="list.id" :value="list.id" v-model="checkedIds"></td>
                             <td v-text="list.ip" :title="list.ip"></td>
-                            <td v-text="list.serial" :title="list.serial"></td>
+                            <td>
+                                <a class="pointer" v-text="list.serial" @click="$broadcast('viewEditServer', list.id)"></a>
+                            </td>
                             <td v-text="list.sn" :title="list.sn"></td>
                         </tr>
                         <tr class="text-center" v-show="tableList.length === 0">
@@ -132,6 +136,7 @@
         </modal>
 
         <confirm-modal></confirm-modal>
+        <edit-server-modal></edit-server-modal>
     </div>
 </template>
 
@@ -142,6 +147,7 @@ import bootPage from '../../global/BootPage.vue'
 import { getTreeSelect } from '../../../vuex/action.js'
 import { treeProducts } from '../../../vuex/getters.js'
 import serverModal from '../../server/server_search/ServerSearch.vue'
+import editServerModal from '../../server/server_search/EditServer.vue'
 import confirmModal from '../../global/Confirm.vue'
 import '../../../assets/js/bootstrap/modal.js'
 
@@ -482,8 +488,10 @@ export default {
                     }else{
                         var uid2=_this.uuid();
                         nodestr += ',{"node_id":"'+uid2+'","parent_id":"'+uid1+'","model_id":"'+pnode.children[i].id+'","node_name":"'+set2+'","type":'+pnode.children[i].type+'}';
-                        for (var j = 0; j < pnode.children[i].children.length; j++) {
-                            nodestr+=',{"node_id":"'+_this.uuid()+'","parent_id":"'+uid2+'","model_id":"'+pnode.children[i].children[j].id+'","node_name":"'+set2+"-"+pnode.children[i].children[j].name+'","type":'+pnode.children[i].children[j].type+'}';
+                        if(pnode.children[i].children!=undefined){
+                            for (var j = 0; j < pnode.children[i].children.length; j++) {
+                                nodestr+=',{"node_id":"'+_this.uuid()+'","parent_id":"'+uid2+'","model_id":"'+pnode.children[i].children[j].id+'","node_name":"'+set2+"-"+pnode.children[i].children[j].name+'","type":'+pnode.children[i].children[j].type+'}';
+                            }
                         }
                     }
                 }
@@ -524,7 +532,11 @@ export default {
 
         /*删除节点*/
         beforeRemove (treeId, treeNode) {
-            return confirm("确认删除 " + treeNode.name + " 吗？");
+            if(treeId=="tree1"){
+                return confirm("删除模型节点时，所有的实例节点也会删除，确认删除 " + treeNode.name + " 吗,？");
+            }else{
+                return confirm("确认删除 " + treeNode.name + " 吗,？");
+            }
         },
 
         onRemove (e, treeId, treeNode) {
@@ -533,15 +545,15 @@ export default {
                 $.post("/node/removeModel/",{"modelID":treeNode.id},function(data){
                     if(data.code==500){
                         alert(data.msg);
-                        _this.getProduct();
                     }
+                    _this.getProduct();
                 },"json");
             }else{
                 $.post("/node/removeNode/",{"nodeID":treeNode.id},function(data){
                     if(data.code==500){
                         alert(data.msg);
-                        _this.getProduct();
                     }
+                    _this.getProduct();
                 },"json");
             }
         },
@@ -635,7 +647,8 @@ export default {
         spinner,
         modal,
         serverModal,
-        confirmModal
+        confirmModal,
+        editServerModal
     },
     vuex: {
         actions: {

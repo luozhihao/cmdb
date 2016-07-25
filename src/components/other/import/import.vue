@@ -30,8 +30,7 @@ export default {
             types: [
                 {value: '1', label: '交换机导入'},
                 {value: '2', label: '服务器导入'},
-                {value: '3', label: '业务树导入'},
-                {value: '4', label: '模块服务器关系导入'}
+                {value: '3', label: '业务树导入'}
             ],
             type: '',
             road: '',
@@ -65,6 +64,9 @@ export default {
                     case '2':
                         url = '/device/server/import/'
                         break
+                    case '3':
+                        url = '/node/import/'
+                        break
                 }
 
                 if (url) {
@@ -79,15 +81,18 @@ export default {
                         .then(function (data) {
                             if (data.code === 200) {
                                 _this.road = ''
+                                $('#file').val('')
+                                _this.msgs = ['【操作说明】', '1、先下载excel模板', '2、红色为必填字段，黑色为非必填字段']
 
                                 _this.$dispatch('show-success', '导入成功')
                             } else {
                                 _this.msgs = data.invalid
 
-                                _this.$dispatch('data.msg')
                                 _this.$dispatch('show-error', data.msg)
                             }
                         })
+                } else {
+                    this.$dispatch('show-notify', '请选择导入类型')
                 }
             } else {
                 this.$dispatch('show-notify', '导入文件必须为.xlsx后缀的文件')

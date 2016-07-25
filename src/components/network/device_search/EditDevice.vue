@@ -177,11 +177,15 @@
                         </div>
                     </form>
                     <div class="text-center mt30 mb20">
-                        <button type="button" class="btn btn-default" @click="saveFn"
+                        <button 
+                            v-if="canSave"
+                            type="button" 
+                            class="btn btn-default" 
+                            @click="saveFn"
                             :disabled="sn.trim() && room && frame && seat && origin1 && origin2 && model && firm && status && interfaceTotal.trim() ? false : true"
-                        >保存</button>
-                        <!-- <button type="button" class="btn btn-default" @click="$broadcast('showCreatVlan')">新增VLAN</button>
-                        <button type="button" class="btn btn-default" @click="$broadcast('showCreatPort')">新增端口</button> -->
+                        >
+                            保存
+                        </button>
                         <button type="button" class="btn btn-default" @click='editDeviceModal = false'>取消</button>
                     </div>
                 </tab>
@@ -268,6 +272,7 @@ import { idcs, firms, origins1, deviceStatus, frames, seats, origins2 } from '..
 
 let origin = {
         editDeviceModal: false,
+        canSave: true,
         vlans: [{name: 'vlan1', speed: '1Gbps', port: 'G23,G07,G15,G18,G02,G10,G2', ip: '', use: ''}],
         ports: [
             {name: 'G01', vlan: 'vlan1', speed: '1Gbps', status: '', device: '', devicePort: '', deviceVlan: '', use: ''},
@@ -328,6 +333,24 @@ export default {
                     this.$dispatch('show-error')
                 }
             })
+        },
+
+        // 加载数据
+        loadData (param) {
+            this.$http({
+                url: '/device/switch/get/?id=' + param,
+                method: 'GET'
+            })
+            .then(response => {
+                if (response.data.code === 200) {
+                    this.$data = Object.assign({}, origin, response.data)
+
+                    this.id = param
+                    this.editDeviceModal = true
+                } else {
+                    this.$dispatch('show-error')
+                }
+            })
         }
     },
     components: {
@@ -360,20 +383,12 @@ export default {
     },
     events: {
         'showEditDevice' (param) {
-            this.$http({
-                url: '/device/switch/get/?id=' + param,
-                method: 'GET'
-            })
-            .then(response => {
-                if (response.data.code === 200) {
-                    this.$data = Object.assign({}, origin, response.data)
-
-                    this.id = param
-                    this.editDeviceModal = true
-                } else {
-                    this.$dispatch('show-error')
-                }
-            })
+            this.loadData(param)
+            this.canSave = true
+        },
+        'viewEditDevice' (param) {
+            this.loadData(param)
+            this.canSave = false
         }
     },
     watch: {

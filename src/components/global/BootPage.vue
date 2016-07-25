@@ -3,8 +3,13 @@
     <nav class="boot-nav">
         <ul class="pagination boot-page">
             <li>
-                <a href="javascript:void(0)" aria-label="Previous" @click="onPrevClick()">
+                <a href="javascript:void(0)" aria-label="Previous" @click="onFirstClick()">
                     <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:void(0)" aria-label="Next" @click="onPrevClick()">
+                    <span aria-hidden="true">‹</span>
                 </a>
             </li>
             <li v-for="page in pages" :class="activeNum === $index ? 'active' : ''">
@@ -12,6 +17,11 @@
             </li>
             <li>
                 <a href="javascript:void(0)" aria-label="Next" @click="onNextClick()">
+                    <span aria-hidden="true">›</span>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:void(0)" aria-label="Next" @click="onLastClick()">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
             </li>
@@ -144,6 +154,38 @@ export default {
             }
         },
 
+        // 第一页
+        onFirstClick () {
+            if (this.pages[0] === 1) {
+                this.activeNum = 0
+            } else {
+                let originPage = []
+
+                for (let i = 1; i <= this.pageLen; i++) {
+                    originPage.push(i)
+                }
+
+                this.pages = originPage
+                this.activeNum === 0 ? this.getData() : this.activeNum = 0
+            }
+        },
+
+        // 最后一页
+        onLastClick () {
+            if (this.pageTotal <= this.pageLen) {
+                this.activeNum = this.pages.length - 1
+            } else {
+                let lastPage = []
+
+                for (let i = this.pageLen - 1; i >= 0; i--) {
+                    lastPage.push(this.pageTotal - i)
+                }
+
+                this.pages = lastPage
+                this.activeNum === this.pages.length - 1 ? this.getData() : this.activeNum = this.pages.length - 1
+            }
+        },
+
         // 获取页码
         getPages () {
             this.pages = []
@@ -210,20 +252,15 @@ export default {
         refresh2 () {
             this.pages = [1]
 
-            this.activeNum = 0
-
-            this.getData()
+            this.activeNum === 0 ? this.getData() : this.activeNum = 0
         }
     },
     ready () {
         if (!this.async) {
             this.getPages()
-            this.getData()
+        } 
 
-            let _this = this
-        } else {
-            this.getData()
-        }
+        this.getData()
     },
     watch: {
 
@@ -231,8 +268,6 @@ export default {
         'len' (newVal, oldVal) {
             if (!this.async) {
                 this.getPages()
-
-                let _this = this
 
                 if (this.activeNum + 1 > this.pages.length) {
                     this.activeNum = this.pages.length - 1

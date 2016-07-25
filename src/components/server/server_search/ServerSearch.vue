@@ -176,12 +176,26 @@
                 <button type="button" class="btn btn-default" @click="exportFn">
                     导出
                 </button>
-                <button type="button" class="btn btn-default">
-                    应用回收
-                </button>
-                <button type="button" class="btn btn-default">
-                    退还IDC
-                </button>
+                <dropdown v-el:recoverconfirm>
+                    <button type="button" class="btn btn-default" data-toggle="dropdown">
+                        应用回收
+                        <span class="caret"></span>
+                    </button>
+                    <div slot="dropdown-menu" class="dropdown-menu pd20">
+                        <button type="button" class="btn btn-danger btn-block" @click="checkedFn('/node/recover/', 'recoverconfirm')">确定</button>
+                        <button type="button" class="btn btn-default btn-block" @click="cancelFn('recoverconfirm')">取消</button>
+                    </div>
+                </dropdown>
+                <dropdown v-el:backconfirm>
+                    <button type="button" class="btn btn-default" data-toggle="dropdown">
+                        退还IDC
+                        <span class="caret"></span>
+                    </button>
+                    <div slot="dropdown-menu" class="dropdown-menu pd20">
+                        <button type="button" class="btn btn-danger btn-block" @click="checkedFn('/node/backIDC/', 'backconfirm')">确定</button>
+                        <button type="button" class="btn btn-default btn-block" @click="cancelFn('backconfirm')">取消</button>
+                    </div>
+                </dropdown>
             </span>
             <span v-if="isModal">
                 <button type="button" class="btn btn-default" @click="getChecked">
@@ -212,7 +226,7 @@
                 <table :class="['table', 'table-hover', 'table-bordered', {'table-small': isModal}]">
                     <thead>
                         <tr>
-                            <th width="3%"><input type="checkbox" v-model="checkedAll"></th>
+                            <th width="2%"><input type="checkbox" v-model="checkedAll"></th>
                             <th v-for="title in titles" v-text="title"></th>
                         </tr>
                     </thead>
@@ -304,19 +318,24 @@ export default {
                 {label: '所在机房', value: 'room', checked: true},
                 {label: '所在机架', value: 'frame', checked: true},
                 {label: '所在机位', value: 'seat', checked: true},
-                {label: '入库时间', value: 'addTime', checked: true},
-                {label: '出厂时间', value: 'factoryTime', checked: true},
-                {label: '采购时间', value: 'procureTime', checked: true},
+                {label: 'set', value: 'set', checked: true},
+                {label: 'module', value: 'module', checked: true},
+                {label: '运维负责人', value: 'maintainManager', checked: true},
+                {label: '入库时间', value: 'addTime', checked: false},
+                {label: '出厂时间', value: 'factoryTime', checked: false},
+                {label: '采购时间', value: 'procureTime', checked: false},
                 {label: '型号', value: 'model', checked: true},
                 {label: '厂商', value: 'firm', checked: true},
-                {label: '物理主机编号', value: 'hostNum', checked: true},
-                {label: '资产编号', value: 'assetNum', checked: true},
-                {label: '财务编号', value: 'financeNum', checked: true},
-                {label: '发票编号', value: 'invoiceNum', checked: true},
-                {label: '质保期限', value: 'shelfLife', checked: true},
+                {label: '物理主机编号', value: 'hostNum', checked: false},
+                {label: '资产编号', value: 'assetNum', checked: false},
+                {label: '财务编号', value: 'financeNum', checked: false},
+                {label: '发票编号', value: 'invoiceNum', checked: false},
+                {label: '质保期限', value: 'shelfLife', checked: false},
                 {label: '公司内网', value: 'companyIntnet', checked: true},
                 {label: '机房内网', value: 'roomIntnet', checked: true},
                 {label: '机房外网', value: 'roomOutnet', checked: true},
+                {label: 'CPU', value: 'cpu', checked: true},
+                {label: '内存', value: 'mem', checked: true},
                 {label: '备注', value: 'remark', checked: true}
             ],
             valueArr: [],
@@ -442,6 +461,38 @@ export default {
             } else {
                 this.$dispatch('show-notify', '请选择分配项')
             }
+        },
+
+        // 应用回收、退还IDC
+        checkedFn (url, name) {
+            if (this.checkedIds.length) {
+                this.$http({
+                    url: url,
+                    method: 'POST',
+                    data: {
+                        checkedIds: this.checkedIds
+                    }
+                })
+                .then(response => {
+                    if (response.data.code === 200) {
+                        this.checkedIds = []
+                        this.refresh()
+
+                        this.$dispatch('show-success')
+                    } else {
+                        this.$dispatch('show-error')
+                    }
+                })
+            } else {
+                this.$dispatch('show-notify', '请选择操作项')
+            }
+
+            this.$els[name].classList.toggle('open')
+        },
+
+        // 取消confirm
+        cancelFn (name) {
+            this.$els[name].classList.toggle('open')
         }
     },
     components: {
@@ -552,5 +603,9 @@ export default {
 
 .dropdown-li {
     width: 50%;
+}
+
+.pd20 {
+    padding: 20px;
 }
 </style>
