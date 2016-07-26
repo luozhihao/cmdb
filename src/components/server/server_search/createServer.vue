@@ -206,6 +206,7 @@ import { idcs, frames, seats, serverTypes, serverStatus, firms, origins1, origin
 
 let origin = {
         creatServerModal: false,
+        autoId: null,
         sn: '',
         room: '',
         frame: '',
@@ -303,6 +304,25 @@ export default {
             let obj = param.name.split('.')
 
             this[obj[0]] = param.val
+        },
+        'showCreateAuto' (param) {
+            this.$http({
+                url: '/device/server/auto_list/detail/',
+                method: 'POST',
+                data: {
+                    id: param
+                }
+            })
+            .then(response => {
+                if (response.data.code === 200) {
+                    this.$data = Object.assign({}, origin, response.data)
+
+                    this.autoId = param
+                    this.creatServerModal = true
+                } else {
+                    this.$dispatch('show-error')
+                }
+            })
         }
     },
     watch: {

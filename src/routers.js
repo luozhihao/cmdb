@@ -49,6 +49,11 @@ export default function (router) {
                 require(['./components/server/server_search/ServerSearch.vue'], resolve)
             }
         },
+        '/autoDiscovery': {
+            component: function (resolve) {
+                require(['./components/server/auto_discovery/AutoDiscovery.vue'], resolve)
+            }
+        },
         '/businessSearch': {
             component: function (resolve) {
                 require(['./components/business/business_search/BusinessSearch.vue'], resolve)

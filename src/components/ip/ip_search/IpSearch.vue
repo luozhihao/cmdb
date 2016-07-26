@@ -15,6 +15,13 @@
                         <input type="text" class="form-control" placeholder="多个，精确" onfocus="this.blur()" v-model="param.deviceNum" @click="showBroad('param.deviceNum')">
                     </div>
                 </div>
+                 <div class="form-group input-box">
+                    <label class="control-label col-sm-4">录入方式：</label>
+                    <div class="col-sm-8">
+                        <v-select :value.sync="param.importType" :options="importTypes" placeholder="请选择">
+                        </v-select>
+                    </div>
+                </div>
             </div>
             <div class="col-sm-3">
                 <div class="form-group">
@@ -101,6 +108,7 @@
                         <td :title="list.operator" v-text="list.operator"></td>
                         <td :title="list.idc" v-text="list.idc"></td>
                         <td><a class="pointer" v-text="list.deviceNum" @click="showView(list.deviceId, list.deviceType)"></a></td>
+                        <td :title="list.importType" v-text="list.importType"></td>
                     </tr>
                     <tr class="text-center" v-show="tableList.length === 0">
                         <td :colspan="titles.length + 1">暂无数据</td>
@@ -131,14 +139,14 @@ import vSelect from '../../global/Select.vue'
 import editServerModal from '../../server/server_search/EditServer.vue'
 import editDeviceModal from '../../network/device_search/EditDevice.vue'
 import { getIpSearch } from '../../../vuex/action.js'
-import { idcs, statusArr, operators, netTypes } from '../../../vuex/getters.js'
+import { idcs, statusArr, operators, netTypes, importTypes } from '../../../vuex/getters.js'
 
 export default {
     data () {
         return {
             checkedAll: false,
             checkedIds: [],
-            titles: ['IP地址', '网段', '掩码', '网关', 'IP状态', '网络类型', '运营商', '所在机房', '关联设备'],
+            titles: ['IP地址', '网段', '掩码', '网关', 'IP状态', '网络类型', '运营商', '所在机房', '关联设备', '录入方式'],
             tableList: [],
             lenArr: [10, 50, 100],
             pageLen: 5,
@@ -151,7 +159,8 @@ export default {
                 room: '',
                 type: '',
                 status: '',
-                network: ''
+                network: '',
+                importType: ''
             }
         }
     },
@@ -235,7 +244,8 @@ export default {
             rooms: idcs,
             statusArr,
             netTypes,
-            operators
+            operators,
+            importTypes
         }
     },
     ready () {

@@ -40,7 +40,8 @@ const state = {
     serverStatus: [],
     systems: [],
     connTypes: [],
-    treeProducts: []
+    treeProducts: [],
+    importTypes: []
 }   
 
 // 创建一个 object 存储 mutation 函数
@@ -124,6 +125,7 @@ const mutations = {
         state.roomStatus = data.stautsArr
         state.operators = data.operators
         state.netTypes = data.types
+        state.importTypes = data.importTypes
     },
 
     // 获取机房连通性数据

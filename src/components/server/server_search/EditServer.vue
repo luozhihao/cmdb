@@ -280,6 +280,7 @@ let origin = {
         canSave: true,
         ports: [],
         id: null,
+        autoId: null,
         serverNum: '',
         sn: '',
         room: '',
@@ -391,6 +392,11 @@ export default {
         'viewEditServer' (param) {
             this.loadData(param)
             this.canSave = false
+        },
+        'showEditAuto' (param) {
+            this.loadData(param.serverId)
+            this.canSave = true
+            this.autoId = param.autoId
         }
     },
     watch: {

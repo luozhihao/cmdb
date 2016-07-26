@@ -86,3 +86,6 @@ export const connTypes = state => state.connTypes
 
 // 获取机房连通类型
 export const treeProducts = state => state.treeProducts
+
+// 获取录入方式
+export const importTypes = state => state.importTypes

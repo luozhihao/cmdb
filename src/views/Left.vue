@@ -52,6 +52,9 @@
                 <li v-link="{ path: '/serverSearch' }">
                     <span>服务器查询</span>
                 </li>
+                <li v-link="{ path: '/autoDiscovery' }">
+                    <span>自动发现</span>
+                </li>
             </ul>
             <div class="aside-header" @click="toggle('business')">
                 <span class="icon glyphicon glyphicon-th-large"></span>
