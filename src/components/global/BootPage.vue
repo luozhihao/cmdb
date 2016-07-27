@@ -287,6 +287,9 @@ export default {
     events: {
         'refresh::page' () {
             this.refresh()
+        },
+        'refresh2::page' () {
+            this.refresh2()
         }
     }
 }

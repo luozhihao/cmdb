@@ -74,7 +74,7 @@
             <button type="button" class="btn btn-default" @click="refresh">
                 查询
             </button>
-            <dropdown v-el:confirm>
+            <dropdown v-el:confirm v-if="perm.IP回收 || perm.all">
                 <button type="button" class="btn btn-default" data-toggle="dropdown">
                     批量回收
                     <span class="caret"></span>
@@ -139,7 +139,7 @@ import vSelect from '../../global/Select.vue'
 import editServerModal from '../../server/server_search/EditServer.vue'
 import editDeviceModal from '../../network/device_search/EditDevice.vue'
 import { getIpSearch } from '../../../vuex/action.js'
-import { idcs, statusArr, operators, netTypes, importTypes } from '../../../vuex/getters.js'
+import { idcs, statusArr, operators, netTypes, importTypes, perm } from '../../../vuex/getters.js'
 
 export default {
     data () {
@@ -241,6 +241,7 @@ export default {
             getIpSearch
         },
         getters: {
+            perm,
             rooms: idcs,
             statusArr,
             netTypes,

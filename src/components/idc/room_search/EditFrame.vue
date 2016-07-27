@@ -68,8 +68,23 @@
             </form>
         </div>
         <div slot="modal-footer" class="modal-footer">
-            <button type="button" class="btn btn-default" @click="saveFn" :disabled="frameNum.trim() && status && capacity.trim() && location.trim() ? false : true">保存</button>
-            <button type="button" class="btn btn-default" v-if="frameId" @click="createSeats">新增机位</button>
+            <button
+                v-if="canSave && (perm.编辑机房 || perm.all)"  
+                type="button" 
+                class="btn btn-default" 
+                @click="saveFn" 
+                :disabled="frameNum.trim() && status && capacity.trim() && location.trim() ? false : true"
+            >
+                保存
+            </button>
+            <button
+                type="button" 
+                class="btn btn-default" 
+                v-if="canSave && frameId && (perm.编辑机房 || perm.all)" 
+                @click="createSeats"
+            >
+                新增机位
+            </button>
             <button type="button" class="btn btn-default" @click='editFrameModal = false'>取消</button>
         </div>
     </modal>
@@ -78,10 +93,11 @@
 <script>
 import { modal } from 'vue-strap'
 import vSelect from '../../global/Select.vue'
-import { statusArr } from '../../../vuex/getters.js'
+import { statusArr, perm } from '../../../vuex/getters.js'
 
 let origin = {
         editFrameModal: false,
+        canSave: true,
         roomId: null,
         frameId: null,
         frameNum: '',
@@ -157,7 +173,8 @@ export default {
     },
     vuex: {
         getters: {
-            statusArr
+            statusArr,
+            perm
         }
     },
     events: {
@@ -174,6 +191,8 @@ export default {
 
                     this.frameId = param
                     this.editFrameModal = true
+
+                    response.data.frameNum === '未知' ? this.canSave = false : this.canSave = true
                 } else {
                     this.$dispatch('show-error')
                 }

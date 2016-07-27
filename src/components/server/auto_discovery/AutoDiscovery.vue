@@ -63,7 +63,7 @@ export default {
         return {
             titles: ['状态', '编号', 'SN', 'OS', '型号', 'IP', 'CPU', '内存', '说明', '发现时间', '操作'],
             tableList: [],
-            lenArr: [10, 50, 100],
+            lenArr: [20, 50, 100],
             pageLen: 5,
             url: '/device/server/auto_list/',
             param: {}

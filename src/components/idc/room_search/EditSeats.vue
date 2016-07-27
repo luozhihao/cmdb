@@ -44,7 +44,15 @@
             </form>
         </div>
         <div slot="modal-footer" class="modal-footer">
-            <button type="button" class="btn btn-default" @click="saveFn" :disabled="seatsNum.trim() && startLocation.trim() && endLocation.trim() && status ? false : true">保存</button>
+            <button
+                v-if="canSave && (perm.编辑机房 || perm.all)" 
+                type="button" 
+                class="btn btn-default" 
+                @click="saveFn" 
+                :disabled="seatsNum.trim() && startLocation.trim() && endLocation.trim() && status ? false : true"
+            >
+                保存
+            </button>
             <button type="button" class="btn btn-default" @click='editSeatsModal = false'>取消</button>
         </div>
     </modal>
@@ -53,10 +61,11 @@
 <script>
 import { modal } from 'vue-strap'
 import vSelect from '../../global/Select.vue'
-import { statusArr } from '../../../vuex/getters.js'
+import { statusArr, perm } from '../../../vuex/getters.js'
 
 let origin = {
         editSeatsModal: false,
+        canSave: true,
         frameId: null,
         seatsId: null,
         seatsNum: '',
@@ -121,6 +130,7 @@ export default {
     },
     vuex: {
         getters: {
+            perm,
             statusArr
         }
     },
@@ -138,6 +148,8 @@ export default {
 
                     this.seatsId = param
                     this.editSeatsModal = true
+                    
+                    response.data.seatsNum === '未知' ? this.canSave = false : this.canSave = true
                 } else {
                     this.$dispatch('show-error')
                 }

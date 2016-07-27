@@ -25,7 +25,12 @@
             <button type="button" class="btn btn-default" @click="refresh">
                 查询
             </button>
-            <button type="button" class="btn btn-default" @click="$broadcast('showConnect')">
+            <button 
+                v-if="perm.打通机房 || perm.all" 
+                type="button" 
+                class="btn btn-default" 
+                @click="$broadcast('showConnect')"
+            >
                 机房打通
             </button>
         </div>
@@ -45,7 +50,12 @@
                         <td :title="list.roomTo" v-text="list.roomTo"></td>
                         <td :title="list.connType" v-text="list.connType"></td>
                         <td>
-                            <button type="button" class="btn btn-default set-btn" @click="$broadcast('showConfirm', list.id)">
+                            <button 
+                                v-if="perm.打通机房 || perm.all" 
+                                type="button" 
+                                class="btn btn-default set-btn" 
+                                @click="$broadcast('showConfirm', list.id)"
+                            >
                                 切断
                             </button>
                         </td>
@@ -78,7 +88,7 @@ import connectModal from './SetConnect.vue'
 import confirmModal from '../../global/Confirm.vue'
 import vSelect from '../../global/Select.vue'
 import { getRoomConnect } from '../../../vuex/action.js'
-import { idcs, connTypes } from '../../../vuex/getters.js'
+import { idcs, connTypes, perm } from '../../../vuex/getters.js'
 
 export default {
     data () {
@@ -134,6 +144,7 @@ export default {
             getRoomConnect
         },
         getters: {
+            perm,
             idcs,   // 获取机房位置
             connTypes
         }

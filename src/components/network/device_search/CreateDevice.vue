@@ -3,7 +3,7 @@
         <div slot="modal-header" class="modal-header">
             <h4 class="modal-title">新增交换机</h4>
         </div>
-        <div slot="modal-body" class="modal-body">
+        <div slot="modal-body" class="modal-body min-height">
             <form class="form-horizontal clearfix form-input">
                 <div class="col-sm-6">
                     <div class="form-group">
@@ -321,5 +321,7 @@ export default {
 </script>
 
 <style scoped>
-
+.min-height {
+    min-height: 550px;
+}
 </style>

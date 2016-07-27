@@ -164,19 +164,19 @@
                 查询
             </button>
             <span v-if="!isModal">
-                <button type="button" class="btn btn-default" @click="$broadcast('showCreateServer')">
+                <button v-if="perm.新增服务器 || perm.all" type="button" class="btn btn-default" @click="$broadcast('showCreateServer')">
                     新增服务器
                 </button>
-                <button type="button" class="btn btn-default" @click="dispatchFn">
+                <button v-if="perm.分配到产品 || perm.all" type="button" class="btn btn-default" @click="dispatchFn">
                     分配到产品
                 </button>
-                <button type="button" class="btn btn-default" @click="batchEdit">
+                <button v-if="perm.批量修改服务器 || perm.all" type="button" class="btn btn-default" @click="batchEdit">
                     批量修改
                 </button>
-                <button type="button" class="btn btn-default" @click="exportFn">
+                <button v-if="perm.导出服务器 || perm.all" type="button" class="btn btn-default" @click="exportFn">
                     导出
                 </button>
-                <dropdown v-el:recoverconfirm>
+                <dropdown v-el:recoverconfirm v-if="perm.应用回收 || perm.all">
                     <button type="button" class="btn btn-default" data-toggle="dropdown">
                         应用回收
                         <span class="caret"></span>
@@ -186,7 +186,7 @@
                         <button type="button" class="btn btn-default btn-block" @click="cancelFn('recoverconfirm')">取消</button>
                     </div>
                 </dropdown>
-                <dropdown v-el:backconfirm>
+                <dropdown v-el:backconfirm v-if="perm['退还IDC'] || perm.all">
                     <button type="button" class="btn btn-default" data-toggle="dropdown">
                         退还IDC
                         <span class="caret"></span>
@@ -270,7 +270,7 @@ import dispatchModal from './Dispatch.vue'
 import vSelect from '../../global/Select.vue'
 import calendar from '../../global/Calendar.vue'
 import { getServerSearch, getFramesSeats, getOrigins } from '../../../vuex/action.js'
-import { idcs, frames, products, serverTypes, departments, systems, serverStatus, firms, origins1, origins2 } from '../../../vuex/getters.js'
+import { idcs, frames, products, serverTypes, departments, systems, serverStatus, firms, origins1, origins2, perm } from '../../../vuex/getters.js'
 
 export default {
     data () {
@@ -318,6 +318,7 @@ export default {
                 {label: '所在机房', value: 'room', checked: true},
                 {label: '所在机架', value: 'frame', checked: true},
                 {label: '所在机位', value: 'seat', checked: true},
+                {label: '产品', value: 'product', checked: true},
                 {label: 'set', value: 'set', checked: true},
                 {label: 'module', value: 'module', checked: true},
                 {label: '运维负责人', value: 'maintainManager', checked: true},
@@ -513,6 +514,7 @@ export default {
             getOrigins
         },
         getters: {
+            perm,
             rooms: idcs,
             frames,
             products,

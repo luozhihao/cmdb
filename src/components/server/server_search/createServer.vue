@@ -4,7 +4,7 @@
         <div slot="modal-header" class="modal-header">
             <h4 class="modal-title">新增服务器</h4>
         </div>
-        <div slot="modal-body" class="modal-body">
+        <div slot="modal-body" class="modal-body min-height">
             <form class="form-horizontal clearfix form-input">
                 <div class="col-sm-6">
                     <div class="form-group">
@@ -202,7 +202,7 @@ import { modal } from 'vue-strap'
 import datepicker from '../../global/Datepicker.vue'
 import vSelect from '../../global/Select.vue'
 import { getFramesSeats, getOrigins } from '../../../vuex/action.js'
-import { idcs, frames, seats, serverTypes, serverStatus, firms, origins1, origins2 } from '../../../vuex/getters.js'
+import { idcs, frames, seats, serverTypes, addStatusArr, firms, origins1, origins2 } from '../../../vuex/getters.js'
 
 let origin = {
         creatServerModal: false,
@@ -289,7 +289,7 @@ export default {
             origins1,
             origins2,
             serverTypes,
-            statusArr: serverStatus,
+            statusArr: addStatusArr,
             firms
         }
     },
@@ -347,4 +347,7 @@ export default {
 </script>
 
 <style scoped>
+.min-height {
+    min-height: 550px;
+}
 </style>

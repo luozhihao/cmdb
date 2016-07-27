@@ -6,7 +6,6 @@
 
 .right-tree {
     width: 25%;
-
 }
 
 .table-tree {

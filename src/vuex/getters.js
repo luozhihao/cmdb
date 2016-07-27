@@ -12,6 +12,9 @@
 // 获取用户名
 export const username = state => state.username
 
+// 权限控制
+export const perm = state => state.perm
+
 // 获取机房位置
 export const idcs = state => state.roomLocation
 
@@ -77,6 +80,9 @@ export const serverTypes = state => state.serverTypes
 
 // 获取服务器状态
 export const serverStatus = state => state.serverStatus
+
+// 获取新增服务器状态
+export const addStatusArr = state => state.addStatusArr
 
 // 获取操作系统
 export const systems = state => state.systems

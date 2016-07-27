@@ -104,8 +104,23 @@
             </form>
         </div>
         <div slot="modal-footer" class="modal-footer">
-            <button type="button" class="btn btn-default" :disabled="idcName.trim() && idcAddress.trim() && operator && productType && city1 && city2 && status ? false : true" @click="saveFn">保存</button>
-            <button type="button" class="btn btn-default" @click="createFrame">新增机架</button>
+            <button
+                v-if="perm.编辑机房 || perm.all" 
+                type="button" 
+                class="btn btn-default" 
+                :disabled="idcName.trim() && idcAddress.trim() && operator && productType && city1 && city2 && status ? false : true" 
+                @click="saveFn"
+            >
+                保存
+            </button>
+            <button 
+                v-if="perm.编辑机房 || perm.all" 
+                type="button" 
+                class="btn btn-default" 
+                @click="createFrame"
+            >
+                新增机架
+            </button>
             <button type="button" class="btn btn-default" @click='editRoomModal = false'>取消</button>
         </div>
     </modal>
@@ -115,7 +130,7 @@
 import { modal } from 'vue-strap'
 import vSelect from '../../global/Select.vue'
 import { getRoomCreate } from '../../../vuex/action.js'
-import { operators, productTypes, cityArr1, statusArr } from '../../../vuex/getters.js'
+import { operators, productTypes, cityArr1, statusArr, perm } from '../../../vuex/getters.js'
 
 let origin = {
         editRoomModal: false,
@@ -194,6 +209,7 @@ export default {
             getRoomCreate
         },
         getters: {
+            perm,
             operators, // 运营商
             productTypes, // 产品类型
             cityArr1, // 一级城市

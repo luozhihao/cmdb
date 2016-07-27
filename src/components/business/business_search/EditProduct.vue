@@ -217,7 +217,7 @@
             </form>
         </div>
         <div slot="modal-footer" class="modal-footer">
-            <button type="button" class="btn btn-default" @click="saveFn" :disabled="save === 0 ? true : false">保存</button>
+            <button v-if="perm.编辑产品 || perm.all" type="button" class="btn btn-default" @click="saveFn" :disabled="save === 0 ? true : false">保存</button>
             <button type="button" class="btn btn-default" @click='editProductModal = false'>取消</button>
         </div>
     </modal>
@@ -227,7 +227,7 @@
 import { modal, typeahead } from 'vue-strap'
 import vSelect from '../../global/Select.vue'
 import { getBusinessSearch } from '../../../vuex/action.js'
-import { departments, productTypes, phases, gameTypes, platformTypes, developModels, gameLists, productLevels } from '../../../vuex/getters.js'
+import { departments, productTypes, phases, gameTypes, platformTypes, developModels, gameLists, productLevels, perm } from '../../../vuex/getters.js'
 
 let origin = {
         editProductModal: false,
@@ -363,6 +363,7 @@ export default {
             getBusinessSearch
         },
         getters: {
+            perm,
             departments,
             businessTypes: productTypes,
             phases,

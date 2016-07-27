@@ -97,13 +97,13 @@
             <button type="button" class="btn btn-default" @click="refresh">
                 查询
             </button>
-            <button type="button" class="btn btn-default" @click="$broadcast('showCreate')">
+            <button v-if="perm.新增交换机 || perm.all" type="button" class="btn btn-default" @click="$broadcast('showCreate')">
                 新增交换机
             </button>
-            <button type="button" class="btn btn-default" @click="batchEdit">
+            <button v-if="perm.批量修改交换机 || perm.all" type="button" class="btn btn-default" @click="batchEdit">
                 批量修改
             </button>
-            <dropdown v-el:confirm>
+            <dropdown v-el:confirm v-if="perm.删除交换机 || perm.all">
                 <button type="button" class="btn btn-default" data-toggle="dropdown">
                     批量删除
                     <span class="caret"></span>
@@ -113,7 +113,7 @@
                     <button type="button" class="btn btn-default btn-block" @click="cancelFn">取消</button>
                 </div>
             </dropdown>
-            <button type="button" class="btn btn-default" @click="exportFn">
+            <button v-if="perm.导出交换机 || perm.all" type="button" class="btn btn-default" @click="exportFn">
                 导出
             </button>
         </div>
@@ -181,7 +181,7 @@ import editDeviceModal from './EditDevice.vue'
 import vSelect from '../../global/Select.vue'
 import calendar from '../../global/Calendar.vue'
 import { getDeviceSearch, getOrigins } from '../../../vuex/action.js'
-import { idcs, firms, origins1, origins2 } from '../../../vuex/getters.js'
+import { idcs, firms, origins1, origins2, perm } from '../../../vuex/getters.js'
 
 export default {
     data () {
@@ -380,6 +380,7 @@ export default {
             getOrigins
         },
         getters: {
+            perm,
             rooms: idcs,
             firms,
             origins1,

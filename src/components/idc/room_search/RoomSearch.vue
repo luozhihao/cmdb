@@ -37,10 +37,10 @@
             <button type="button" class="btn btn-default" @click="searchFn">
                 查询
             </button>
-            <button type="button" class="btn btn-default" @click="$broadcast('showCreate')">
+            <button type="button" class="btn btn-default" @click="$broadcast('showCreate')" v-if="perm.新增机房 || perm.all">
                 新增机房
             </button>
-            <dropdown v-el:confirm>
+            <dropdown v-el:confirm v-if="perm.删除机房 || perm.all">
                 <button type="button" class="btn btn-default" data-toggle="dropdown">
                     批量删除
                     <span class="caret"></span>
@@ -124,7 +124,7 @@ import editFrameModal from './EditFrame.vue'
 import editSeatsModal from './EditSeats.vue'
 import vSelect from '../../global/Select.vue'
 import { getRoomSearch } from '../../../vuex/action.js'
-import { idcs, statusArr } from '../../../vuex/getters.js'
+import { idcs, statusArr, perm } from '../../../vuex/getters.js'
 
 export default {
     data () {
@@ -263,6 +263,7 @@ export default {
             getRoomSearch
         },
         getters: {
+            perm,
             idcs,   // 获取机房位置
             statusArr  // 获取机房状态
         }
@@ -299,7 +300,9 @@ export default {
         'param.dimension' (newVal) {
             this.originFilter()
 
-            this.refresh()
+            this.$refs.spinner.show()
+            this.checkedIds = []
+            this.$refs.page.refresh2()
         }
     },
     events: {

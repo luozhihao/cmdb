@@ -17,7 +17,7 @@ export function getUserInfo({ dispatch, state }) {
     })
     .then(response => {
         if (response.data.result === 1) {
-            dispatch('GETUSER', response.data.username)  // 登陆用户名
+            dispatch('GETUSER', response.data)  // 登陆用户名
         }
     })
 }

@@ -94,10 +94,10 @@
             <button type="button" class="btn btn-default" @click="refresh">
                 查询
             </button>
-            <button type="button" class="btn btn-default" @click="$broadcast('showCreateProduct')">
+            <button v-if="perm.新增产品 || perm.all" type="button" class="btn btn-default" @click="$broadcast('showCreateProduct')">
                 新增产品
             </button>
-            <dropdown v-el:confirm>
+            <dropdown v-el:confirm v-if="perm.删除产品 || perm.all">
                 <button type="button" class="btn btn-default" data-toggle="dropdown">
                     批量删除
                     <span class="caret"></span>
@@ -166,7 +166,7 @@ import createProductModal from './CreateProduct.vue'
 import editProductModal from './EditProduct.vue'
 import vSelect from '../../global/Select.vue'
 import { getBusinessSearch } from '../../../vuex/action.js'
-import { departments, productTypes, phases, gameTypes, platformTypes, developModels, productLevels } from '../../../vuex/getters.js'
+import { departments, productTypes, phases, gameTypes, platformTypes, developModels, productLevels, perm } from '../../../vuex/getters.js'
 
 export default {
     data () {
@@ -250,6 +250,7 @@ export default {
             getBusinessSearch
         },
         getters: {
+            perm,
             departments,
             businessTypes: productTypes,
             phases,

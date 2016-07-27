@@ -178,7 +178,7 @@
                     </form>
                     <div class="text-center mt30 mb20">
                         <button 
-                            v-if="canSave"
+                            v-if="canSave && (perm.删除交换机 || perm.all)"
                             type="button" 
                             class="btn btn-default" 
                             @click="saveFn"
@@ -256,32 +256,20 @@
         <div slot="modal-footer" class="modal-footer">
         </div>
     </modal>
-
-    <create-vlan-modal></create-vlan-modal>
-    <create-port-modal></create-port-modal>
 </template>
 
 <script>
 import { modal, tabset, tab } from 'vue-strap'
 import datepicker from '../../global/Datepicker.vue'
 import vSelect from '../../global/Select.vue'
-import createVlanModal from './CreateVlan.vue'
-import createPortModal from './CreatePort.vue'
 import { getDeviceSearch, getFramesSeats, getOrigins } from '../../../vuex/action.js'
-import { idcs, firms, origins1, deviceStatus, frames, seats, origins2 } from '../../../vuex/getters.js'
+import { idcs, firms, origins1, deviceStatus, frames, seats, origins2, perm } from '../../../vuex/getters.js'
 
 let origin = {
         editDeviceModal: false,
         canSave: true,
-        vlans: [{name: 'vlan1', speed: '1Gbps', port: 'G23,G07,G15,G18,G02,G10,G2', ip: '', use: ''}],
-        ports: [
-            {name: 'G01', vlan: 'vlan1', speed: '1Gbps', status: '', device: '', devicePort: '', deviceVlan: '', use: ''},
-            {name: 'G01', vlan: 'vlan1', speed: '1Gbps', status: '', device: '', devicePort: '', deviceVlan: '', use: ''},
-            {name: 'G01', vlan: 'vlan1', speed: '1Gbps', status: '', device: '', devicePort: '', deviceVlan: '', use: ''},
-            {name: 'G01', vlan: 'vlan1', speed: '1Gbps', status: '', device: '', devicePort: '', deviceVlan: '', use: ''},
-            {name: 'G01', vlan: 'vlan1', speed: '1Gbps', status: '', device: '', devicePort: '', deviceVlan: '', use: ''},
-            {name: 'G01', vlan: 'vlan1', speed: '1Gbps', status: '', device: '', devicePort: '', deviceVlan: '', use: ''}
-        ],
+        vlans: [],
+        ports: [],
         id: null,
         sn: '',
         firm: '',
@@ -356,8 +344,6 @@ export default {
     components: {
         modal,
         vSelect,
-        createVlanModal,
-        createPortModal,
         datepicker,
         tabs: tabset,
         tab
@@ -369,6 +355,7 @@ export default {
             getDeviceSearch
         },
         getters: {
+            perm,
             rooms: idcs,
             firms,
             origins1,

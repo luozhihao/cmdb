@@ -49,7 +49,7 @@
                             <div class="form-group input-box">
                                 <label class="control-label col-sm-4">状态：<span class="text-danger">*</span></label>
                                 <div class="col-sm-8">
-                                    <v-select :value.sync="status" :options="statusArr" placeholder="请选择">
+                                    <v-select :value.sync="status" :options="editStatusArr" placeholder="请选择">
                                     </v-select>
                                 </div>
                             </div>
@@ -273,7 +273,7 @@ import { modal, tabset, tab } from 'vue-strap'
 import datepicker from '../../global/Datepicker.vue'
 import vSelect from '../../global/Select.vue'
 import { getServerSearch, getFramesSeats, getOrigins } from '../../../vuex/action.js'
-import { idcs, frames, seats, serverTypes, serverStatus, firms, origins1, origins2 } from '../../../vuex/getters.js'
+import { idcs, frames, seats, serverTypes, firms, origins1, origins2 } from '../../../vuex/getters.js'
 
 let origin = {
         editServerModal: false,
@@ -289,6 +289,7 @@ let origin = {
         origin1: '',
         origin2: '',
         firm: '',
+        editStatusArr: [],
         status: '',
         addTime: '',
         factoryTime: '',
@@ -377,7 +378,6 @@ export default {
             origins1,
             origins2,
             serverTypes,
-            statusArr: serverStatus,
             firms
         }
     },
