@@ -27,7 +27,7 @@
             </li>
         </ul>
         <div class="page-total">
-            共 <span v-text="pageTotal"></span> 页
+            共 <span v-text="pageTotal"></span> 页 / (共<span v-text="total"></span>条)
         </div>
     </nav>
     <select class="form-control boot-select" v-model="len">
@@ -87,12 +87,6 @@ export default {
             default: 5
         },
 
-        // 总页数 
-        pageTotal: {
-            type: Number,
-            default: 1
-        },
-
         // 参数内容
         param: {
             type: Object,
@@ -103,7 +97,9 @@ export default {
     },
     data () {
         return {
-            activeNum: 0
+            activeNum: 0,
+            pageTotal: 1,
+            total: 0
         }
     },
     methods: {
@@ -229,6 +225,7 @@ export default {
                 })
                 .then(function (response) {
                     this.pageTotal = response.data.page_num
+                    this.total = response.data.total
 
                     if (this.pages.length !== this.pageLen || this.pageTotal < this.pageLen) {
                         this.getPages()

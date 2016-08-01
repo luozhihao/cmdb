@@ -2,7 +2,7 @@
     <div class="overview-box clearfix">
         <div class="left-table pull-left table-view">
             <div class="text-center table-title">
-                产品服务器Top10（产品总数：<span v-text="productTotal"></span>）
+                产品服务器Top30（产品总数：<span v-text="productTotal"></span>）
             </div>
             <table class="table table-hover table-bordered">
                 <thead>
@@ -79,8 +79,7 @@ export default {
 
 .table-view {
     padding: 20px;
-    height: 750px;
-    overflow: auto;
+    min-height: 750px;
 }
 
 .left-table {

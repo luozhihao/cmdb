@@ -140,6 +140,10 @@ fieldset[disabled] .form-control {
     width: 100%
 }
 
+.min-dropdown .dropdown-menu {
+    max-height: 200px !important;
+}
+
 .input-search .dropdown-menu {
     max-height: 300px;
     overflow: auto;
