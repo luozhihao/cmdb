@@ -88,7 +88,7 @@
                             </v-select>
                         </div>
                     </div>
-                    <div class="form-group input-box">
+                    <div class="form-group input-box min-dropdown">
                         <label class="control-label col-sm-4">厂商：<span class="text-danger">*</span></label>
                         <div class="col-sm-8">
                             <v-select :value.sync="firm" :options="firms" placeholder="请选择">
