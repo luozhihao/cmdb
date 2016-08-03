@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="table-box">
-            <table class="table table-hover table-bordered">
+            <table class="table table-hover table-bordered table-show-all">
                 <thead>
                     <tr>
                         <th v-for="title in titles" v-text="title"></th>
@@ -113,5 +113,9 @@ export default {
     padding: 2px 8px;
     width: 60px;
     margin-top: -4px;
+}
+
+.table-show-all tr td {
+    white-space: normal !important;
 }
 </style>

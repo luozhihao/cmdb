@@ -173,6 +173,16 @@
                 <button v-if="perm.批量修改服务器 || perm.all" type="button" class="btn btn-default" @click="batchEdit">
                     批量修改
                 </button>
+                <dropdown v-el:deleteconfirm v-if="perm.删除服务器 || perm.all">
+                    <button type="button" class="btn btn-default" data-toggle="dropdown">
+                        批量删除
+                        <span class="caret"></span>
+                    </button>
+                    <div slot="dropdown-menu" class="dropdown-menu pd20">
+                        <button type="button" class="btn btn-danger btn-block" @click="checkedFn('/device/server/delete/', 'deleteconfirm')">确定</button>
+                        <button type="button" class="btn btn-default btn-block" @click="cancelFn('deleteconfirm')">取消</button>
+                    </div>
+                </dropdown>
                 <button v-if="perm.导出服务器 || perm.all" type="button" class="btn btn-default" @click="exportFn">
                     导出
                 </button>
@@ -481,7 +491,7 @@ export default {
 
                         this.$dispatch('show-success')
                     } else {
-                        this.$dispatch('show-error')
+                        this.$dispatch('show-error', response.data.msg)
                     }
                 })
             } else {

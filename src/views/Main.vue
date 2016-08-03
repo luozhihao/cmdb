@@ -108,7 +108,7 @@ export default {
     width: auto;
     position: absolute;
     top: 0;
-    left: 200px;
+    left: 11%;
     bottom: 0;
     right: 0;
     overflow: hidden;

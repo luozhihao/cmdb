@@ -111,7 +111,7 @@ export default {
 
 <style scoped>
 .sidebar {
-    width: 200px;
+    width: 11%;
     display: block;
     position: fixed;
     top: 0;
@@ -136,7 +136,7 @@ export default {
     height: 42px;
     line-height: 42px;
     background: #404040;
-    padding: 0 16px 0 28px;
+    padding: 0 16px 0 14%;
     font-size: 12px;
     color: #999;
     cursor: pointer;
@@ -168,7 +168,7 @@ export default {
     width: 100%;
     line-height: 35px;
     height: 35px;
-    padding: 0 5px 0 50px;
+    padding: 0 5px 0 28%;
     background: #333;
     color: #999;
     font-size: 12px;
