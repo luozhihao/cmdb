@@ -1,14 +1,14 @@
 var webpack = require('webpack')
+var HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
     entry: {
         main: './src/main.js'
-        //vendors: ['react','jquery']
     },
     output: {
         path: './dist',
         publicPath: '/static/dist/',
-        filename: 'build.js'
+        filename: '[hash].build.js'
     },
     module: {
         loaders: [
@@ -17,14 +17,11 @@ module.exports = {
                 loader: 'vue'
             },
             {
-                // edit this for additional asset file types
                 test: /\.(png|jpg|gif)$/, 
                 loader: 'url-loader?limit=819200'
             },
             {
                 test: /\.js$/,
-                // excluding some local linked packages.
-                // for normal use cases only node_modules is needed.
                 exclude: /node_modules|vue\/dist|vue-router\/|vue-loader\/|vue-hot-reload-api\//,
                 loader: 'babel'
             },
@@ -34,11 +31,13 @@ module.exports = {
             { 
                 test: /\.(woff|svg|eot|ttf)\??.*$/,
                 loader: 'url-loader?limit=50000&name=[path][name].[ext]'
-            }
+            },
+            {
+                test: /\.html$/,
+                loader: 'html'
+            },
         ]
     },
-    // example: if you wish to apply custom babel options
-    // instead of using vue-loader's default:
     babel: {
         presets: ['es2015', 'stage-0'],
         plugins: ['transform-runtime']
@@ -48,8 +47,11 @@ module.exports = {
             $: "jquery",
             jQuery: "jquery",
             "window.jQuery": "jquery"
+        }),
+        new HtmlWebpackPlugin({
+            title: 'CMDB',
+            template: 'index.html'
         })
-        // new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js', Infinity) // 这是第三方库打包生成的文件
     ]
 }
 

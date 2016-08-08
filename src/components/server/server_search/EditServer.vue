@@ -341,16 +341,18 @@ export default {
         },
 
         // 加载数据
-        loadData (param) {
+        loadData (idNum, canSave = false, autoId = null) {
             this.$http({
-                url: '/device/server/get/?id=' + param,
+                url: '/device/server/get/?id=' + idNum,
                 method: 'GET'
             })
             .then(repsonse => {
                 if (repsonse.data.code === 200) {
                     this.$data = Object.assign({}, origin, repsonse.data)
 
-                    this.id = param
+                    this.canSave = canSave
+                    this.id = idNum
+                    this.autoId = autoId
                     this.editServerModal = true
                 } else {
                     this.$dispatch('show-error')
@@ -386,17 +388,13 @@ export default {
     },
     events: {
         'showEditServer' (param) {
-            this.loadData(param)
-            this.canSave = true
+            this.loadData(param, true)
         },
         'viewEditServer' (param) {
-            this.loadData(param)
-            this.canSave = false
+            this.loadData(param, false)
         },
         'showEditAuto' (param) {
-            this.loadData(param.serverId)
-            this.canSave = true
-            this.autoId = param.autoId
+            this.loadData(param.serverId, true, param.autoId)
         }
     },
     watch: {

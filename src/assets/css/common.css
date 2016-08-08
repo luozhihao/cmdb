@@ -92,10 +92,7 @@ fieldset[disabled] .form-control {
 
 .table tr td,
 .table tr th {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    word-break: keep-all;
+    word-break: break-all;
     font-size: 12px;
     vertical-align: middle !important;
 }
