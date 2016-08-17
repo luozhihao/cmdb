@@ -139,6 +139,19 @@ export function getIpSearch({ dispatch, state }) {
     })
 }
 
+// 获取网段查询下拉框
+export function getNetSearch({ dispatch, state }) {
+    this.$http({
+        url: '/ip/network_list/',
+        method: 'GET'
+    })
+    .then(response => {
+        if (response.data.code === 200) {
+           dispatch('GETNETSEARCH', response.data)
+        } 
+    })
+}
+
 // 获取机房连通性
 export function getRoomConnect({ dispatch, state }) {
     this.$http({

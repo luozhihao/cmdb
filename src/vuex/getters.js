@@ -18,11 +18,17 @@ export const perm = state => state.perm
 // 获取机房位置
 export const idcs = state => state.roomLocation
 
+// 获取机房位置2
+export const idcs2 = state => state.roomLocation2
+
 // 获取机房状态
 export const statusArr = state => state.roomStatus
 
 // 获取运营商
 export const operators = state => state.operators
+
+// 获取运营商2
+export const operators2 = state => state.operators2
 
 // 获取业务类型
 export const productTypes = state => state.productTypes
@@ -71,6 +77,9 @@ export const origins2 = state => state.origins2
 
 // 获取网络类型
 export const netTypes = state => state.netTypes
+
+// 获取网络类型2
+export const netTypes2 = state => state.netTypes2
 
 // 获取产品类型
 export const products = state => state.products

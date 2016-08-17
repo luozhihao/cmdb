@@ -18,8 +18,10 @@ const state = {
     username: '',
     perm: {},
     roomLocation: [],
+    roomLocation2: [],
     roomStatus: [],
     operators: [],
+    operators2: [],
     productTypes: [],
     cityArr1: [],
     departments: [],
@@ -36,6 +38,7 @@ const state = {
     frames: [],
     seats: [],
     netTypes: [],
+    netTypes2: [],
     products: [],
     serverTypes: [],
     serverStatus: [],
@@ -130,6 +133,13 @@ const mutations = {
         state.operators = data.operators
         state.netTypes = data.types
         state.importTypes = data.importTypes
+    },
+
+    // 获取网段查询页下拉框
+    GETNETSEARCH (state, data) {
+        state.roomLocation2 = data.rooms
+        state.operators2 = data.operators
+        state.netTypes2 = data.types
     },
 
     // 获取机房连通性数据

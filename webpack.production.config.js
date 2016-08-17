@@ -2,14 +2,14 @@ var webpack = require('webpack')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
-    devtool: 'eval-source-map',
+    devtool: 'source-map',
     entry: {
         main: __dirname + '/src/main.js'
     },
     output: {
         path: __dirname + '/dist',
         publicPath: '/static/dist/',
-        filename: 'build.js'
+        filename: '[name]-[hash].js'
     },
     module: {
         loaders: [
@@ -44,6 +44,12 @@ module.exports = {
         plugins: ['transform-runtime']
     },
     plugins: [
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false
+            }
+        }),
+        new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.ProvidePlugin({
             $: "jquery",
             jQuery: "jquery",
@@ -54,7 +60,7 @@ module.exports = {
             template: 'index.html'
         }),
         new webpack.DefinePlugin({
-            'NODE_ENV': JSON.stringify('development')
+            'NODE_ENV': JSON.stringify('production')
         })
     ]
 }

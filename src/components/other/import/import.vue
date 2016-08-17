@@ -9,7 +9,7 @@
                 <input type="text" class="form-control" onfocus="this.blur()" v-model="road">
                 <input id="file" type="file" name="file" v-show="false" @change="changeFn">
                 <button type="button" class="btn btn-default" @click="findFile">浏览</button>
-                <button type="button" class="btn btn-default" @click="uploadFile">导入</button>
+                <button type="button" class="btn btn-default" @click="uploadFile" :disabled="isLoading" v-text="isLoading ? '导入中...' : '导入'"></button>
                 <a type="button" class="btn btn-default" href="/file/template_cmdb.xlsx" target="_blank">下载模板</a>
             </div>
         </form>
@@ -27,10 +27,12 @@ import vSelect from '../../global/Select.vue'
 export default {
     data () {
         return {
+            isLoading: false,
             types: [
                 {value: '1', label: '交换机导入'},
                 {value: '2', label: '服务器导入'},
-                {value: '3', label: '业务树导入'}
+                {value: '3', label: '业务树导入'},
+                {value: '4', label: '业务服务器导入'}
             ],
             type: '',
             road: '',
@@ -65,11 +67,16 @@ export default {
                         url = '/device/server/import/'
                         break
                     case '3':
-                        url = '/node/import/'
+                        url = '/node/importNode/'
+                        break
+                    case '4':
+                        url = '/node/importIP/'
                         break
                 }
 
                 if (url) {
+                    _this.isLoading = true
+
                     $.ajax({
                             url: url,
                             type: 'POST',
@@ -90,6 +97,8 @@ export default {
 
                                 _this.$dispatch('show-error', data.msg)
                             }
+
+                            _this.isLoading = false
                         })
                 } else {
                     this.$dispatch('show-notify', '请选择导入类型')

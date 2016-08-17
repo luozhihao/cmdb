@@ -5,7 +5,7 @@
         </div>
         <div slot="modal-body" class="modal-body">
             <form class="form-horizontal clearfix">
-                <textarea rows="8" class="form-control" v-model="txt" placeholder="输入多个请以回车换行"></textarea>
+                <textarea id="txt" rows="8" class="form-control" v-model="txt" placeholder="输入多个请以回车换行"></textarea>
             </form> 
         </div>
         <div slot="modal-footer" class="modal-footer">
@@ -73,6 +73,13 @@ export default {
             param.types ? this.types = 1 : this.types = 0
             
             this.broadModal = true
+
+            // 自动聚焦文本框
+            this.$nextTick(function () {
+                let txt = document.getElementById('txt')
+
+                txt.focus()
+            })
         }
     }
 }

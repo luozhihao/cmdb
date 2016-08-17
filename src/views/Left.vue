@@ -49,6 +49,9 @@
                 <li v-link="{ path: '/ipPlan' }" v-if="perm.IP规划 || perm.all">
                     <span>IP规划</span>
                 </li>
+                <li v-link="{ path: '/netSearch' }" v-if="perm.网段查询 || perm.all">
+                    <span>网段查询</span>
+                </li>
             </ul>
             <div class="aside-header" @click="toggle('server')" v-if="perm.服务器 || perm.all">
                 <span class="icon glyphicon glyphicon-hdd"></span>
@@ -111,7 +114,7 @@ export default {
 
 <style scoped>
 .sidebar {
-    width: 11%;
+    width: 10%;
     display: block;
     position: fixed;
     top: 0;
@@ -133,8 +136,8 @@ export default {
 .aside-header {
     position: relative;
     width: 100%;
-    height: 42px;
-    line-height: 42px;
+    height: 35px;
+    line-height: 35px;
     background: #404040;
     padding: 0 16px 0 14%;
     font-size: 12px;
@@ -166,8 +169,8 @@ export default {
 
 .aside-lists li {
     width: 100%;
-    line-height: 35px;
-    height: 35px;
+    line-height: 30px;
+    height: 30px;
     padding: 0 5px 0 28%;
     background: #333;
     color: #999;

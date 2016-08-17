@@ -44,9 +44,9 @@ export default function (router) {
                 require(['./components/ip/ip_plan/IpPlan.vue'], resolve)
             }
         },
-        '/ipDelete': {
+        '/netSearch': {
             component: function (resolve) {
-                require(['./components/ip/ip_delete/IpDelete.vue'], resolve)
+                require(['./components/ip/net_search/NetSearch.vue'], resolve)
             }
         },
         '/serverSearch': {
