@@ -36,9 +36,6 @@ export const productTypes = state => state.productTypes
 // 获取一级城市
 export const cityArr1 = state => state.cityArr1
 
-// 获取部门
-export const departments = state => state.departments
-
 // 获取运营阶段
 export const phases = state => state.phases
 
@@ -104,3 +101,18 @@ export const treeProducts = state => state.treeProducts
 
 // 获取录入方式
 export const importTypes = state => state.importTypes
+
+// 获取子公司
+export const companys = state => state.companys
+
+// 获取工作室
+export const studios = state => state.studios
+
+// 获取发行部
+export const releases = state => state.releases
+
+// 获取一级部门
+export const departments1 = state => state.departments1
+
+// 获取用途
+export const serverUseTypes = state => state.serverUseTypes

@@ -26,8 +26,12 @@
             <div class="col-sm-3">
                 <div class="form-group input-box">
                     <label class="control-label col-sm-4">部门：</label>
-                    <div class="col-sm-8">
-                        <v-select :value.sync="param.department" :options="departments" placeholder="请选择">
+                    <div class="col-sm-4 input-box pr0">
+                        <v-select :value.sync="param.department1" :options="departments1" placeholder="请选择">
+                        </v-select>
+                    </div>
+                    <div class="col-sm-4 input-box pl0">
+                        <v-select :value.sync="param.department2" :options="departments2" placeholder="请选择">
                         </v-select>
                     </div>
                 </div>
@@ -136,6 +140,9 @@
                         <td :title="list.operationalManager" v-text="list.operationalManager"></td>
                         <td :title="list.maintainManager" v-text="list.maintainManager"></td>
                         <td :title="list.marketManager" v-text="list.marketManager"></td>
+                        <td :title="list.studio" v-text="list.studio"></td>
+                        <td :title="list.release" v-text="list.release"></td>
+                        <td :title="list.company" v-text="list.company"></td>
                     </tr>
                     <tr class="text-center" v-show="tableList.length === 0">
                         <td :colspan="titles.length + 1">暂无数据</td>
@@ -166,21 +173,22 @@ import createProductModal from './CreateProduct.vue'
 import editProductModal from './EditProduct.vue'
 import vSelect from '../../global/Select.vue'
 import { getBusinessSearch } from '../../../vuex/action.js'
-import { departments, productTypes, phases, gameTypes, platformTypes, developModels, productLevels, perm } from '../../../vuex/getters.js'
+import { departments1, productTypes, phases, gameTypes, platformTypes, developModels, productLevels, perm } from '../../../vuex/getters.js'
 
 export default {
     data () {
         return {
             checkedAll: false,
             checkedIds: [],
-            titles: ['产品名称', '业务类别', '产品级别', '平台类型', '游戏类型', '研发模式', '所属部门', '运营阶段', '项目负责人', '运营负责人', '运维负责人', '市场负责人'],
+            titles: ['产品名称', '业务类别', '产品级别', '平台类型', '游戏类型', '研发模式', '所属部门', '运营阶段', '项目负责人', '运营负责人', '运维负责人', '市场负责人', '工作室', '发行部', '子公司'],
             tableList: [],
             lenArr: [10, 50, 100],
             pageLen: 5,
             url: '/product/query/',
             param: {
                 productName: '',
-                department: '',
+                department1: '',
+                department2: '',
                 businessType: '',
                 gameType: '',
                 platformType: '',
@@ -191,7 +199,8 @@ export default {
                 operationalManager: '',
                 projectManager: '',
                 marketManager: ''
-            }
+            },
+            departments2: []
         }
     },
     methods: {
@@ -251,7 +260,7 @@ export default {
         },
         getters: {
             perm,
-            departments,
+            departments1,
             businessTypes: productTypes,
             phases,
             gameTypes,
@@ -287,6 +296,17 @@ export default {
             } else {
                 this.checkedAll = false
             }
+        },
+        'param.department1' (newVal) {
+            this.param.department2 = ''
+
+            this.$http({
+                url: '/product/getDepartment/?id=' + newVal,
+                method: 'GET'
+            })
+            .then(response => {
+                this.departments2 = response.data.departments2
+            })
         }
     },
     events: {

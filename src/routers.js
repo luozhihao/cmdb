@@ -11,7 +11,7 @@ export default function (router) {
     router.map({
         '/': {
             component: function (resolve) {
-            require(['./components/overview/Overview.vue'], resolve)
+                require(['./components/overview/Overview.vue'], resolve)
             }
         },
         '/overview': {

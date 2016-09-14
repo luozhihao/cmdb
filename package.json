@@ -7,7 +7,8 @@
     "start": "webpack-dev-server --inline --hot --quiet",
     "build": "webpack",
     "prod": "set NODE_ENV=prod&&webpack -p --config ./webpack.production.config.js --progress --colors",
-    "dev": "set NODE_ENV=dev&&webpack -p --progress --colors"
+    "dev": "set NODE_ENV=dev&&webpack -p --progress --colors",
+    "watch": "webpack -w"
   },
   "author": "luozh",
   "license": "MIT",

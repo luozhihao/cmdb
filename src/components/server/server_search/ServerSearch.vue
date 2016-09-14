@@ -73,8 +73,12 @@
                 </div>
                 <div class="form-group input-box">
                     <label class="control-label col-sm-4">所属部门：</label>
-                    <div class="col-sm-8">
-                        <v-select :value.sync="param.department" :options="departments" placeholder="请选择" :search="true">
+                    <div class="col-sm-4 input-box pr0">
+                        <v-select :value.sync="param.department1" :options="departments1" placeholder="请选择">
+                        </v-select>
+                    </div>
+                    <div class="col-sm-4 input-box pl0">
+                        <v-select :value.sync="param.department2" :options="departments2" placeholder="请选择">
                         </v-select>
                     </div>
                 </div>
@@ -280,7 +284,7 @@ import dispatchModal from './Dispatch.vue'
 import vSelect from '../../global/Select.vue'
 import calendar from '../../global/Calendar.vue'
 import { getServerSearch, getFramesSeats, getOrigins } from '../../../vuex/action.js'
-import { idcs, frames, products, serverTypes, departments, systems, serverStatus, firms, origins1, origins2, perm } from '../../../vuex/getters.js'
+import { idcs, frames, products, serverTypes, departments1, systems, serverStatus, firms, origins1, origins2, perm } from '../../../vuex/getters.js'
 
 export default {
     data () {
@@ -293,6 +297,7 @@ export default {
             lenArr: [10, 50, 100],
             pageLen: 5,
             url: '/device/server/query/',
+            departments2: [],
             param: {
                 sn: '',
                 serverNum: '',
@@ -316,7 +321,9 @@ export default {
                 product: '',
                 maintainManager: '',
                 module: '',
-                set: ''
+                set: '',
+                department1: '',
+                department2: ''
             },
             checkArr: [
                 {label: 'SN', value: 'sn', checked: true},
@@ -347,6 +354,8 @@ export default {
                 {label: 'CPU', value: 'cpu', checked: false},
                 {label: '内存', value: 'mem', checked: false},
                 {label: '物理主机编号', value: 'hostNum', checked: false},
+                {label: '用途', value: 'serverUseType', checked: false},
+                {label: '共用产品', value: 'serverUseProduct', checked: false},
                 {label: '备注', value: 'remark', checked: true}
             ],
             valueArr: [],
@@ -529,7 +538,7 @@ export default {
             frames,
             products,
             serverTypes,
-            departments,
+            departments1,
             systems,
             origins1,
             origins2,
@@ -575,6 +584,17 @@ export default {
             this.param.origin2 = ''
 
             this.getOrigins(newVal)
+        },
+        'param.department1' (newVal) {
+            this.param.department2 = ''
+
+            this.$http({
+                url: '/product/getDepartment/?id=' + newVal,
+                method: 'GET'
+            })
+            .then(response => {
+                this.departments2 = response.data.departments2
+            })
         }
     },
     events: {

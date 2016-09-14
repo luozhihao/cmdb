@@ -15,6 +15,33 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-sm-12" v-show="businessType !== '1'">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">产品名称：<span class="text-danger">*</span></label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" v-model="productName" :disabled="true">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="col-sm-6">
+                        <div class="form-group input-box">
+                            <label class="control-label col-sm-4">部门：<span class="text-danger">*</span></label>
+                            <div class="col-sm-8" style="width: 262px; padding-right: 0">
+                                <v-select :value.sync="department1" :options="departments1" placeholder="请选择">
+                                </v-select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group input-box">
+                            <div class="col-sm-10">
+                                <v-select :value.sync="department2" :options="departments2" placeholder="请选择">
+                                </v-select>
+                            </div>
+                        </div>
+                    </div>
+                </div>  
                 <div class="col-sm-12" v-show="businessType === '1'">
                     <div class="col-sm-6" >
                         <div class="form-group input-box">
@@ -30,42 +57,6 @@
                             <label class="control-label col-sm-4">区域名称：</label>
                             <div class="col-sm-6">
                                 <input type="text" class="form-control" v-model="childType">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-12" v-show="businessType === '2'">
-                    <div class="form-group">
-                        <label class="control-label col-sm-2">产品名称：<span class="text-danger">*</span></label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" v-model="productName" :disabled="true">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-12">
-                    <div class="col-sm-6">
-                        <div class="form-group input-box">
-                            <label class="control-label col-sm-4">部门：<span class="text-danger">*</span></label>
-                            <div class="col-sm-6">
-                                <typeahead
-                                    :on-hit="addDepartment"
-                                    :async="'/product/getDepartment/?name='"
-                                    :key="'name'"
-                                    placeholder="按回车键添加"
-                                >
-                                </typeahead>
-                                <span class="selected-tag" v-show="department !== ''">
-                                    <span v-text="department"></span>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group input-box">
-                            <label class="control-label col-sm-4">产品级别：<span class="text-danger">*</span></label>
-                            <div class="col-sm-6">
-                                <v-select :value.sync="productLevel" :options="productLevels" placeholder="请选择">
-                                </v-select>
                             </div>
                         </div>
                     </div>
@@ -105,6 +96,46 @@
                             <label class="control-label col-sm-4">运营阶段：<span class="text-danger">*</span></label>
                             <div class="col-sm-6">
                                 <v-select :value.sync="phase" :options="phases" placeholder="请选择">
+                                </v-select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="col-sm-6">
+                        <div class="form-group input-box">
+                            <label class="control-label col-sm-4">产品级别：<span class="text-danger">*</span></label>
+                            <div class="col-sm-6">
+                                <v-select :value.sync="productLevel" :options="productLevels" placeholder="请选择">
+                                </v-select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group input-box">
+                            <label class="control-label col-sm-4">子公司：<span class="text-danger">*</span></label>
+                            <div class="col-sm-6">
+                                <v-select :value.sync="company" :options="companys" placeholder="请选择">
+                                </v-select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12" v-show="businessType === '1'">
+                    <div class="col-sm-6">
+                        <div class="form-group input-box">
+                            <label class="control-label col-sm-4">工作室：<span class="text-danger">*</span></label>
+                            <div class="col-sm-6">
+                                <v-select :value.sync="studio" :options="studios" placeholder="请选择">
+                                </v-select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group input-box">
+                            <label class="control-label col-sm-4">发行部：<span class="text-danger">*</span></label>
+                            <div class="col-sm-6">
+                                <v-select :value.sync="release" :options="releases" placeholder="请选择">
                                 </v-select>
                             </div>
                         </div>
@@ -227,7 +258,7 @@
 import { modal, typeahead } from 'vue-strap'
 import vSelect from '../../global/Select.vue'
 import { getBusinessSearch } from '../../../vuex/action.js'
-import { departments, productTypes, phases, gameTypes, platformTypes, developModels, gameLists, productLevels, perm } from '../../../vuex/getters.js'
+import { productTypes, phases, gameTypes, platformTypes, developModels, gameLists, productLevels, perm, studios, releases, companys, departments1 } from '../../../vuex/getters.js'
 
 let origin = {
         editProductModal: false,
@@ -236,17 +267,22 @@ let origin = {
         businessType: '',
         gameList: '',
         childType: '',
-        department: '',
+        department1: '',
+        department2: '',
         productName: '',
         productLevel: '',
         gameType: '',
         platformType: '',
         developModel: '',
         phase: '',
+        company: '',
+        studio: '',
+        release: '',
         projectManagers: [],
         maintainManagers: [],
         operationalManagers: [],
         marketManagers: [],
+        departments2: []
     },
     init = Object.assign({}, origin);
 
@@ -255,13 +291,6 @@ export default {
         return origin
     },
     methods: {
-
-        // 模糊搜索部门
-        addDepartment (items, targetVM) {
-            this.department = items
-            
-            targetVM.reset()
-        },
 
         // 模糊搜索项目负责人
         addProjectManager (items, targetVM) {
@@ -308,9 +337,8 @@ export default {
         saveFn () {
             if (this.businessType === '1') {
 
-                if (this.gameList && 
-                    this.department && this.productLevel && this.gameType && this.platformType
-                    && this.developModel && this.phase && this.maintainManagers.length) {
+                if (this.gameList && this.department1 && this.productLevel && this.gameType && this.platformType
+                    && this.developModel && this.phase && this.maintainManagers.length && this.company && this.studio && this.release) {
 
                     this.saveVaild()
                     
@@ -318,9 +346,9 @@ export default {
                     this.$dispatch('show-notify', '存在未填写的必填项，请检查')
                 }
 
-            } else if (this.businessType === '2') {
+            } else if (this.businessType !== '1' && this.businessType) {
 
-                if (this.department && this.productLevel && this.maintainManagers.length) {
+                if (this.department1 && this.productLevel && this.maintainManagers.length && this.company) {
 
                     this.saveVaild()
                     
@@ -364,30 +392,55 @@ export default {
         },
         getters: {
             perm,
-            departments,
             businessTypes: productTypes,
             phases,
             gameTypes,
             platformTypes,
             developModels,
             gameLists,
-            productLevels
+            productLevels,
+            studios,
+            releases,
+            companys,
+            departments1
         }
     },
     watch: {
         'businessType' (newVal) {
-            switch (newVal) {
-                case '1':
-                    this.productName = ''
-                    break
-                case '2':
-                    this.gameList = ''
-                    this.childType = ''
-                    this.gameType = ''
-                    this.platformType = ''
-                    this.developModel = ''
-                    this.phase = ''
-                    break
+            if (newVal === '1') {
+                this.productName = ''
+            } else if (newVal !== '1' && newVal) {
+                this.gameList = ''
+                this.childType = ''
+                this.gameType = ''
+                this.platformType = ''
+                this.developModel = ''
+                this.phase = ''
+                this.studio = ''
+                this.release = ''
+                this.company = this.company || '1'
+            }
+        },
+        'department1' (newVal, oldVal) {
+            if (newVal) {
+
+                oldVal ? this.department2 = '' : ''
+                
+                this.$http({
+                    url: '/product/getDepartment/?id=' + newVal,
+                    method: 'GET'
+                })
+                .then(response => {
+                    this.departments2 = response.data.departments2
+                })
+            } else {
+                this.department2 = ''
+                this.departments2 = []
+            }
+        },
+        'editProductModal' (newVal) {
+            if (!newVal) {
+                this.department1 = ''
             }
         }
     },

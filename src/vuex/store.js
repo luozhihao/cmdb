@@ -24,7 +24,6 @@ const state = {
     operators2: [],
     productTypes: [],
     cityArr1: [],
-    departments: [],
     gameTypes: [],
     platformTypes: [],
     developModels: [],
@@ -46,7 +45,12 @@ const state = {
     systems: [],
     connTypes: [],
     treeProducts: [],
-    importTypes: []
+    importTypes: [],
+    studios: [],
+    releases: [],
+    companys: [],
+    departments1: [],
+    serverUseTypes: []
 }   
 
 // 创建一个 object 存储 mutation 函数
@@ -73,7 +77,7 @@ const mutations = {
 
     // 设置业务管理下拉框内容
     GETBUSINESSSEARCH (state, data) {
-        state.departments = data.departments
+        state.departments1 = data.departments1
         state.productTypes = data.businessTypes
         state.gameTypes = data.gameTypes
         state.platformTypes = data.platformTypes
@@ -81,6 +85,9 @@ const mutations = {
         state.phases = data.phases
         state.productLevels = data.productLevels
         state.gameLists = data.gameLists
+        state.studios = data.studios
+        state.releases = data.releases
+        state.companys = data.companys
     },
 
     // 获取交换机查询下拉框内容
@@ -118,12 +125,13 @@ const mutations = {
         state.roomLocation = data.rooms
         state.products = data.products
         state.serverTypes = data.serverTypes
-        state.departments = data.departments
+        state.departments1 = data.departments1
         state.systems = data.systems
         state.origins1 = data.origins1
         state.serverStatus = data.statusArr
         state.addStatusArr = data.addStatusArr
         state.firms = data.firms
+        state.serverUseTypes = data.serverUseTypes
     },
 
     // 获取IP查询页下拉框

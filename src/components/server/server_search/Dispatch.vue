@@ -5,8 +5,8 @@
             <h4 class="modal-title">分配到产品</h4>
         </div>
         <div slot="modal-body" class="modal-body min-height">
-            <form class="form-inline text-center">
-                <div class="form-group">
+            <form class="text-center">
+                <div class="form-group input-box">
                     <v-select :value.sync="product" :options="products" placeholder="请选择产品" :search="true">
                     </v-select>
                 </div>

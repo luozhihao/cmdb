@@ -95,14 +95,13 @@
                             </v-select>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-4">备注：</label>
+                    <div class="form-group input-box">
+                        <label class="control-label col-sm-4">用途：<span class="text-danger">*</span></label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" v-model="remark">
+                            <v-select :value.sync="serverUseType" :options="serverUseTypes" placeholder="请选择">
+                            </v-select>
                         </div>
                     </div>
-                </div>
-                <div class="col-sm-6">
                     <div class="form-group input-box">
                         <label class="control-label col-sm-4">类型：<span class="text-danger">*</span></label>
                         <div class="col-sm-8">
@@ -110,7 +109,16 @@
                             </v-select>
                         </div>
                     </div>
-                     <div class="form-group">
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group input-box">
+                        <label class="control-label col-sm-4">共用产品：</label>
+                        <div class="col-sm-8">
+                            <v-select :value.sync="serverUseProduct" :options="products" placeholder="请选择" multiple search>
+                            </v-select>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="control-label col-sm-4">物理主机编号：</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" v-model="hostNum">
@@ -180,6 +188,12 @@
                             <input type="text" class="form-control" v-model="roomOutnet" onfocus="this.blur()" @click="showBroad('roomOutnet')">
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-4">备注：</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" v-model="remark">
+                        </div>
+                    </div>
                 </div>
             </form>
         </div>
@@ -188,7 +202,7 @@
                 type="button" 
                 class="btn btn-default" 
                 @click="saveFn"
-                :disabled="sn.trim() && origin1 && origin2 && room && frame && seat && model && status && serverType && firm && (companyIntnet.trim() || roomIntnet.trim()) ? false : true"
+                :disabled="sn.trim() && origin1 && origin2 && room && frame && seat && model && status && serverType && firm && serverUseType && (companyIntnet.trim() || roomIntnet.trim()) ? false : true"
             >
                 保存
             </button>
@@ -202,7 +216,7 @@ import { modal } from 'vue-strap'
 import datepicker from '../../global/Datepicker.vue'
 import vSelect from '../../global/Select.vue'
 import { getFramesSeats, getOrigins } from '../../../vuex/action.js'
-import { idcs, frames, seats, serverTypes, addStatusArr, firms, origins1, origins2 } from '../../../vuex/getters.js'
+import { idcs, frames, seats, serverTypes, addStatusArr, firms, origins1, origins2, serverUseTypes, products } from '../../../vuex/getters.js'
 
 let origin = {
         creatServerModal: false,
@@ -231,7 +245,9 @@ let origin = {
         companyIntnet: '',
         roomIntnet: '',
         roomOutnet: '',
-        remark: ''
+        remark: '',
+        serverUseType: '-1',
+        serverUseProduct: []
     },
     init = Object.assign({}, origin);
 
@@ -290,7 +306,9 @@ export default {
             origins2,
             serverTypes,
             statusArr: addStatusArr,
-            firms
+            firms,
+            serverUseTypes,
+            products
         }
     },
     ready () {

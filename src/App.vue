@@ -1,7 +1,8 @@
-<template lang='jade'>
-div.main
-    Left
-    Main
+<template>
+    <div class="main">
+        <Left v-if="showLeft"></Left>
+        <Main></Main>
+    </div>
 </template>
 
 <script>
@@ -11,6 +12,11 @@ import store from './vuex/store.js'
 import { getUserInfo } from './vuex/action.js'
 
 export default {
+    data () {
+        return {
+            showLeft: true
+        }
+    },
     components: {
         Left,
         Main
@@ -19,6 +25,13 @@ export default {
         actions: {
             getUserInfo
         }
+    },
+    created () {
+
+        // 性能优化
+        setTimeout(() => {
+            this.showLeft = true
+        }, 0)
     },
     ready () {
         this.getUserInfo()
