@@ -40,7 +40,6 @@ export default {
 }
 </script>
 
-<style lang="stylus">
-@import '../src/assets/css/bootstrap.min.css'
-@import '../src/assets/css/common.css'
+<style scoped>
+
 </style>

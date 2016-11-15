@@ -71,12 +71,18 @@
                                 </div>
                             </div>     
                             <div class="form-group input-box">
-                                <label class="control-label col-sm-4">用途：<span class="text-danger">*</span></label>
+                                <label class="control-label col-sm-4">用途分类：<span class="text-danger">*</span></label>
                                 <div class="col-sm-8">
                                     <v-select :value.sync="serverUseType" :options="serverUseTypes" placeholder="请选择">
                                     </v-select>
                                 </div>
-                            </div>           
+                            </div>
+                            <div class="form-group input-box">
+                                <label class="control-label col-sm-4">用途描述：</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" v-model="usage">
+                                </div>
+                            </div>          
                         </div>
                         <div class="col-sm-3">
                            <div class="form-group">
@@ -133,6 +139,12 @@
                                     <input type="text" class="form-control" v-model="model">
                                 </div>
                             </div>
+                            <div class="form-group input-box">
+                                <label class="control-label col-sm-4">接收人：</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" v-model="catcher">
+                                </div>
+                            </div>  
                         </div>
                         <div class="col-sm-3">
                             <div class="form-group">
@@ -207,6 +219,12 @@
                                     <input type="text" class="form-control" v-model="remark">
                                 </div>
                             </div>
+                            <div class="form-group input-box">
+                                <label class="control-label col-sm-4">价格：</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" v-model="price">
+                                </div>
+                            </div>
                         </div>
                         <div class="col-sm-3">
                             <div class="form-group">
@@ -224,7 +242,7 @@
                             <div class="form-group">
                                 <label class="control-label col-sm-4">IP：</label>
                                 <div class="col-sm-8">
-                                    <textarea rows="4" class="form-control" :readonly="true" v-model="ips"></textarea> 
+                                    <textarea rows="8" class="form-control" :readonly="true" v-model="ips"></textarea> 
                                 </div>
                             </div>
                         </div>
@@ -326,7 +344,10 @@ let origin = {
         module: '',
         ips: '',
         serverUseProduct: [],
-        serverUseType: ''
+        serverUseType: '',
+        usage: '',
+        catcher: '',
+        price: ''
     },
     init = Object.assign({}, origin);
 

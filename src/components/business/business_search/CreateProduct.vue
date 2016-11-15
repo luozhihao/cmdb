@@ -142,7 +142,7 @@
                     </div>
                 </div>
                 <div class="col-sm-12">
-                    <div class="form-group mb0">
+                    <div class="form-group input-box mb0">
                         <label class="control-label col-sm-2">项目负责人：</label>
                         <div class="col-sm-9">
                             <typeahead
@@ -168,7 +168,7 @@
                     </div>
                 </div>
                 <div class="col-sm-12">
-                    <div class="form-group mb0">
+                    <div class="form-group input-box mb0">
                         <label class="control-label col-sm-2">运营负责人：</label>
                         <div class="col-sm-9">
                             <typeahead
@@ -194,7 +194,7 @@
                     </div>
                 </div>
                 <div class="col-sm-12">
-                    <div class="form-group mb0">
+                    <div class="form-group input-box mb0">
                         <label class="control-label col-sm-2">运维负责人：<span class="text-danger">*</span></label>
                         <div class="col-sm-9">
                             <typeahead
@@ -220,7 +220,7 @@
                     </div>
                 </div>
                 <div class="col-sm-12">
-                    <div class="form-group mb0">
+                    <div class="form-group input-box mb0">
                         <label class="control-label col-sm-2">市场负责人：</label>
                         <div class="col-sm-9">
                             <typeahead
@@ -255,7 +255,8 @@
 </template>
 
 <script>
-import { modal, typeahead } from 'vue-strap'
+import { modal } from 'vue-strap'
+import typeahead from '../../global/Typeahead.vue'
 import vSelect from '../../global/Select.vue'
 import { getBusinessSearch } from '../../../vuex/action.js'
 import { productTypes, phases, gameTypes, platformTypes, developModels, gameLists, productLevels, studios, releases, companys, departments1 } from '../../../vuex/getters.js'

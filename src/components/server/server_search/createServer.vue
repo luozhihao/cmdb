@@ -96,10 +96,16 @@
                         </div>
                     </div>
                     <div class="form-group input-box">
-                        <label class="control-label col-sm-4">用途：<span class="text-danger">*</span></label>
+                        <label class="control-label col-sm-4">用途分类：<span class="text-danger">*</span></label>
                         <div class="col-sm-8">
                             <v-select :value.sync="serverUseType" :options="serverUseTypes" placeholder="请选择">
                             </v-select>
+                        </div>
+                    </div>
+                    <div class="form-group input-box">
+                        <label class="control-label col-sm-4">用途描述：</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" v-model="usage">
                         </div>
                     </div>
                     <div class="form-group input-box">
@@ -107,6 +113,12 @@
                         <div class="col-sm-8">
                             <v-select :value.sync="serverType" :options="serverTypes" placeholder="请选择">
                             </v-select>
+                        </div>
+                    </div>
+                    <div class="form-group input-box">
+                        <label class="control-label col-sm-4">接收人：</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" v-model="catcher">
                         </div>
                     </div>
                 </div>
@@ -188,6 +200,12 @@
                             <input type="text" class="form-control" v-model="roomOutnet" onfocus="this.blur()" @click="showBroad('roomOutnet')">
                         </div>
                     </div>
+                    <div class="form-group input-box">
+                        <label class="control-label col-sm-4">价格：</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" v-model="price">
+                        </div>
+                    </div> 
                     <div class="form-group">
                         <label class="control-label col-sm-4">备注：</label>
                         <div class="col-sm-8">
@@ -247,7 +265,10 @@ let origin = {
         roomOutnet: '',
         remark: '',
         serverUseType: '-1',
-        serverUseProduct: []
+        serverUseProduct: [],
+        usage: '',
+        catcher: '',
+        price: ''
     },
     init = Object.assign({}, origin);
 

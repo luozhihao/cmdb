@@ -354,8 +354,11 @@ export default {
                 {label: 'CPU', value: 'cpu', checked: false},
                 {label: '内存', value: 'mem', checked: false},
                 {label: '物理主机编号', value: 'hostNum', checked: false},
-                {label: '用途', value: 'serverUseType', checked: false},
+                {label: '用途分类', value: 'serverUseType', checked: false},
+                {label: '用途描述', value: 'usage', checked: false},
                 {label: '共用产品', value: 'serverUseProduct', checked: false},
+                {label: '接收人', value: 'catcher', checked: false},
+                {label: '价格', value: 'price', checked: false},
                 {label: '备注', value: 'remark', checked: true}
             ],
             valueArr: [],

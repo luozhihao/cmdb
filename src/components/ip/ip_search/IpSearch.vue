@@ -80,8 +80,18 @@
                     <span class="caret"></span>
                 </button>
                 <div slot="dropdown-menu" class="dropdown-menu pd20">
-                    <button type="button" class="btn btn-danger btn-block" @click="deleteFn">确定</button>
-                    <button type="button" class="btn btn-default btn-block" @click="cancelFn">取消</button>
+                    <button type="button" class="btn btn-danger btn-block" @click="deleteFn('delete')">确定</button>
+                    <button type="button" class="btn btn-default btn-block" @click="cancelFn('delete')">取消</button>
+                </div>
+            </dropdown>
+            <dropdown v-el:remove v-if="perm.IP删除 || perm.all">
+                <button type="button" class="btn btn-default" data-toggle="dropdown">
+                    批量删除
+                    <span class="caret"></span>
+                </button>
+                <div slot="dropdown-menu" class="dropdown-menu pd20">
+                    <button type="button" class="btn btn-danger btn-block" @click="deleteFn('remove')">确定</button>
+                    <button type="button" class="btn btn-default btn-block" @click="cancelFn('remove')">取消</button>
                 </div>
             </dropdown>
         </div>
@@ -107,7 +117,7 @@
                         <td :title="list.netType" v-text="list.netType"></td>
                         <td :title="list.operator" v-text="list.operator"></td>
                         <td :title="list.idc" v-text="list.idc"></td>
-                        <td><a class="pointer" v-text="list.deviceNum" @click="showView(list.deviceId, list.deviceType)"></a></td>
+                        <td><a class="pointer" v-text="list.deviceNum" @click="showView(list.deviceId, list.deviceType, list.id)"></a></td>
                         <td :title="list.importType" v-text="list.importType"></td>
                     </tr>
                     <tr class="text-center" v-show="tableList.length === 0">
@@ -129,6 +139,7 @@
 
         <edit-server-modal></edit-server-modal>
         <edit-device-modal></edit-device-modal>
+        <device-set-modal></device-set-modal>
     </div>
 </template>
 
@@ -138,6 +149,7 @@ import bootPage from '../../global/BootPage.vue'
 import vSelect from '../../global/Select.vue'
 import editServerModal from '../../server/server_search/EditServer.vue'
 import editDeviceModal from '../../network/device_search/EditDevice.vue'
+import deviceSetModal from './DeviceSet.vue'
 import { getIpSearch } from '../../../vuex/action.js'
 import { idcs, statusArr, operators, netTypes, importTypes, perm } from '../../../vuex/getters.js'
 
@@ -185,22 +197,29 @@ export default {
         },
 
         // 显示弹框
-        showView (id, type) {
+        showView (deviceId, type, id) {
             switch (type) {
+                case '':
+                    this.$broadcast('setDeviceNum', id)
+                    break;
                 case 1:
-                    this.$broadcast('viewEditServer', id)
+                    this.$broadcast('viewEditServer', deviceId)
                     break;
                 case 2:
-                    this.$broadcast('viewEditDevice', id)
+                    this.$broadcast('viewEditDevice', deviceId)
                     break;
             }
         },
 
-        // 批量删除
-        deleteFn () {
+        // 批量回收
+        deleteFn (type) {
+            let url
+
+            type === 'delete' ? url = '/ip/ip_delete/' : url = '/ip/ip_remove/'
+
             if (this.checkedIds.length) {
                 this.$http({
-                    url: '/ip/ip_delete/',
+                    url: url,
                     method: 'POST',
                     data: {
                         checkedIds: this.checkedIds
@@ -211,21 +230,21 @@ export default {
                         this.checkedIds = []
                         this.refresh()
 
-                        this.$dispatch('show-success', '删除成功')
+                        this.$dispatch('show-success', '操作成功')
                     } else {
-                        this.$dispatch('show-error', '删除失败了')
+                        this.$dispatch('show-error', '操作失败了')
                     }
                 })
             } else {
-                this.$dispatch('show-notify', '请选择删除项')
+                this.$dispatch('show-notify', '请选择操作项')
             }
 
-            this.$els.confirm.classList.toggle('open')
+            type === 'delete' ? this.$els.confirm.classList.toggle('open') : this.$els.remove.classList.toggle('open')
         },
 
         // 取消删除
-        cancelFn () {
-            this.$els.confirm.classList.toggle('open')
+        cancelFn (type) {
+            type === 'delete' ? this.$els.confirm.classList.toggle('open') : this.$els.remove.classList.toggle('open')
         }
     },
     components: {
@@ -234,7 +253,8 @@ export default {
         spinner,
         editServerModal,
         editDeviceModal,
-        dropdown
+        dropdown,
+        deviceSetModal
     },
     vuex: {
         actions: {

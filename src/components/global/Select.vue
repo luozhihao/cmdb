@@ -14,12 +14,14 @@
         <li v-if="search" class="bs-searchbox">
           <input type="text" placeholder="Search" v-model="searchText" class="form-control" autocomplete="off">
         </li>
-        <li v-for="option in options | filterBy searchText " v-bind:id="option.value" style="position:relative">
-          <a @mousedown.prevent="select(option.value)" style="cursor:pointer">
-            {{ option.label }}
-            <span class="glyphicon glyphicon-ok check-mark" v-show="multiple ? value.indexOf(option.value) !== -1 : value === option.value"></span>
-          </a>
-        </li>
+        <ul class="search-list">
+            <li v-for="option in options | filterBy searchText " v-bind:id="option.value" style="position:relative">
+              <a @mousedown.prevent="select(option.value)" style="cursor:pointer">
+                {{ option.label }}
+                <span class="glyphicon glyphicon-ok check-mark" v-show="multiple ? value.indexOf(option.value) !== -1 : value === option.value"></span>
+              </a>
+            </li>
+        </ul>
       </template>
       <slot v-else></slot>
       <div class="notify" v-show="showNotify" transition="fadein">最多选择 ({{limit}} 个)</div>
@@ -191,5 +193,36 @@ export default {
   box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
    pointer-events: none;
   opacity: .9;
+}
+
+.search-list {
+    width: 100%;
+    max-height: 300px;
+    overflow-y: auto;
+    float: left;
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    font-size: 14px;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+}
+
+.search-list > li > a {
+    cursor: pointer;
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: 400;
+    line-height: 1.42857143;
+    color: #333;
+    white-space: nowrap;
+}
+
+.search-list>li>a:focus, .search-list>li>a:hover {
+    color: #262626;
+    text-decoration: none;
+    background-color: #f5f5f5;
 }
 </style>
