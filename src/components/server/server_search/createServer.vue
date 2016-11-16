@@ -336,7 +336,32 @@ export default {
 
     },
     events: {
-        'showCreateServer' () {
+        'showCreateServer' (param) {
+            if (param.length === 1) {
+                this.$http({
+                    url: '/device/server/get/?id=' + param[0],
+                    method: 'GET'
+                })
+                .then(repsonse => {
+                    if (repsonse.data.code === 200) {
+                        this.$data = Object.assign({}, origin, repsonse.data)
+
+                        this.assetNum = ''
+                        this.financeNum = ''
+                        this.invoiceNum = ''
+                        this.addTime = ''
+                        this.factoryTime = ''
+                        this.procureTime = ''
+                        this.status = '1'
+                        this.serverUseProduct = []
+                    } else {
+                        this.$dispatch('show-error')
+                    }
+                })
+            } else if (param.length > 1) {
+                this.$dispatch('show-notify', '无法复制, 请选择一个操作对象')
+            }
+
             this.creatServerModal = true
         },
         'getTxt2' (param) {
@@ -365,21 +390,49 @@ export default {
         }
     },
     watch: {
-        'room' (newVal) {
-            this.frame = ''
-            this.seat = ''
+        'room' (newVal, oldVal) {
+            if (newVal) {
+                if (oldVal) {
+                    this.frame = ''
+                    this.seat = ''
+                }
 
-            this.getFramesSeats(newVal, 'room')
+                this.getFramesSeats(newVal, 'room')
+            } else {
+                this.frame = ''
+                this.seat = ''
+                this.getFramesSeats(newVal, 'room')
+            }
         },
-        'frame' (newVal) {
-            this.seat = ''
+        'frame' (newVal, oldVal) {
+            if (newVal) {
+                if (oldVal) {
+                    this.seat = ''
+                }
 
-            this.getFramesSeats(newVal, 'shelf')
+                this.getFramesSeats(newVal, 'shelf')
+            } else {
+                this.seat = ''
+                this.getFramesSeats(newVal, 'shelf')
+            }
         },
-        'origin1' (newVal) {
-            this.origin2 = ''
+        'origin1' (newVal, oldVal) {
+            if (newVal) {
+                if (oldVal) {
+                    this.origin2 = ''
+                }
 
-            this.getOrigins(newVal)
+                this.getOrigins(newVal)
+            } else {
+                this.origin2 = ''
+                this.getOrigins(newVal)
+            }
+        },
+        'creatServerModal' (newVal) {
+            if (!newVal) {
+                this.origin1 = ''
+                this.room = ''
+            }
         }
     }
 }

@@ -168,7 +168,7 @@
                 查询
             </button>
             <span v-if="!isModal">
-                <button v-if="perm.新增服务器 || perm.all" type="button" class="btn btn-default" @click="$broadcast('showCreateServer')">
+                <button v-if="perm.新增服务器 || perm.all" type="button" class="btn btn-default" @click="createServer">
                     新增服务器
                 </button>
                 <button v-if="perm.分配到产品 || perm.all" type="button" class="btn btn-default" @click="dispatchFn">
@@ -403,6 +403,13 @@ export default {
 
             this.titles.unshift('服务器编号')
             this.valueArr.unshift('serverNum')
+        },
+
+        // 新增服务器
+        createServer () {
+            let _this = this
+
+            this.$broadcast('showCreateServer', _this.checkedIds)
         },
 
         // 批量修改
