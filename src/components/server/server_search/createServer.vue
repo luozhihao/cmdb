@@ -344,16 +344,28 @@ export default {
                 })
                 .then(repsonse => {
                     if (repsonse.data.code === 200) {
-                        this.$data = Object.assign({}, origin, repsonse.data)
+                        const {sn, origin1, origin2, room, frame, seat, model, firm, serverUseType, usage, serverType, voltage, electric, power, shelfLife, hostNum, assetNum, financeNum, invoiceNum} = repsonse.data
 
-                        this.assetNum = ''
-                        this.financeNum = ''
-                        this.invoiceNum = ''
-                        this.addTime = ''
-                        this.factoryTime = ''
-                        this.procureTime = ''
+                        this.sn = sn
+                        this.origin1 = origin1
+                        this.origin2 = origin2
+                        this.room = room
+                        this.frame = frame
+                        this.seat = seat
+                        this.model = model
+                        this.firm = firm
+                        this.serverUseType = serverUseType
+                        this.usage = usage
+                        this.serverType = serverType
+                        this.voltage = voltage
+                        this.electric = electric
+                        this.power = power
+                        this.shelfLife = shelfLife
+                        this.hostNum = hostNum
+                        this.assetNum = assetNum
+                        this.financeNum = financeNum
+                        this.invoiceNum = invoiceNum
                         this.status = '1'
-                        this.serverUseProduct = []
                     } else {
                         this.$dispatch('show-error')
                     }

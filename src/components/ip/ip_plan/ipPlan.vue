@@ -166,13 +166,6 @@ export default {
                 })
                 .then(response => {
                     if (response.data.code === 200) {
-                        this.netType = '',
-                        this.idc = '',
-                        this.network = '',
-                        this.gateway = '',
-                        this.ips = '',
-                        this.operator = '',
-
                         this.$dispatch('show-success')
                     } else {
                         this.$dispatch('show-error', response.data.msg)
