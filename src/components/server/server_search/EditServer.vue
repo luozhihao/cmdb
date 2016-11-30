@@ -12,12 +12,6 @@
                 <tab header="服务器">
                     <form class="form-horizontal clearfix form-input">
                         <div class="col-sm-3">
-                            <div class="form-group">
-                                <label class="control-label col-sm-4">SN：<span class="text-danger">*</span></label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" v-model="sn">
-                                </div>
-                            </div>
                             <div class="form-group input-box">
                                 <label class="control-label col-sm-4">类型：<span class="text-danger">*</span></label>
                                 <div class="col-sm-8">
@@ -25,7 +19,96 @@
                                     </v-select>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-4">物理主机编号：</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" v-model="hostNum">
+                                </div>
+                            </div>
+                            <div class="form-group input-box min-dropdown">
+                                <label class="control-label col-sm-4">厂商：<span class="text-danger">*</span></label>
+                                <div class="col-sm-8">
+                                    <v-select :value.sync="firm" :options="firms" placeholder="请选择">
+                                    </v-select>
+                                </div>
+                            </div>   
+                            <div class="form-group">
+                                <label class="control-label col-sm-4">型号：<span class="text-danger">*</span></label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" v-model="model">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="control-label col-sm-4">SN：<span class="text-danger">*</span></label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" v-model="sn">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-4">IP：</label>
+                                <div class="col-sm-8">
+                                    <textarea rows="3" class="form-control" :readonly="true" v-model="ips"></textarea> 
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-4">CPU：</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-4">内存：</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-4">磁盘：</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label class="control-label col-sm-4">设备编号：</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" v-model="serverNum" :readonly="true">
+                                </div>
+                            </div>
                             <div class="form-group input-box">
+                                <label class="control-label col-sm-4">用途分类：<span class="text-danger">*</span></label>
+                                <div class="col-sm-8">
+                                    <v-select :value.sync="serverUseType" :options="serverUseTypes" placeholder="请选择">
+                                    </v-select>
+                                </div>
+                            </div>
+                            <div class="form-group input-box">
+                                <label class="control-label col-sm-4">用途描述：</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" v-model="usage">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-4">来源：<span class="text-danger">*</span></label>
+                                <div class="col-sm-4 input-box pr0">
+                                    <v-select :value.sync="origin1" :options="origins1" placeholder="请选择" class="fs12">
+                                    </v-select>
+                                </div>
+                                <div class="col-sm-4 input-box pl0">
+                                    <v-select :value.sync="origin2" :options="origins2" placeholder="请选择" class="fs12">
+                                    </v-select>
+                                </div>
+                            </div>
+                            <div class="form-group input-box">
+                                <label class="control-label col-sm-4">状态：<span class="text-danger">*</span></label>
+                                <div class="col-sm-8">
+                                    <v-select :value.sync="status" :options="editStatusArr" placeholder="请选择">
+                                    </v-select>
+                                </div>
+                            </div>
+                             <div class="form-group input-box">
                                 <label class="control-label col-sm-4">机房：<span class="text-danger">*</span></label>
                                 <div class="col-sm-8">
                                     <v-select :value.sync="room" :options="rooms" placeholder="请选择">
@@ -46,125 +129,14 @@
                                     </v-select>
                                 </div>
                             </div>
-                            <div class="form-group input-box">
-                                <label class="control-label col-sm-4">状态：<span class="text-danger">*</span></label>
+                            <div class="form-group">
+                                <label class="control-label col-sm-4">备注：</label>
                                 <div class="col-sm-8">
-                                    <v-select :value.sync="status" :options="editStatusArr" placeholder="请选择">
-                                    </v-select>
+                                    <input type="text" class="form-control" v-model="remark">
                                 </div>
                             </div>
-                            <div class="form-group input-box min-dropdown">
-                                <label class="control-label col-sm-4">厂商：<span class="text-danger">*</span></label>
-                                <div class="col-sm-8">
-                                    <v-select :value.sync="firm" :options="firms" placeholder="请选择">
-                                    </v-select>
-                                </div>
-                            </div>   
-                             <div class="form-group">
-                                <label class="control-label col-sm-4">质保期限：</label>
-                                <div class="col-sm-8">
-                                    <datepicker
-                                      :value.sync="shelfLife"
-                                      :format="'yyyy-MM-dd'"
-                                      :show-reset-button="true">
-                                    </datepicker>
-                                </div>
-                            </div>     
-                            <div class="form-group input-box">
-                                <label class="control-label col-sm-4">用途分类：<span class="text-danger">*</span></label>
-                                <div class="col-sm-8">
-                                    <v-select :value.sync="serverUseType" :options="serverUseTypes" placeholder="请选择">
-                                    </v-select>
-                                </div>
-                            </div>
-                            <div class="form-group input-box">
-                                <label class="control-label col-sm-4">用途描述：</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" v-model="usage">
-                                </div>
-                            </div>          
                         </div>
                         <div class="col-sm-3">
-                           <div class="form-group">
-                                <label class="control-label col-sm-4">设备编号：</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" v-model="serverNum" :readonly="true">
-                                </div>
-                            </div>
-                             <div class="form-group">
-                                <label class="control-label col-sm-4">物理主机编号：</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" v-model="hostNum">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-4">资产编号：</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" v-model="assetNum">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-4">财务编号：</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" v-model="financeNum">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-4">发票编号：</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" v-model="invoiceNum">
-                                </div>
-                            </div>
-                             <div class="form-group">
-                                <label class="control-label col-sm-4">电压：</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" v-model="voltage">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-4">电流：</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" v-model="electric">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-4">功率：</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" v-model="power">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-4">型号：<span class="text-danger">*</span></label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" v-model="model">
-                                </div>
-                            </div>
-                            <div class="form-group input-box">
-                                <label class="control-label col-sm-4">接收人：</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" v-model="catcher">
-                                </div>
-                            </div>  
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="form-group">
-                                <label class="control-label col-sm-4">来源：<span class="text-danger">*</span></label>
-                                <div class="col-sm-4 input-box pr0">
-                                    <v-select :value.sync="origin1" :options="origins1" placeholder="请选择" class="fs12">
-                                    </v-select>
-                                </div>
-                                <div class="col-sm-4 input-box pl0">
-                                    <v-select :value.sync="origin2" :options="origins2" placeholder="请选择" class="fs12">
-                                    </v-select>
-                                </div>
-                            </div>
-                            <div class="form-group input-box">
-                                <label class="control-label col-sm-4">共用产品：</label>
-                                <div class="col-sm-8">
-                                    <v-select :value.sync="serverUseProduct" :options="products" placeholder="请选择" multiple search>
-                                    </v-select>
-                                </div>
-                            </div>
                             <div class="form-group">
                                 <label class="control-label col-sm-4">入库时间：</label>
                                 <div class="col-sm-8">
@@ -196,6 +168,61 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label class="control-label col-sm-4">质保期限：</label>
+                                <div class="col-sm-8">
+                                    <datepicker
+                                      :value.sync="shelfLife"
+                                      :format="'yyyy-MM-dd'"
+                                      :show-reset-button="true">
+                                    </datepicker>
+                                </div>
+                            </div>   
+                            <div class="form-group">
+                                <label class="control-label col-sm-4">资产编号：</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" v-model="assetNum">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-4">财务编号：</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" v-model="financeNum">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-sm-4">发票编号：</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" v-model="invoiceNum">
+                                </div>
+                            </div>
+                            <div class="form-group input-box">
+                                <label class="control-label col-sm-4">价格：</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" v-model="price">
+                                </div>
+                            </div>  
+                             <!-- <div class="form-group">
+                                <label class="control-label col-sm-4">电压：</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" v-model="voltage">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-4">电流：</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" v-model="electric">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-4">功率：</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" v-model="power">
+                                </div>
+                            </div> -->
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
                                 <label class="control-label col-sm-4">所属部门：</label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control" :readonly="true" v-model="department">
@@ -214,37 +241,36 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-sm-4">备注：</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" v-model="remark">
-                                </div>
-                            </div>
-                            <div class="form-group input-box">
-                                <label class="control-label col-sm-4">价格：</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" v-model="price">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="form-group">
                                 <label class="control-label col-sm-4">所属Set：</label>
                                 <div class="col-sm-8">
-                                    <textarea rows="4" class="form-control" :readonly="true" v-model="set"></textarea> 
+                                    <textarea rows="3" class="form-control" :readonly="true" v-model="set"></textarea> 
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-sm-4">所属Module：</label>
                                 <div class="col-sm-8">
-                                    <textarea rows="4" class="form-control" :readonly="true" v-model="module"></textarea> 
+                                    <textarea rows="3" class="form-control" :readonly="true" v-model="module"></textarea> 
+                                </div>
+                            </div>
+                            <div class="form-group input-box">
+                                <label class="control-label col-sm-4">接收人：</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" v-model="catcher">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-sm-4">IP：</label>
+                                <label class="control-label col-sm-4">成本中心：</label>
                                 <div class="col-sm-8">
-                                    <textarea rows="8" class="form-control" :readonly="true" v-model="ips"></textarea> 
+                                    <textarea rows="2" class="form-control" :readonly="true"></textarea> 
                                 </div>
                             </div>
+                            <!-- <div class="form-group input-box">
+                                <label class="control-label col-sm-4">共用产品：</label>
+                                <div class="col-sm-8">
+                                    <v-select :value.sync="serverUseProduct" :options="products" placeholder="请选择" multiple search>
+                                    </v-select>
+                                </div>
+                            </div> -->
                         </div>
                     </form>
                     <div class="text-center mt30 mb20">
