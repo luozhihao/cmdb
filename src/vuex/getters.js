@@ -116,3 +116,9 @@ export const departments1 = state => state.departments1
 
 // 获取用途
 export const serverUseTypes = state => state.serverUseTypes
+
+// 获取成本中心
+export const costCenters = state => state.costCenters
+
+// 获取地区
+export const areas = state => state.areas

@@ -4,215 +4,248 @@
         <div slot="modal-header" class="modal-header">
             <h4 class="modal-title">新增服务器</h4>
         </div>
-        <div slot="modal-body" class="modal-body min-height">
+        <div slot="modal-body" class="modal-body" style="min-height: 450px;">
             <form class="form-horizontal clearfix form-input">
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label class="control-label col-sm-4">SN：<span class="text-danger">*</span></label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" v-model="sn">
+                <form class="form-horizontal clearfix form-input">
+                    <div class="col-sm-3">
+                        <div class="form-group input-box">
+                            <label class="control-label col-sm-4">类型：<span class="text-danger">*</span></label>
+                            <div class="col-sm-8">
+                                <v-select :value.sync="serverType" :options="serverTypes" placeholder="请选择">
+                                </v-select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4">物理主机编号：</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" v-model="hostNum">
+                            </div>
+                        </div>
+                        <div class="form-group input-box">
+                            <label class="control-label col-sm-4">厂商：<span class="text-danger">*</span></label>
+                            <div class="col-sm-8">
+                                <v-select :value.sync="firm" :options="firms" placeholder="请选择">
+                                </v-select>
+                            </div>
+                        </div>   
+                        <div class="form-group">
+                            <label class="control-label col-sm-4">型号：<span class="text-danger">*</span></label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" v-model="model">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="control-label col-sm-4">SN：<span class="text-danger">*</span></label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" v-model="sn">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4">CPU：</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4">内存：</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4">磁盘：</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control">
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-4">来源：<span class="text-danger">*</span></label>
-                        <div class="col-sm-4 input-box pr0">
-                            <v-select :value.sync="origin1" :options="origins1" placeholder="请选择">
-                            </v-select>
+                    <div class="col-sm-3">
+                        <div class="form-group input-box">
+                            <label class="control-label col-sm-4">用途分类：<span class="text-danger">*</span></label>
+                            <div class="col-sm-8">
+                                <v-select :value.sync="serverUseType" :options="serverUseTypes" placeholder="请选择">
+                                </v-select>
+                            </div>
                         </div>
-                        <div class="col-sm-4 input-box pl0">
-                            <v-select :value.sync="origin2" :options="origins2" placeholder="请选择">
-                            </v-select>
+                        <div class="form-group input-box">
+                            <label class="control-label col-sm-4">用途描述：</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" v-model="usage">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group input-box">
-                        <label class="control-label col-sm-4">机房：<span class="text-danger">*</span></label>
-                        <div class="col-sm-8">
-                            <v-select :value.sync="room" :options="rooms" placeholder="请选择">
-                            </v-select>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4">来源：<span class="text-danger">*</span></label>
+                            <div class="col-sm-4 input-box pr0">
+                                <v-select :value.sync="origin1" :options="origins1" placeholder="请选择" class="fs12">
+                                </v-select>
+                            </div>
+                            <div class="col-sm-4 input-box pl0">
+                                <v-select :value.sync="origin2" :options="origins2" placeholder="请选择" class="fs12">
+                                </v-select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group input-box">
-                        <label class="control-label col-sm-4">机架：<span class="text-danger">*</span></label>
-                        <div class="col-sm-8">
-                            <v-select :value.sync="frame" :options="frames" placeholder="请选择">
-                            </v-select>
+                        <div class="form-group input-box">
+                            <label class="control-label col-sm-4">状态：<span class="text-danger">*</span></label>
+                            <div class="col-sm-8">
+                                <v-select :value.sync="status" :options="statusArr" placeholder="请选择">
+                                </v-select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group input-box">
-                        <label class="control-label col-sm-4">机位：<span class="text-danger">*</span></label>
-                        <div class="col-sm-8">
-                            <v-select :value.sync="seat" :options="seats" placeholder="请选择">
-                            </v-select>
+                         <div class="form-group input-box">
+                            <label class="control-label col-sm-4">机房：<span class="text-danger">*</span></label>
+                            <div class="col-sm-8">
+                                <v-select :value.sync="room" :options="rooms" placeholder="请选择">
+                                </v-select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-4">入库时间：</label>
-                        <div class="col-sm-8">
-                            <datepicker
-                              :value.sync="addTime"
-                              :format="'yyyy-MM-dd'"
-                              :show-reset-button="true">
-                            </datepicker>
+                        <div class="form-group input-box min-dropdown">
+                            <label class="control-label col-sm-4">机架：<span class="text-danger">*</span></label>
+                            <div class="col-sm-8">
+                                <v-select :value.sync="frame" :options="frames" placeholder="请选择">
+                                </v-select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-4">出厂时间：</label>
-                        <div class="col-sm-8">
-                            <datepicker
-                              :value.sync="factoryTime"
-                              :format="'yyyy-MM-dd'"
-                              :show-reset-button="true">
-                            </datepicker>
+                        <div class="form-group input-box">
+                            <label class="control-label col-sm-4">机位：<span class="text-danger">*</span></label>
+                            <div class="col-sm-8">
+                                <v-select :value.sync="seat" :options="seats" placeholder="请选择">
+                                </v-select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-4">采购时间：</label>
-                        <div class="col-sm-8">
-                            <datepicker
-                              :value.sync="procureTime"
-                              :format="'yyyy-MM-dd'"
-                              :show-reset-button="true">
-                            </datepicker>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4">备注：</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" v-model="remark">
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-4">型号：<span class="text-danger">*</span></label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" v-model="model">
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label class="control-label col-sm-4">入库时间：</label>
+                            <div class="col-sm-8">
+                                <datepicker
+                                  :value.sync="addTime"
+                                  :format="'yyyy-MM-dd'"
+                                  :show-reset-button="true">
+                                </datepicker>
+                            </div>
                         </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4">出厂时间：</label>
+                            <div class="col-sm-8">
+                                <datepicker
+                                  :value.sync="factoryTime"
+                                  :format="'yyyy-MM-dd'"
+                                  :show-reset-button="true">
+                                </datepicker>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4">采购时间：</label>
+                            <div class="col-sm-8">
+                                <datepicker
+                                  :value.sync="procureTime"
+                                  :format="'yyyy-MM-dd'"
+                                  :show-reset-button="true">
+                                </datepicker>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4">质保期限：</label>
+                            <div class="col-sm-8">
+                                <datepicker
+                                  :value.sync="shelfLife"
+                                  :format="'yyyy-MM-dd'"
+                                  :show-reset-button="true">
+                                </datepicker>
+                            </div>
+                        </div>   
+                        <div class="form-group">
+                            <label class="control-label col-sm-4">资产编号：</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" v-model="assetNum">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4">财务编号：</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" v-model="financeNum">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-4">发票编号：</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" v-model="invoiceNum">
+                            </div>
+                        </div>
+                        <div class="form-group input-box">
+                            <label class="control-label col-sm-4">价格：</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" v-model="price">
+                            </div>
+                        </div>  
+                         <!-- <div class="form-group">
+                            <label class="control-label col-sm-4">电压：</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" v-model="voltage">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4">电流：</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" v-model="electric">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4">功率：</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" v-model="power">
+                            </div>
+                        </div> -->
                     </div>
-                    <div class="form-group input-box">
-                        <label class="control-label col-sm-4">状态：<span class="text-danger">*</span></label>
-                        <div class="col-sm-8">
-                            <v-select :value.sync="status" :options="statusArr" placeholder="请选择">
-                            </v-select>
+                    <div class="col-sm-3">
+                        <div class="form-group input-box">
+                            <label class="control-label col-sm-4">接收人：</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" v-model="catcher">
+                            </div>
                         </div>
+                        <div class="form-group input-box">
+                            <label class="control-label col-sm-4">成本中心：<span class="text-danger">*</span></label>
+                            <div class="col-sm-8">
+                                <v-select :value.sync="costCenter" :options="costCenters" placeholder="请选择" :search="true">
+                                </v-select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4">公司内网：<span class="text-danger">(选一)</span></label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" v-model="companyIntnet" onfocus="this.blur()" @click="showBroad('companyIntnet')">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4">机房内网：<span class="text-danger">(选一)</span></label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" v-model="roomIntnet" onfocus="this.blur()" @click="showBroad('roomIntnet')">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4">机房外网：</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" v-model="roomOutnet" onfocus="this.blur()" @click="showBroad('roomOutnet')">
+                            </div>
+                        </div>
+                        <!-- <div class="form-group input-box">
+                            <label class="control-label col-sm-4">共用产品：</label>
+                            <div class="col-sm-8">
+                                <v-select :value.sync="serverUseProduct" :options="products" placeholder="请选择" multiple search>
+                                </v-select>
+                            </div>
+                        </div> -->
                     </div>
-                    <div class="form-group input-box min-dropdown">
-                        <label class="control-label col-sm-4">厂商：<span class="text-danger">*</span></label>
-                        <div class="col-sm-8">
-                            <v-select :value.sync="firm" :options="firms" placeholder="请选择">
-                            </v-select>
-                        </div>
-                    </div>
-                    <div class="form-group input-box">
-                        <label class="control-label col-sm-4">用途分类：<span class="text-danger">*</span></label>
-                        <div class="col-sm-8">
-                            <v-select :value.sync="serverUseType" :options="serverUseTypes" placeholder="请选择">
-                            </v-select>
-                        </div>
-                    </div>
-                    <div class="form-group input-box">
-                        <label class="control-label col-sm-4">用途描述：</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" v-model="usage">
-                        </div>
-                    </div>
-                    <div class="form-group input-box">
-                        <label class="control-label col-sm-4">类型：<span class="text-danger">*</span></label>
-                        <div class="col-sm-8">
-                            <v-select :value.sync="serverType" :options="serverTypes" placeholder="请选择">
-                            </v-select>
-                        </div>
-                    </div>
-                    <div class="form-group input-box">
-                        <label class="control-label col-sm-4">接收人：</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" v-model="catcher">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="form-group input-box">
-                        <label class="control-label col-sm-4">共用产品：</label>
-                        <div class="col-sm-8">
-                            <v-select :value.sync="serverUseProduct" :options="products" placeholder="请选择" multiple search>
-                            </v-select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-4">物理主机编号：</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" v-model="hostNum">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-4">资产编号：</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" v-model="assetNum">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-4">财务编号：</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" v-model="financeNum">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-4">发票编号：</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" v-model="invoiceNum">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-4">电压：</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" v-model="voltage">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-4">电流：</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" v-model="electric">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-4">功率：</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" v-model="power">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-4">质保期限：</label>
-                        <div class="col-sm-8">
-                            <datepicker
-                              :value.sync="shelfLife"
-                              :format="'yyyy-MM-dd'"
-                              :show-reset-button="true">
-                            </datepicker>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-4">公司内网：<span class="text-danger">(选一)</span></label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" v-model="companyIntnet" onfocus="this.blur()" @click="showBroad('companyIntnet')">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-4">机房内网：<span class="text-danger">(选一)</span></label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" v-model="roomIntnet" onfocus="this.blur()" @click="showBroad('roomIntnet')">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-4">机房外网：</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" v-model="roomOutnet" onfocus="this.blur()" @click="showBroad('roomOutnet')">
-                        </div>
-                    </div>
-                    <div class="form-group input-box">
-                        <label class="control-label col-sm-4">价格：</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" v-model="price">
-                        </div>
-                    </div> 
-                    <div class="form-group">
-                        <label class="control-label col-sm-4">备注：</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" v-model="remark">
-                        </div>
-                    </div>
-                </div>
+                </form>
             </form>
         </div>
         <div slot="modal-footer" class="modal-footer">
@@ -220,7 +253,7 @@
                 type="button" 
                 class="btn btn-default" 
                 @click="saveFn"
-                :disabled="sn.trim() && origin1 && origin2 && room && frame && seat && model && status && serverType && firm && serverUseType && (companyIntnet.trim() || roomIntnet.trim()) ? false : true"
+                :disabled="sn.trim() && origin1 && origin2 && room && frame && seat && model && status && serverType && firm && serverUseType && costCenter && (companyIntnet.trim() || roomIntnet.trim()) ? false : true"
             >
                 保存
             </button>
@@ -234,7 +267,7 @@ import { modal } from 'vue-strap'
 import datepicker from '../../global/Datepicker.vue'
 import vSelect from '../../global/Select.vue'
 import { getFramesSeats, getOrigins } from '../../../vuex/action.js'
-import { idcs, frames, seats, serverTypes, addStatusArr, firms, origins1, origins2, serverUseTypes, products } from '../../../vuex/getters.js'
+import { idcs, frames, seats, serverTypes, addStatusArr, firms, origins1, origins2, serverUseTypes, products, costCenters } from '../../../vuex/getters.js'
 
 let origin = {
         creatServerModal: false,
@@ -257,18 +290,15 @@ let origin = {
         assetNum: '',
         financeNum: '',
         invoiceNum: '',
-        voltage: '',
-        electric: '',
-        power: '',
         companyIntnet: '',
         roomIntnet: '',
         roomOutnet: '',
         remark: '',
         serverUseType: '-1',
-        serverUseProduct: [],
         usage: '',
         catcher: '',
-        price: ''
+        price: '',
+        costCenter: 'y3cAAAAABrHM567U'
     },
     init = Object.assign({}, origin);
 
@@ -328,8 +358,9 @@ export default {
             serverTypes,
             statusArr: addStatusArr,
             firms,
+            products,
             serverUseTypes,
-            products
+            costCenters
         }
     },
     ready () {
@@ -344,7 +375,7 @@ export default {
                 })
                 .then(repsonse => {
                     if (repsonse.data.code === 200) {
-                        const {sn, origin1, origin2, room, frame, seat, model, firm, serverUseType, usage, serverType, voltage, electric, power, shelfLife, hostNum, assetNum, financeNum, invoiceNum} = repsonse.data
+                        const {sn, origin1, origin2, room, frame, seat, model, firm, serverUseType, usage, serverType, shelfLife, hostNum, assetNum, financeNum, invoiceNum, catcher, companyIntnet, roomIntnet, roomOutnet, costCenter} = repsonse.data
 
                         this.sn = sn
                         this.origin1 = origin1
@@ -357,14 +388,16 @@ export default {
                         this.serverUseType = serverUseType
                         this.usage = usage
                         this.serverType = serverType
-                        this.voltage = voltage
-                        this.electric = electric
-                        this.power = power
                         this.shelfLife = shelfLife
                         this.hostNum = hostNum
                         this.assetNum = assetNum
                         this.financeNum = financeNum
                         this.invoiceNum = invoiceNum
+                        this.catcher = catcher
+                        this.companyIntnet = companyIntnet
+                        this.roomIntnet = roomIntnet
+                        this.roomOutnet = roomOutnet
+                        this.costCenter = costCenter
                         this.status = '1'
                     } else {
                         this.$dispatch('show-error')

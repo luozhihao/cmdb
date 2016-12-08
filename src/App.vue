@@ -40,6 +40,7 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style lang="sass">
+@import '../src/assets/css/bootstrap.min.css'
+@import '../src/assets/css/common.css'
 </style>

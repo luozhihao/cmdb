@@ -25,7 +25,7 @@
                                     <input type="text" class="form-control" v-model="hostNum">
                                 </div>
                             </div>
-                            <div class="form-group input-box">
+                            <div class="form-group input-box min-dropdown">
                                 <label class="control-label col-sm-4">厂商：<span class="text-danger">*</span></label>
                                 <div class="col-sm-8">
                                     <v-select :value.sync="firm" :options="firms" placeholder="请选择">
@@ -122,7 +122,7 @@
                                     </v-select>
                                 </div>
                             </div>
-                            <div class="form-group input-box min-dropdown">
+                            <div class="form-group input-box">
                                 <label class="control-label col-sm-4">机位：<span class="text-danger">*</span></label>
                                 <div class="col-sm-8">
                                     <v-select :value.sync="seat" :options="seats" placeholder="请选择">
@@ -261,7 +261,7 @@
                             <div class="form-group">
                                 <label class="control-label col-sm-4">成本中心：</label>
                                 <div class="col-sm-8">
-                                    <input class="form-control" :readonly="true" v-model="costCenter">
+                                    <textarea rows="2" class="form-control" :readonly="true"></textarea> 
                                 </div>
                             </div>
                             <!-- <div class="form-group input-box">
@@ -359,6 +359,9 @@ let origin = {
         assetNum: '',
         financeNum: '',
         invoiceNum: '',
+        voltage: '',
+        electric: '',
+        power: '',
         remark: '',
         department: '',
         product: '',
@@ -366,11 +369,11 @@ let origin = {
         set: '',
         module: '',
         ips: '',
+        serverUseProduct: [],
         serverUseType: '',
         usage: '',
         catcher: '',
-        price: '',
-        costCenter: ''
+        price: ''
     },
     init = Object.assign({}, origin);
 

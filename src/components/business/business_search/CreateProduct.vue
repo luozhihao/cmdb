@@ -53,10 +53,14 @@
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        <div class="form-group">
-                            <label class="control-label col-sm-4">区域名称：</label>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" v-model="childType">
+                        <div class="form-group input-box">
+                            <label class="control-label col-sm-4">区域名称：<span class="text-danger">*</span></label>
+                            <div class="col-sm-3 pr0">
+                                <v-select :value.sync="area" :options="areas" placeholder="请选择">
+                                </v-select>
+                            </div>
+                            <div class="col-sm-3 pl0">
+                                <input type="text" class="form-control" v-model="childType" placeholder="选填">
                             </div>
                         </div>
                     </div>
@@ -259,12 +263,13 @@ import { modal } from 'vue-strap'
 import typeahead from '../../global/Typeahead.vue'
 import vSelect from '../../global/Select.vue'
 import { getBusinessSearch } from '../../../vuex/action.js'
-import { productTypes, phases, gameTypes, platformTypes, developModels, gameLists, productLevels, studios, releases, companys, departments1 } from '../../../vuex/getters.js'
+import { productTypes, phases, gameTypes, platformTypes, developModels, gameLists, productLevels, studios, releases, companys, departments1, areas} from '../../../vuex/getters.js'
 
 let origin = {
         creatProductModal: false,
         businessType: '1',
         gameList: '',
+        area: '2',
         childType: '',
         department1: '',
         department2: '',
@@ -337,7 +342,8 @@ export default {
             if (this.businessType === '1') {
 
                 if (this.gameList && this.department1 && this.productLevel && this.gameType && this.platformType
-                    && this.developModel && this.phase && this.maintainManagers.length && this.company && this.studio && this.release) {
+                    && this.developModel && this.phase && this.maintainManagers.length && this.company 
+                    && this.studio && this.release && this.area) {
 
                     this.saveVaild()
                     
@@ -347,7 +353,8 @@ export default {
 
             } else if (this.businessType !== '1' && this.businessType) {
 
-                if (this.department1 && this.productLevel && this.maintainManagers.length && this.company) {
+                if (this.department1 && this.productLevel && this.maintainManagers.length
+                    && this.company && this.productName) {
 
                     this.saveVaild()
                     
@@ -400,7 +407,8 @@ export default {
             studios,
             releases,
             companys,
-            departments1
+            departments1,
+            areas
         }
     },
     watch: {
@@ -409,6 +417,7 @@ export default {
                 this.productName = ''
             } else if (newVal !== '1' && newVal) {
                 this.gameList = ''
+                this.costCenter = ''
                 this.childType = ''
                 this.gameType = ''
                 this.platformType = ''

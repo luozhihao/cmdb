@@ -135,7 +135,7 @@ fieldset[disabled] .form-control {
     width: 100%
 }
 
-.min-dropdown .dropdown-menu {
+.min-dropdown .search-list {
     max-height: 200px !important;
 }
 

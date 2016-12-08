@@ -42,6 +42,12 @@
                             </v-select>
                         </div>
                     </div>
+                    <div class="form-group input-box">
+                        <label class="control-label col-sm-4">用途描述：</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" v-model="usage">
+                        </div>
+                    </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
@@ -84,6 +90,12 @@
                             </datepicker>
                         </div>
                     </div>
+                    <div class="form-group input-box">
+                        <label class="control-label col-sm-4">接收人：</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" v-model="catcher">
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label class="control-label col-sm-4">备注：</label>
                         <div class="col-sm-8">
@@ -119,6 +131,8 @@ let origin = {
         factoryTime: '',
         procureTime: '',
         shelfLife: '',
+        usage: '',
+        catcher: '',
         remark: ''
     },
     init = Object.assign({}, origin);

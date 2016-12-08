@@ -50,7 +50,9 @@ const state = {
     releases: [],
     companys: [],
     departments1: [],
-    serverUseTypes: []
+    serverUseTypes: [],
+    costCenters: [],
+    areas: []
 }   
 
 // 创建一个 object 存储 mutation 函数
@@ -88,6 +90,8 @@ const mutations = {
         state.studios = data.studios
         state.releases = data.releases
         state.companys = data.companys
+        state.costCenters = data.costCenters
+        state.areas = data.areas
     },
 
     // 获取交换机查询下拉框内容
@@ -132,6 +136,7 @@ const mutations = {
         state.addStatusArr = data.addStatusArr
         state.firms = data.firms
         state.serverUseTypes = data.serverUseTypes
+        state.costCenters = data.costCenters
     },
 
     // 获取IP查询页下拉框

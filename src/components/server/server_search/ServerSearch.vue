@@ -127,6 +127,13 @@
                         <input type="text" class="form-control" v-model="param.set">
                     </div>
                 </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">成本中心：</label>
+                    <div class="col-sm-8">
+                        <v-select :value.sync="param.costCenter" :options="costCenters" placeholder="请选择" :search="true">
+                        </v-select>
+                    </div>
+                </div>
             </div>
             <div class="col-sm-3">
                 <div class="form-group">
@@ -284,7 +291,7 @@ import dispatchModal from './Dispatch.vue'
 import vSelect from '../../global/Select.vue'
 import calendar from '../../global/Calendar.vue'
 import { getServerSearch, getFramesSeats, getOrigins } from '../../../vuex/action.js'
-import { idcs, frames, products, serverTypes, departments1, systems, serverStatus, firms, origins1, origins2, perm } from '../../../vuex/getters.js'
+import { idcs, frames, products, serverTypes, departments1, systems, serverStatus, firms, origins1, origins2, costCenters, perm } from '../../../vuex/getters.js'
 
 export default {
     data () {
@@ -323,7 +330,8 @@ export default {
                 module: '',
                 set: '',
                 department1: '',
-                department2: ''
+                department2: '',
+                costCenter: ''
             },
             checkArr: [
                 {label: 'SN', value: 'sn', checked: true},
@@ -356,7 +364,7 @@ export default {
                 {label: '物理主机编号', value: 'hostNum', checked: false},
                 {label: '用途分类', value: 'serverUseType', checked: false},
                 {label: '用途描述', value: 'usage', checked: false},
-                {label: '共用产品', value: 'serverUseProduct', checked: false},
+                {label: '成本中心', value: 'costCenter', checked: true},
                 {label: '接收人', value: 'catcher', checked: false},
                 {label: '价格', value: 'price', checked: false},
                 {label: '备注', value: 'remark', checked: true}
@@ -553,7 +561,8 @@ export default {
             origins1,
             origins2,
             statusArr: serverStatus,
-            firms
+            firms,
+            costCenters
         }
     },
     ready () {
