@@ -54,19 +54,19 @@
                             <div class="form-group">
                                 <label class="control-label col-sm-4">CPU：</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control">
+                                    <input type="text" class="form-control" v-model="cpu">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-sm-4">内存：</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control">
+                                    <input type="text" class="form-control" v-model="mem">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-sm-4">磁盘：</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control">
+                                    <input type="text" class="form-control" v-model="disk">
                                 </div>
                             </div>
                         </div>
@@ -370,7 +370,10 @@ let origin = {
         usage: '',
         catcher: '',
         price: '',
-        costCenter: ''
+        costCenter: '',
+        cpu: '',
+        mem: '',
+        disk: ''
     },
     init = Object.assign({}, origin);
 

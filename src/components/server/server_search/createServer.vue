@@ -44,19 +44,19 @@
                         <div class="form-group">
                             <label class="control-label col-sm-4">CPU：</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" v-model="cpu">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-4">内存：</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" v-model="mem">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-4">磁盘：</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" v-model="disk">
                             </div>
                         </div>
                     </div>
@@ -298,7 +298,10 @@ let origin = {
         usage: '',
         catcher: '',
         price: '',
-        costCenter: 'y3cAAAAABrHM567U'
+        costCenter: 'y3cAAAAABrHM567U',
+        cpu: '',
+        mem: '',
+        disk: ''
     },
     init = Object.assign({}, origin);
 
@@ -375,7 +378,7 @@ export default {
                 })
                 .then(repsonse => {
                     if (repsonse.data.code === 200) {
-                        const {sn, origin1, origin2, room, frame, seat, model, firm, serverUseType, usage, serverType, shelfLife, hostNum, assetNum, financeNum, invoiceNum, catcher, companyIntnet, roomIntnet, roomOutnet, costCenter} = repsonse.data
+                        const {sn, origin1, origin2, room, frame, seat, model, firm, serverUseType, usage, serverType, shelfLife, hostNum, assetNum, financeNum, invoiceNum, catcher, companyIntnet, roomIntnet, roomOutnet, costCenter, cpu, mem, disk} = repsonse.data
 
                         this.sn = sn
                         this.origin1 = origin1
@@ -398,6 +401,9 @@ export default {
                         this.roomIntnet = roomIntnet
                         this.roomOutnet = roomOutnet
                         this.costCenter = costCenter
+                        this.cpu = cpu
+                        this.mem = mem
+                        this.disk = disk
                         this.status = '1'
                     } else {
                         this.$dispatch('show-error')

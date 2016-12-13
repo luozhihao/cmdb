@@ -361,6 +361,7 @@ export default {
                 {label: '质保期限', value: 'shelfLife', checked: false},
                 {label: 'CPU', value: 'cpu', checked: false},
                 {label: '内存', value: 'mem', checked: false},
+                {label: '磁盘', value: 'disk', checked: false},
                 {label: '物理主机编号', value: 'hostNum', checked: false},
                 {label: '用途分类', value: 'serverUseType', checked: false},
                 {label: '用途描述', value: 'usage', checked: false},

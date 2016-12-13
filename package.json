@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "node build/build.js",
-    "dev": "node build/dev-server.js",
-    "watch": "webpack -w build/build.js"
+    "dev": "node build/dev-server.js"
   },
   "author": "luozh",
   "license": "MIT",
