@@ -724,7 +724,8 @@ export default {
                 url: '/node/recover/',
                 method: 'POST',
                 data: {
-                    checkedIds: this.checkedIds
+                    checkedIds: this.checkedIds,
+                    nodeid: this.param.curNode
                 }
             })
             .then(response => {

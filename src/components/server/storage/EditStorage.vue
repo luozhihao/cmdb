@@ -1,26 +1,19 @@
-<!-- 编辑服务器 -->
+<!-- 编辑存储 -->
 <template>
     <modal :show.sync="editServerModal" effect="fade" width="1200px">
         <div slot="modal-header" class="modal-header">
             <button type="button" class="close" @click="editServerModal = false">
                 <span>×</span>
             </button>
-            <h4 class="modal-title">编辑服务器</h4>
+            <h4 class="modal-title">编辑存储</h4>
         </div>
         <div slot="modal-body" class="modal-body min-height">
             <tabs :active="0">
                 <tab header="服务器">
                     <form class="form-horizontal clearfix form-input">
                         <div class="col-sm-3">
-                            <div class="form-group input-box">
-                                <label class="control-label col-sm-4">类型：<span class="text-danger">*</span></label>
-                                <div class="col-sm-8">
-                                    <v-select :value.sync="serverType" :options="serverTypes" placeholder="请选择">
-                                    </v-select>
-                                </div>
-                            </div>
                             <div class="form-group">
-                                <label class="control-label col-sm-4">物理主机编号：</label>
+                                <label class="control-label col-sm-4">存储编号：</label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control" v-model="hostNum">
                                 </div>
@@ -51,43 +44,12 @@
                                     <textarea rows="3" class="form-control" :readonly="true" v-model="ips"></textarea> 
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-4">CPU：</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" v-model="cpu">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-4">内存：</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" v-model="mem">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-4">磁盘：</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" v-model="disk">
-                                </div>
-                            </div>
                         </div>
                         <div class="col-sm-3">
                             <div class="form-group">
                                 <label class="control-label col-sm-4">设备编号：</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" v-model="serverNum" :readonly="true">
-                                </div>
-                            </div>
-                            <div class="form-group input-box">
-                                <label class="control-label col-sm-4">用途分类：<span class="text-danger">*</span></label>
-                                <div class="col-sm-8">
-                                    <v-select :value.sync="serverUseType" :options="serverUseTypes" placeholder="请选择">
-                                    </v-select>
-                                </div>
-                            </div>
-                            <div class="form-group input-box">
-                                <label class="control-label col-sm-4">用途描述：</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" v-model="usage">
+                                    <input type="text" class="form-control" v-model="deviceNum" :readonly="true">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -202,24 +164,6 @@
                                     <input type="text" class="form-control" v-model="price">
                                 </div>
                             </div>  
-                             <!-- <div class="form-group">
-                                <label class="control-label col-sm-4">电压：</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" v-model="voltage">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-4">电流：</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" v-model="electric">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-4">功率：</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" v-model="power">
-                                </div>
-                            </div> -->
                         </div>
                         <div class="col-sm-3">
                             <div class="form-group">
@@ -240,18 +184,6 @@
                                     <input type="text" class="form-control" :readonly="true" v-model="maintainManager">
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-4">所属Set：</label>
-                                <div class="col-sm-8">
-                                    <textarea rows="3" class="form-control" :readonly="true" v-model="set"></textarea> 
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-4">所属Module：</label>
-                                <div class="col-sm-8">
-                                    <textarea rows="3" class="form-control" :readonly="true" v-model="module"></textarea> 
-                                </div>
-                            </div>
                             <div class="form-group input-box">
                                 <label class="control-label col-sm-4">接收人：</label>
                                 <div class="col-sm-8">
@@ -264,13 +196,6 @@
                                     <input class="form-control" :readonly="true" v-model="costCenter">
                                 </div>
                             </div>
-                            <!-- <div class="form-group input-box">
-                                <label class="control-label col-sm-4">共用产品：</label>
-                                <div class="col-sm-8">
-                                    <v-select :value.sync="serverUseProduct" :options="products" placeholder="请选择" multiple search>
-                                    </v-select>
-                                </div>
-                            </div> -->
                         </div>
                     </form>
                     <div class="text-center mt30 mb20">
@@ -279,7 +204,7 @@
                             type="button" 
                             class="btn btn-default"
                             @click="saveFn"
-                            :disabled="sn.trim() && origin1 && origin2 && room && frame && seat && model && status && serverType && firm && serverUseType ? false : true"
+                            :disabled="sn.trim() && origin1 && origin2 && room && frame && seat && model && status && firm ? false : true"
                         >
                             保存
                         </button>
@@ -330,8 +255,8 @@
 import { modal, tabset, tab } from 'vue-strap'
 import datepicker from '../../global/Datepicker.vue'
 import vSelect from '../../global/Select.vue'
-import { getServerSearch, getFramesSeats, getOrigins } from '../../../vuex/action.js'
-import { idcs, frames, seats, serverTypes, firms, origins1, origins2, serverUseTypes, products } from '../../../vuex/getters.js'
+import { getStorageSearch, getFramesSeats, getOrigins } from '../../../vuex/action.js'
+import { idcs, frames, seats, firms, origins1, origins2, products } from '../../../vuex/getters.js'
 
 let origin = {
         editServerModal: false,
@@ -339,7 +264,7 @@ let origin = {
         ports: [],
         id: null,
         autoId: null,
-        serverNum: '',
+        deviceNum: '',
         sn: '',
         room: '',
         frame: '',
@@ -354,7 +279,6 @@ let origin = {
         procureTime: '',
         model: '',
         shelfLife: '',
-        serverType: '',
         hostNum: '',
         assetNum: '',
         financeNum: '',
@@ -363,17 +287,10 @@ let origin = {
         department: '',
         product: '',
         maintainManager: '',
-        set: '',
-        module: '',
         ips: '',
-        serverUseType: '',
-        usage: '',
         catcher: '',
         price: '',
         costCenter: '',
-        cpu: '',
-        mem: '',
-        disk: ''
     },
     init = Object.assign({}, origin);
 
@@ -386,7 +303,7 @@ export default {
         // 保存编辑
         saveFn () {
             this.$http({
-                url: '/device/server/edit/',
+                url: '/device/storage/edit/',
                 method: 'POST',
                 data: this.$data
             })
@@ -406,7 +323,7 @@ export default {
         // 加载数据
         loadData (idNum, canSave = false, autoId = null) {
             this.$http({
-                url: '/device/server/get/?id=' + idNum,
+                url: '/device/storage/get/?id=' + idNum,
                 method: 'GET'
             })
             .then(repsonse => {
@@ -434,7 +351,7 @@ export default {
         actions: {
             getFramesSeats,
             getOrigins,
-            getServerSearch
+            getStorageSearch
         },
         getters: {
             rooms: idcs,
@@ -442,14 +359,12 @@ export default {
             seats,
             origins1,
             origins2,
-            serverTypes,
             firms,
-            serverUseTypes,
             products
         }
     },
     ready () {
-        this.getServerSearch()
+        this.getStorageSearch()
     },
     events: {
         'showEditServer' (param) {

@@ -21,7 +21,7 @@
                             <div class="form-group input-box">
                                 <label class="control-label col-sm-4">机房：<span class="text-danger">*</span></label>
                                 <div class="col-sm-8">
-                                    <v-select :value.sync="room" :options="rooms" placeholder="请选择">
+                                    <v-select :value.sync="room" :options="rooms" placeholder="请选择" :search="true">
                                     </v-select>
                                 </div>
                             </div>

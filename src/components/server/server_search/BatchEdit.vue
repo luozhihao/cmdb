@@ -8,6 +8,13 @@
             <form class="form-horizontal clearfix">
                 <div class="col-sm-6">
                     <div class="form-group input-box">
+                        <label class="control-label col-sm-4">类型：</label>
+                        <div class="col-sm-8">
+                            <v-select :value.sync="serverType" :options="serverTypes" placeholder="请选择">
+                            </v-select>
+                        </div>
+                    </div>
+                    <div class="form-group input-box">
                         <label class="control-label col-sm-4">状态：</label>
                         <div class="col-sm-8">
                             <v-select :value.sync="status" :options="statusArr" placeholder="请选择">
@@ -117,11 +124,12 @@ import { modal } from 'vue-strap'
 import vSelect from '../../global/Select.vue'
 import datepicker from '../../global/Datepicker.vue'
 import { getFramesSeats } from '../../../vuex/action.js'
-import { idcs, frames, seats, serverStatus, firms } from '../../../vuex/getters.js'
+import { idcs, frames, seats, serverStatus, serverTypes, firms } from '../../../vuex/getters.js'
 
 let origin = {
         batchEditModal: false,
         checkedIds: [],
+        serverType: '',
         status: '',
         firm: '',
         room: '',
@@ -177,7 +185,8 @@ export default {
             frames,
             seats,
             statusArr: serverStatus,
-            firms
+            firms,
+            serverTypes
         }
     },
     events: {

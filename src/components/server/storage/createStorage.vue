@@ -1,22 +1,15 @@
-<!-- 新增服务器 -->
+<!-- 新增存储 -->
 <template>
     <modal :show.sync="creatServerModal" effect="fade" width="1200px">
         <div slot="modal-header" class="modal-header">
-            <h4 class="modal-title">新增服务器</h4>
+            <h4 class="modal-title">新增存储</h4>
         </div>
         <div slot="modal-body" class="modal-body" style="min-height: 450px;">
             <form class="form-horizontal clearfix form-input">
                 <form class="form-horizontal clearfix form-input">
                     <div class="col-sm-3">
-                        <div class="form-group input-box">
-                            <label class="control-label col-sm-4">类型：<span class="text-danger">*</span></label>
-                            <div class="col-sm-8">
-                                <v-select :value.sync="serverType" :options="serverTypes" placeholder="请选择">
-                                </v-select>
-                            </div>
-                        </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-4">物理主机编号：</label>
+                            <label class="control-label col-sm-4">存储编号：</label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" v-model="hostNum">
                             </div>
@@ -34,46 +27,14 @@
                                 <input type="text" class="form-control" v-model="model">
                             </div>
                         </div>
-                        
                         <div class="form-group">
                             <label class="control-label col-sm-4">SN：<span class="text-danger">*</span></label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" v-model="sn">
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-4">CPU：</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" v-model="cpu">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-4">内存：</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" v-model="mem">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-4">磁盘：</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" v-model="disk">
-                            </div>
-                        </div>
                     </div>
                     <div class="col-sm-3">
-                        <div class="form-group input-box">
-                            <label class="control-label col-sm-4">用途分类：<span class="text-danger">*</span></label>
-                            <div class="col-sm-8">
-                                <v-select :value.sync="serverUseType" :options="serverUseTypes" placeholder="请选择">
-                                </v-select>
-                            </div>
-                        </div>
-                        <div class="form-group input-box">
-                            <label class="control-label col-sm-4">用途描述：</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" v-model="usage">
-                            </div>
-                        </div>
                         <div class="form-group">
                             <label class="control-label col-sm-4">来源：<span class="text-danger">*</span></label>
                             <div class="col-sm-4 input-box pr0">
@@ -186,24 +147,6 @@
                                 <input type="text" class="form-control" v-model="price">
                             </div>
                         </div>  
-                         <!-- <div class="form-group">
-                            <label class="control-label col-sm-4">电压：</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" v-model="voltage">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-4">电流：</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" v-model="electric">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-4">功率：</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" v-model="power">
-                            </div>
-                        </div> -->
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group input-box">
@@ -237,13 +180,6 @@
                                 <input type="text" class="form-control" v-model="roomOutnet" onfocus="this.blur()" @click="showBroad('roomOutnet')">
                             </div>
                         </div>
-                        <!-- <div class="form-group input-box">
-                            <label class="control-label col-sm-4">共用产品：</label>
-                            <div class="col-sm-8">
-                                <v-select :value.sync="serverUseProduct" :options="products" placeholder="请选择" multiple search>
-                                </v-select>
-                            </div>
-                        </div> -->
                     </div>
                 </form>
             </form>
@@ -253,7 +189,7 @@
                 type="button" 
                 class="btn btn-default" 
                 @click="saveFn"
-                :disabled="sn.trim() && origin1 && origin2 && room && frame && seat && model && status && serverType && firm && serverUseType && costCenter && (companyIntnet.trim() || roomIntnet.trim()) ? false : true"
+                :disabled="sn.trim() && origin1 && origin2 && room && frame && seat && model && status && firm && costCenter && (companyIntnet.trim() || roomIntnet.trim()) ? false : true"
             >
                 保存
             </button>
@@ -267,7 +203,7 @@ import { modal } from 'vue-strap'
 import datepicker from '../../global/Datepicker.vue'
 import vSelect from '../../global/Select.vue'
 import { getFramesSeats, getOrigins } from '../../../vuex/action.js'
-import { idcs, frames, seats, serverTypes, addStatusArr, firms, origins1, origins2, serverUseTypes, products, costCenters } from '../../../vuex/getters.js'
+import { idcs, frames, seats, addStatusArr, firms, origins1, origins2, products, costCenters } from '../../../vuex/getters.js'
 
 let origin = {
         creatServerModal: false,
@@ -285,7 +221,6 @@ let origin = {
         procureTime: '',
         model: '',
         shelfLife: '',
-        serverType: '',
         hostNum: '',
         assetNum: '',
         financeNum: '',
@@ -294,14 +229,9 @@ let origin = {
         roomIntnet: '',
         roomOutnet: '',
         remark: '',
-        serverUseType: '-1',
-        usage: '',
         catcher: '',
         price: '',
         costCenter: 'y3cAAAAABrHM567U',
-        cpu: '',
-        mem: '',
-        disk: ''
     },
     init = Object.assign({}, origin);
 
@@ -314,7 +244,7 @@ export default {
         // 创建服务器
         saveFn () {
             this.$http({
-                url: '/device/server/add/',
+                url: '/device/storage/add/',
                 method: 'POST',
                 data: this.$data
             })
@@ -358,11 +288,9 @@ export default {
             seats,
             origins1,
             origins2,
-            serverTypes,
             statusArr: addStatusArr,
             firms,
             products,
-            serverUseTypes,
             costCenters
         }
     },
@@ -373,12 +301,12 @@ export default {
         'showCreateServer' (param) {
             if (param.length === 1) {
                 this.$http({
-                    url: '/device/server/get/?id=' + param[0],
+                    url: '/device/storage/get/?id=' + param[0],
                     method: 'GET'
                 })
                 .then(repsonse => {
                     if (repsonse.data.code === 200) {
-                        const {sn, origin1, origin2, room, frame, seat, model, firm, serverUseType, usage, serverType, shelfLife, hostNum, assetNum, financeNum, invoiceNum, catcher, companyIntnet, roomIntnet, roomOutnet, costCenter, cpu, mem, disk} = repsonse.data
+                        const {sn, origin1, origin2, room, frame, seat, model, firm, shelfLife, hostNum, assetNum, financeNum, invoiceNum, catcher, companyIntnet, roomIntnet, roomOutnet, costCenter} = repsonse.data
 
                         this.sn = sn
                         this.origin1 = origin1
@@ -388,9 +316,6 @@ export default {
                         this.seat = seat
                         this.model = model
                         this.firm = firm
-                        this.serverUseType = serverUseType
-                        this.usage = usage
-                        this.serverType = serverType
                         this.shelfLife = shelfLife
                         this.hostNum = hostNum
                         this.assetNum = assetNum
@@ -401,9 +326,6 @@ export default {
                         this.roomIntnet = roomIntnet
                         this.roomOutnet = roomOutnet
                         this.costCenter = costCenter
-                        this.cpu = cpu
-                        this.mem = mem
-                        this.disk = disk
                         this.status = '1'
                     } else {
                         this.$dispatch('show-error')
@@ -420,25 +342,6 @@ export default {
 
             this[obj[0]] = param.val
         },
-        'showCreateAuto' (param) {
-            this.$http({
-                url: '/device/server/auto_list/detail/',
-                method: 'POST',
-                data: {
-                    id: param
-                }
-            })
-            .then(response => {
-                if (response.data.code === 200) {
-                    this.$data = Object.assign({}, origin, response.data)
-
-                    this.autoId = param
-                    this.creatServerModal = true
-                } else {
-                    this.$dispatch('show-error')
-                }
-            })
-        }
     },
     watch: {
         'room' (newVal, oldVal) {

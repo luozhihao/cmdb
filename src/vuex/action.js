@@ -126,6 +126,19 @@ export function getServerSearch({ dispatch, state }) {
     })
 }
 
+// 获取存储查询页下拉框数据
+export function getStorageSearch({ dispatch, state }) {
+    this.$http({
+        url: '/device/storage/home/',
+        method: 'GET'
+    })
+    .then(response => {
+        if (response.data.code === 200) {
+           dispatch('GETSTORAGESEARCH', response.data)
+        } 
+    })
+}
+
 // 获取IP查询页下拉框
 export function getIpSearch({ dispatch, state }) {
     this.$http({

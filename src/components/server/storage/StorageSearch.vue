@@ -1,4 +1,4 @@
-<!-- 服务器查询 -->
+<!-- 存储查询 -->
 <template>
     <div class="clearfix">
         <form :class="['form-horizontal', 'clearfix', 'form-search', {'form-min': isModal}]" name="serverForm" method="POST">
@@ -10,16 +10,9 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-sm-4">服务器编号：</label>
+                    <label class="control-label col-sm-4">存储编号：</label>
                     <div class="col-sm-8">
                         <input type="text" class="form-control" placeholder="多个，精确" onfocus="this.blur()" v-model="param.serverNum" @click="showBroad('param.serverNum')">
-                    </div>
-                </div>
-                <div class="form-group input-box">
-                    <label class="control-label col-sm-4">所在机房：</label>
-                    <div class="col-sm-8">
-                        <v-select :value.sync="param.room" :options="rooms" placeholder="请选择" :search="true">
-                        </v-select>
                     </div>
                 </div>
                 <div class="form-group">
@@ -29,17 +22,22 @@
                         <calendar :show.sync="show1" :value.sync="param.addTime" :x="x" :y="y" :range="range" :type="type"></calendar>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">来源：</label>
+                    <div class="col-sm-4 input-box pr0">
+                        <v-select :value.sync="param.origin1" :options="origins1" placeholder="请选择">
+                        </v-select>
+                    </div>
+                    <div class="col-sm-4 input-box pl0">
+                        <v-select :value.sync="param.origin2" :options="origins2" placeholder="请选择">
+                        </v-select>
+                    </div>
+                </div>
                 <div class="form-group input-box">
                     <label class="control-label col-sm-4">所属产品：</label>
                     <div class="col-sm-8">
                         <v-select :value.sync="param.product" :options="products" placeholder="请选择" :search="true" :disabled="isModal">
                         </v-select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-sm-4">运维负责人：</label>
-                    <div class="col-sm-8">
-                        <input type="text" class="form-control" v-model="param.maintainManager">
                     </div>
                 </div>
             </div>
@@ -51,16 +49,9 @@
                     </div>
                 </div>
                 <div class="form-group input-box">
-                    <label class="control-label col-sm-4">类型：</label>
+                    <label class="control-label col-sm-4">所在机房：</label>
                     <div class="col-sm-8">
-                        <v-select :value.sync="param.serverType" :options="serverTypes" placeholder="请选择">
-                        </v-select>
-                    </div>
-                </div>
-                <div class="form-group input-box">
-                    <label class="control-label col-sm-4">所在机架：</label>
-                    <div class="col-sm-8">
-                        <v-select :value.sync="param.frame" :options="frames" placeholder="请选择" :search="true">
+                        <v-select :value.sync="param.room" :options="rooms" placeholder="请选择" :search="true">
                         </v-select>
                     </div>
                 </div>
@@ -97,20 +88,9 @@
                     </div>
                 </div>
                 <div class="form-group input-box">
-                    <label class="control-label col-sm-4">操作系统：</label>
+                    <label class="control-label col-sm-4">所在机架：</label>
                     <div class="col-sm-8">
-                        <v-select :value.sync="param.system" :options="systems" placeholder="请选择">
-                        </v-select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-sm-4">来源：</label>
-                    <div class="col-sm-4 input-box pr0">
-                        <v-select :value.sync="param.origin1" :options="origins1" placeholder="请选择">
-                        </v-select>
-                    </div>
-                    <div class="col-sm-4 input-box pl0">
-                        <v-select :value.sync="param.origin2" :options="origins2" placeholder="请选择">
+                        <v-select :value.sync="param.frame" :options="frames" placeholder="请选择" :search="true">
                         </v-select>
                     </div>
                 </div>
@@ -122,16 +102,16 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-sm-4">Set：</label>
-                    <div class="col-sm-8">
-                        <input type="text" class="form-control" v-model="param.set">
-                    </div>
-                </div>
-                <div class="form-group">
                     <label class="control-label col-sm-4">成本中心：</label>
                     <div class="col-sm-8">
                         <v-select :value.sync="param.costCenter" :options="costCenters" placeholder="请选择" :search="true">
                         </v-select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">运维负责人：</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" v-model="param.maintainManager">
                     </div>
                 </div>
             </div>
@@ -162,12 +142,6 @@
                         </v-select>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="control-label col-sm-4">Module：</label>
-                    <div class="col-sm-8">
-                        <input type="text" class="form-control" v-model="param.module">
-                    </div>
-                </div>
             </div>
         </form>
         <div class="text-center btn-operate">
@@ -176,13 +150,10 @@
             </button>
             <span v-if="!isModal">
                 <button v-if="perm.新增服务器 || perm.all" type="button" class="btn btn-default" @click="createServer">
-                    新增服务器
+                    新增存储
                 </button>
                 <button v-if="perm.分配到产品 || perm.all" type="button" class="btn btn-default" @click="dispatchFn">
                     分配到产品
-                </button>
-                <button v-if="perm.批量修改服务器 || perm.all" type="button" class="btn btn-default" @click="batchEdit">
-                    批量修改
                 </button>
                 <dropdown v-el:deleteconfirm v-if="perm.删除服务器 || perm.all">
                     <button type="button" class="btn btn-default" data-toggle="dropdown">
@@ -190,21 +161,8 @@
                         <span class="caret"></span>
                     </button>
                     <div slot="dropdown-menu" class="dropdown-menu pd20">
-                        <button type="button" class="btn btn-danger btn-block" @click="checkedFn('/device/server/delete/', 'deleteconfirm')">确定</button>
+                        <button type="button" class="btn btn-danger btn-block" @click="checkedFn('/device/storage/delete/', 'deleteconfirm')">确定</button>
                         <button type="button" class="btn btn-default btn-block" @click="cancelFn('deleteconfirm')">取消</button>
-                    </div>
-                </dropdown>
-                <button v-if="perm.导出服务器 || perm.all" type="button" class="btn btn-default" @click="exportFn">
-                    导出
-                </button>
-                <dropdown v-el:recoverconfirm v-if="perm.应用回收 || perm.all">
-                    <button type="button" class="btn btn-default" data-toggle="dropdown">
-                        应用回收
-                        <span class="caret"></span>
-                    </button>
-                    <div slot="dropdown-menu" class="dropdown-menu pd20">
-                        <button type="button" class="btn btn-danger btn-block" @click="checkedFn('/device/server/recover/', 'recoverconfirm')">确定</button>
-                        <button type="button" class="btn btn-default btn-block" @click="cancelFn('recoverconfirm')">取消</button>
                     </div>
                 </dropdown>
                 <dropdown v-el:backconfirm v-if="perm['退还IDC'] || perm.all">
@@ -275,7 +233,6 @@
         </div>
 
         <create-server-modal></create-server-modal>
-        <batch-edit-modal></batch-edit-modal>
         <edit-server-modal></edit-server-modal>
         <dispatch-modal></dispatch-modal>
     </div>
@@ -284,14 +241,13 @@
 <script>
 import { dropdown, spinner } from 'vue-strap'
 import bootPage from '../../global/BootPage.vue'
-import createServerModal from './createServer.vue'
-import batchEditModal from './BatchEdit.vue'
-import editServerModal from './EditServer.vue'
+import createServerModal from './createStorage.vue'
+import editServerModal from './EditStorage.vue'
 import dispatchModal from './Dispatch.vue'
 import vSelect from '../../global/Select.vue'
 import calendar from '../../global/Calendar.vue'
-import { getServerSearch, getFramesSeats, getOrigins } from '../../../vuex/action.js'
-import { idcs, frames, products, serverTypes, departments1, systems, serverStatus, firms, origins1, origins2, costCenters, perm } from '../../../vuex/getters.js'
+import { getStorageSearch, getFramesSeats, getOrigins } from '../../../vuex/action.js'
+import { idcs, frames, products, departments1, serverStatus, firms, origins1, origins2, costCenters, perm } from '../../../vuex/getters.js'
 
 export default {
     data () {
@@ -303,7 +259,7 @@ export default {
             tableList: [],
             lenArr: [10, 50, 100],
             pageLen: 5,
-            url: '/device/server/query/',
+            url: '/device/storage/query/',
             departments2: [],
             param: {
                 sn: '',
@@ -315,10 +271,8 @@ export default {
                 frame: '',
                 ip: '',
                 firm: '',
-                serverType: '',
                 status: '',
                 model: '',
-                system: '',
                 origin1: '',
                 origin2: '',
                 addTime: '',
@@ -327,25 +281,19 @@ export default {
                 department: '',
                 product: '',
                 maintainManager: '',
-                module: '',
-                set: '',
                 department1: '',
                 department2: '',
                 costCenter: ''
             },
             checkArr: [
                 {label: 'SN', value: 'sn', checked: true},
-                {label: '类型', value: 'serverType', checked: true},
                 {label: '来源', value: 'origin', checked: true},
                 {label: '状态', value: 'status', checked: true},
                 {label: '公司内网', value: 'companyIntnet', checked: true},
                 {label: '机房内网', value: 'roomIntnet', checked: true},
                 {label: '机房外网', value: 'roomOutnet', checked: true},
                 {label: '产品', value: 'product', checked: true},
-                {label: 'set', value: 'set', checked: true},
-                {label: 'module', value: 'module', checked: true},
                 {label: '运维负责人', value: 'maintainManager', checked: true},
-                {label: '操作系统', value: 'system', checked: true},
                 {label: 'IP', value: 'ip', checked: false},
                 {label: '型号', value: 'model', checked: false},
                 {label: '厂商', value: 'firm', checked: false},
@@ -410,7 +358,7 @@ export default {
                 }
             })
 
-            this.titles.unshift('服务器编号')
+            this.titles.unshift('存储编号')
             this.valueArr.unshift('serverNum')
         },
 
@@ -475,22 +423,6 @@ export default {
             }, 500);
         },
 
-        // 导出
-        exportFn () {
-            let form = document.serverForm,
-                arr = []
-
-            for (let key in this.$data.param) {
-                let obj = key + '=' + this.$data.param[key]
-
-                arr.push(obj)
-            }
-
-            form.action='/device/server/export/?' + arr.join('&')
-
-            form.submit()
-        },
-
         // 发送选中列表至业务树
         getChecked () {
             let _this = this
@@ -537,7 +469,6 @@ export default {
     components: {
         bootPage,
         createServerModal,
-        batchEditModal,
         editServerModal,
         vSelect,
         calendar,
@@ -547,7 +478,7 @@ export default {
     },
     vuex: {
         actions: {
-            getServerSearch,
+            getStorageSearch,
             getFramesSeats,
             getOrigins
         },
@@ -556,9 +487,7 @@ export default {
             rooms: idcs,
             frames,
             products,
-            serverTypes,
             departments1,
-            systems,
             origins1,
             origins2,
             statusArr: serverStatus,
@@ -567,7 +496,7 @@ export default {
         }
     },
     ready () {
-        this.getServerSearch()
+        this.getStorageSearch()
         this.originFilter()
         this.$refs.spinner.show()
     },

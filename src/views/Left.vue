@@ -27,7 +27,7 @@
                     <span>机房连通性</span>
                 </li>
             </ul>
-            <div class="aside-header" @click="toggle('network')" v-if="perm.网络设备 || perm.all">
+            <!-- <div class="aside-header" @click="toggle('network')" v-if="perm.网络设备 || perm.all">
                 <span class="icon glyphicon glyphicon-inbox"></span>
                 <span>网络设备</span>
                 <span class="icon-arrow glyphicon glyphicon-cog"></span>
@@ -36,7 +36,7 @@
                 <li v-link="{ path: '/deviceSearch' }" v-if="perm.交换机 || perm.all">
                     <span>交换机查询</span>
                 </li>
-            </ul>
+            </ul> -->
             <div class="aside-header" @click="toggle('ip')" v-if="perm.IP || perm.all">
                 <span class="icon glyphicon glyphicon-asterisk"></span>
                 <span>IP</span>
@@ -55,12 +55,18 @@
             </ul>
             <div class="aside-header" @click="toggle('server')" v-if="perm.服务器 || perm.all">
                 <span class="icon glyphicon glyphicon-hdd"></span>
-                <span>服务器</span>
+                <span>设备管理</span>
                 <span class="icon-arrow glyphicon glyphicon-cog"></span>
             </div>
             <ul class="aside-lists" v-el:server>
                 <li v-link="{ path: '/serverSearch' }" v-if="perm.服务器查询 || perm.all">
-                    <span>服务器查询</span>
+                    <span>服务器</span>
+                </li>
+                <li v-link="{ path: '/deviceSearch' }" v-if="perm.交换机 || perm.all">
+                    <span>交换机</span>
+                </li>
+                <li v-link="{ path: '/storageSearch' }" v-if="perm.存储 || perm.all">
+                    <span>存储</span>
                 </li>
                 <li v-link="{ path: '/autoDiscovery' }" v-if="perm.自动发现 || perm.all">
                     <span>自动发现</span>

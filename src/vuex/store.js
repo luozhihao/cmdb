@@ -139,6 +139,19 @@ const mutations = {
         state.costCenters = data.costCenters
     },
 
+    // 获取存储查询页下拉框
+    GETSTORAGESEARCH (state, data) {
+        state.roomLocation = data.rooms
+        state.products = data.products
+        state.departments1 = data.departments1
+        state.origins1 = data.origins1
+        state.serverStatus = data.statusArr
+        state.addStatusArr = data.addStatusArr
+        state.firms = data.firms
+        state.serverUseTypes = data.serverUseTypes
+        state.costCenters = data.costCenters
+    },
+
     // 获取IP查询页下拉框
     GETIPSEARCH (state, data) {
         state.roomLocation = data.rooms
