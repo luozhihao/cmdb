@@ -228,10 +228,11 @@
                                     <input type="text" class="form-control" :readonly="true" v-model="department">
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group input-box">
                                 <label class="control-label col-sm-4">所属产品：</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" :readonly="true" v-model="product">
+                                    <v-select :value.sync="product" :disabled="autoId === null" :options="products" placeholder="请选择" :search="true">
+                                    </v-select>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -258,19 +259,13 @@
                                     <input type="text" class="form-control" v-model="catcher">
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group input-box">
                                 <label class="control-label col-sm-4">成本中心：</label>
                                 <div class="col-sm-8">
-                                    <input class="form-control" :readonly="true" v-model="costCenter">
-                                </div>
-                            </div>
-                            <!-- <div class="form-group input-box">
-                                <label class="control-label col-sm-4">共用产品：</label>
-                                <div class="col-sm-8">
-                                    <v-select :value.sync="serverUseProduct" :options="products" placeholder="请选择" multiple search>
+                                    <v-select :value.sync="costCenter" :disabled="autoId === null" :options="costCenters" placeholder="请选择" :search="true">
                                     </v-select>
                                 </div>
-                            </div> -->
+                            </div>
                         </div>
                     </form>
                     <div class="text-center mt30 mb20">
@@ -331,7 +326,7 @@ import { modal, tabset, tab } from 'vue-strap'
 import datepicker from '../../global/Datepicker.vue'
 import vSelect from '../../global/Select.vue'
 import { getServerSearch, getFramesSeats, getOrigins } from '../../../vuex/action.js'
-import { idcs, frames, seats, serverTypes, firms, origins1, origins2, serverUseTypes, products } from '../../../vuex/getters.js'
+import { idcs, frames, seats, serverTypes, firms, origins1, origins2, serverUseTypes, products, costCenters } from '../../../vuex/getters.js'
 
 let origin = {
         editServerModal: false,
@@ -445,7 +440,8 @@ export default {
             serverTypes,
             firms,
             serverUseTypes,
-            products
+            products,
+            costCenters
         }
     },
     ready () {

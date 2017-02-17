@@ -12,7 +12,7 @@
                 <div class="form-group">
                     <label class="control-label col-sm-4">存储编号：</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" placeholder="多个，精确" onfocus="this.blur()" v-model="param.serverNum" @click="showBroad('param.serverNum')">
+                        <input type="text" class="form-control" placeholder="多个，精确" onfocus="this.blur()" v-model="param.deviceNum" @click="showBroad('param.deviceNum')">
                     </div>
                 </div>
                 <div class="form-group">
@@ -171,7 +171,7 @@
                         <span class="caret"></span>
                     </button>
                     <div slot="dropdown-menu" class="dropdown-menu pd20">
-                        <button type="button" class="btn btn-danger btn-block" @click="checkedFn('/node/backIDC/', 'backconfirm')">确定</button>
+                        <button type="button" class="btn btn-danger btn-block" @click="checkedFn('/node/backIDCStorage/', 'backconfirm')">确定</button>
                         <button type="button" class="btn btn-default btn-block" @click="cancelFn('backconfirm')">取消</button>
                     </div>
                 </dropdown>
@@ -212,10 +212,10 @@
                     <tbody>
                         <tr v-for="list in tableList" v-if="tableList.length !== 0" v-show="tableList.length !== 0">
                             <td><input type="checkbox" :id="list.id" :value="list.id" v-model="checkedIds"></td>
-                            <td v-for="value in valueArr" v-if="value === 'serverNum'">
-                                <a class="pointer" v-if="value === 'serverNum'" v-text="list[value]" @click="$broadcast('showEditServer', list.id)"></a>
+                            <td v-for="value in valueArr" v-if="value === 'deviceNum'">
+                                <a class="pointer" v-if="value === 'deviceNum'" v-text="list[value]" @click="$broadcast('showEditServer', list.id)"></a>
                             </td>
-                            <td v-for="value in valueArr" :title="list[value]" v-text="list[value]" v-if="value !== 'serverNum'">
+                            <td v-for="value in valueArr" :title="list[value]" v-text="list[value]" v-if="value !== 'deviceNum'">
                             </td>
                         </tr>
                         <tr class="text-center" v-show="tableList.length === 0">
@@ -263,7 +263,7 @@ export default {
             departments2: [],
             param: {
                 sn: '',
-                serverNum: '',
+                deviceNum: '',
                 assetNum: '',
                 financeNum: '',
                 invoiceNum: '',
@@ -307,12 +307,6 @@ export default {
                 {label: '财务编号', value: 'financeNum', checked: false},
                 {label: '发票编号', value: 'invoiceNum', checked: false},
                 {label: '质保期限', value: 'shelfLife', checked: false},
-                {label: 'CPU', value: 'cpu', checked: false},
-                {label: '内存', value: 'mem', checked: false},
-                {label: '磁盘', value: 'disk', checked: false},
-                {label: '物理主机编号', value: 'hostNum', checked: false},
-                {label: '用途分类', value: 'serverUseType', checked: false},
-                {label: '用途描述', value: 'usage', checked: false},
                 {label: '成本中心', value: 'costCenter', checked: true},
                 {label: '接收人', value: 'catcher', checked: false},
                 {label: '价格', value: 'price', checked: false},
@@ -359,7 +353,7 @@ export default {
             })
 
             this.titles.unshift('存储编号')
-            this.valueArr.unshift('serverNum')
+            this.valueArr.unshift('deviceNum')
         },
 
         // 新增服务器
