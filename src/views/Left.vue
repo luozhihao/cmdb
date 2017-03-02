@@ -65,6 +65,9 @@
                 <li v-link="{ path: '/deviceSearch' }" v-if="perm.交换机 || perm.all">
                     <span>交换机</span>
                 </li>
+                <li v-link="{ path: '/group' }" v-if="perm.物理机群组 || perm.all">
+                    <span>物理机群组</span>
+                </li>
                 <li v-link="{ path: '/storageSearch' }" v-if="perm.存储 || perm.all">
                     <span>存储</span>
                 </li>
@@ -83,6 +86,22 @@
                 </li>
                 <li v-link="{ path: '/businessTree' }" v-if="perm.业务树 || perm.all">
                     <span>业务树</span>
+                </li>
+            </ul>
+            <div class="aside-header" @click="toggle('accessories')" v-if="perm.配件管理 || perm.all">
+                <span class="icon glyphicon glyphicon-th-large"></span>
+                <span>配件管理</span>
+                <span class="icon-arrow glyphicon glyphicon-cog"></span>
+            </div>
+            <ul class="aside-lists" v-el:accessories>
+                <li v-link="{ path: '/cpu' }" v-if="perm.CPU || perm.all">
+                    <span>CPU</span>
+                </li>
+                <li v-link="{ path: '/ram' }" v-if="perm.内存 || perm.all">
+                    <span>内存</span>
+                </li>
+                <li v-link="{ path: '/disk' }" v-if="perm.硬盘 || perm.all">
+                    <span>硬盘</span>
                 </li>
             </ul>
             <div class="aside-header" @click="toggle('other')" v-if="perm.其他 || perm.all">

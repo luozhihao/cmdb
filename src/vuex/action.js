@@ -191,4 +191,17 @@ export function getTreeSelect({ dispatch, state }) {
     })
 }
 
+// 获取群组下拉框
+export function getGroupSearch({ dispatch, state }) {
+    this.$http({
+        url: '/group/home/',
+        method: 'GET'
+    })
+    .then(response => {
+        if (response.data.code === 200) {
+           dispatch('GETGROUPSEARCH', response.data)
+        } 
+    })
+}
+
 

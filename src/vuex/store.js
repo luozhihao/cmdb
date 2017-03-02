@@ -52,7 +52,8 @@ const state = {
     departments1: [],
     serverUseTypes: [],
     costCenters: [],
-    areas: []
+    areas: [],
+    groups: []
 }   
 
 // 创建一个 object 存储 mutation 函数
@@ -177,7 +178,11 @@ const mutations = {
     // 获取业务树产品数据
     GETTREESELECT (state, data) {
         state.treeProducts = data.products
-    }
+    },
+
+    GETGROUPSEARCH (state, data) {
+        state.groups = data.data
+    },
 }
 
 // 通过 new Vuex.Store 结合初始 state 和 mutations，创建 store

@@ -54,6 +54,11 @@ export default function (router) {
                 require(['./components/server/server_search/ServerSearch.vue'], resolve)
             }
         },
+        '/group': {
+            component: function (resolve) {
+                require(['./components/server/group/Group.vue'], resolve)
+            }
+        },
         '/storageSearch': {
             component: function (resolve) {
                 require(['./components/server/storage/StorageSearch.vue'], resolve)
@@ -77,6 +82,21 @@ export default function (router) {
         '/businessTree': {
             component: function (resolve) {
                 require(['./components/business/business_tree/BusinessTree.vue'], resolve)
+            }
+        },
+        '/cpu': {
+            component: function (resolve) {
+                require(['./components/accessories/cpu/Cpu.vue'], resolve)
+            }
+        },
+        '/ram': {
+            component: function (resolve) {
+                require(['./components/accessories/ram/Ram.vue'], resolve)
+            }
+        },
+        '/disk': {
+            component: function (resolve) {
+                require(['./components/accessories/disk/Disk.vue'], resolve)
             }
         }
     })

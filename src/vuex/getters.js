@@ -122,3 +122,6 @@ export const costCenters = state => state.costCenters
 
 // 获取地区
 export const areas = state => state.areas
+
+// 获取群组名称
+export const groups = state => state.groups
