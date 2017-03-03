@@ -168,6 +168,13 @@
                         <input type="text" class="form-control" v-model="param.module">
                     </div>
                 </div>
+                <div class="form-group input-box">
+                    <label class="control-label col-sm-4">群组名：</label>
+                    <div class="col-sm-8">
+                        <v-select :value.sync="param.group" :options="groups" placeholder="请选择" :search="true">
+                        </v-select>
+                    </div>
+                </div>
             </div>
         </form>
         <div class="text-center btn-operate">
@@ -291,7 +298,7 @@ import dispatchModal from './Dispatch.vue'
 import vSelect from '../../global/Select.vue'
 import calendar from '../../global/Calendar.vue'
 import { getServerSearch, getFramesSeats, getOrigins } from '../../../vuex/action.js'
-import { idcs, frames, products, serverTypes, departments1, systems, serverStatus, firms, origins1, origins2, costCenters, perm } from '../../../vuex/getters.js'
+import { idcs, frames, products, serverTypes, departments1, systems, serverStatus, firms, origins1, origins2, costCenters, groups, perm } from '../../../vuex/getters.js'
 
 export default {
     data () {
@@ -331,7 +338,8 @@ export default {
                 set: '',
                 department1: '',
                 department2: '',
-                costCenter: ''
+                costCenter: '',
+                group: ''
             },
             checkArr: [
                 {label: 'SN', value: 'sn', checked: true},
@@ -563,7 +571,8 @@ export default {
             origins2,
             statusArr: serverStatus,
             firms,
-            costCenters
+            costCenters,
+            groups
         }
     },
     ready () {

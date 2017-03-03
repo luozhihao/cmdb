@@ -5,16 +5,27 @@
             <h4 class="modal-title">添加物理主机</h4>
         </div>
         <div slot="modal-body" class="modal-body max-height">
-            <form class="form-horizontal text-center clearfix mb20">
+            <form class="form-horizontal form-search clearfix">
+                <div class="col-sm-3">
+                    <label class="control-label col-sm-3">SN：</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="多个，精确" onfocus="this.blur()" v-model="param.sn" @click="showBroad('param.sn')">
+                    </div>
+                </div>
                 <div class="col-sm-3">
                     <div class="form-group input-box">
-                        <label class="control-label col-sm-3">SN：<span class="text-danger">*</span></label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" v-model="param.sn">
+                        <label class="control-label col-sm-3">IP：</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="多个，精确" onfocus="this.blur()" v-model="param.ip" @click="showBroad('param.ip')">
                         </div>
                     </div>
                 </div>
             </form>
+            <div class="text-center btn-operate">
+                <button type="button" class="btn btn-default" @click="refresh">
+                    查询
+                </button>
+            </div>
             <div class="table-box" v-if="showData">
                 <table class="table table-hover table-bordered table-small">
                     <thead>
@@ -56,7 +67,8 @@
             </div>
         </div>
         <div slot="modal-footer" class="modal-footer">
-            <button type="button" class="btn btn-default" @click='viewAddServerModal = false'>取消</button>
+            <button type="button" class="btn btn-default" @click='addServer'>添加</button>
+            <button type="button" class="btn btn-default" @click='viewAddServerModal = false'>关闭</button>
         </div>
     </modal>
 </template>
@@ -74,6 +86,7 @@ export default {
             viewAddServerModal: false,
             param: {
                 id: null,
+                ip: '',
                 sn: '',
             },
             tableList: [],
@@ -88,6 +101,44 @@ export default {
         refresh () {
             this.checkedIds = []
             this.$refs.page.refresh()
+        },
+
+        // 添加群组物理机
+        addServer () {
+            if (this.checkedIds.length) {
+                this.$http({
+                    url: '/group/bind_machines/',
+                    method: 'POST',
+                    data: {
+                        id: this.param.id,
+                        checkedIds: this.checkedIds
+                    }
+                })
+                .then(response => {
+                    if (response.data.code === 200) {
+                        this.viewAddServerModal = false
+
+                        this.$dispatch('refresh')
+                        this.$dispatch('show-success')
+                    } else {
+                        this.$dispatch('show-error', response.data.msg)
+                    }
+                })
+            } else {
+                this.$dispatch('show-notify', '请选择添加项')
+            }
+        },
+
+        // 输入面板
+        showBroad (target) {
+            let obj = target.split('.')
+
+            let param = {
+                value: this[obj[0]][obj[1]],
+                name: target
+            }
+
+            this.$dispatch('showBroad', param)
         },
     },
     ready () {
@@ -143,13 +194,20 @@ export default {
         'refresh' () {
             this.refresh()
         },
+
+        // 获取输入框内容
+        'getTxt' (param) {
+            let obj = param.name.split('.')
+
+            this[obj[0]][obj[1]] = param.val
+        },
     }
 }
 </script>
 
 <style scoped>
 .max-height {
-    max-height: 550px;
+    max-height: 650px;
     overflow: auto;
 }
 </style>

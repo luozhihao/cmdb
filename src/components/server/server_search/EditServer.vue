@@ -19,6 +19,13 @@
                                     </v-select>
                                 </div>
                             </div>
+                            <div class="form-group input-box" v-if="serverType === '9'">
+                                <label class="control-label col-sm-4">群组名：<span class="text-danger">*</span></label>
+                                <div class="col-sm-8">
+                                    <v-select :value.sync="group" :options="groups" placeholder="请选择" disabled>
+                                    </v-select>
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label class="control-label col-sm-4">物理主机编号：</label>
                                 <div class="col-sm-8">
@@ -326,7 +333,7 @@ import { modal, tabset, tab } from 'vue-strap'
 import datepicker from '../../global/Datepicker.vue'
 import vSelect from '../../global/Select.vue'
 import { getServerSearch, getFramesSeats, getOrigins } from '../../../vuex/action.js'
-import { idcs, frames, seats, serverTypes, firms, origins1, origins2, serverUseTypes, products, costCenters } from '../../../vuex/getters.js'
+import { idcs, frames, seats, serverTypes, firms, origins1, origins2, serverUseTypes, products, costCenters, groups } from '../../../vuex/getters.js'
 
 let origin = {
         editServerModal: false,
@@ -368,7 +375,8 @@ let origin = {
         costCenter: '',
         cpu: '',
         mem: '',
-        disk: ''
+        disk: '',
+        group: '',
     },
     init = Object.assign({}, origin);
 
@@ -380,6 +388,10 @@ export default {
 
         // 保存编辑
         saveFn () {
+            if (this.serverType !== '9') {
+                this.group = ''
+            }
+
             this.$http({
                 url: '/device/server/edit/',
                 method: 'POST',
@@ -441,7 +453,8 @@ export default {
             firms,
             serverUseTypes,
             products,
-            costCenters
+            costCenters,
+            groups
         }
     },
     ready () {

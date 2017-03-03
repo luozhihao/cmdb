@@ -138,6 +138,7 @@ const mutations = {
         state.firms = data.firms
         state.serverUseTypes = data.serverUseTypes
         state.costCenters = data.costCenters
+        state.groups = data.groups
     },
 
     // 获取存储查询页下拉框

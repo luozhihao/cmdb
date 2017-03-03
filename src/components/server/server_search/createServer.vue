@@ -14,6 +14,13 @@
                             </v-select>
                         </div>
                     </div>
+                    <div class="form-group input-box" v-if="serverType === '9'">
+                        <label class="control-label col-sm-4">群组名：<span class="text-danger">*</span></label>
+                        <div class="col-sm-8">
+                            <v-select :value.sync="group" :options="groups" placeholder="请选择" :search="true">
+                            </v-select>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label class="control-label col-sm-4">物理主机编号：</label>
                         <div class="col-sm-8">
@@ -251,7 +258,7 @@
                 type="button" 
                 class="btn btn-default" 
                 @click="saveFn"
-                :disabled="sn.trim() && origin1 && origin2 && room && frame && seat && model && status && serverType && firm && serverUseType && costCenter && (companyIntnet.trim() || roomIntnet.trim()) ? false : true"
+                :disabled="sn.trim() && origin1 && origin2 && room && frame && seat && model && status && serverType && firm && serverUseType && costCenter && (companyIntnet.trim() || roomIntnet.trim()) && (serverType === '9' ? group : true) ? false : true"
             >
                 保存
             </button>
@@ -265,7 +272,7 @@ import { modal } from 'vue-strap'
 import datepicker from '../../global/Datepicker.vue'
 import vSelect from '../../global/Select.vue'
 import { getFramesSeats, getOrigins } from '../../../vuex/action.js'
-import { idcs, frames, seats, serverTypes, addStatusArr, firms, origins1, origins2, serverUseTypes, products, costCenters } from '../../../vuex/getters.js'
+import { idcs, frames, seats, serverTypes, addStatusArr, firms, origins1, origins2, serverUseTypes, products, costCenters, groups } from '../../../vuex/getters.js'
 
 let origin = {
         creatServerModal: false,
@@ -299,7 +306,8 @@ let origin = {
         costCenter: 'y3cAAAAABrHM567U',
         cpu: '',
         mem: '',
-        disk: ''
+        disk: '',
+        group: '',
     },
     init = Object.assign({}, origin);
 
@@ -361,7 +369,8 @@ export default {
             firms,
             products,
             serverUseTypes,
-            costCenters
+            costCenters,
+            groups
         }
     },
     ready () {
@@ -482,6 +491,9 @@ export default {
                 this.origin1 = ''
                 this.room = ''
             }
+        },
+        'serverType' () {
+            this.group = ''
         }
     }
 }

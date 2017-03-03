@@ -6,7 +6,7 @@
                 <div class="form-group input-box">
                     <label class="control-label col-sm-4">群组名：</label>
                     <div class="col-sm-8">
-                        <v-select :value.sync="param.name" :options="groups" placeholder="请选择" :search="true">
+                        <v-select :value.sync="param.group" :options="groups" placeholder="请选择" :search="true">
                         </v-select>
                     </div>
                 </div>
@@ -98,7 +98,7 @@ export default {
             checkedAll: false,
             checkedIds: [],
             param: {
-                name: ''
+                group: ''
             },
             tableList: [],
             lenArr: [10, 50, 100],

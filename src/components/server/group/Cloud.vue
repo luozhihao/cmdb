@@ -6,14 +6,14 @@
         </div>
         <div slot="modal-body" class="modal-body max-height">
             <form class="form-horizontal text-center clearfix mb20">
-                <div class="col-sm-3">
+                <!-- <div class="col-sm-3">
                     <div class="form-group input-box">
                         <label class="control-label col-sm-3">SN：<span class="text-danger">*</span></label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" v-model="param.sn">
                         </div>
                     </div>
-                </div>
+                </div> -->
             </form>
             <div class="table-box" v-if="showData">
                 <table class="table table-hover table-bordered table-small">
@@ -54,7 +54,7 @@
             </div>
         </div>
         <div slot="modal-footer" class="modal-footer">
-            <button type="button" class="btn btn-default" @click='viewCloudModal = false'>取消</button>
+            <button type="button" class="btn btn-default" @click='viewCloudModal = false'>关闭</button>
         </div>
     </modal>
 </template>
@@ -119,7 +119,7 @@ export default {
 
 <style scoped>
 .max-height {
-    max-height: 550px;
+    max-height: 650px;
     overflow: auto;
 }  
 </style>
